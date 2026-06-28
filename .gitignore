@@ -1,0 +1,6 @@
+.uploads/
+node_modules/
+.design_library/
+*.design
+Thumbs.db
+.DS_Store

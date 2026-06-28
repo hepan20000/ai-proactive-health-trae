@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform - Brand CSS
+   Based on Semi Design System (Light Theme)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+
+  /* --- Semi Design Light Theme Backgrounds --- */
+  --hmp-bg-body: #f5f6f7;
+  --hmp-bg-card: #ffffff;
+  --hmp-bg-card-hover: #fafafa;
+  --hmp-bg-elevated: #ffffff;
+  --hmp-bg-sunken: #f0f1f2;
+  --hmp-bg-sunken-alt: #ebedf0;
+  --hmp-bg-sidebar: #ffffff;
+  --hmp-bg-header: #ffffff;
+
+  /* --- Semi Design Primary (Blue) --- */
+  --hmp-color-primary: #387bff;
+  --hmp-color-primary-hover: #5a93ff;
+  --hmp-color-primary-active: #0e5ce6;
+  --hmp-color-primary-disabled: rgba(56, 123, 255, 0.35);
+  --hmp-color-primary-light-default: rgba(56, 123, 255, 0.04);
+  --hmp-color-primary-light-hover: rgba(56, 123, 255, 0.08);
+
+  /* --- Semi Design Secondary (Light Blue) --- */
+  --hmp-color-secondary: #0e9fe6;
+  --hmp-color-secondary-hover: #36b5eb;
+  --hmp-color-secondary-active: #0b8acc;
+  --hmp-color-secondary-light-default: rgba(14, 159, 230, 0.04);
+
+  /* --- Semi Design Tertiary (Grey) --- */
+  --hmp-color-tertiary: #6b7785;
+  --hmp-color-tertiary-hover: #505b66;
+  --hmp-color-tertiary-active: #3b4652;
+  --hmp-color-tertiary-light-default: rgba(107, 119, 133, 0.04);
+
+  /* --- Semi Design Functional Colors --- */
+  --hmp-color-success: #0fbf60;
+  --hmp-color-success-light-default: rgba(15, 191, 96, 0.04);
+  --hmp-color-warning: #f5a623;
+  --hmp-color-warning-light-default: rgba(245, 166, 35, 0.04);
+  --hmp-color-danger: #f65159;
+  --hmp-color-danger-light-default: rgba(246, 81, 89, 0.04);
+  --hmp-color-info: #387bff;
+  --hmp-color-info-light-default: rgba(56, 123, 255, 0.04);
+
+  /* --- Semi Design Text Colors (Light) --- */
+  --hmp-color-text-primary: #1d2129;
+  --hmp-color-text-secondary: rgba(29, 33, 41, 0.6);
+  --hmp-color-text-tertiary: rgba(29, 33, 41, 0.35);
+  --hmp-color-text-disabled: rgba(29, 33, 41, 0.2);
+  --hmp-color-text-on-primary: #ffffff;
+  --hmp-color-text-help: rgba(29, 33, 41, 0.4);
+
+  /* --- Semi Design Border Colors --- */
+  --hmp-color-border: rgba(29, 33, 41, 0.08);
+  --hmp-color-border-hover: rgba(29, 33, 41, 0.15);
+  --hmp-color-border-active: rgba(56, 123, 255, 0.5);
+
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: #0fbf60;
+  --hmp-health-green-bg: rgba(15, 191, 96, 0.06);
+  --hmp-health-green-border: rgba(15, 191, 96, 0.2);
+  --hmp-health-yellow: #f5a623;
+  --hmp-health-yellow-bg: rgba(245, 166, 35, 0.06);
+  --hmp-health-yellow-border: rgba(245, 166, 35, 0.2);
+  --hmp-health-red: #f65159;
+  --hmp-health-red-bg: rgba(246, 81, 89, 0.06);
+  --hmp-health-red-border: rgba(246, 81, 89, 0.2);
+
+  /* --- Chart Colors --- */
+  --hmp-chart-blue: #387bff;
+  --hmp-chart-cyan: #0e9fe6;
+  --hmp-chart-green: #0fbf60;
+  --hmp-chart-yellow: #f5a623;
+  --hmp-chart-orange: #f57c00;
+  --hmp-chart-red: #f65159;
+  --hmp-chart-purple: #a97bff;
+  --hmp-chart-pink: #f759ab;
+
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+
+  /* --- Border Radius (Semi Design style) --- */
+  --hmp-radius-sm: 3px;
+  --hmp-radius-md: 6px;
+  --hmp-radius-lg: 8px;
+  --hmp-radius-xl: 12px;
+  --hmp-radius-full: 9999px;
+
+  /* --- Shadows (Light theme, subtle) --- */
+  --hmp-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --hmp-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --hmp-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+  <style type="text/tailwindcss">
+      @theme inline {
+      }
+    </style>
+</head>
+<body data-active-role="institution" style="margin:0; padding:0; height:100vh; overflow:hidden; font-family:var(--hmp-font-family); background:var(--hmp-bg-body); color:var(--hmp-color-text-primary);">
+
+  <style>
+    /* Role-based nav visibility - CSS driven */
+    body[data-active-role="institution"] [data-role-nav="institution"] { display: block; }
+    body[data-active-role="institution"] [data-role-nav="doctor"] { display: none; }
+    body[data-active-role="doctor"] [data-role-nav="institution"] { display: none; }
+    body[data-active-role="doctor"] [data-role-nav="doctor"] { display: block; }
+
+    /* Nav item hover */
+    [data-nav-key] {
+      transition: background 0.15s, color 0.15s;
+    }
+    [data-nav-key]:hover {
+      background: var(--hmp-color-tertiary-light-default);
+    }
+    [data-nav-key][data-active="true"] {
+      background: var(--hmp-color-primary-light-default) !important;
+      color: var(--hmp-color-primary) !important;
+    }
+    [data-nav-key][data-active="true"] svg {
+      color: var(--hmp-color-primary) !important;
+    }
+
+    /* Submenu */
+    .nav-submenu-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: var(--hmp-radius-md);
+      margin: 1px 8px;
+      cursor: pointer;
+      color: var(--hmp-color-text-primary);
+      transition: background 0.15s;
+    }
+    .nav-submenu-trigger:hover {
+      background: var(--hmp-color-tertiary-light-default);
+    }
+    .nav-submenu-trigger.is-open {
+      color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light-default);
+    }
+    .nav-submenu-trigger.is-open svg:first-child {
+      color: var(--hmp-color-primary);
+    }
+    .nav-submenu-trigger .submenu-arrow {
+      margin-left: auto;
+      transition: transform 0.2s;
+    }
+    .nav-submenu-trigger.is-open .submenu-arrow {
+      transform: rotate(90deg);
+    }
+    .nav-submenu {
+      display: none;
+      padding: 2px 0;
+    }
+    .nav-submenu-trigger.is-open + .nav-submenu {
+      display: block;
+    }
+    .nav-submenu-item {
+      display: flex;
+      align-items: center;
+      height: 34px;
+      padding: 0 16px 0 42px;
+      margin: 1px 8px;
+      border-radius: var(--hmp-radius-md);
+      cursor: pointer;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-submenu-item:hover {
+      background: var(--hmp-color-tertiary-light-default);
+      color: var(--hmp-color-text-primary);
+    }
+    .nav-submenu-item[data-active="true"] {
+      background: var(--hmp-color-primary-light-default) !important;
+      color: var(--hmp-color-primary) !important;
+    }
+
+    /* Header role dropdown */
+    .role-dropdown { position: relative; }
+    .role-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--hmp-radius-md);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      cursor: pointer;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      height: 32px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      transition: border-color 0.15s;
+      font-family: var(--hmp-font-family);
+    }
+    .role-dropdown-trigger:hover {
+      border-color: var(--hmp-color-primary);
+      color: var(--hmp-color-primary);
+    }
+    .role-dropdown-trigger .arrow {
+      transition: transform 0.2s;
+    }
+    .role-dropdown.is-open .role-dropdown-trigger .arrow {
+      transform: rotate(180deg);
+    }
+    .role-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      min-width: 140px;
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      padding: 4px;
+      z-index: 100;
+    }
+    .role-dropdown.is-open .role-dropdown-menu {
+      display: block;
+    }
+    .role-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .role-dropdown-item:hover {
+      background: var(--hmp-color-tertiary-light-default);
+    }
+    .role-dropdown-item.is-active {
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .role-dropdown-item.is-active .role-check {
+      display: inline-block;
+    }
+    .role-check {
+      display: none;
+      width: 14px;
+      height: 14px;
+      color: var(--hmp-color-primary);
+    }
+  </style>
+
+  <div style="display:flex; height:100vh; width:100vw;">
+
+    <!-- LEFT SIDEBAR -->
+    <aside style="width:var(--hmp-sidebar-width); min-width:var(--hmp-sidebar-width); height:100vh; background:var(--hmp-bg-card); border-right:1px solid var(--hmp-color-border); display:flex; flex-direction:column; overflow-y:auto;">
+
+      <!-- Logo Area -->
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 16px 12px 16px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+          <path d="M3 12h4l3-9 4 18 3-9h4" stroke="var(--hmp-color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span style="font-size:var(--hmp-font-size-h4); font-weight:var(--hmp-font-weight-semibold); color:var(--hmp-color-text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">主动健康管理</span>
+      </div>
+
+      <!-- Navigation -->
+      <nav style="flex:1; padding:0 0 8px 0;">
+
+        <!-- INSTITUTION MENU -->
+        <div data-role-nav="institution">
+
+          <div data-nav-key="dashboard" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">业务大屏</span>
+          </div>
+
+          <div data-nav-key="doctor-approval" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6"/><path d="M19 8v6"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">医生入驻审批</span>
+          </div>
+
+          <div data-nav-key="resident-list" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">在管居民</span>
+          </div>
+
+          <div data-nav-key="treatment-plan" data-active="true" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">调理方案</span>
+          </div>
+
+          <div data-nav-key="service-package" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">服务包管理</span>
+          </div>
+
+          <div data-nav-key="product-management" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">商品管理</span>
+          </div>
+
+          <div data-nav-key="cms-content" class="nav-submenu-trigger" data-submenu-trigger="cms">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">CMS运营</span>
+            <svg class="submenu-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="nav-submenu" data-submenu="cms">
+            <div data-nav-key="cms-banner" class="nav-submenu-item">Banner广告管理</div>
+            <div data-nav-key="cms-recommend-doctors" class="nav-submenu-item">推荐名医管理</div>
+          </div>
+
+          <div data-nav-key="device-management" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><rect x="1" y="6" width="22" height="12" rx="4"/><path d="M10 9h4"/><path d="M12 6v3"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">设备管理</span>
+          </div>
+
+          <div data-nav-key="system-settings" class="nav-submenu-trigger" data-submenu-trigger="system">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">系统配置</span>
+            <svg class="submenu-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="nav-submenu" data-submenu="system">
+            <div data-nav-key="system-basic" class="nav-submenu-item">基础配置</div>
+            <div data-nav-key="system-alert-rules" class="nav-submenu-item">预警规则配置</div>
+            <div data-nav-key="system-notifications" class="nav-submenu-item">通知与数据管理</div>
+            <div data-nav-key="sub-account" class="nav-submenu-item">子账号管理</div>
+            <div data-nav-key="operation-log" class="nav-submenu-item">操作日志</div>
+          </div>
+
+        </div>
+
+        <!-- DOCTOR MENU -->
+        <div data-role-nav="doctor">
+
+          <div data-nav-key="alert-workbench" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">预警工作台</span>
+          </div>
+
+          <div data-nav-key="my-patients" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">我的病人</span>
+          </div>
+
+          <div data-nav-key="plan-template" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">专科方案</span>
+          </div>
+
+          <div data-nav-key="plan-tracking" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">方案下发</span>
+          </div>
+
+          <div data-nav-key="im-chat" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">即时通讯</span>
+          </div>
+
+          <div data-nav-key="template-phrases" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">常用语模板</span>
+          </div>
+
+          <div data-nav-key="doctor-profile" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">个人信息</span>
+          </div>
+
+          <div data-nav-key="doctor-homepage" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:var(--hmp-radius-md); margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span style="font-size:var(--hmp-font-size-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">主页维护</span>
+          </div>
+
+        </div>
+
+      </nav>
+
+      <!-- Bottom: User Info -->
+      <div style="border-top:1px solid var(--hmp-color-border); padding:12px 16px; display:flex; align-items:center; gap:10px;">
+        <div style="width:32px; height:32px; border-radius:var(--hmp-radius-full); background:var(--hmp-color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <span style="color:var(--hmp-color-text-on-primary); font-size:var(--hmp-font-size-caption); font-weight:var(--hmp-font-weight-semibold);">管</span>
+        </div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:var(--hmp-font-size-body); color:var(--hmp-color-text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">管理员</div>
+          <div style="display:flex; align-items:center; gap:4px;">
+            <span style="font-size:var(--hmp-font-size-small); color:var(--hmp-color-text-tertiary); white-space:nowrap;">机构管理员</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+
+      <!-- Top Header Bar -->
+      <header style="height:var(--hmp-header-height); min-height:var(--hmp-header-height); background:var(--hmp-bg-card); border-bottom:1px solid var(--hmp-color-border); display:flex; align-items:center; justify-content:space-between; padding:0 24px;">
+
+        <!-- Left: Breadcrumb + Title -->
+        <div style="flex:1; min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:var(--hmp-font-size-body);color:var(--hmp-color-text-secondary);flex-wrap:wrap;"><span style="color:var(--hmp-color-text-tertiary);">首页</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-tertiary);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg><span style="color:var(--hmp-color-text-secondary);">机构管理</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-tertiary);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg><span style="color:var(--hmp-color-text-primary);font-weight:var(--hmp-font-weight-medium);">调理方案维护</span></div>
+        </div>
+
+        <!-- Right: Role Switcher + Search + Notification + Avatar -->
+        <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
+
+          <!-- Role Switcher Dropdown -->
+          <div class="role-dropdown">
+            <div class="role-dropdown-trigger">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span class="role-dropdown-text">机构管理员</span>
+              <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="role-dropdown-menu">
+              <div data-role-select="institution" class="role-dropdown-item is-active">
+                <svg class="role-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>机构管理员</span>
+              </div>
+              <div data-role-select="doctor" class="role-dropdown-item">
+                <svg class="role-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>医生</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div style="position:relative;">
+            <input type="text" placeholder="搜索..." style="width:200px; height:32px; padding:0 12px 0 32px; border:1px solid var(--hmp-color-border); border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-caption); background:var(--hmp-bg-sunken); color:var(--hmp-color-text-primary); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family);" />
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--hmp-color-text-tertiary);">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+
+          <!-- Notification Bell -->
+          <div style="position:relative; cursor:pointer; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:var(--hmp-radius-md);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary);">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <div style="position:absolute; top:4px; right:4px; width:6px; height:6px; border-radius:var(--hmp-radius-full); background:var(--hmp-color-danger);"></div>
+          </div>
+
+          <!-- User Avatar -->
+          <div style="width:28px; height:28px; border-radius:var(--hmp-radius-full); background:var(--hmp-color-primary); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+            <span style="color:var(--hmp-color-text-on-primary); font-size:var(--hmp-font-size-small); font-weight:var(--hmp-font-weight-semibold);">管</span>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <main style="flex:1; background:var(--hmp-bg-body); padding:var(--hmp-spacing-xl); overflow-y:auto;">
+        <!-- SLOT: pageContent -->
+<!-- SLOT: pageContent -->
+
+        <!-- Page Title + Action -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--hmp-spacing-xl);">
+          <h1 style="font-size:var(--hmp-font-size-h2); font-weight:var(--hmp-font-weight-semibold); color:var(--hmp-color-text-primary); margin:0; white-space:nowrap;">调理方案维护</h1>
+          <button data-crm-open="create-plan" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 20px; background:var(--hmp-color-primary); color:var(--hmp-color-text-on-primary); border:none; border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); cursor:pointer; white-space:nowrap; flex-shrink:0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            新建方案
+          </button>
+        </div>
+
+        <!-- Tab Bar -->
+        <div style="display:flex; align-items:center; gap:0; border-bottom:1px solid var(--hmp-color-border); margin-bottom:var(--hmp-spacing-xl);">
+          <div style="position:relative; padding:10px 20px; font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-primary); cursor:pointer; white-space:nowrap;">
+            睡眠
+            <span style="position:absolute; bottom:-1px; left:20px; right:20px; height:2px; background:var(--hmp-color-primary); border-radius:1px;"></span>
+          </div>
+          <div style="padding:10px 20px; font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-regular); color:var(--hmp-color-text-secondary); cursor:pointer; white-space:nowrap;">
+            脑血管
+          </div>
+          <div style="padding:10px 20px; font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-regular); color:var(--hmp-color-text-secondary); cursor:pointer; white-space:nowrap;">
+            情绪压力
+          </div>
+        </div>
+
+        <!-- Table Card -->
+<div style="background:var(--hmp-bg-card); border-radius:var(--hmp-radius-lg); box-shadow:var(--hmp-shadow-sm); overflow:hidden;">
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:var(--hmp-font-size-body); table-layout:fixed;">
+      <thead>
+        <tr style="background:var(--hmp-bg-sunken);">
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:20%;">方案名称</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:12%;">适用人群</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:10%;">方案周期</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:10%;">节点数</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:10%;">状态</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:left; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; width:12%;">最后编辑</th>
+          <th style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl); text-align:center; font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-secondary); border-bottom:1px solid var(--hmp-color-border); white-space:nowrap; min-width:180px;">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+  // Navigation click handling
+  (function() {
+    // Submenu toggle
+    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var menuName = this.getAttribute('data-submenu-trigger');
+        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+        if (!submenu) return;
+        var isOpen = this.classList.contains('is-open');
+        // Close all submenus first
+        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+          openTrigger.classList.remove('is-open');
+          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+          if (openMenu) openMenu.style.display = 'none';
+        });
+        if (!isOpen) {
+          this.classList.add('is-open');
+          submenu.style.display = 'block';
+        }
+      });
+    });
+
+    // Nav click -> page navigation (skip submenu parent triggers)
+    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
+    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        // Skip if this is a submenu parent trigger (submenu toggle handles it)
+        if (this.hasAttribute('data-submenu-trigger')) return;
+        var key = this.getAttribute('data-nav-key');
+        if (navMap[key]) window.location.href = navMap[key];
+      });
+    });
+
+    // Role switcher dropdown
+    var roleDropdown = document.querySelector('.role-dropdown');
+    if (roleDropdown) {
+      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        roleDropdown.classList.toggle('is-open');
+      });
+      document.addEventListener('click', function(e) {
+        if (!roleDropdown.contains(e.target)) {
+          roleDropdown.classList.remove('is-open');
+        }
+      });
+      document.querySelectorAll('[data-role-select]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var role = this.getAttribute('data-role-select');
+          document.body.setAttribute('data-active-role', role);
+          roleDropdown.classList.remove('is-open');
+          // Update trigger text
+          var textEl = roleDropdown.querySelector('.role-dropdown-text');
+          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+          // Update active state
+          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+          this.classList.add('is-active');
+        });
+      });
+    }
+  })();
+  </script>
+
+
+</div>
+
+  </div>
+
+  <script>
+  // Navigation click handling
+  (function() {
+    // Submenu toggle
+    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var menuName = this.getAttribute('data-submenu-trigger');
+        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+        if (!submenu) return;
+        var isOpen = this.classList.contains('is-open');
+        // Close all submenus first
+        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+          openTrigger.classList.remove('is-open');
+          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+          if (openMenu) openMenu.style.display = 'none';
+        });
+        if (!isOpen) {
+          this.classList.add('is-open');
+          submenu.style.display = 'block';
+        }
+      });
+    });
+
+    // Nav click -> page navigation (skip submenu parent triggers)
+    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
+    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        // Skip if this is a submenu parent trigger (submenu toggle handles it)
+        if (this.hasAttribute('data-submenu-trigger')) return;
+        var key = this.getAttribute('data-nav-key');
+        if (navMap[key]) window.location.href = navMap[key];
+      });
+    });
+
+    // Role switcher dropdown
+    var roleDropdown = document.querySelector('.role-dropdown');
+    if (roleDropdown) {
+      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        roleDropdown.classList.toggle('is-open');
+      });
+      document.addEventListener('click', function(e) {
+        if (!roleDropdown.contains(e.target)) {
+          roleDropdown.classList.remove('is-open');
+        }
+      });
+      document.querySelectorAll('[data-role-select]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var role = this.getAttribute('data-role-select');
+          document.body.setAttribute('data-active-role', role);
+          roleDropdown.classList.remove('is-open');
+          // Update trigger text
+          var textEl = roleDropdown.querySelector('.role-dropdown-text');
+          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+          // Update active state
+          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+          this.classList.add('is-active');
+        });
+      });
+    }
+  })();
+  </script>
+
+
+</div>
+
+  </div>
+
+  <script>
+  // Navigation click handling
+  (function() {
+    // Submenu toggle
+    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var menuName = this.getAttribute('data-submenu-trigger');
+        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+        if (!submenu) return;
+        var isOpen = this.classList.contains('is-open');
+        // Close all submenus first
+        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+          openTrigger.classList.remove('is-open');
+          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+          if (openMenu) openMenu.style.display = 'none';
+        });
+        if (!isOpen) {
+          this.classList.add('is-open');
+          submenu.style.display = 'block';
+        }
+      });
+    });
+
+    // Nav click -> page navigation (skip submenu parent triggers)
+    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
+    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        // Skip if this is a submenu parent trigger (submenu toggle handles it)
+        if (this.hasAttribute('data-submenu-trigger')) return;
+        var key = this.getAttribute('data-nav-key');
+        if (navMap[key]) window.location.href = navMap[key];
+      });
+    });
+
+    // Role switcher dropdown
+    var roleDropdown = document.querySelector('.role-dropdown');
+    if (roleDropdown) {
+      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        roleDropdown.classList.toggle('is-open');
+      });
+      document.addEventListener('click', function(e) {
+        if (!roleDropdown.contains(e.target)) {
+          roleDropdown.classList.remove('is-open');
+        }
+      });
+      document.querySelectorAll('[data-role-select]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var role = this.getAttribute('data-role-select');
+          document.body.setAttribute('data-active-role', role);
+          roleDropdown.classList.remove('is-open');
+          // Update trigger text
+          var textEl = roleDropdown.querySelector('.role-dropdown-text');
+          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+          // Update active state
+          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+          this.classList.add('is-active');
+        });
+      });
+    }
+  })();
+  </script>
+
+
+</div>
+
+  </div>
+
+  <script>
+  // Navigation click handling
+  (function() {
+    // Submenu toggle
+    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var menuName = this.getAttribute('data-submenu-trigger');
+        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+        if (!submenu) return;
+        var isOpen = this.classList.contains('is-open');
+        // Close all submenus first
+        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+          openTrigger.classList.remove('is-open');
+          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+          if (openMenu) openMenu.style.display = 'none';
+        });
+        if (!isOpen) {
+          this.classList.add('is-open');
+          submenu.style.display = 'block';
+        }
+      });
+    });
+
+    // Nav click -> page navigation (skip submenu parent triggers)
+    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
+    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        // Skip if this is a submenu parent trigger (submenu toggle handles it)
+        if (this.hasAttribute('data-submenu-trigger')) return;
+        var key = this.getAttribute('data-nav-key');
+        if (navMap[key]) window.location.href = navMap[key];
+      });
+    });
+
+    // Role switcher dropdown
+    var roleDropdown = document.querySelector('.role-dropdown');
+    if (roleDropdown) {
+      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        roleDropdown.classList.toggle('is-open');
+      });
+      document.addEventListener('click', function(e) {
+        if (!roleDropdown.contains(e.target)) {
+          roleDropdown.classList.remove('is-open');
+        }
+      });
+      document.querySelectorAll('[data-role-select]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var role = this.getAttribute('data-role-select');
+          document.body.setAttribute('data-active-role', role);
+          roleDropdown.classList.remove('is-open');
+          // Update trigger text
+          var textEl = roleDropdown.querySelector('.role-dropdown-text');
+          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+          // Update active state
+          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+          this.classList.add('is-active');
+        });
+      });
+    }
+  })();
+  </script>
+
+
+</div>
+
+  </div>
+
+
+    <script>
+    // Role switching logic
+    (function() {
+      function switchRole(role) {
+        document.body.setAttribute('data-active-role', role);
+        // Update header role switcher text
+        var switcher = document.querySelector('.header-role-switcher span');
+        if (switcher) {
+          switcher.textContent = role === 'institution' ? '机构管理员' : '医生';
+        }
+        // Update bottom user info role text
+        var roleLabel = document.querySelector('.user-role-label');
+        if (roleLabel) {
+          roleLabel.textContent = role === 'institution' ? '机构管理员' : '医生';
+        }
+      }
+
+      // Bind role tab clicks
+      document.querySelectorAll('[data-role-tab]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          switchRole(this.getAttribute('data-role-tab'));
+        });
+      });
+
+      // Bind header role switcher click
+      var headerSwitcher = document.querySelector('.header-role-switcher');
+      if (headerSwitcher) {
+        headerSwitcher.addEventListener('click', function() {
+          var currentRole = document.body.getAttribute('data-active-role');
+          switchRole(currentRole === 'institution' ? 'doctor' : 'institution');
+        });
+      }
+    })();
+    </script>
+
+    <script>
+    // Navigation click handling
+    (function() {
+      var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","service-package":"service-package.html","device-management":"device-management.html","system-settings":"system-settings.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html"};
+      document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var key = this.getAttribute('data-nav-key');
+          var target = navMap[key];
+          if (target) {
+            window.location.href = target;
+          }
+        });
+      });
+    })();
+    </script>
+<style>.crm-modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.45);align-items:center;justify-content:center}.crm-modal-overlay.is-visible{display:flex}.crm-modal{background:var(--hmp-bg-card);border-radius:var(--hmp-radius-lg);padding:24px;width:520px;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.15)}.crm-modal{width:580px}.crm-modal-title{font-size:var(--hmp-font-size-h3);font-weight:var(--hmp-font-weight-semibold);color:var(--hmp-color-text-primary);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}.crm-modal-close{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:var(--hmp-radius-md);cursor:pointer;color:var(--hmp-color-text-tertiary);border:none;background:transparent}.crm-modal-close:hover{background:var(--hmp-color-tertiary-light-default)}.crm-form-group{margin-bottom:16px}.crm-label{display:block;font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-secondary);margin-bottom:6px}.crm-label .required{color:var(--hmp-color-danger);margin-left:2px}.crm-input{width:100%;height:36px;padding:0 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);box-sizing:border-box}.crm-input:focus{outline:none;border-color:var(--hmp-color-primary);box-shadow:0 0 0 2px var(--hmp-color-primary-light-default)}.crm-textarea{width:100%;min-height:80px;padding:10px 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);resize:vertical;box-sizing:border-box}.crm-textarea:focus{outline:none;border-color:var(--hmp-color-primary);box-shadow:0 0 0 2px var(--hmp-color-primary-light-default)}.crm-select{width:100%;height:36px;padding:0 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);box-sizing:border-box}.crm-select:focus{outline:none;border-color:var(--hmp-color-primary)}.crm-modal-footer{display:flex;justify-content:flex-end;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--hmp-color-border)}.crm-btn{height:36px;padding:0 20px;border-radius:var(--hmp-radius-md);font-size:var(--hmp-font-size-body);cursor:pointer;font-family:var(--hmp-font-family);border:1px solid var(--hmp-color-border)}.crm-btn-primary{background:var(--hmp-color-primary);color:white;border-color:var(--hmp-color-primary)}.crm-btn-primary:hover{opacity:0.9}.crm-btn-default{background:var(--hmp-bg-card);color:var(--hmp-color-text-primary)}.crm-btn-default:hover{background:var(--hmp-bg-sunken)}.crm-btn-danger{background:var(--hmp-color-danger);color:white;border-color:var(--hmp-color-danger)}.crm-btn-danger:hover{opacity:0.9}.crm-warning-box{background:var(--hmp-color-danger-light-default);border:1px solid rgba(246,81,89,0.2);border-radius:var(--hmp-radius-md);padding:10px 14px;font-size:var(--hmp-font-size-caption);color:var(--hmp-color-danger);margin-bottom:16px;display:flex;align-items:center;gap:8px}.crm-info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--hmp-color-border);font-size:var(--hmp-font-size-body)}.crm-info-row:last-child{border-bottom:none}.crm-info-label{color:var(--hmp-color-text-secondary)}.crm-info-value{color:var(--hmp-color-text-primary);font-weight:var(--hmp-font-weight-medium)}</style>
+<div class="crm-modal-overlay" data-crm-modal="create-plan">
+  <div class="crm-modal">
+    <div class="crm-modal-title"><span>新建调理方案</span><button class="crm-modal-close" data-crm-close="create-plan">&#10005;</button></div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案名称 <span class="required">*</span></label>
+      <input class="crm-input" placeholder="请输入方案名称">
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">适用人群</label>
+      <select class="crm-select">
+        <option value="">请选择适用人群</option>
+        <option>睡眠障碍人群</option>
+        <option>高血压人群</option>
+        <option>糖尿病人群</option>
+        <option>心脑血管人群</option>
+      </select>
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案周期</label>
+      <select class="crm-select">
+        <option>2周</option>
+        <option>1个月</option>
+        <option>3个月</option>
+        <option>6个月</option>
+      </select>
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案描述</label>
+      <textarea class="crm-textarea" placeholder="请输入方案描述"></textarea>
+    </div>
+    <div class="crm-modal-footer">
+      <button class="crm-btn crm-btn-default" data-crm-close="create-plan">取消</button>
+      <button class="crm-btn crm-btn-primary" id="btn-create-plan">创建</button>
+    </div>
+  </div>
+</div>
+<div class="crm-modal-overlay" data-crm-modal="edit-plan">
+  <div class="crm-modal">
+    <div class="crm-modal-title"><span>编辑调理方案</span><button class="crm-modal-close" data-crm-close="edit-plan">&#10005;</button></div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案名称 <span class="required">*</span></label>
+      <input class="crm-input" value="睡眠调理基础方案">
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">适用人群</label>
+      <select class="crm-select">
+        <option>睡眠障碍人群</option>
+        <option>高血压人群</option>
+        <option>糖尿病人群</option>
+        <option>心脑血管人群</option>
+      </select>
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案周期</label>
+      <select class="crm-select">
+        <option>2周</option>
+        <option>1个月</option>
+        <option>3个月</option>
+        <option>6个月</option>
+      </select>
+    </div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案描述</label>
+      <textarea class="crm-textarea" placeholder="请输入方案描述">针对轻度睡眠障碍患者的基础调理方案，包含睡眠习惯评估、作息调整指导等内容</textarea>
+    </div>
+    <div class="crm-modal-footer">
+      <button class="crm-btn crm-btn-default" data-crm-close="edit-plan">取消</button>
+      <button class="crm-btn crm-btn-primary" id="btn-save-plan">保存</button>
+    </div>
+  </div>
+</div>
+<div class="crm-modal-overlay" data-crm-modal="confirm-delete-plan">
+  <div class="crm-modal">
+    <div class="crm-modal-title"><span>删除确认</span><button class="crm-modal-close" data-crm-close="confirm-delete-plan">&#10005;</button></div>
+    <div class="crm-warning-box">删除后该方案将无法恢复，已关联该方案的用户将自动切换至默认方案</div>
+    <div class="crm-form-group">
+      <label class="crm-label">方案名称</label>
+      <input class="crm-input" value="睡眠调理基础方案" readonly>
+    </div>
+    <div class="crm-modal-footer">
+      <button class="crm-btn crm-btn-default" data-crm-close="confirm-delete-plan">取消</button>
+      <button class="crm-btn crm-btn-danger" id="btn-confirm-delete-plan" data-crm-close="confirm-delete-plan">确认删除</button>
+    </div>
+  </div>
+</div>
+<div class="crm-modal-overlay" data-crm-modal="preview-plan">
+  <div class="crm-modal">
+    <div class="crm-modal-title"><span>方案预览</span><button class="crm-modal-close" data-crm-close="preview-plan">&#10005;</button></div>
+    <div class="crm-info-row"><span class="crm-info-label">方案名称</span><span class="crm-info-value">睡眠调理基础方案</span></div>
+    <div class="crm-info-row"><span class="crm-info-label">适用人群</span><span class="crm-info-value">睡眠障碍人群</span></div>
+    <div class="crm-info-row"><span class="crm-info-label">方案周期</span><span class="crm-info-value">2周</span></div>
+    <div class="crm-info-row"><span class="crm-info-label">创建时间</span><span class="crm-info-value">2024-12-15</span></div>
+    <div class="crm-info-row"><span class="crm-info-label">方案状态</span><span class="crm-info-value" style="color:var(--hmp-color-success)">已启用</span></div>
+    <div class="crm-form-group" style="margin-top:16px">
+      <label class="crm-label">方案描述</label>
+      <div style="font-size:var(--hmp-font-size-body);color:var(--hmp-color-text-secondary);line-height:1.6;">针对轻度睡眠障碍患者的基础调理方案，包含睡眠习惯评估、作息调整指导、放松训练等内容。通过科学的睡眠管理方法，帮助患者建立良好的睡眠习惯。</div>
+    </div>
+    <div class="crm-modal-footer">
+      <button class="crm-btn crm-btn-default" data-crm-close="preview-plan">关闭</button>
+    </div>
+  </div>
+</div>
+<script>(function(){function openModal(id){var m=document.querySelector('[data-crm-modal="'+id+'"]');if(m)m.classList.add('is-visible')}function closeModal(id){var m=document.querySelector('[data-crm-modal="'+id+'"]');if(m)m.classList.remove('is-visible')}document.addEventListener('click',function(e){var t=e.target.closest('[data-crm-open]');if(t){openModal(t.getAttribute('data-crm-open'));return}var c=e.target.closest('[data-crm-close]');if(c){closeModal(c.getAttribute('data-crm-close'));return}var o=e.target.closest('[data-crm-modal]');if(o&&o.classList.contains('is-visible')&&o===e.target){o.classList.remove('is-visible')}})})();</script>
+<script>
+// Tab switching for treatment plans
+(function(){
+  var tabBar = document.querySelector('main div[style*="border-bottom:1px solid var(--hmp-color-border)"]');
+  if (!tabBar) return;
+  var tabs = tabBar.children;
+  var tabNames = ['睡眠','脑血管','情绪压力'];
+  var tabData = {
+    '睡眠': [
+      {name:'睡眠调理基础方案',people:'睡眠障碍人群',cycle:'2周',nodes:'5个',status:'已发布',statusType:'green',date:'2026-06-24'},
+      {name:'睡眠改善进阶方案',people:'睡眠障碍人群',cycle:'1个月',nodes:'8个',status:'已发布',statusType:'green',date:'2026-06-20'},
+      {name:'睡眠监测指导方案',people:'睡眠障碍人群',cycle:'3个月',nodes:'12个',status:'草稿',statusType:'yellow',date:'2026-06-18'},
+      {name:'失眠认知行为方案',people:'睡眠障碍人群',cycle:'6个月',nodes:'15个',status:'已发布',statusType:'green',date:'2026-06-15'}
+    ],
+    '脑血管': [
+      {name:'脑血管健康管理方案',people:'心脑血管人群',cycle:'3个月',nodes:'10个',status:'已发布',statusType:'green',date:'2026-06-22'},
+      {name:'脑卒中康复方案',people:'心脑血管人群',cycle:'6个月',nodes:'18个',status:'已发布',statusType:'green',date:'2026-06-19'},
+      {name:'高血压调控方案',people:'高血压人群',cycle:'1个月',nodes:'6个',status:'草稿',statusType:'yellow',date:'2026-06-16'}
+    ],
+    '情绪压力': [
+      {name:'情绪压力评估方案',people:'情绪压力人群',cycle:'2周',nodes:'4个',status:'已发布',statusType:'green',date:'2026-06-21'},
+      {name:'焦虑舒缓训练方案',people:'情绪压力人群',cycle:'1个月',nodes:'8个',status:'已发布',statusType:'green',date:'2026-06-18'},
+      {name:'抑郁干预指导方案',people:'情绪压力人群',cycle:'3个月',nodes:'12个',status:'草稿',statusType:'yellow',date:'2026-06-14'}
+    ]
+  };
+  window.__planTabData = tabData;
+  window.__planCurrentTab = '睡眠';
+
+  for (var i=0; i<tabs.length; i++) {
+    (function(idx){
+      tabs[idx].addEventListener('click', function() {
+        var tabName = tabNames[idx];
+        window.__planCurrentTab = tabName;
+        for (var j=0; j<tabs.length; j++) {
+          if (j===idx) {
+            tabs[j].style.color = 'var(--hmp-color-primary)';
+            tabs[j].style.fontWeight = 'var(--hmp-font-weight-medium)';
+            if (!tabs[j].querySelector('.tab-indicator')) {
+              var indicator = document.createElement('span');
+              indicator.className = 'tab-indicator';
+              indicator.style.cssText = 'position:absolute;bottom:-1px;left:20px;right:20px;height:2px;background:var(--hmp-color-primary);border-radius:1px;';
+              tabs[j].style.position = 'relative';
+              tabs[j].appendChild(indicator);
+            }
+          } else {
+            tabs[j].style.color = 'var(--hmp-color-text-secondary)';
+            tabs[j].style.fontWeight = 'var(--hmp-font-weight-regular)';
+            var ind = tabs[j].querySelector('.tab-indicator');
+            if (ind) ind.remove();
+          }
+        }
+        if (window.__planRenderTable) window.__planRenderTable(tabData[tabName]);
+      });
+    })(i);
+  }
+})();
+</script>
+<script>
+(function(){
+  var STORAGE_KEY = 'hmp_treatment_plans';
+  var defaultData = [
+    {name:'睡眠调理基础方案',people:'睡眠障碍人群',cycle:'2周',nodes:'5个',status:'已发布',statusType:'green',date:'2026-06-24'},
+    {name:'睡眠改善进阶方案',people:'睡眠障碍人群',cycle:'1个月',nodes:'8个',status:'已发布',statusType:'green',date:'2026-06-20'},
+    {name:'睡眠监测指导方案',people:'睡眠障碍人群',cycle:'3个月',nodes:'12个',status:'草稿',statusType:'yellow',date:'2026-06-18'},
+    {name:'失眠认知行为方案',people:'睡眠障碍人群',cycle:'6个月',nodes:'15个',status:'已发布',statusType:'green',date:'2026-06-15'}
+  ];
+  var data = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || JSON.parse(JSON.stringify(defaultData));
+  // Use tab data if available
+  if (window.__planTabData && window.__planCurrentTab) {
+    data = JSON.parse(JSON.stringify(window.__planTabData[window.__planCurrentTab] || defaultData));
+  }
+  var currentEditIndex = -1;
+  var currentDeleteIndex = -1;
+  var tbody = document.querySelector('main table tbody');
+  if (!tbody) return;
+
+  function renderTable(newData) {
+    if (!tbody) return;
+    if (newData) data = newData;
+    var statusBg = {green:'var(--hmp-health-green-bg)',yellow:'var(--hmp-color-warning-light-default)'};
+    var statusColor = {green:'var(--hmp-health-green)',yellow:'var(--hmp-color-warning)'};
+    var html = '';
+    data.forEach(function(row, i) {
+      html += '<tr style="height:var(--hmp-table-row-height);border-bottom:1px solid var(--hmp-color-border);transition:background 0.15s;" onmouseover="this.style.background=\'var(--hmp-bg-card-hover)\'" onmouseout="this.style.background=\'\'">'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-primary);white-space:nowrap;font-weight:var(--hmp-font-weight-medium);">' + row.name + '</td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;">' + row.people + '</td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;">' + row.cycle + '</td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;">' + row.nodes + '</td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);white-space:nowrap;"><span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--hmp-radius-sm);background:'+statusBg[row.statusType]+';color:'+statusColor[row.statusType]+';font-size:var(--hmp-font-size-small);font-weight:var(--hmp-font-weight-medium);white-space:nowrap;">'+row.status+'</span></td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;font-family:var(--hmp-font-family-mono);">' + row.date + '</td>'
+        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);white-space:nowrap;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;">'
+        + '<button data-crm-open="edit-plan" data-action="edit" data-row="'+i+'" style="padding:4px 8px;border:none;background:none;color:var(--hmp-color-primary);font-size:var(--hmp-font-size-caption);cursor:pointer;white-space:nowrap;border-radius:var(--hmp-radius-sm);transition:background 0.15s;font-family:var(--hmp-font-family);" onmouseover="this.style.background=\'var(--hmp-color-primary-light-hover)\'" onmouseout="this.style.background=\'none\'">编辑</button>'
+        + '<a href="#" data-crm-open="preview-plan" data-action="preview" data-row="'+i+'" style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-primary);text-decoration:none;white-space:nowrap;cursor:pointer;">预览</a>'
+        + '<a href="#" data-crm-open="confirm-delete-plan" data-action="delete" data-row="'+i+'" style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-danger);text-decoration:none;white-space:nowrap;cursor:pointer;">删除</a>'
+        + '</div></td></tr>';
+    });
+    tbody.innerHTML = html;
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  document.addEventListener('click', function(e) {
+    var editBtn = e.target.closest('[data-action="edit"]');
+    if (editBtn) {
+      var idx = parseInt(editBtn.getAttribute('data-row'));
+      currentEditIndex = idx;
+      var row = data[idx];
+      if (!row) return;
+      var modal = document.querySelector('[data-crm-modal="edit-plan"]');
+      if (!modal) return;
+      modal.querySelector('.crm-input').value = row.name;
+      var selPeople = modal.querySelectorAll('.crm-select')[0];
+      for (var o=0;o<selPeople.options.length;o++) { if(selPeople.options[o].text===row.people) selPeople.selectedIndex=o; }
+      var selCycle = modal.querySelectorAll('.crm-select')[1];
+      for (var o=0;o<selCycle.options.length;o++) { if(selCycle.options[o].text===row.cycle) selCycle.selectedIndex=o; }
+      modal.querySelector('.crm-textarea').value = row.name + '的方案描述';
+    }
+    var delBtn = e.target.closest('[data-action="delete"]');
+    if (delBtn) {
+      currentDeleteIndex = parseInt(delBtn.getAttribute('data-row'));
+    }
+  });
+
+  var saveBtn = document.getElementById('btn-save-plan');
+  if (saveBtn) saveBtn.addEventListener('click', function() {
+    if (currentEditIndex >= 0 && data[currentEditIndex]) {
+      var modal = document.querySelector('[data-crm-modal="edit-plan"]');
+      data[currentEditIndex].name = modal.querySelector('.crm-input').value;
+      data[currentEditIndex].people = modal.querySelectorAll('.crm-select')[0].value;
+      data[currentEditIndex].cycle = modal.querySelectorAll('.crm-select')[1].value;
+      var closeBtn = modal.querySelector('[data-crm-close="edit-plan"]');
+      if (closeBtn) closeBtn.click();
+      renderTable();
+    }
+  });
+
+  var createBtn = document.getElementById('btn-create-plan');
+  if (createBtn) createBtn.addEventListener('click', function() {
+    var modal = document.querySelector('[data-crm-modal="create-plan"]');
+    var name = modal.querySelector('.crm-input').value.trim();
+    if (!name) return;
+    var today = new Date();
+    var dateStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    data.unshift({name:name, people:modal.querySelectorAll('.crm-select')[0].value, cycle:modal.querySelectorAll('.crm-select')[1].value, nodes:'0个', status:'草稿', statusType:'yellow', date:dateStr});
+    modal.querySelector('.crm-input').value = '';
+    modal.querySelector('.crm-textarea').value = '';
+    var closeBtn = modal.querySelector('[data-crm-close="create-plan"]');
+    if (closeBtn) closeBtn.click();
+    renderTable();
+  });
+
+  var deleteBtn = document.getElementById('btn-confirm-delete-plan');
+  if (deleteBtn) deleteBtn.addEventListener('click', function() {
+    if (currentDeleteIndex >= 0) {
+      data.splice(currentDeleteIndex, 1);
+      var modal = document.querySelector('[data-crm-modal="confirm-delete-plan"]');
+      var closeBtn = modal.querySelector('[data-crm-close="confirm-delete-plan"]');
+      if (closeBtn) closeBtn.click();
+      renderTable();
+    }
+  });
+
+  window.__planRenderTable = renderTable;
+  renderTable();
+})();
+</script>
+</body>
+</html>
+  <script>
+  // Submenu toggle
+  (function() {
+    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var menuName = this.getAttribute('data-submenu-trigger');
+        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+        if (!submenu) return;
+        var isOpen = this.classList.contains('is-open');
+        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+          openTrigger.classList.remove('is-open');
+          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+          if (openMenu) openMenu.style.display = 'none';
+        });
+        if (!isOpen) {
+          this.classList.add('is-open');
+          submenu.style.display = 'block';
+        }
+      });
+    });
+  })();
+  </script></body>
+</html>
+</body>
+</html>
+</body>
+</html>
+</body>
+</html>

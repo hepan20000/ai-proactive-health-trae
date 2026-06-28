@@ -1,0 +1,134 @@
+/* ========================================
+   Health Monitor Dashboard - Brand CSS
+   Based on Semi Design System (Dark Theme)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmd --- */
+
+  /* --- Semi Design Dark Theme Backgrounds --- */
+  --hmd-bg-body: #1d2129;
+  --hmd-bg-card: #24292f;
+  --hmd-bg-card-hover: #2a3038;
+  --hmd-bg-elevated: #2c323a;
+  --hmd-bg-sunken: #181c22;
+  --hmd-bg-sunken-alt: #1a1f26;
+
+  /* --- Semi Design Primary (Blue) --- */
+  --hmd-color-primary: #387bff;
+  --hmd-color-primary-hover: #5a93ff;
+  --hmd-color-primary-active: #0e5ce6;
+  --hmd-color-primary-light: rgba(56, 123, 255, 0.12);
+  --hmd-color-primary-light-hover: rgba(56, 123, 255, 0.18);
+
+  /* --- Semi Design Functional Colors --- */
+  --hmd-color-success: #7ccd94;
+  --hmd-color-success-light: rgba(124, 205, 148, 0.12);
+  --hmd-color-warning: #f5a623;
+  --hmd-color-warning-light: rgba(245, 166, 35, 0.12);
+  --hmd-color-danger: #f65159;
+  --hmd-color-danger-light: rgba(246, 81, 89, 0.12);
+  --hmd-color-info: #387bff;
+  --hmd-color-info-light: rgba(56, 123, 255, 0.12);
+
+  /* --- Semi Design Text Colors (Dark) --- */
+  --hmd-color-text-primary: #ffffff;
+  --hmd-color-text-secondary: rgba(255, 255, 255, 0.7);
+  --hmd-color-text-tertiary: rgba(255, 255, 255, 0.45);
+  --hmd-color-text-disabled: rgba(255, 255, 255, 0.25);
+  --hmd-color-text-on-primary: #ffffff;
+
+  /* --- Semi Design Border Colors --- */
+  --hmd-color-border: rgba(255, 255, 255, 0.08);
+  --hmd-color-border-hover: rgba(255, 255, 255, 0.15);
+  --hmd-color-border-active: rgba(56, 123, 255, 0.5);
+
+  /* --- Health-Specific Status Colors --- */
+  --hmd-health-green: #7ccd94;
+  --hmd-health-green-bg: rgba(124, 205, 148, 0.1);
+  --hmd-health-yellow: #f5a623;
+  --hmd-health-yellow-bg: rgba(245, 166, 35, 0.1);
+  --hmd-health-red: #f65159;
+  --hmd-health-red-bg: rgba(246, 81, 89, 0.1);
+
+  /* --- Chart Colors --- */
+  --hmd-chart-blue: #387bff;
+  --hmd-chart-cyan: #36cfc9;
+  --hmd-chart-green: #7ccd94;
+  --hmd-chart-yellow: #f5a623;
+  --hmd-chart-orange: #f57c00;
+  --hmd-chart-red: #f65159;
+  --hmd-chart-purple: #a97bff;
+  --hmd-chart-pink: #f759ab;
+
+  /* --- Typography --- */
+  --hmd-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmd-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  --hmd-font-size-display: 36px;
+  --hmd-font-size-h1: 28px;
+  --hmd-font-size-h2: 22px;
+  --hmd-font-size-h3: 18px;
+  --hmd-font-size-h4: 15px;
+  --hmd-font-size-body: 14px;
+  --hmd-font-size-caption: 12px;
+  --hmd-font-size-small: 11px;
+
+  --hmd-font-weight-regular: 400;
+  --hmd-font-weight-medium: 500;
+  --hmd-font-weight-semibold: 600;
+  --hmd-font-weight-bold: 700;
+
+  --hmd-line-height-tight: 1.25;
+  --hmd-line-height-normal: 1.5;
+  --hmd-line-height-relaxed: 1.75;
+
+  /* --- Spacing --- */
+  --hmd-spacing-xs: 4px;
+  --hmd-spacing-sm: 8px;
+  --hmd-spacing-md: 12px;
+  --hmd-spacing-lg: 16px;
+  --hmd-spacing-xl: 24px;
+  --hmd-spacing-2xl: 32px;
+  --hmd-spacing-3xl: 48px;
+
+  /* --- Border Radius (Semi Design style) --- */
+  --hmd-radius-sm: 3px;
+  --hmd-radius-md: 6px;
+  --hmd-radius-lg: 8px;
+  --hmd-radius-xl: 12px;
+  --hmd-radius-full: 9999px;
+
+  /* --- Shadows (Dark theme, subtle) --- */
+  --hmd-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --hmd-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --hmd-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --hmd-shadow-glow-blue: 0 0 20px rgba(56, 123, 255, 0.15);
+  --hmd-shadow-glow-red: 0 0 20px rgba(246, 81, 89, 0.15);
+
+  /* --- Dashboard Specific --- */
+  --hmd-kpi-value-size: 32px;
+  --hmd-kpi-label-size: 12px;
+  --hmd-card-padding: 16px;
+  --hmd-card-gap: 16px;
+  --hmd-header-height: 56px;
+}
+
+/* Light mode overrides (not primary for dashboard, but available) */
+html:not(.dark) {
+  --hmd-bg-body: #f5f6f7;
+  --hmd-bg-card: #ffffff;
+  --hmd-bg-card-hover: #fafafa;
+  --hmd-bg-elevated: #ffffff;
+  --hmd-bg-sunken: #f0f1f2;
+  --hmd-bg-sunken-alt: #ebedf0;
+  --hmd-color-text-primary: #1d2129;
+  --hmd-color-text-secondary: rgba(29, 33, 41, 0.6);
+  --hmd-color-text-tertiary: rgba(29, 33, 41, 0.35);
+  --hmd-color-text-disabled: rgba(29, 33, 41, 0.2);
+  --hmd-color-border: rgba(29, 33, 41, 0.08);
+  --hmd-color-border-hover: rgba(29, 33, 41, 0.15);
+  --hmd-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --hmd-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --hmd-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+}

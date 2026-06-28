@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform - Brand CSS
+   Based on Semi Design System (Light Theme)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+
+  /* --- Semi Design Light Theme Backgrounds --- */
+  --hmp-bg-body: #f5f6f7;
+  --hmp-bg-card: #ffffff;
+  --hmp-bg-card-hover: #fafafa;
+  --hmp-bg-elevated: #ffffff;
+  --hmp-bg-sunken: #f0f1f2;
+  --hmp-bg-sunken-alt: #ebedf0;
+  --hmp-bg-sidebar: #ffffff;
+  --hmp-bg-header: #ffffff;
+
+  /* --- Semi Design Primary (Blue) --- */
+  --hmp-color-primary: #387bff;
+  --hmp-color-primary-hover: #5a93ff;
+  --hmp-color-primary-active: #0e5ce6;
+  --hmp-color-primary-disabled: rgba(56, 123, 255, 0.35);
+  --hmp-color-primary-light-default: rgba(56, 123, 255, 0.04);
+  --hmp-color-primary-light-hover: rgba(56, 123, 255, 0.08);
+
+  /* --- Semi Design Secondary (Light Blue) --- */
+  --hmp-color-secondary: #0e9fe6;
+  --hmp-color-secondary-hover: #36b5eb;
+  --hmp-color-secondary-active: #0b8acc;
+  --hmp-color-secondary-light-default: rgba(14, 159, 230, 0.04);
+
+  /* --- Semi Design Tertiary (Grey) --- */
+  --hmp-color-tertiary: #6b7785;
+  --hmp-color-tertiary-hover: #505b66;
+  --hmp-color-tertiary-active: #3b4652;
+  --hmp-color-tertiary-light-default: rgba(107, 119, 133, 0.04);
+
+  /* --- Semi Design Functional Colors --- */
+  --hmp-color-success: #0fbf60;
+  --hmp-color-success-light-default: rgba(15, 191, 96, 0.04);
+  --hmp-color-warning: #f5a623;
+  --hmp-color-warning-light-default: rgba(245, 166, 35, 0.04);
+  --hmp-color-danger: #f65159;
+  --hmp-color-danger-light-default: rgba(246, 81, 89, 0.04);
+  --hmp-color-info: #387bff;
+  --hmp-color-info-light-default: rgba(56, 123, 255, 0.04);
+
+  /* --- Semi Design Text Colors (Light) --- */
+  --hmp-color-text-primary: #1d2129;
+  --hmp-color-text-secondary: rgba(29, 33, 41, 0.6);
+  --hmp-color-text-tertiary: rgba(29, 33, 41, 0.35);
+  --hmp-color-text-disabled: rgba(29, 33, 41, 0.2);
+  --hmp-color-text-on-primary: #ffffff;
+  --hmp-color-text-help: rgba(29, 33, 41, 0.4);
+
+  /* --- Semi Design Border Colors --- */
+  --hmp-color-border: rgba(29, 33, 41, 0.08);
+  --hmp-color-border-hover: rgba(29, 33, 41, 0.15);
+  --hmp-color-border-active: rgba(56, 123, 255, 0.5);
+
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: #0fbf60;
+  --hmp-health-green-bg: rgba(15, 191, 96, 0.06);
+  --hmp-health-green-border: rgba(15, 191, 96, 0.2);
+  --hmp-health-yellow: #f5a623;
+  --hmp-health-yellow-bg: rgba(245, 166, 35, 0.06);
+  --hmp-health-yellow-border: rgba(245, 166, 35, 0.2);
+  --hmp-health-red: #f65159;
+  --hmp-health-red-bg: rgba(246, 81, 89, 0.06);
+  --hmp-health-red-border: rgba(246, 81, 89, 0.2);
+
+  /* --- Chart Colors --- */
+  --hmp-chart-blue: #387bff;
+  --hmp-chart-cyan: #0e9fe6;
+  --hmp-chart-green: #0fbf60;
+  --hmp-chart-yellow: #f5a623;
+  --hmp-chart-orange: #f57c00;
+  --hmp-chart-red: #f65159;
+  --hmp-chart-purple: #a97bff;
+  --hmp-chart-pink: #f759ab;
+
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+
+  /* --- Border Radius (Semi Design style) --- */
+  --hmp-radius-sm: 3px;
+  --hmp-radius-md: 6px;
+  --hmp-radius-lg: 8px;
+  --hmp-radius-xl: 12px;
+  --hmp-radius-full: 9999px;
+
+  /* --- Shadows (Light theme, subtle) --- */
+  --hmp-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --hmp-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --hmp-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--hmp-bg-body); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+    <style type="text/tailwindcss">
+      @theme inline {
+        --color-primary: var(--hmp-color-primary);
+        --color-primary-hover: var(--hmp-color-primary-hover);
+        --color-primary-light: var(--hmp-color-primary-light-default);
+        --color-success: var(--hmp-color-success);
+        --color-warning: var(--hmp-color-warning);
+        --color-danger: var(--hmp-color-danger);
+        --color-info: var(--hmp-color-info);
+        --color-foreground: var(--hmp-color-text-primary);
+        --color-card: var(--hmp-bg-card);
+        --color-card-hover: var(--hmp-bg-card-hover);
+        --color-border: var(--hmp-color-border);
+      }
+    </style>
+</head>
+<body style="margin:0; padding:0; min-height:100vh; font-family:var(--hmp-font-family); color:var(--hmp-color-text-primary);">
+
+  <!-- Full-page login background -->
+  <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg, #ffffff 0%, #f0f5ff 100%); position:relative; overflow:hidden; padding:var(--hmp-spacing-xl);">
+
+    <!-- CSS-only subtle geometric pattern -->
+    <div style="position:absolute; inset:0; overflow:hidden; pointer-events:none;">
+      <!-- Large circle top-right -->
+      <div style="position:absolute; top:-120px; right:-80px; width:360px; height:360px; border-radius:50%; border:1px solid rgba(56,123,255,0.06);"></div>
+      <div style="position:absolute; top:-60px; right:-20px; width:240px; height:240px; border-radius:50%; border:1px solid rgba(56,123,255,0.04);"></div>
+      <!-- Large circle bottom-left -->
+      <div style="position:absolute; bottom:-100px; left:-60px; width:300px; height:300px; border-radius:50%; border:1px solid rgba(56,123,255,0.05);"></div>
+      <!-- Cross / plus shapes -->
+      <div style="position:absolute; top:20%; left:12%; width:24px; height:24px; opacity:0.06;">
+        <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:var(--hmp-color-primary); transform:translateY(-50%);"></div>
+        <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--hmp-color-primary); transform:translateX(-50%);"></div>
+      </div>
+      <div style="position:absolute; bottom:30%; right:15%; width:20px; height:20px; opacity:0.05;">
+        <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:var(--hmp-color-primary); transform:translateY(-50%);"></div>
+        <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--hmp-color-primary); transform:translateX(-50%);"></div>
+      </div>
+      <!-- Small dots -->
+      <div style="position:absolute; top:35%; right:25%; width:6px; height:6px; border-radius:50%; background:rgba(56,123,255,0.08);"></div>
+      <div style="position:absolute; top:60%; left:20%; width:4px; height:4px; border-radius:50%; background:rgba(56,123,255,0.06);"></div>
+      <div style="position:absolute; bottom:20%; right:35%; width:5px; height:5px; border-radius:50%; background:rgba(56,123,255,0.07);"></div>
+      <!-- Heartbeat line decoration -->
+      <svg style="position:absolute; bottom:15%; left:8%; opacity:0.04;" width="120" height="40" viewBox="0 0 120 40" fill="none">
+        <path d="M0 20 L20 20 L28 8 L36 32 L44 12 L52 28 L60 20 L120 20" stroke="var(--hmp-color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Login Card -->
+    <div style="width:100%; max-width:400px; background:var(--hmp-bg-card); border-radius:var(--hmp-radius-xl); box-shadow:var(--hmp-shadow-lg); position:relative; overflow:hidden;">
+
+      <!-- Blue accent top border -->
+      <div style="height:3px; background:linear-gradient(90deg, var(--hmp-color-primary), var(--hmp-color-secondary));"></div>
+
+      <!-- Card Content -->
+      <div style="padding:var(--hmp-spacing-2xl) var(--hmp-spacing-2xl) var(--hmp-spacing-xl);">
+
+        <!-- Logo + Title -->
+        <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:var(--hmp-spacing-lg);">
+          <!-- Heartbeat icon -->
+          <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; margin-bottom:var(--hmp-spacing-md);">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="10" fill="rgba(56,123,255,0.08)"/>
+              <path d="M8 20h6l4-12 6 24 4-12h6" stroke="var(--hmp-color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 style="font-size:20px; font-weight:var(--hmp-font-weight-bold); color:var(--hmp-color-text-primary); margin:0 0 var(--hmp-spacing-xs); text-align:center;">主动健康管理平台</h1>
+          <span style="font-size:var(--hmp-font-size-body); color:var(--hmp-color-text-tertiary); margin:0;">机构管理平台</span>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px; background:var(--hmp-color-border); margin-bottom:var(--hmp-spacing-xl);"></div>
+
+        <!-- Role Tabs -->
+        <div style="display:flex; gap:var(--hmp-spacing-xl); margin-bottom:var(--hmp-spacing-xl); border-bottom:1px solid var(--hmp-color-border);">
+          <button style="padding:0 0 var(--hmp-spacing-md); font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-primary); background:none; border:none; cursor:pointer; border-bottom:2px solid var(--hmp-color-primary); margin-bottom:-1px;">机构管理员</button>
+          <button style="padding:0 0 var(--hmp-spacing-md); font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); color:var(--hmp-color-text-tertiary); background:none; border:none; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px;">医生</button>
+        </div>
+
+        <!-- Login Form -->
+        <form onsubmit="return false;" style="display:flex; flex-direction:column; gap:var(--hmp-spacing-lg);">
+
+          <!-- Account Input -->
+          <div style="position:relative;">
+            <div style="position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; align-items:center; pointer-events:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <input type="text" placeholder="请输入手机号/账号" style="width:100%; height:40px; padding:0 var(--hmp-spacing-lg) 0 38px; border:1px solid var(--hmp-color-border); border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-body); color:var(--hmp-color-text-primary); background:var(--hmp-bg-card); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family); transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--hmp-color-border-active)'" onblur="this.style.borderColor='var(--hmp-color-border)'" />
+          </div>
+
+          <!-- Password Input -->
+          <div style="position:relative;">
+            <div style="position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; align-items:center; pointer-events:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <input type="password" placeholder="请输入密码" style="width:100%; height:40px; padding:0 38px 0 38px; border:1px solid var(--hmp-color-border); border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-body); color:var(--hmp-color-text-primary); background:var(--hmp-bg-card); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family); transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--hmp-color-border-active)'" onblur="this.style.borderColor='var(--hmp-color-border)'" />
+            <!-- Eye toggle -->
+            <button type="button" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:2px; display:flex; align-items:center; justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Remember + Forgot -->
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <label style="display:flex; align-items:center; gap:var(--hmp-spacing-sm); cursor:pointer; font-size:var(--hmp-font-size-body); color:var(--hmp-color-text-secondary);">
+              <input type="checkbox" style="width:16px; height:16px; accent-color:var(--hmp-color-primary); cursor:pointer;" />
+              <span>记住账号</span>
+            </label>
+            <a href="#" style="font-size:var(--hmp-font-size-body); color:var(--hmp-color-primary); text-decoration:none; white-space:nowrap;">忘记密码?</a>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" style="width:100%; height:40px; background:var(--hmp-color-primary); color:var(--hmp-color-text-on-primary); border:none; border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); cursor:pointer; font-family:var(--hmp-font-family); transition:background 0.2s;" onmouseenter="this.style.background='var(--hmp-color-primary-hover)'" onmouseleave="this.style.background='var(--hmp-color-primary)'">登录</button>
+
+          <!-- Other login divider -->
+          <div style="display:flex; align-items:center; gap:var(--hmp-spacing-md); margin-top:var(--hmp-spacing-sm);">
+            <div style="flex:1; height:1px; background:var(--hmp-color-border);"></div>
+            <span style="font-size:var(--hmp-font-size-caption); color:var(--hmp-color-text-tertiary); white-space:nowrap;">其他登录方式</span>
+            <div style="flex:1; height:1px; background:var(--hmp-color-border);"></div>
+          </div>
+
+          <!-- WeChat Login Button -->
+          <button type="button" style="width:100%; height:40px; background:var(--hmp-bg-card); color:var(--hmp-color-text-primary); border:1px solid var(--hmp-color-border); border-radius:var(--hmp-radius-md); font-size:var(--hmp-font-size-body); font-weight:var(--hmp-font-weight-medium); cursor:pointer; font-family:var(--hmp-font-family); display:flex; align-items:center; justify-content:center; gap:var(--hmp-spacing-sm); transition:border-color 0.2s;" onmouseenter="this.style.borderColor='var(--hmp-color-border-hover)'" onmouseleave="this.style.borderColor='var(--hmp-color-border)'">
+            <!-- WeChat icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--hmp-chart-green)" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05a6.42 6.42 0 0 1-.235-1.676c0-3.665 3.373-6.636 7.534-6.636.254 0 .5.017.749.032C16.595 4.372 12.998 2.188 8.691 2.188zm-2.35 4.47a.994.994 0 1 1 0 1.988.994.994 0 0 1 0-1.988zm4.7 0a.994.994 0 1 1 0 1.988.994.994 0 0 1 0-1.988zm4.385 3.408c-3.617 0-6.557 2.548-6.557 5.693 0 3.146 2.94 5.694 6.557 5.694.676 0 1.327-.086 1.942-.242a.715.715 0 0 1 .59.08l1.57.918a.27.27 0 0 0 .137.045.24.24 0 0 0 .239-.243c0-.06-.024-.118-.04-.176l-.32-1.222a.487.487 0 0 1 .175-.548C20.927 19.376 21.9 17.7 21.9 15.759c0-3.145-2.94-5.693-6.574-5.693zm-2.347 3.678a.82.82 0 1 1 0 1.64.82.82 0 0 1 0-1.64zm4.694 0a.82.82 0 1 1 0 1.64.82.82 0 0 1 0-1.64z"/>
+            </svg>
+            企业微信登录
+          </button>
+
+        </form>
+
+        <!-- Bottom text -->
+        <div style="text-align:center; margin-top:var(--hmp-spacing-xl); padding-top:var(--hmp-spacing-lg); border-top:1px solid var(--hmp-color-border);">
+          <span style="font-size:var(--hmp-font-size-caption); color:var(--hmp-color-text-tertiary);">还没有账号？联系管理员开通</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
