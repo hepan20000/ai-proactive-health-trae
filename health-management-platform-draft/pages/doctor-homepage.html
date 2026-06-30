@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的工作台 — 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR (医生端) ===== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i data-lucide="heart-pulse" style="width:18px;height:18px;"></i>
+    </div>
+    <span class="sidebar-logo-text">主动健康管理</span>
+  </div>
+  <nav class="sidebar-nav">
+    <!-- 工作台 -->
+    <div class="nav-group-label">工作台</div>
+    <a class="nav-item active" href="#">
+      <i data-lucide="layout-dashboard" class="nav-icon"></i>
+      <span>我的工作台</span>
+    </a>
+    <!-- 业务管理 -->
+    <div class="nav-group-label">业务管理</div>
+    <a class="nav-item" href="#">
+      <i data-lucide="user-round" class="nav-icon"></i>
+      <span>我的病人</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="siren" class="nav-icon"></i>
+      <span>预警工作台</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="message-circle" class="nav-icon"></i>
+      <span>即时通讯</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="clipboard-list" class="nav-icon"></i>
+      <span>调理方案</span>
+    </a>
+    <!-- 个人与设置 -->
+    <div class="nav-group-label">个人与设置</div>
+    <a class="nav-item" href="#">
+      <i data-lucide="user-circle" class="nav-icon"></i>
+      <span>个人信息</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="settings" class="nav-icon"></i>
+      <span>系统设置</span>
+    </a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">陈</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">陈雪松</div>
+      <div class="sidebar-user-role">主治医师</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="breadcrumb">
+      <a href="#">首页</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span class="current">我的工作台</span>
+    </div>
+    <div class="header-search">
+      <i data-lucide="search" class="header-search-icon" style="width:15px;height:15px;"></i>
+      <input type="text" placeholder="搜索居民、预警、方案...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="通知">
+        <i data-lucide="bell" style="width:17px;height:17px;"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="header-avatar">
+        <div class="avatar-circle" style="background:var(--hmp-color-primary);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600;flex-shrink:0;">陈</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Welcome Banner -->
+    <div class="welcome-banner">
+      <div class="welcome-left">
+        <div class="welcome-greeting">早上好，陈雪松医生</div>
+        <p class="welcome-sub">您今天有 <span style="color:var(--hmp-color-primary);font-weight:600;">8 条预警</span> 待处理，<span style="color:var(--hmp-color-primary);font-weight:600;">5 项任务</span> 待完成</p>
+      </div>
+      <div class="welcome-date">
+        <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+        <span>2026年6月30日 星期二</span>
+      </div>
+    </div>
+
+    <!-- Today Overview Stat Cards (4 columns) -->
+    <div class="stat-grid">
+      <!-- 今日待处理预警 -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">今日待处理预警</span>
+          <div class="stat-card-icon" style="background:var(--hmp-health-red-bg);color:var(--hmp-health-red);">
+            <i data-lucide="alert-circle" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value tnum" style="color:var(--hmp-health-red);">8</div>
+        <div class="stat-card-detail">较昨日 <span style="color:var(--hmp-health-red);font-weight:500;">+2</span></div>
+      </div>
+      <!-- 今日干预人次 -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">今日干预人次</span>
+          <div class="stat-card-icon" style="background:var(--hmp-color-primary-light-default);color:var(--hmp-color-primary);">
+            <i data-lucide="activity" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value tnum" style="color:var(--hmp-color-primary);">12</div>
+        <div class="stat-card-detail">较昨日 <span style="color:var(--hmp-color-success);font-weight:500;">+3</span></div>
+      </div>
+      <!-- 我的病人数 -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">我的病人数</span>
+          <div class="stat-card-icon" style="background:var(--hmp-color-info-light-default);color:var(--hmp-color-info);">
+            <i data-lucide="users" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value tnum" style="color:var(--hmp-color-info);">42</div>
+        <div class="stat-card-detail">本月新增 <span style="color:var(--hmp-color-primary);font-weight:500;">+3</span></div>
+      </div>
+      <!-- 平均响应耗时 -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">平均响应耗时</span>
+          <div class="stat-card-icon" style="background:var(--hmp-health-green-bg);color:var(--hmp-health-green);">
+            <i data-lucide="timer" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value tnum" style="color:var(--hmp-health-green);">6.2<span class="stat-unit">min</span></div>
+        <div class="stat-card-detail">较上周 <span style="color:var(--hmp-health-green);font-weight:500;">-0.8min</span></div>
+      </div>
+    </div>
+
+    <!-- Two-column Layout: Alert List + Timeline -->
+    <div class="two-col-grid">
+
+      <!-- Left: Pending Alerts Table -->
+      <div class="table-card">
+        <div class="table-header-row">
+          <div style="display:flex;align-items:center;">
+            <span class="table-header-title">待处理预警</span>
+            <span class="table-header-count tnum">最近 5 条</span>
+          </div>
+          <button class="btn btn-ghost" style="height:30px;font-size:12px;">
+            查看全部
+            <i data-lucide="arrow-right" style="width:13px;height:13px;"></i>
+          </button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width:120px;">时间</th>
+                <th style="min-width:80px;">居民</th>
+                <th style="min-width:100px;">类型</th>
+                <th style="min-width:60px;">等级</th>
+                <th style="min-width:80px;">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-red">
+                <td class="tnum compact-cell">09:15</td>
+                <td>
+                  <div class="compact-patient">
+                    <div class="patient-avatar mini" style="background:var(--hmp-health-red-bg);color:var(--hmp-health-red);">张</div>
+                    <span>张建国</span>
+                  </div>
+                </td>
+                <td>血压异常</td>
+                <td><span class="health-badge badge-red"><span class="dot"></span>高</span></td>
+                <td>
+                  <button class="quick-action-btn primary" style="height:26px;font-size:11px;">处理</button>
+                </td>
+              </tr>
+              <tr class="row-red">
+                <td class="tnum compact-cell">08:42</td>
+                <td>
+                  <div class="compact-patient">
+                    <div class="patient-avatar mini" style="background:var(--hmp-health-red-bg);color:var(--hmp-health-red);">李</div>
+                    <span>李美华</span>
+                  </div>
+                </td>
+                <td>血糖异常</td>
+                <td><span class="health-badge badge-red"><span class="dot"></span>高</span></td>
+                <td>
+                  <button class="quick-action-btn primary" style="height:26px;font-size:11px;">处理</button>
+                </td>
+              </tr>
+              <tr class="row-yellow">
+                <td class="tnum compact-cell">08:30</td>
+                <td>
+                  <div class="compact-patient">
+                    <div class="patient-avatar mini" style="background:var(--hmp-health-yellow-bg);color:var(--hmp-health-yellow);">王</div>
+                    <span>王德福</span>
+                  </div>
+                </td>
+                <td>血氧偏低</td>
+                <td><span class="health-badge badge-yellow"><span class="dot"></span>中</span></td>
+                <td>
+                  <button class="quick-action-btn" style="height:26px;font-size:11px;">处理</button>
+                </td>
+              </tr>
+              <tr class="row-yellow">
+                <td class="tnum compact-cell">08:15</td>
+                <td>
+                  <div class="compact-patient">
+                    <div class="patient-avatar mini" style="background:var(--hmp-health-yellow-bg);color:var(--hmp-health-yellow);">孙</div>
+                    <span>孙桂兰</span>
+                  </div>
+                </td>
+                <td>心率异常</td>
+                <td><span class="health-badge badge-yellow"><span class="dot"></span>中</span></td>
+                <td>
+                  <button class="quick-action-btn" style="height:26px;font-size:11px;">处理</button>
+                </td>
+              </tr>
+              <tr class="row-yellow">
+                <td class="tnum compact-cell">07:50</td>
+                <td>
+                  <div class="compact-patient">
+                    <div class="patient-avatar mini" style="background:var(--hmp-health-yellow-bg);color:var(--hmp-health-yellow);">赵</div>
+                    <span>赵志明</span>
+                  </div>
+                </td>
+                <td>血压偏高</td>
+                <td><span class="health-badge badge-yellow"><span class="dot"></span>中</span></td>
+                <td>
+                  <button class="quick-action-btn" style="height:26px;font-size:11px;">处理</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right: Today Timeline -->
+      <div class="timeline-card">
+        <div class="table-header-row">
+          <div style="display:flex;align-items:center;">
+            <span class="table-header-title">今日任务</span>
+            <span class="table-header-count tnum">5 项待办</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <!-- Item 1: completed -->
+          <div class="timeline-item done">
+            <div class="timeline-dot done"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content">
+              <div class="timeline-time tnum">08:00</div>
+              <div class="timeline-title">晨间查房 — 查看夜间体征数据</div>
+              <div class="timeline-meta">
+                <i data-lucide="check-circle-2" style="width:12px;height:12px;color:var(--hmp-color-success);"></i>
+                <span style="color:var(--hmp-color-success);">已完成</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 2: completed -->
+          <div class="timeline-item done">
+            <div class="timeline-dot done"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content">
+              <div class="timeline-time tnum">08:30</div>
+              <div class="timeline-title">回访赵志明 — 血压控制方案调整</div>
+              <div class="timeline-meta">
+                <i data-lucide="check-circle-2" style="width:12px;height:12px;color:var(--hmp-color-success);"></i>
+                <span style="color:var(--hmp-color-success);">已完成</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 3: current -->
+          <div class="timeline-item current">
+            <div class="timeline-dot current"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content">
+              <div class="timeline-time tnum">09:30</div>
+              <div class="timeline-title">处理张建国高血压预警</div>
+              <div class="timeline-meta">
+                <i data-lucide="loader" style="width:12px;height:12px;color:var(--hmp-color-primary);"></i>
+                <span style="color:var(--hmp-color-primary);font-weight:500;">进行中</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 4: pending -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content">
+              <div class="timeline-time tnum">10:30</div>
+              <div class="timeline-title">刘秀英随访 — 糖尿病管理方案评估</div>
+              <div class="timeline-meta">
+                <i data-lucide="clock" style="width:12px;height:12px;color:var(--hmp-color-text-tertiary);"></i>
+                <span style="color:var(--hmp-color-text-tertiary);">待处理</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 5: pending -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-time tnum">14:00</div>
+              <div class="timeline-title">周国强远程问诊 — BMI异常随访</div>
+              <div class="timeline-meta">
+                <i data-lucide="clock" style="width:12px;height:12px;color:var(--hmp-color-text-tertiary);"></i>
+                <span style="color:var(--hmp-color-text-tertiary);">待处理</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+
+    <style>
+    /* ========================================
+       Health Management Platform — OKLCH Design System
+       Prefix: --hmp-
+       ======================================== */
+    :root {
+      /* --- Typography --- */
+      --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+      --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+      --hmp-font-size-display: 36px;
+      --hmp-font-size-h1: 28px;
+      --hmp-font-size-h2: 22px;
+      --hmp-font-size-h3: 18px;
+      --hmp-font-size-h4: 15px;
+      --hmp-font-size-body: 14px;
+      --hmp-font-size-caption: 12px;
+      --hmp-font-size-small: 11px;
+      --hmp-font-weight-regular: 400;
+      --hmp-font-weight-medium: 500;
+      --hmp-font-weight-semibold: 600;
+      --hmp-font-weight-bold: 700;
+      --hmp-line-height-tight: 1.25;
+      --hmp-line-height-normal: 1.5;
+      --hmp-line-height-relaxed: 1.75;
+      --hmp-font-features: "tnum" 1, "ss01" 1;
+
+      /* --- Spacing --- */
+      --hmp-spacing-xs: 4px;
+      --hmp-spacing-sm: 8px;
+      --hmp-spacing-md: 12px;
+      --hmp-spacing-lg: 16px;
+      --hmp-spacing-xl: 24px;
+      --hmp-spacing-2xl: 32px;
+      --hmp-spacing-3xl: 48px;
+
+      /* --- Border Radius --- */
+      --hmp-radius-sm: 6px;
+      --hmp-radius-md: 8px;
+      --hmp-radius-lg: 10px;
+      --hmp-radius-xl: 14px;
+      --hmp-radius-full: 9999px;
+
+      /* --- Shadows --- */
+      --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+      --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+      --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+
+      /* --- Layout --- */
+      --hmp-sidebar-width: 232px;
+      --hmp-header-height: 56px;
+      --hmp-content-max-width: 1200px;
+      --hmp-card-padding: 16px;
+
+      /* --- Chart Colors --- */
+      --hmp-chart-1: oklch(0.65 0.18 195);
+      --hmp-chart-2: oklch(0.7 0.16 155);
+      --hmp-chart-3: oklch(0.78 0.16 75);
+      --hmp-chart-4: oklch(0.62 0.23 22);
+      --hmp-chart-5: oklch(0.6 0.2 290);
+
+      /* --- Backgrounds (Light) --- */
+      --hmp-bg-body: oklch(0.99 0.005 200);
+      --hmp-bg-card: oklch(1 0 0);
+      --hmp-bg-card-hover: oklch(0.995 0.003 200);
+      --hmp-bg-elevated: oklch(1 0 0);
+      --hmp-bg-sunken: oklch(0.96 0.01 200);
+      --hmp-bg-sidebar: oklch(1 0 0);
+      --hmp-bg-header: oklch(1 0 0);
+
+      /* --- Primary (Medical Cyan-Blue) --- */
+      --hmp-color-primary: oklch(0.55 0.13 195);
+      --hmp-color-primary-hover: oklch(0.58 0.14 195);
+      --hmp-color-primary-active: oklch(0.50 0.13 195);
+      --hmp-color-primary-light: oklch(0.55 0.13 195 / 8%);
+      --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+      --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+
+      /* --- Text Colors --- */
+      --hmp-color-text-primary: oklch(0.2 0.03 220);
+      --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+      --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+      --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+
+      /* --- Border Colors --- */
+      --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+      --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+
+      /* --- Functional Colors --- */
+      --hmp-color-success: oklch(0.7 0.16 155);
+      --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+      --hmp-color-warning: oklch(0.78 0.16 75);
+      --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+      --hmp-color-danger: oklch(0.62 0.23 22);
+      --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+      --hmp-color-info: oklch(0.62 0.14 230);
+      --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+
+      /* --- Health Status Colors --- */
+      --hmp-health-green: oklch(0.7 0.16 155);
+      --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+      --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+      --hmp-health-yellow: oklch(0.78 0.16 75);
+      --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+      --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+      --hmp-health-red: oklch(0.62 0.23 22);
+      --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+      --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--hmp-font-family);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      background: var(--hmp-bg-body);
+      line-height: var(--hmp-line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: var(--hmp-sidebar-width);
+      background: var(--hmp-bg-sidebar);
+      border-right: 1px solid var(--hmp-color-border);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      height: var(--hmp-header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-lg);
+      border-bottom: 1px solid var(--hmp-color-border);
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-text {
+      font-family: var(--hmp-font-family-display);
+      font-weight: 600;
+      font-size: var(--hmp-font-size-h4);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--hmp-spacing-sm) var(--hmp-spacing-sm);
+    }
+    .nav-group-label {
+      font-size: var(--hmp-font-size-small);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-tertiary);
+      padding: 12px var(--hmp-spacing-md) 4px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px var(--hmp-spacing-md);
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .nav-item:hover {
+      background: var(--hmp-bg-card-hover);
+      color: var(--hmp-color-text-primary);
+    }
+    .nav-item.active {
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .nav-item .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-user {
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      border-top: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-user-avatar {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: var(--hmp-font-size-caption);
+      flex-shrink: 0;
+    }
+    .sidebar-user-info { overflow: hidden; }
+    .sidebar-user-name {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-user-role {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+
+    /* --- Main Layout --- */
+    .main-wrapper {
+      margin-left: var(--hmp-sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Header --- */
+    .header {
+      height: var(--hmp-header-height);
+      background: var(--hmp-bg-header);
+      border-bottom: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-xl);
+      gap: var(--hmp-spacing-lg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      flex-shrink: 0;
+    }
+    .breadcrumb a { color: var(--hmp-color-text-tertiary); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--hmp-color-text-secondary); }
+    .breadcrumb .current { color: var(--hmp-color-text-primary); font-weight: var(--hmp-font-weight-medium); }
+    .header-search {
+      flex: 1;
+      max-width: 360px;
+      margin-left: auto;
+      position: relative;
+    }
+    .header-search input {
+      width: 100%;
+      height: 34px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-full);
+      padding: 0 14px 0 34px;
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      transition: border-color 0.15s, background 0.15s;
+      outline: none;
+    }
+    .header-search input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .header-search input:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+    }
+    .header-search-icon {
+      position: absolute;
+      left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--hmp-color-text-tertiary);
+      pointer-events: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+      flex-shrink: 0;
+    }
+    .header-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--hmp-color-text-secondary);
+      transition: all 0.15s;
+      position: relative;
+    }
+    .header-btn:hover {
+      border-color: var(--hmp-color-border-hover);
+      background: var(--hmp-bg-card-hover);
+    }
+    .header-btn .badge-dot {
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 7px; height: 7px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-health-red);
+      border: 1.5px solid var(--hmp-bg-card);
+    }
+    .header-avatar {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid var(--hmp-color-border);
+    }
+
+    /* --- Content --- */
+    .content {
+      flex: 1;
+      padding: var(--hmp-spacing-xl);
+      max-width: var(--hmp-content-max-width);
+      width: 100%;
+    }
+
+    /* --- Welcome Banner --- */
+    .welcome-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--hmp-spacing-lg);
+      padding: var(--hmp-spacing-lg) var(--hmp-card-padding);
+      background: var(--hmp-color-primary-light-default);
+      border: 1px solid oklch(0.55 0.13 195 / 15%);
+      border-radius: var(--hmp-radius-xl);
+    }
+    .welcome-greeting {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-h2);
+      font-weight: var(--hmp-font-weight-bold);
+      color: var(--hmp-color-text-primary);
+      margin-bottom: 4px;
+    }
+    .welcome-sub {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+    }
+    .welcome-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      white-space: nowrap;
+      font-feature-settings: var(--hmp-font-features);
+    }
+
+    /* --- Stat Cards --- */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--hmp-spacing-md);
+      margin-bottom: var(--hmp-spacing-lg);
+    }
+    .stat-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      padding: var(--hmp-card-padding);
+      box-shadow: var(--hmp-shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--hmp-shadow-md); }
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .stat-card-label {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .stat-card-icon {
+      width: 28px; height: 28px;
+      border-radius: var(--hmp-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-card-value {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-display);
+      font-weight: var(--hmp-font-weight-bold);
+      font-feature-settings: var(--hmp-font-features);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-unit {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+    }
+    .stat-card-detail {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+    }
+
+    /* --- Two-column grid --- */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--hmp-spacing-md);
+    }
+
+    /* --- Table Card --- */
+    .table-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-lg);
+      overflow: hidden;
+    }
+    .table-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--hmp-spacing-md) var(--hmp-card-padding);
+      border-bottom: 1px solid var(--hmp-color-border);
+    }
+    .table-header-title {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+    }
+    .table-header-count {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+      margin-left: 6px;
+    }
+
+    /* --- Table --- */
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      text-align: left;
+      padding: 10px var(--hmp-card-padding);
+      font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+      background: var(--hmp-bg-body);
+      border-bottom: 1px solid var(--hmp-color-border);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--hmp-color-border);
+      transition: background 0.12s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--hmp-bg-card-hover); }
+    tbody td {
+      padding: 10px var(--hmp-card-padding);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      vertical-align: middle;
+    }
+
+    /* Compact table overrides */
+    .compact-cell {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+    }
+    .compact-patient {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: var(--hmp-font-weight-medium);
+      font-size: var(--hmp-font-size-caption);
+    }
+    .patient-avatar {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--hmp-font-weight-semibold);
+      font-size: var(--hmp-font-size-caption);
+      flex-shrink: 0;
+    }
+    .patient-avatar.mini {
+      width: 24px; height: 24px;
+      font-size: 10px;
+    }
+
+    /* Row highlight */
+    tbody tr.row-red {
+      background: var(--hmp-health-red-bg);
+    }
+    tbody tr.row-red:hover {
+      background: oklch(0.62 0.23 22 / 12%);
+    }
+    tbody tr.row-red td:first-child {
+      position: relative;
+    }
+    tbody tr.row-red td:first-child::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--hmp-health-red);
+    }
+    tbody tr.row-yellow {
+      background: var(--hmp-health-yellow-bg);
+    }
+    tbody tr.row-yellow:hover {
+      background: oklch(0.78 0.16 75 / 12%);
+    }
+    tbody tr.row-yellow td:first-child {
+      position: relative;
+    }
+    tbody tr.row-yellow td:first-child::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--hmp-health-yellow);
+    }
+
+    /* --- Health Badge --- */
+    .health-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 10px;
+      border-radius: var(--hmp-radius-full);
+      font-size: var(--hmp-font-size-small);
+      font-weight: var(--hmp-font-weight-medium);
+      white-space: nowrap;
+    }
+    .health-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: var(--hmp-radius-full);
+    }
+    .badge-red {
+      background: var(--hmp-health-red-bg);
+      color: var(--hmp-health-red);
+      border: 1px solid var(--hmp-health-red-border);
+    }
+    .badge-red .dot { background: var(--hmp-health-red); }
+    .badge-yellow {
+      background: var(--hmp-health-yellow-bg);
+      color: var(--hmp-health-yellow);
+      border: 1px solid var(--hmp-health-yellow-border);
+    }
+    .badge-yellow .dot { background: var(--hmp-health-yellow); }
+    .badge-green {
+      background: var(--hmp-health-green-bg);
+      color: var(--hmp-health-green);
+      border: 1px solid var(--hmp-health-green-border);
+    }
+    .badge-green .dot { background: var(--hmp-health-green); }
+
+    /* --- Quick Action Buttons --- */
+    .quick-action-btn {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: var(--hmp-radius-md);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: var(--hmp-color-text-secondary);
+      font-size: var(--hmp-font-size-small);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .quick-action-btn:hover {
+      border-color: var(--hmp-color-primary);
+      color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light);
+    }
+    .quick-action-btn.primary {
+      background: var(--hmp-color-primary-light);
+      border-color: oklch(0.55 0.13 195 / 20%);
+      color: var(--hmp-color-primary);
+    }
+    .quick-action-btn.primary:hover {
+      background: var(--hmp-color-primary-light-hover);
+      border-color: oklch(0.55 0.13 195 / 30%);
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+      background: transparent;
+    }
+    .btn-primary {
+      background: var(--hmp-color-primary);
+      color: var(--hmp-color-text-on-primary);
+    }
+    .btn-primary:hover { background: var(--hmp-color-primary-hover); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--hmp-color-border);
+      color: var(--hmp-color-text-secondary);
+    }
+    .btn-ghost:hover { background: var(--hmp-bg-card-hover); border-color: var(--hmp-color-border-hover); }
+
+    /* --- Timeline Card --- */
+    .timeline-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-lg);
+      overflow: hidden;
+    }
+    .timeline-body {
+      padding: var(--hmp-spacing-lg) var(--hmp-card-padding);
+    }
+    .timeline-item {
+      display: flex;
+      gap: var(--hmp-spacing-md);
+      position: relative;
+      padding-bottom: var(--hmp-spacing-lg);
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-dot {
+      width: 12px; height: 12px;
+      border-radius: var(--hmp-radius-full);
+      border: 2px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      flex-shrink: 0;
+      margin-top: 2px;
+      z-index: 1;
+    }
+    .timeline-dot.done {
+      background: var(--hmp-color-success);
+      border-color: var(--hmp-color-success);
+    }
+    .timeline-dot.current {
+      background: var(--hmp-color-primary);
+      border-color: var(--hmp-color-primary);
+      box-shadow: 0 0 0 4px var(--hmp-color-primary-light-default);
+    }
+    .timeline-line {
+      position: absolute;
+      left: 5px;
+      top: 18px;
+      bottom: 0;
+      width: 2px;
+      background: var(--hmp-color-border);
+    }
+    .timeline-item:last-child .timeline-line {
+      display: none;
+    }
+    .timeline-item.done .timeline-line {
+      background: var(--hmp-color-success);
+      opacity: 0.3;
+    }
+    .timeline-item.current .timeline-line {
+      background: var(--hmp-color-primary-light-default);
+    }
+    .timeline-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .timeline-time {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+      margin-bottom: 2px;
+    }
+    .timeline-title {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      margin-bottom: 3px;
+      line-height: var(--hmp-line-height-tight);
+    }
+    .timeline-item.done .timeline-title {
+      color: var(--hmp-color-text-secondary);
+      text-decoration: line-through;
+      text-decoration-color: var(--hmp-color-text-tertiary);
+    }
+    .timeline-meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--hmp-font-size-small);
+    }
+
+    /* --- Tabular Numbers Utility --- */
+    .tnum { font-feature-settings: var(--hmp-font-features); }
+  </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

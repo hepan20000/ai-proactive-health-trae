@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统通知设置 — 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i data-lucide="heart-pulse" style="width:18px;height:18px;"></i>
+    </div>
+    <span class="sidebar-logo-text">主动健康管理</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">业务概览</div>
+    <a class="nav-item" href="dashboard.html"><i data-lucide="monitor" class="nav-icon"></i><span>业务大屏</span></a>
+    <div class="nav-group-label">居民管理</div>
+    <a class="nav-item" href="resident-list.html"><i data-lucide="users" class="nav-icon"></i><span>在管居民</span></a>
+    <div class="nav-group-label">医生管理</div>
+    <a class="nav-item" href="doctor-approval.html"><i data-lucide="user-check" class="nav-icon"></i><span>医生入驻审批</span></a>
+    <a class="nav-item" href="my-patients.html"><i data-lucide="stethoscope" class="nav-icon"></i><span>我的病人</span></a>
+    <div class="nav-group-label">智能服务</div>
+    <a class="nav-item" href="treatment-plan.html"><i data-lucide="clipboard-list" class="nav-icon"></i><span>调理方案</span></a>
+    <a class="nav-item" href="alert-workbench.html"><i data-lucide="shield-alert" class="nav-icon"></i><span>预警工作台</span></a>
+    <a class="nav-item" href="im-chat.html"><i data-lucide="message-circle" class="nav-icon"></i><span>即时通讯</span></a>
+    <div class="nav-group-label">系统设置</div>
+    <a class="nav-item" href="device-management.html"><i data-lucide="cpu" class="nav-icon"></i><span>设备管理</span></a>
+    <a class="nav-item active" href="#"><i data-lucide="settings" class="nav-icon"></i><span>系统配置</span></a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">陈</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">陈思远</div>
+      <div class="sidebar-user-role">运营管理员</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <header class="header">
+    <div class="breadcrumb">
+      <a href="#">首页</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span>系统配置</span>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span class="current">通知设置</span>
+    </div>
+    <div class="header-search">
+      <i data-lucide="search" class="header-search-icon" style="width:15px;height:15px;"></i>
+      <input type="text" placeholder="全局搜索居民、医生、方案...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="通知">
+        <i data-lucide="bell" style="width:17px;height:17px;"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="header-avatar">
+        <div style="background:var(--hmp-color-primary);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600;flex-shrink:0;">CS</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">系统通知设置</h1>
+        <p class="page-title-sub">管理通知渠道和预警通知模板，确保异常情况及时触达相关人员</p>
+      </div>
+    </div>
+
+    <!-- Channel Config -->
+    <div class="section-card">
+      <div class="section-title">
+        <i data-lucide="radio-tower" style="width:18px;height:18px;"></i>
+        通知渠道配置
+      </div>
+      <div class="channel-grid">
+        <!-- SMS -->
+        <div class="channel-card enabled" id="smsCard">
+          <div class="channel-header">
+            <div class="channel-info">
+              <div class="channel-icon sms">
+                <i data-lucide="smartphone" style="width:18px;height:18px;"></i>
+              </div>
+              <div>
+                <div class="channel-name">短信通知</div>
+                <div class="channel-desc">通过短信网关发送</div>
+              </div>
+            </div>
+            <label class="toggle-wrap">
+              <input type="checkbox" class="toggle-input" checked onchange="toggleChannel('sms', this.checked)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="channel-status on">
+            <i data-lucide="check-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i>
+            已启用 -- 已配置短信网关
+          </div>
+        </div>
+        <!-- Push -->
+        <div class="channel-card enabled" id="pushCard">
+          <div class="channel-header">
+            <div class="channel-info">
+              <div class="channel-icon push">
+                <i data-lucide="bell-ring" style="width:18px;height:18px;"></i>
+              </div>
+              <div>
+                <div class="channel-name">APP推送</div>
+                <div class="channel-desc">通过APP推送通知</div>
+              </div>
+            </div>
+            <label class="toggle-wrap">
+              <input type="checkbox" class="toggle-input" checked onchange="toggleChannel('push', this.checked)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="channel-status on">
+            <i data-lucide="check-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i>
+            已启用 -- APNs/FCM 已接入
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="channel-card" id="emailCard">
+          <div class="channel-header">
+            <div class="channel-info">
+              <div class="channel-icon email">
+                <i data-lucide="mail" style="width:18px;height:18px;"></i>
+              </div>
+              <div>
+                <div class="channel-name">邮件通知</div>
+                <div class="channel-desc">通过SMTP发送邮件</div>
+              </div>
+            </div>
+            <label class="toggle-wrap">
+              <input type="checkbox" class="toggle-input" onchange="toggleChannel('email', this.checked)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="channel-status off">
+            <i data-lucide="x-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i>
+            未启用 -- 需配置SMTP服务器
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Templates -->
+    <div class="section-card">
+      <div class="section-title">
+        <i data-lucide="file-text" style="width:18px;height:18px;"></i>
+        预警通知模板
+      </div>
+      <div class="template-list">
+
+        <!-- Template 1: High Risk Warning -->
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-header-left">
+              <span class="template-badge danger">
+                <i data-lucide="alert-triangle" style="width:12px;height:12px;"></i>
+                高危预警
+              </span>
+              <span class="template-name">高危健康指标预警通知</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn" onclick="showToast('已进入编辑模式')">
+                <i data-lucide="pencil" style="width:13px;height:13px;"></i> 编辑模板
+              </button>
+              <button class="action-btn">
+                <i data-lucide="eye" style="width:13px;height:13px;"></i> 预览
+              </button>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-detail-row">
+              <span class="template-detail-label">触发条件</span>
+              <span class="template-detail-value">当居民监测指标（收缩压/舒张压/血氧等）超出预警阈值时自动触发</span>
+            </div>
+            <div class="template-detail-row">
+              <span class="template-detail-label">通知内容</span>
+            </div>
+            <div class="template-content-preview">【阳光健康预警】尊敬的家属您好，{居民姓名}的{监测指标}于{时间}出现异常值：{当前值}（阈值：{阈值范围}），属于{等级}级预警。请及时关注并建议居民就医检查。详情可登录APP查看。-- 阳光社区卫生服务中心</div>
+          </div>
+        </div>
+
+        <!-- Template 2: Device Offline -->
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-header-left">
+              <span class="template-badge warning">
+                <i data-lucide="wifi-off" style="width:12px;height:12px;"></i>
+                设备离线
+              </span>
+              <span class="template-name">设备离线告警通知</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn" onclick="showToast('已进入编辑模式')">
+                <i data-lucide="pencil" style="width:13px;height:13px;"></i> 编辑模板
+              </button>
+              <button class="action-btn">
+                <i data-lucide="eye" style="width:13px;height:13px;"></i> 预览
+              </button>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-detail-row">
+              <span class="template-detail-label">触发条件</span>
+              <span class="template-detail-value">当居民绑定的智能设备连续超过24小时未上报数据时自动触发</span>
+            </div>
+            <div class="template-detail-row">
+              <span class="template-detail-label">通知内容</span>
+            </div>
+            <div class="template-content-preview">【设备离线提醒】尊敬的{居民姓名}您好，您绑定的{设备名称}（IMEI: {IMEI}）已超过24小时未上传数据，可能存在电量不足或网络异常。请检查设备状态，确保正常佩戴和使用。如有疑问请联系社区医生。-- 阳光社区卫生服务中心</div>
+          </div>
+        </div>
+
+        <!-- Template 3: Follow-up Reminder -->
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-header-left">
+              <span class="template-badge info">
+                <i data-lucide="calendar-check" style="width:12px;height:12px;"></i>
+                随访提醒
+              </span>
+              <span class="template-name">随访计划提醒通知</span>
+            </div>
+            <div class="template-actions">
+              <button class="action-btn" onclick="showToast('已进入编辑模式')">
+                <i data-lucide="pencil" style="width:13px;height:13px;"></i> 编辑模板
+              </button>
+              <button class="action-btn">
+                <i data-lucide="eye" style="width:13px;height:13px;"></i> 预览
+              </button>
+            </div>
+          </div>
+          <div class="template-body">
+            <div class="template-detail-row">
+              <span class="template-detail-label">触发条件</span>
+              <span class="template-detail-value">当居民有待执行的随访计划，且距计划执行时间不足24小时时自动触发</span>
+            </div>
+            <div class="template-detail-row">
+              <span class="template-detail-label">通知内容</span>
+            </div>
+            <div class="template-content-preview">【随访提醒】尊敬的{居民姓名}您好，您有一项{随访类型}随访计划将于{计划日期}到期。本次随访需要关注{重点指标}等数据。请提前准备好近期健康数据记录。如需调整时间，请联系您的社区医生{医生姓名}。-- 阳光社区卫生服务中心</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  function toggleChannel(type, enabled) {
+    const card = document.getElementById(type + 'Card');
+    const status = card.querySelector('.channel-status');
+    if (enabled) {
+      card.classList.add('enabled');
+      status.className = 'channel-status on';
+      if (type === 'sms') status.innerHTML = '<i data-lucide="check-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> 已启用 -- 已配置短信网关';
+      if (type === 'push') status.innerHTML = '<i data-lucide="check-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> 已启用 -- APNs/FCM 已接入';
+      if (type === 'email') status.innerHTML = '<i data-lucide="check-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> 已启用 -- SMTP 已配置';
+    } else {
+      card.classList.remove('enabled');
+      status.className = 'channel-status off';
+      status.innerHTML = '<i data-lucide="x-circle" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> 未启用';
+    }
+    lucide.createIcons();
+  }
+
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.textContent = msg;
+    toast.style.cssText = 'position:fixed;top:80px;right:32px;padding:10px 20px;background:var(--hmp-color-primary);color:#fff;border-radius:8px;font-size:14px;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  }
+</script>
+
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--hmp-font-family);
+        font-size: var(--hmp-font-size-body);
+        color: var(--hmp-color-text-primary);
+        background: var(--hmp-bg-body);
+        line-height: var(--hmp-line-height-normal);
+        -webkit-font-smoothing: antialiased;
+      }
+      .sidebar {
+        position: fixed; left: 0; top: 0; bottom: 0;
+        width: var(--hmp-sidebar-width);
+        background: var(--hmp-bg-sidebar);
+        border-right: 1px solid var(--hmp-color-border);
+        display: flex; flex-direction: column; z-index: 100;
+      }
+      .sidebar-logo {
+        height: var(--hmp-header-height);
+        display: flex; align-items: center;
+        padding: 0 var(--hmp-spacing-lg);
+        border-bottom: 1px solid var(--hmp-color-border);
+        gap: 10px; flex-shrink: 0;
+      }
+      .sidebar-logo-icon {
+        width: 32px; height: 32px;
+        border-radius: var(--hmp-radius-md);
+        background: var(--hmp-color-primary);
+        display: flex; align-items: center; justify-content: center;
+        color: white; flex-shrink: 0;
+      }
+      .sidebar-logo-text {
+        font-family: var(--hmp-font-family-display);
+        font-weight: 600; font-size: var(--hmp-font-size-h4);
+        color: var(--hmp-color-text-primary);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .sidebar-nav { flex: 1; overflow-y: auto; padding: var(--hmp-spacing-sm) var(--hmp-spacing-sm); }
+      .nav-group-label {
+        padding: 16px 12px 4px;
+        font-size: var(--hmp-font-size-small);
+        color: var(--hmp-color-text-tertiary);
+        font-weight: var(--hmp-font-weight-medium);
+        text-transform: uppercase; letter-spacing: 0.05em;
+      }
+      .nav-item {
+        display: flex; align-items: center; gap: 10px;
+        padding: 9px var(--hmp-spacing-md);
+        border-radius: var(--hmp-radius-md);
+        font-size: var(--hmp-font-size-body);
+        color: var(--hmp-color-text-secondary);
+        cursor: pointer; transition: all 0.15s ease;
+        text-decoration: none; margin-bottom: 2px; white-space: nowrap;
+      }
+      .nav-item:hover { background: var(--hmp-bg-card-hover); color: var(--hmp-color-text-primary); }
+      .nav-item.active { background: var(--hmp-color-primary-light); color: var(--hmp-color-primary); font-weight: var(--hmp-font-weight-medium); }
+      .nav-item .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+      .sidebar-user {
+        padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+        border-top: 1px solid var(--hmp-color-border);
+        display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      }
+      .sidebar-user-avatar {
+        width: 32px; height: 32px;
+        border-radius: var(--hmp-radius-full);
+        background: var(--hmp-color-primary-light);
+        color: var(--hmp-color-primary);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 600; font-size: var(--hmp-font-size-caption); flex-shrink: 0;
+      }
+      .sidebar-user-info { overflow: hidden; }
+      .sidebar-user-name {
+        font-size: var(--hmp-font-size-body);
+        font-weight: var(--hmp-font-weight-medium);
+        color: var(--hmp-color-text-primary);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .sidebar-user-role { font-size: var(--hmp-font-size-caption); color: var(--hmp-color-text-tertiary); }
+      .main-wrapper {
+        margin-left: var(--hmp-sidebar-width);
+        min-height: 100vh; display: flex; flex-direction: column;
+      }
+      .header {
+        height: var(--hmp-header-height);
+        background: var(--hmp-bg-header);
+        border-bottom: 1px solid var(--hmp-color-border);
+        display: flex; align-items: center;
+        padding: 0 var(--hmp-spacing-xl); gap: var(--hmp-spacing-lg);
+        position: sticky; top: 0; z-index: 50;
+      }
+      .breadcrumb {
+        display: flex; align-items: center; gap: 6px;
+        font-size: var(--hmp-font-size-caption);
+        color: var(--hmp-color-text-tertiary); flex-shrink: 0;
+      }
+      .breadcrumb a { color: var(--hmp-color-text-tertiary); text-decoration: none; }
+      .breadcrumb a:hover { color: var(--hmp-color-text-secondary); }
+      .breadcrumb .current { color: var(--hmp-color-text-primary); font-weight: var(--hmp-font-weight-medium); }
+      .header-search { flex: 1; max-width: 360px; margin-left: auto; position: relative; }
+      .header-search input {
+        width: 100%; height: 34px;
+        border: 1px solid var(--hmp-color-border);
+        border-radius: var(--hmp-radius-full);
+        padding: 0 14px 0 34px;
+        font-size: var(--hmp-font-size-body);
+        font-family: var(--hmp-font-family);
+        background: var(--hmp-bg-sunken);
+        color: var(--hmp-color-text-primary); outline: none; transition: border-color 0.15s;
+      }
+      .header-search input::placeholder { color: var(--hmp-color-text-tertiary); }
+      .header-search input:focus { border-color: var(--hmp-color-primary); background: var(--hmp-bg-card); }
+      .header-search-icon {
+        position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+        color: var(--hmp-color-text-tertiary); pointer-events: none;
+      }
+      .header-actions { display: flex; align-items: center; gap: var(--hmp-spacing-sm); flex-shrink: 0; }
+      .header-btn {
+        width: 34px; height: 34px;
+        border-radius: var(--hmp-radius-full);
+        border: 1px solid var(--hmp-color-border);
+        background: var(--hmp-bg-card);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; color: var(--hmp-color-text-secondary); transition: all 0.15s;
+        position: relative;
+      }
+      .header-btn:hover { border-color: var(--hmp-color-border-hover); background: var(--hmp-bg-card-hover); }
+      .header-btn .badge-dot {
+        position: absolute; top: 6px; right: 6px;
+        width: 7px; height: 7px;
+        border-radius: var(--hmp-radius-full);
+        background: var(--hmp-health-red);
+        border: 1.5px solid var(--hmp-bg-card);
+      }
+      .header-avatar {
+        width: 34px; height: 34px;
+        border-radius: var(--hmp-radius-full);
+        overflow: hidden; cursor: pointer;
+        border: 1.5px solid var(--hmp-color-border);
+      }
+      .content { flex: 1; padding: var(--hmp-spacing-xl); max-width: var(--hmp-content-max-width); width: 100%; }
+      .page-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--hmp-spacing-lg); }
+      .page-title {
+        font-family: var(--hmp-font-family-display);
+        font-size: var(--hmp-font-size-h2);
+        font-weight: var(--hmp-font-weight-bold);
+        color: var(--hmp-color-text-primary);
+      }
+      .page-title-sub { font-size: var(--hmp-font-size-caption); color: var(--hmp-color-text-secondary); margin-top: 2px; }
+      .btn {
+        height: 34px; padding: 0 14px;
+        border-radius: var(--hmp-radius-md);
+        font-size: var(--hmp-font-size-body);
+        font-family: var(--hmp-font-family);
+        font-weight: var(--hmp-font-weight-medium);
+        cursor: pointer; border: 1px solid transparent;
+        display: inline-flex; align-items: center; gap: 6px;
+        transition: all 0.15s; white-space: nowrap;
+      }
+      .btn-primary { background: var(--hmp-color-primary); color: var(--hmp-color-text-on-primary); }
+      .btn-primary:hover { background: var(--hmp-color-primary-hover); }
+      .btn-ghost { background: transparent; border: 1px solid var(--hmp-color-border); color: var(--hmp-color-text-secondary); }
+      .btn-ghost:hover { background: var(--hmp-bg-card-hover); border-color: var(--hmp-color-border-hover); }
+
+      /* --- Section Card --- */
+      .section-card {
+        background: var(--hmp-bg-card);
+        border: 1px solid var(--hmp-color-border);
+        border-radius: var(--hmp-radius-lg);
+        box-shadow: var(--hmp-shadow-sm);
+        padding: var(--hmp-spacing-xl);
+        margin-bottom: var(--hmp-spacing-lg);
+      }
+      .section-card:last-child { margin-bottom: 0; }
+      .section-title {
+        font-size: var(--hmp-font-size-h4);
+        font-weight: var(--hmp-font-weight-semibold);
+        color: var(--hmp-color-text-primary);
+        margin-bottom: var(--hmp-spacing-lg);
+        display: flex; align-items: center; gap: 8px;
+      }
+      .section-title i { color: var(--hmp-color-primary); }
+
+      /* --- Channel Toggle Row --- */
+      .channel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--hmp-spacing-lg);
+      }
+      .channel-card {
+        border: 1px solid var(--hmp-color-border);
+        border-radius: var(--hmp-radius-lg);
+        padding: var(--hmp-spacing-lg);
+        display: flex; flex-direction: column; gap: var(--hmp-spacing-md);
+        transition: all 0.2s;
+      }
+      .channel-card:hover { border-color: var(--hmp-color-border-hover); }
+      .channel-card.enabled { border-color: oklch(0.7 0.16 155 / 30%); background: oklch(0.7 0.16 155 / 3%); }
+      .channel-header {
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .channel-info {
+        display: flex; align-items: center; gap: var(--hmp-spacing-md);
+      }
+      .channel-icon {
+        width: 36px; height: 36px;
+        border-radius: var(--hmp-radius-md);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .channel-icon.sms { background: var(--hmp-color-primary-light); color: var(--hmp-color-primary); }
+      .channel-icon.push { background: var(--hmp-color-success-light); color: var(--hmp-color-success); }
+      .channel-icon.email { background: var(--hmp-color-info-light); color: var(--hmp-color-info); }
+      .channel-name {
+        font-size: var(--hmp-font-size-body);
+        font-weight: var(--hmp-font-weight-medium);
+        color: var(--hmp-color-text-primary);
+      }
+      .channel-desc {
+        font-size: var(--hmp-font-size-caption);
+        color: var(--hmp-color-text-tertiary);
+      }
+      .channel-status {
+        font-size: var(--hmp-font-size-caption);
+        font-weight: var(--hmp-font-weight-medium);
+      }
+      .channel-status.on { color: var(--hmp-health-green); }
+      .channel-status.off { color: var(--hmp-color-text-tertiary); }
+
+      /* --- Toggle Switch --- */
+      .toggle-wrap { position: relative; }
+      .toggle-input { opacity: 0; width: 0; height: 0; position: absolute; }
+      .toggle-slider {
+        width: 40px; height: 22px;
+        border-radius: var(--hmp-radius-full);
+        background: var(--hmp-color-border-hover);
+        position: relative; cursor: pointer;
+        transition: background 0.2s;
+        display: block;
+      }
+      .toggle-slider::after {
+        content: '';
+        position: absolute;
+        top: 2px; left: 2px;
+        width: 18px; height: 18px;
+        border-radius: var(--hmp-radius-full);
+        background: white;
+        box-shadow: 0 1px 3px oklch(0 0 0 / 15%);
+        transition: transform 0.2s;
+      }
+      .toggle-input:checked + .toggle-slider {
+        background: var(--hmp-color-primary);
+      }
+      .toggle-input:checked + .toggle-slider::after {
+        transform: translateX(18px);
+      }
+
+      /* --- Template Cards --- */
+      .template-list { display: flex; flex-direction: column; gap: var(--hmp-spacing-md); }
+      .template-card {
+        border: 1px solid var(--hmp-color-border);
+        border-radius: var(--hmp-radius-lg);
+        overflow: hidden;
+        transition: all 0.2s;
+      }
+      .template-card:hover { border-color: var(--hmp-color-border-hover); box-shadow: var(--hmp-shadow-md); }
+      .template-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+        background: var(--hmp-bg-body);
+        border-bottom: 1px solid var(--hmp-color-border);
+      }
+      .template-header-left {
+        display: flex; align-items: center; gap: var(--hmp-spacing-md);
+      }
+      .template-badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 3px 8px;
+        border-radius: var(--hmp-radius-sm);
+        font-size: var(--hmp-font-size-caption);
+        font-weight: var(--hmp-font-weight-medium);
+      }
+      .template-badge.danger { background: var(--hmp-health-red-bg); color: var(--hmp-health-red); }
+      .template-badge.warning { background: var(--hmp-health-yellow-bg); color: var(--hmp-health-yellow); }
+      .template-badge.info { background: var(--hmp-color-info-light); color: var(--hmp-color-info); }
+      .template-name {
+        font-size: var(--hmp-font-size-body);
+        font-weight: var(--hmp-font-weight-medium);
+        color: var(--hmp-color-text-primary);
+      }
+      .template-body { padding: var(--hmp-spacing-lg); }
+      .template-detail-row {
+        display: flex; gap: var(--hmp-spacing-2xl);
+        margin-bottom: var(--hmp-spacing-lg);
+      }
+      .template-detail-row:last-child { margin-bottom: 0; }
+      .template-detail-label {
+        font-size: var(--hmp-font-size-caption);
+        color: var(--hmp-color-text-tertiary);
+        white-space: nowrap; min-width: 72px;
+      }
+      .template-detail-value {
+        font-size: var(--hmp-font-size-body);
+        color: var(--hmp-color-text-primary);
+        flex: 1;
+      }
+      .template-content-preview {
+        background: var(--hmp-bg-body);
+        border: 1px solid var(--hmp-color-border);
+        border-radius: var(--hmp-radius-md);
+        padding: var(--hmp-spacing-md);
+        font-size: var(--hmp-font-size-caption);
+        color: var(--hmp-color-text-secondary);
+        line-height: var(--hmp-line-height-relaxed);
+        white-space: pre-wrap;
+      }
+      .template-actions {
+        display: flex; align-items: center; gap: var(--hmp-spacing-sm);
+      }
+      .action-btn {
+        height: 30px; padding: 0 10px;
+        border-radius: var(--hmp-radius-sm);
+        border: 1px solid var(--hmp-color-border);
+        background: var(--hmp-bg-card);
+        display: inline-flex; align-items: center; gap: 4px;
+        font-size: var(--hmp-font-size-caption);
+        font-family: var(--hmp-font-family);
+        cursor: pointer; color: var(--hmp-color-text-secondary);
+        transition: all 0.15s; white-space: nowrap;
+      }
+      .action-btn:hover { border-color: var(--hmp-color-primary); color: var(--hmp-color-primary); background: var(--hmp-color-primary-light); }
+      .tnum { font-feature-settings: var(--hmp-font-features); }
+    </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审批详情 — 医生入驻审批 — 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i data-lucide="heart-pulse" style="width:18px;height:18px;"></i>
+    </div>
+    <span class="sidebar-logo-text">主动健康管理</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="#">
+      <i data-lucide="monitor" class="nav-icon"></i>
+      <span>业务大屏</span>
+    </a>
+    <a class="nav-item active" href="#">
+      <i data-lucide="user-check" class="nav-icon"></i>
+      <span>医生入驻审批</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="users" class="nav-icon"></i>
+      <span>在管居民</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="clipboard-list" class="nav-icon"></i>
+      <span>调理方案</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="package" class="nav-icon"></i>
+      <span>服务包管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="shopping-bag" class="nav-icon"></i>
+      <span>商品管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="layout-dashboard" class="nav-icon"></i>
+      <span>CMS运营</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="cpu" class="nav-icon"></i>
+      <span>设备管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="settings" class="nav-icon"></i>
+      <span>系统配置</span>
+    </a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">陈</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">陈思远</div>
+      <div class="sidebar-user-role">运营管理员</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="breadcrumb">
+      <a href="#">首页</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <a href="#">医生管理</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <a href="#">医生入驻审批</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span class="current">审批详情</span>
+    </div>
+    <div class="header-search">
+      <i data-lucide="search" class="header-search-icon" style="width:15px;height:15px;"></i>
+      <input type="text" placeholder="全局搜索居民、医生、方案...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="通知">
+        <i data-lucide="bell" style="width:17px;height:17px;"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="header-avatar">
+        <div style="background:#1a8a8a;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600;">CS</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Back + Title Row -->
+    <div class="page-title-row">
+      <button class="back-btn" onclick="history.back()">
+        <i data-lucide="arrow-left" class="back-btn-icon"></i>
+        返回
+      </button>
+      <h1 class="page-title">医生审批详情</h1>
+      <span class="page-title-sub">查看并审核医生入驻申请信息</span>
+    </div>
+
+    <!-- Two-Column Cards: Basic Info + Qualifications -->
+    <div class="detail-grid">
+
+      <!-- Left: Basic Info Card -->
+      <div class="detail-card">
+        <div class="detail-card-title">
+          <i data-lucide="user" class="detail-card-title-icon"></i>
+          医生基本信息
+        </div>
+        <div class="doctor-profile-header">
+          <div class="doctor-avatar-lg">张</div>
+          <div>
+            <div class="doctor-name-lg">张伟良</div>
+            <div class="doctor-id tnum">ID: D-20260601</div>
+            <div class="doctor-status-tag pending">
+              <span class="dot"></span>
+              待审批
+            </div>
+          </div>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">性别</span>
+            <span class="info-value">男</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">年龄</span>
+            <span class="info-value tnum">48 岁</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">手机号</span>
+            <span class="info-value tnum">138****6789</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">邮箱</span>
+            <span class="info-value">zhangwl@hospital.cn</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Qualifications Card -->
+      <div class="detail-card">
+        <div class="detail-card-title">
+          <i data-lucide="award" class="detail-card-title-icon"></i>
+          资质信息
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">科室</span>
+            <span class="info-value">心血管内科</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">职称</span>
+            <span class="info-value">主任医师</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">学历</span>
+            <span class="info-value">博士研究生</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">毕业院校</span>
+            <span class="info-value">北京协和医学院</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">从医年限</span>
+            <span class="info-value tnum">24 年</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">执业证号</span>
+            <span class="info-value tnum" style="font-family:var(--hmp-font-family-mono);">110108198801****</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Tags -->
+    <div class="section-card">
+      <div class="section-title">
+        <i data-lucide="tag" class="section-title-icon"></i>
+        专业擅长
+      </div>
+      <div class="tags-container">
+        <span class="tag">冠心病</span>
+        <span class="tag">高血压</span>
+        <span class="tag">心力衰竭</span>
+        <span class="tag">心律失常</span>
+        <span class="tag">心血管介入诊疗</span>
+        <span class="tag">心脏康复</span>
+        <span class="tag">血脂异常</span>
+        <span class="tag">动脉粥样硬化</span>
+      </div>
+    </div>
+
+    <!-- Self Introduction -->
+    <div class="section-card">
+      <div class="section-title">
+        <i data-lucide="file-text" class="section-title-icon"></i>
+        自我介绍
+      </div>
+      <div class="intro-text">
+        从事心血管内科临床工作24年，曾在北京协和医院、阜外心血管病医院深造。擅长冠心病、高血压、心力衰竭、心律失常等常见及疑难心血管疾病的诊治，在心血管介入诊疗方面积累了丰富经验。累计完成各类心血管介入手术超过3000例。主持参与国家级、省级科研课题8项，发表SCI论文15篇。坚信"治未病"理念，致力于通过主动健康管理帮助患者降低心血管事件风险，提高生活质量。希望借助本平台，为更多居民提供专业、持续的心血管健康管理服务。
+      </div>
+    </div>
+
+    <!-- Attachment Materials -->
+    <div class="section-card">
+      <div class="section-title">
+        <i data-lucide="paperclip" class="section-title-icon"></i>
+        附件资料
+      </div>
+      <div class="attachment-list">
+        <!-- Item 1: Practicing Certificate -->
+        <div class="attachment-item">
+          <div class="attachment-icon cert">
+            <i data-lucide="shield-check" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="attachment-info">
+            <div class="attachment-name">执业医师资格证.pdf</div>
+            <div class="attachment-meta">PDF &middot; 2.4 MB &middot; 上传于 2026-06-28</div>
+          </div>
+          <button class="attachment-view-btn">
+            <i data-lucide="eye" class="attachment-view-btn-icon"></i>
+            查看
+          </button>
+        </div>
+        <!-- Item 2: Professional Title Certificate -->
+        <div class="attachment-item">
+          <div class="attachment-icon file">
+            <i data-lucide="badge-check" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="attachment-info">
+            <div class="attachment-name">主任医师职称证书.pdf</div>
+            <div class="attachment-meta">PDF &middot; 1.8 MB &middot; 上传于 2026-06-28</div>
+          </div>
+          <button class="attachment-view-btn">
+            <i data-lucide="eye" class="attachment-view-btn-icon"></i>
+            查看
+          </button>
+        </div>
+        <!-- Item 3: Education Certificate -->
+        <div class="attachment-item">
+          <div class="attachment-icon file">
+            <i data-lucide="graduation-cap" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="attachment-info">
+            <div class="attachment-name">博士学历学位证书.pdf</div>
+            <div class="attachment-meta">PDF &middot; 3.1 MB &middot; 上传于 2026-06-28</div>
+          </div>
+          <button class="attachment-view-btn">
+            <i data-lucide="eye" class="attachment-view-btn-icon"></i>
+            查看
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <button class="action-btn-lg btn-supplement" id="btnSupplement">
+        <i data-lucide="message-square-plus" class="action-btn-lg-icon"></i>
+        要求补充
+      </button>
+      <button class="action-btn-lg btn-reject" id="btnReject">
+        <i data-lucide="x-circle" class="action-btn-lg-icon"></i>
+        驳回
+      </button>
+      <button class="action-btn-lg btn-approve" id="btnApprove">
+        <i data-lucide="check-circle" class="action-btn-lg-icon"></i>
+        通过
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== Reject Modal ===== -->
+<div class="modal-overlay" id="rejectModal">
+  <div class="modal">
+    <div class="modal-title">驳回申请</div>
+    <div class="modal-desc">请输入驳回理由，该理由将通知到申请医生。请确保理由清晰、具体。</div>
+    <textarea class="modal-textarea" id="rejectReason" placeholder="请输入驳回理由，例如：执业证信息不完整、学历材料需要补充等..."></textarea>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel" id="rejectCancelBtn">取消</button>
+      <button class="modal-btn modal-btn-confirm" id="rejectConfirmBtn" disabled>确认驳回</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Supplement Modal ===== -->
+<div class="modal-overlay" id="supplementModal">
+  <div class="modal">
+    <div class="modal-title">要求补充材料</div>
+    <div class="modal-desc">请说明需要医生补充哪些材料或信息，该通知将发送至申请医生。</div>
+    <textarea class="modal-textarea" id="supplementReason" placeholder="请描述需要补充的材料，例如：请补充近三个月内的体检报告、请更新执业证书照片等..."></textarea>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel" id="supplementCancelBtn">取消</button>
+      <button class="modal-btn modal-btn-confirm" id="supplementConfirmBtn" disabled style="background:var(--hmp-color-warning);border-color:var(--hmp-color-warning);">发送通知</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Success Toast ===== -->
+<div class="toast" id="toast">
+  <i data-lucide="check-circle-2" class="toast-icon"></i>
+  <span class="toast-text" id="toastText">操作成功</span>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  // --- Reject Modal ---
+  const rejectModal = document.getElementById('rejectModal');
+  const rejectReason = document.getElementById('rejectReason');
+  const rejectConfirmBtn = document.getElementById('rejectConfirmBtn');
+
+  document.getElementById('btnReject').addEventListener('click', () => {
+    rejectModal.classList.add('show');
+    rejectReason.value = '';
+    rejectConfirmBtn.disabled = true;
+    rejectReason.focus();
+  });
+  document.getElementById('rejectCancelBtn').addEventListener('click', () => {
+    rejectModal.classList.remove('show');
+  });
+  rejectModal.addEventListener('click', (e) => {
+    if (e.target === rejectModal) rejectModal.classList.remove('show');
+  });
+  rejectReason.addEventListener('input', () => {
+    rejectConfirmBtn.disabled = rejectReason.value.trim().length === 0;
+  });
+  rejectConfirmBtn.addEventListener('click', () => {
+    if (rejectReason.value.trim()) {
+      rejectModal.classList.remove('show');
+      showToast('已驳回该医生的入驻申请');
+    }
+  });
+
+  // --- Supplement Modal ---
+  const supplementModal = document.getElementById('supplementModal');
+  const supplementReason = document.getElementById('supplementReason');
+  const supplementConfirmBtn = document.getElementById('supplementConfirmBtn');
+
+  document.getElementById('btnSupplement').addEventListener('click', () => {
+    supplementModal.classList.add('show');
+    supplementReason.value = '';
+    supplementConfirmBtn.disabled = true;
+    supplementReason.focus();
+  });
+  document.getElementById('supplementCancelBtn').addEventListener('click', () => {
+    supplementModal.classList.remove('show');
+  });
+  supplementModal.addEventListener('click', (e) => {
+    if (e.target === supplementModal) supplementModal.classList.remove('show');
+  });
+  supplementReason.addEventListener('input', () => {
+    supplementConfirmBtn.disabled = supplementReason.value.trim().length === 0;
+  });
+  supplementConfirmBtn.addEventListener('click', () => {
+    if (supplementReason.value.trim()) {
+      supplementModal.classList.remove('show');
+      showToast('已发送补充材料通知');
+    }
+  });
+
+  // --- Approve ---
+  document.getElementById('btnApprove').addEventListener('click', () => {
+    showToast('已通过该医生的入驻申请');
+  });
+
+  // --- Toast ---
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastText').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+</script>
+
+
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--hmp-font-family);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      background: var(--hmp-bg-body);
+      line-height: var(--hmp-line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .tnum { font-feature-settings: var(--hmp-font-features); }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: var(--hmp-sidebar-width);
+      background: var(--hmp-bg-sidebar);
+      border-right: 1px solid var(--hmp-color-border);
+      display: flex; flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      height: var(--hmp-header-height);
+      display: flex; align-items: center;
+      padding: 0 var(--hmp-spacing-lg);
+      border-bottom: 1px solid var(--hmp-color-border);
+      gap: 10px; flex-shrink: 0;
+    }
+    .sidebar-logo-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-primary);
+      display: flex; align-items: center; justify-content: center;
+      color: white; flex-shrink: 0;
+    }
+    .sidebar-logo-text {
+      font-family: var(--hmp-font-family-display);
+      font-weight: 600; font-size: var(--hmp-font-size-h4);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-nav {
+      flex: 1; overflow-y: auto;
+      padding: var(--hmp-spacing-sm) var(--hmp-spacing-sm);
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px var(--hmp-spacing-md);
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer; transition: all 0.15s ease;
+      text-decoration: none; margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .nav-item:hover { background: var(--hmp-bg-card-hover); color: var(--hmp-color-text-primary); }
+    .nav-item.active {
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .nav-item .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-user {
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      border-top: 1px solid var(--hmp-color-border);
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .sidebar-user-avatar {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: var(--hmp-font-size-caption); flex-shrink: 0;
+    }
+    .sidebar-user-info { overflow: hidden; }
+    .sidebar-user-name {
+      font-size: var(--hmp-font-size-body); font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-user-role { font-size: var(--hmp-font-size-caption); color: var(--hmp-color-text-tertiary); }
+
+    /* --- Main Layout --- */
+    .main-wrapper {
+      margin-left: var(--hmp-sidebar-width);
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    /* --- Header --- */
+    .header {
+      height: var(--hmp-header-height);
+      background: var(--hmp-bg-header);
+      border-bottom: 1px solid var(--hmp-color-border);
+      display: flex; align-items: center;
+      padding: 0 var(--hmp-spacing-xl);
+      gap: var(--hmp-spacing-lg);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary); flex-shrink: 0;
+    }
+    .breadcrumb a { color: var(--hmp-color-text-tertiary); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--hmp-color-text-secondary); }
+    .breadcrumb .current { color: var(--hmp-color-text-primary); font-weight: var(--hmp-font-weight-medium); }
+    .header-search {
+      flex: 1; max-width: 360px; margin-left: auto; position: relative;
+    }
+    .header-search input {
+      width: 100%; height: 34px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-full);
+      padding: 0 14px 0 34px;
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      transition: border-color 0.15s, background 0.15s;
+      outline: none;
+    }
+    .header-search input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .header-search input:focus { border-color: var(--hmp-color-primary); background: var(--hmp-bg-card); }
+    .header-search-icon {
+      position: absolute; left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--hmp-color-text-tertiary); pointer-events: none;
+    }
+    .header-actions { display: flex; align-items: center; gap: var(--hmp-spacing-sm); flex-shrink: 0; }
+    .header-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--hmp-color-text-secondary);
+      transition: all 0.15s; position: relative;
+    }
+    .header-btn:hover { border-color: var(--hmp-color-border-hover); background: var(--hmp-bg-card-hover); }
+    .header-btn .badge-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 7px; height: 7px; border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-danger);
+      border: 1.5px solid var(--hmp-bg-card);
+    }
+    .header-avatar {
+      width: 34px; height: 34px; border-radius: var(--hmp-radius-full);
+      overflow: hidden; cursor: pointer; border: 1.5px solid var(--hmp-color-border);
+    }
+
+    /* --- Content --- */
+    .content {
+      flex: 1; padding: var(--hmp-spacing-xl);
+      max-width: var(--hmp-content-max-width); width: 100%;
+    }
+
+    /* --- Page Title Row --- */
+    .page-title-row {
+      display: flex; align-items: center; gap: var(--hmp-spacing-md);
+      margin-bottom: var(--hmp-spacing-xl);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 12px; border-radius: var(--hmp-radius-md);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card); cursor: pointer;
+      font-size: var(--hmp-font-size-body); font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+      font-family: var(--hmp-font-family);
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .back-btn:hover { border-color: var(--hmp-color-border-hover); background: var(--hmp-bg-card-hover); color: var(--hmp-color-text-primary); }
+    .back-btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .page-title {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-h2);
+      font-weight: var(--hmp-font-weight-bold);
+      color: var(--hmp-color-text-primary);
+    }
+    .page-title-sub {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      margin-left: var(--hmp-spacing-md);
+    }
+
+    /* --- Detail Cards --- */
+    .detail-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--hmp-spacing-lg);
+      margin-bottom: var(--hmp-spacing-lg);
+    }
+    .detail-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-md);
+      padding: var(--hmp-spacing-xl);
+    }
+    .detail-card-title {
+      font-size: var(--hmp-font-size-h4);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+      margin-bottom: var(--hmp-spacing-lg);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .detail-card-title-icon {
+      width: 18px; height: 18px;
+      color: var(--hmp-color-primary);
+      flex-shrink: 0;
+    }
+
+    /* --- Doctor Profile Header (inside basic info card) --- */
+    .doctor-profile-header {
+      display: flex; align-items: center; gap: var(--hmp-spacing-lg);
+      margin-bottom: var(--hmp-spacing-xl);
+      padding-bottom: var(--hmp-spacing-lg);
+      border-bottom: 1px solid var(--hmp-color-border);
+    }
+    .doctor-avatar-lg {
+      width: 72px; height: 72px;
+      border-radius: var(--hmp-radius-lg);
+      background: linear-gradient(135deg, #55a3e8, #3d8fd4);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 28px; font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px -2px oklch(0.55 0.13 195 / 25%);
+    }
+    .doctor-name-lg {
+      font-size: var(--hmp-font-size-h3);
+      font-weight: var(--hmp-font-weight-bold);
+      color: var(--hmp-color-text-primary);
+    }
+    .doctor-id {
+      font-family: var(--hmp-font-family-mono);
+      font-feature-settings: var(--hmp-font-features);
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      margin-top: 2px;
+    }
+    .doctor-status-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: var(--hmp-radius-sm);
+      font-size: var(--hmp-font-size-small); font-weight: var(--hmp-font-weight-medium);
+      margin-top: 6px; white-space: nowrap;
+    }
+    .doctor-status-tag.pending {
+      background: var(--hmp-color-warning-bg);
+      color: var(--hmp-color-warning);
+      border: 1px solid var(--hmp-color-warning-border);
+    }
+    .doctor-status-tag .dot {
+      width: 6px; height: 6px; border-radius: var(--hmp-radius-full);
+    }
+    .doctor-status-tag.pending .dot { background: var(--hmp-color-warning); }
+
+    /* --- Info Rows --- */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--hmp-spacing-md) var(--hmp-spacing-xl);
+    }
+    .info-item {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .info-label {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .info-value {
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+
+    /* --- Professional Tags --- */
+    .section-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-md);
+      padding: var(--hmp-spacing-xl);
+      margin-bottom: var(--hmp-spacing-lg);
+    }
+    .section-title {
+      font-size: var(--hmp-font-size-h4);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+      margin-bottom: var(--hmp-spacing-lg);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title-icon {
+      width: 18px; height: 18px;
+      color: var(--hmp-color-primary);
+      flex-shrink: 0;
+    }
+    .tags-container {
+      display: flex; flex-wrap: wrap; gap: var(--hmp-spacing-sm);
+    }
+    .tag {
+      display: inline-flex; align-items: center;
+      padding: 5px 14px; border-radius: var(--hmp-radius-full);
+      font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      border: 1px solid oklch(0.55 0.13 195 / 15%);
+      transition: all 0.15s;
+    }
+    .tag:hover {
+      background: var(--hmp-color-primary-light-hover);
+    }
+
+    /* --- Self Introduction --- */
+    .intro-text {
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      line-height: var(--hmp-line-height-relaxed);
+      background: var(--hmp-bg-sunken);
+      border-radius: var(--hmp-radius-md);
+      padding: var(--hmp-spacing-lg);
+      border: 1px solid var(--hmp-color-border);
+    }
+
+    /* --- Attachment List --- */
+    .attachment-list {
+      display: flex; flex-direction: column; gap: var(--hmp-spacing-sm);
+    }
+    .attachment-item {
+      display: flex; align-items: center;
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      transition: all 0.15s;
+      gap: var(--hmp-spacing-md);
+    }
+    .attachment-item:hover {
+      border-color: var(--hmp-color-border-hover);
+      background: var(--hmp-bg-card-hover);
+    }
+    .attachment-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--hmp-radius-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .attachment-icon.cert { background: var(--hmp-color-info-bg); color: var(--hmp-color-info); }
+    .attachment-icon.file { background: var(--hmp-color-primary-light); color: var(--hmp-color-primary); }
+    .attachment-info { flex: 1; min-width: 0; }
+    .attachment-name {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .attachment-meta {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      margin-top: 1px;
+    }
+    .attachment-view-btn {
+      height: 32px; padding: 0 14px;
+      border-radius: var(--hmp-radius-md);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: inline-flex; align-items: center; gap: 5px;
+      cursor: pointer; font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+      font-family: var(--hmp-font-family);
+      transition: all 0.15s; white-space: nowrap; flex-shrink: 0;
+    }
+    .attachment-view-btn:hover {
+      border-color: var(--hmp-color-primary);
+      color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light);
+    }
+    .attachment-view-btn-icon {
+      width: 14px; height: 14px; flex-shrink: 0;
+    }
+
+    /* --- Action Bar --- */
+    .action-bar {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-md);
+      padding: var(--hmp-spacing-lg) var(--hmp-spacing-xl);
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: var(--hmp-spacing-md);
+    }
+    .action-btn-lg {
+      height: 40px; padding: 0 24px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      cursor: pointer; border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .action-btn-lg-icon {
+      width: 16px; height: 16px; flex-shrink: 0;
+    }
+    .btn-approve {
+      background: var(--hmp-color-success);
+      color: #fff; border-color: var(--hmp-color-success);
+    }
+    .btn-approve:hover { background: oklch(0.65 0.17 155); }
+    .btn-reject {
+      background: var(--hmp-color-danger);
+      color: #fff; border-color: var(--hmp-color-danger);
+    }
+    .btn-reject:hover { background: oklch(0.57 0.24 22); }
+    .btn-supplement {
+      background: var(--hmp-color-warning);
+      color: #fff; border-color: var(--hmp-color-warning);
+    }
+    .btn-supplement:hover { background: oklch(0.74 0.17 75); }
+
+    /* --- Modal Overlay --- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: oklch(0 0 0 / 40%);
+      display: none; align-items: center; justify-content: center;
+      z-index: 200;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-xl);
+      box-shadow: var(--hmp-shadow-xl);
+      width: 480px; max-width: 90vw;
+      padding: var(--hmp-spacing-xl);
+    }
+    .modal-title {
+      font-size: var(--hmp-font-size-h3);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+      margin-bottom: var(--hmp-spacing-md);
+    }
+    .modal-desc {
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      margin-bottom: var(--hmp-spacing-lg);
+      line-height: var(--hmp-line-height-relaxed);
+    }
+    .modal-textarea {
+      width: 100%;
+      min-height: 120px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: var(--hmp-spacing-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      color: var(--hmp-color-text-primary);
+      background: var(--hmp-bg-sunken);
+      resize: vertical; outline: none;
+      transition: border-color 0.15s, background 0.15s;
+      line-height: var(--hmp-line-height-relaxed);
+    }
+    .modal-textarea::placeholder { color: var(--hmp-color-text-tertiary); }
+    .modal-textarea:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+    }
+    .modal-footer {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: var(--hmp-spacing-sm);
+      margin-top: var(--hmp-spacing-lg);
+    }
+    .modal-btn {
+      height: 36px; padding: 0 20px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      cursor: pointer; border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .modal-btn-cancel {
+      background: transparent;
+      border-color: var(--hmp-color-border);
+      color: var(--hmp-color-text-secondary);
+    }
+    .modal-btn-cancel:hover { background: var(--hmp-bg-card-hover); border-color: var(--hmp-color-border-hover); }
+    .modal-btn-confirm {
+      background: var(--hmp-color-danger);
+      color: #fff; border-color: var(--hmp-color-danger);
+    }
+    .modal-btn-confirm:hover { background: oklch(0.57 0.24 22); }
+    .modal-btn-confirm:disabled {
+      opacity: 0.5; cursor: not-allowed;
+    }
+
+    /* --- Success Toast --- */
+    .toast {
+      position: fixed; top: 80px; right: 24px;
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-success-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-lg);
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      display: none; align-items: center; gap: var(--hmp-spacing-md);
+      z-index: 300;
+    }
+    .toast.show { display: flex; }
+    .toast-icon {
+      width: 20px; height: 20px;
+      color: var(--hmp-color-success);
+      flex-shrink: 0;
+    }
+    .toast-text {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+    }
+    </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

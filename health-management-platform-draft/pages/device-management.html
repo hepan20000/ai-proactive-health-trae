@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能设备管理 — 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i data-lucide="heart-pulse" style="width:18px;height:18px;"></i>
+    </div>
+    <span class="sidebar-logo-text">主动健康管理</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="#">
+      <i data-lucide="monitor" class="nav-icon"></i>
+      <span>业务大屏</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="user-check" class="nav-icon"></i>
+      <span>医生入驻审批</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="users" class="nav-icon"></i>
+      <span>在管居民</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="clipboard-list" class="nav-icon"></i>
+      <span>调理方案</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="package" class="nav-icon"></i>
+      <span>服务包管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="shopping-bag" class="nav-icon"></i>
+      <span>商品管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="layout-dashboard" class="nav-icon"></i>
+      <span>CMS运营</span>
+    </a>
+    <a class="nav-item active" href="#">
+      <i data-lucide="cpu" class="nav-icon"></i>
+      <span>设备管理</span>
+    </a>
+    <a class="nav-item" href="#">
+      <i data-lucide="settings" class="nav-icon"></i>
+      <span>系统配置</span>
+    </a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">陈</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">陈思远</div>
+      <div class="sidebar-user-role">运营管理员</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="breadcrumb">
+      <a href="#">首页</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span class="current">设备管理</span>
+    </div>
+    <div class="header-search">
+      <i data-lucide="search" class="header-search-icon" style="width:15px;height:15px;"></i>
+      <input type="text" placeholder="全局搜索居民、医生、方案...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="通知">
+        <i data-lucide="bell" style="width:17px;height:17px;"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="header-avatar">
+        <div class="avatar-circle" style="background:#1a8a8a;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600;flex-shrink:0;">CS</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Page Title -->
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">智能设备管理</h1>
+        <p class="page-title-sub">管理所有智能健康监测设备，查看在线状态与电量信息</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost">
+          <i data-lucide="download" style="width:15px;height:15px;"></i>
+          导出
+        </button>
+        <button class="btn btn-primary">
+          <i data-lucide="plus" style="width:15px;height:15px;"></i>
+          添加设备
+        </button>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stat-grid">
+      <!-- Total -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">总设备数</span>
+          <div class="stat-card-icon" style="background:var(--hmp-color-primary-light);color:var(--hmp-color-primary);">
+            <i data-lucide="cpu" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value" style="color:var(--hmp-color-text-primary);">256</div>
+        <div class="stat-card-detail">本月新增 <span class="pct tnum" style="color:var(--hmp-color-primary);">+18</span></div>
+      </div>
+      <!-- Online -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">在线设备</span>
+          <div class="stat-card-icon" style="background:var(--hmp-health-green-bg);color:var(--hmp-health-green);">
+            <i data-lucide="wifi" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value" style="color:var(--hmp-health-green);">198</div>
+        <div class="stat-card-detail">在线率 <span class="pct tnum" style="color:var(--hmp-health-green);">77.3%</span></div>
+      </div>
+      <!-- Offline -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">离线设备</span>
+          <div class="stat-card-icon" style="background:var(--hmp-health-red-bg);color:var(--hmp-health-red);">
+            <i data-lucide="wifi-off" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value" style="color:var(--hmp-health-red);">42</div>
+        <div class="stat-card-detail">占比 <span class="pct tnum" style="color:var(--hmp-health-red);">16.4%</span></div>
+      </div>
+      <!-- Low Battery -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <span class="stat-card-label">低电量</span>
+          <div class="stat-card-icon" style="background:var(--hmp-health-yellow-bg);color:var(--hmp-health-yellow);">
+            <i data-lucide="battery-low" style="width:16px;height:16px;"></i>
+          </div>
+        </div>
+        <div class="stat-card-value" style="color:var(--hmp-health-yellow);">16</div>
+        <div class="stat-card-detail">低于 <span class="pct tnum" style="color:var(--hmp-health-yellow);">20%</span> 需关注</div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" style="margin-top:var(--hmp-spacing-lg);">
+      <div class="filter-search-wrap">
+        <i data-lucide="search" class="search-icon" style="width:15px;height:15px;"></i>
+        <input class="filter-input" type="text" placeholder="搜索IMEI号、居民姓名...">
+      </div>
+      <select class="filter-select" style="width:150px;">
+        <option value="">全部型号</option>
+        <option>BP-A100 智能血压计</option>
+        <option>GS-B200 血糖仪</option>
+        <option>OX-C300 血氧仪</option>
+        <option>WB-D400 智能手环</option>
+        <option>SC-E500 体脂秤</option>
+      </select>
+      <select class="filter-select" style="width:120px;">
+        <option value="">全部状态</option>
+        <option value="online">在线</option>
+        <option value="offline">离线</option>
+        <option value="low-battery">低电量</option>
+      </select>
+      <button class="btn btn-ghost">
+        <i data-lucide="rotate-ccw" style="width:14px;height:14px;"></i>
+        重置
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-header-row">
+        <div style="display:flex;align-items:center;">
+          <span class="table-header-title">设备列表</span>
+          <span class="table-header-count tnum">共 256 台</span>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-ghost" style="height:30px;font-size:12px;">
+            <i data-lucide="columns-3" style="width:13px;height:13px;"></i>
+            列设置
+          </button>
+          <button class="btn btn-ghost" style="height:30px;font-size:12px;">
+            <i data-lucide="arrow-up-down" style="width:13px;height:13px;"></i>
+            排序
+          </button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th style="min-width:150px;">IMEI号</th>
+              <th style="min-width:140px;">设备型号</th>
+              <th style="min-width:100px;">绑定居民</th>
+              <th style="min-width:80px;">在线状态</th>
+              <th style="min-width:140px;">电量</th>
+              <th style="min-width:150px;">最后心跳时间</th>
+              <th style="min-width:120px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1: Online, 85% -->
+            <tr>
+              <td><span class="imei-text">86001234</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">567890</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">BP-A100 智能血压计</td>
+              <td>张建国</td>
+              <td>
+                <span class="status-dot"><span class="dot online"></span>在线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill green" style="width:85%;"></div></div>
+                  <span class="battery-text green tnum">85%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-30 14:32:18</span>
+                  <div class="time-ago">2 分钟前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="重启设备"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 2: Online, 72% -->
+            <tr>
+              <td><span class="imei-text">86002345</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">678901</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">GS-B200 血糖仪</td>
+              <td>李美华</td>
+              <td>
+                <span class="status-dot"><span class="dot online"></span>在线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill green" style="width:72%;"></div></div>
+                  <span class="battery-text green tnum">72%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-30 14:30:05</span>
+                  <div class="time-ago">4 分钟前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="重启设备"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 3: Online, 45% -->
+            <tr>
+              <td><span class="imei-text">86003456</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">789012</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">OX-C300 血氧仪</td>
+              <td>王德福</td>
+              <td>
+                <span class="status-dot"><span class="dot online"></span>在线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill yellow" style="width:45%;"></div></div>
+                  <span class="battery-text yellow tnum">45%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-30 14:28:42</span>
+                  <div class="time-ago">6 分钟前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="重启设备"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 4: Offline, 60% -->
+            <tr>
+              <td><span class="imei-text">86004567</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">890123</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">WB-D400 智能手环</td>
+              <td>刘秀英</td>
+              <td>
+                <span class="status-dot"><span class="dot offline"></span>离线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill green" style="width:60%;"></div></div>
+                  <span class="battery-text green tnum">60%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-29 18:15:33</span>
+                  <div class="time-ago">20 小时前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="重启设备"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 5: Offline, 33% -->
+            <tr>
+              <td><span class="imei-text">86005678</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">901234</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">BP-A100 智能血压计</td>
+              <td>赵志强</td>
+              <td>
+                <span class="status-dot"><span class="dot offline"></span>离线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill yellow" style="width:33%;"></div></div>
+                  <span class="battery-text yellow tnum">33%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-28 09:20:11</span>
+                  <div class="time-ago">2 天前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="重启设备"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 6: Online, 15% LOW BATTERY - highlighted row -->
+            <tr class="row-low-battery">
+              <td><span class="imei-text">86006789</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">012345</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">SC-E500 体脂秤</td>
+              <td>孙晓梅</td>
+              <td>
+                <span class="status-dot"><span class="dot low-battery-online"></span>在线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill red" style="width:15%;"></div></div>
+                  <span class="battery-text red tnum">15%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-30 14:25:09</span>
+                  <div class="time-ago">9 分钟前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="发送充电提醒"><i data-lucide="bell-ring" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 7: Online, 8% LOW BATTERY - highlighted row -->
+            <tr class="row-low-battery">
+              <td><span class="imei-text">86007890</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">123456</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">WB-D400 智能手环</td>
+              <td>陈文博</td>
+              <td>
+                <span class="status-dot"><span class="dot low-battery-online"></span>在线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill red" style="width:8%;"></div></div>
+                  <span class="battery-text red tnum">8%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-30 14:31:55</span>
+                  <div class="time-ago">3 分钟前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="发送充电提醒"><i data-lucide="bell-ring" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 8: Offline, 5% LOW BATTERY - highlighted row -->
+            <tr class="row-low-battery">
+              <td><span class="imei-text">86008901</span><span class="imei-text" style="color:var(--hmp-color-text-tertiary);">234567</span></td>
+              <td style="font-weight:var(--hmp-font-weight-medium);">GS-B200 血糖仪</td>
+              <td>周雅婷</td>
+              <td>
+                <span class="status-dot"><span class="dot offline"></span>离线</span>
+              </td>
+              <td>
+                <div class="battery-wrap">
+                  <div class="battery-bar"><div class="battery-fill red" style="width:5%;"></div></div>
+                  <span class="battery-text red tnum">5%</span>
+                </div>
+              </td>
+              <td>
+                <div class="heartbeat-time">
+                  <span class="tnum">2026-06-27 16:42:30</span>
+                  <div class="time-ago">3 天前</div>
+                </div>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="action-btn" title="查看详情"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn" title="解绑"><i data-lucide="unlink" style="width:14px;height:14px;"></i></button>
+                  <button class="action-btn danger" title="报废设备"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-wrapper">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="pagination-info">每页</span>
+          <select class="page-size-select">
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+          </select>
+          <span class="pagination-info tnum">条，共 256 台</span>
+        </div>
+        <div class="pagination">
+          <button class="page-btn" disabled title="上一页">
+            <i data-lucide="chevron-left" style="width:14px;height:14px;"></i>
+          </button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn tnum">2</button>
+          <button class="page-btn tnum">3</button>
+          <button class="page-btn tnum">...</button>
+          <button class="page-btn tnum">26</button>
+          <button class="page-btn" title="下一页">
+            <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+
+    <style>
+    /* ========================================
+       Health Management Platform — OKLCH Design System
+       Prefix: --hmp-
+       ======================================== */
+    :root {
+      /* --- Typography --- */
+      --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+      --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+      --hmp-font-size-display: 36px;
+      --hmp-font-size-h1: 28px;
+      --hmp-font-size-h2: 22px;
+      --hmp-font-size-h3: 18px;
+      --hmp-font-size-h4: 15px;
+      --hmp-font-size-body: 14px;
+      --hmp-font-size-caption: 12px;
+      --hmp-font-size-small: 11px;
+      --hmp-font-weight-regular: 400;
+      --hmp-font-weight-medium: 500;
+      --hmp-font-weight-semibold: 600;
+      --hmp-font-weight-bold: 700;
+      --hmp-line-height-tight: 1.25;
+      --hmp-line-height-normal: 1.5;
+      --hmp-line-height-relaxed: 1.75;
+      --hmp-font-features: "tnum" 1, "ss01" 1;
+
+      /* --- Spacing --- */
+      --hmp-spacing-xs: 4px;
+      --hmp-spacing-sm: 8px;
+      --hmp-spacing-md: 12px;
+      --hmp-spacing-lg: 16px;
+      --hmp-spacing-xl: 24px;
+      --hmp-spacing-2xl: 32px;
+      --hmp-spacing-3xl: 48px;
+
+      /* --- Border Radius --- */
+      --hmp-radius-sm: 6px;
+      --hmp-radius-md: 8px;
+      --hmp-radius-lg: 10px;
+      --hmp-radius-xl: 14px;
+      --hmp-radius-full: 9999px;
+
+      /* --- Shadows --- */
+      --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+      --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+      --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+
+      /* --- Layout --- */
+      --hmp-sidebar-width: 232px;
+      --hmp-header-height: 56px;
+      --hmp-content-max-width: 1200px;
+      --hmp-card-padding: 16px;
+
+      /* --- Chart Colors --- */
+      --hmp-chart-1: oklch(0.65 0.18 195);
+      --hmp-chart-2: oklch(0.7 0.16 155);
+      --hmp-chart-3: oklch(0.78 0.16 75);
+      --hmp-chart-4: oklch(0.62 0.23 22);
+      --hmp-chart-5: oklch(0.6 0.2 290);
+
+      /* --- Backgrounds (Light) --- */
+      --hmp-bg-body: oklch(0.99 0.005 200);
+      --hmp-bg-card: oklch(1 0 0);
+      --hmp-bg-card-hover: oklch(0.995 0.003 200);
+      --hmp-bg-elevated: oklch(1 0 0);
+      --hmp-bg-sunken: oklch(0.96 0.01 200);
+      --hmp-bg-sidebar: oklch(1 0 0);
+      --hmp-bg-header: oklch(1 0 0);
+
+      /* --- Primary (Medical Cyan-Blue) --- */
+      --hmp-color-primary: oklch(0.55 0.13 195);
+      --hmp-color-primary-hover: oklch(0.58 0.14 195);
+      --hmp-color-primary-active: oklch(0.50 0.13 195);
+      --hmp-color-primary-light: oklch(0.55 0.13 195 / 8%);
+      --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+
+      /* --- Text Colors --- */
+      --hmp-color-text-primary: oklch(0.2 0.03 220);
+      --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+      --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+      --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+
+      /* --- Border Colors --- */
+      --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+      --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+
+      /* --- Health Status Colors --- */
+      --hmp-health-green: oklch(0.7 0.16 155);
+      --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+      --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+      --hmp-health-yellow: oklch(0.78 0.16 75);
+      --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+      --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+      --hmp-health-red: oklch(0.62 0.23 22);
+      --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+      --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--hmp-font-family);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      background: var(--hmp-bg-body);
+      line-height: var(--hmp-line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: var(--hmp-sidebar-width);
+      background: var(--hmp-bg-sidebar);
+      border-right: 1px solid var(--hmp-color-border);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      height: var(--hmp-header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-lg);
+      border-bottom: 1px solid var(--hmp-color-border);
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-text {
+      font-family: var(--hmp-font-family-display);
+      font-weight: 600;
+      font-size: var(--hmp-font-size-h4);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--hmp-spacing-sm) var(--hmp-spacing-sm);
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px var(--hmp-spacing-md);
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .nav-item:hover {
+      background: var(--hmp-bg-card-hover);
+      color: var(--hmp-color-text-primary);
+    }
+    .nav-item.active {
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .nav-item .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-user {
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      border-top: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-user-avatar {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-primary-light);
+      color: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: var(--hmp-font-size-caption);
+      flex-shrink: 0;
+    }
+    .sidebar-user-info { overflow: hidden; }
+    .sidebar-user-name {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-user-role {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+
+    /* --- Main Layout --- */
+    .main-wrapper {
+      margin-left: var(--hmp-sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Header --- */
+    .header {
+      height: var(--hmp-header-height);
+      background: var(--hmp-bg-header);
+      border-bottom: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-xl);
+      gap: var(--hmp-spacing-lg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      flex-shrink: 0;
+    }
+    .breadcrumb a { color: var(--hmp-color-text-tertiary); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--hmp-color-text-secondary); }
+    .breadcrumb .current { color: var(--hmp-color-text-primary); font-weight: var(--hmp-font-weight-medium); }
+    .header-search {
+      flex: 1;
+      max-width: 360px;
+      margin-left: auto;
+      position: relative;
+    }
+    .header-search input {
+      width: 100%;
+      height: 34px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-full);
+      padding: 0 14px 0 34px;
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      transition: border-color 0.15s, background 0.15s;
+      outline: none;
+    }
+    .header-search input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .header-search input:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+    }
+    .header-search-icon {
+      position: absolute;
+      left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--hmp-color-text-tertiary);
+      pointer-events: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+      flex-shrink: 0;
+    }
+    .header-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--hmp-color-text-secondary);
+      transition: all 0.15s;
+      position: relative;
+    }
+    .header-btn:hover {
+      border-color: var(--hmp-color-border-hover);
+      background: var(--hmp-bg-card-hover);
+    }
+    .header-btn .badge-dot {
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 7px; height: 7px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-health-red);
+      border: 1.5px solid var(--hmp-bg-card);
+    }
+    .header-avatar {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid var(--hmp-color-border);
+    }
+    .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* --- Content --- */
+    .content {
+      flex: 1;
+      padding: var(--hmp-spacing-xl);
+      max-width: var(--hmp-content-max-width);
+      width: 100%;
+    }
+
+    /* --- Page Title Row --- */
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--hmp-spacing-lg);
+    }
+    .page-title {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-h2);
+      font-weight: var(--hmp-font-weight-bold);
+      color: var(--hmp-color-text-primary);
+    }
+    .page-title-sub {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      margin-top: 2px;
+    }
+
+    /* --- Filter Bar --- */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+      flex-wrap: wrap;
+    }
+    .filter-select, .filter-input {
+      height: 34px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: 0 var(--hmp-spacing-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-card);
+      color: var(--hmp-color-text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+      cursor: pointer;
+    }
+    .filter-select:focus, .filter-input:focus {
+      border-color: var(--hmp-color-primary);
+    }
+    .filter-select {
+      padding-right: 28px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    .filter-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+    }
+    .filter-search-wrap .search-icon {
+      position: absolute;
+      left: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--hmp-color-text-tertiary);
+      pointer-events: none;
+    }
+    .filter-search-wrap input { width: 100%; padding-left: 32px; }
+    .btn {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--hmp-color-primary);
+      color: var(--hmp-color-text-on-primary);
+    }
+    .btn-primary:hover { background: var(--hmp-color-primary-hover); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--hmp-color-border);
+      color: var(--hmp-color-text-secondary);
+    }
+    .btn-ghost:hover { background: var(--hmp-bg-card-hover); border-color: var(--hmp-color-border-hover); }
+
+    /* --- Stat Cards --- */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--hmp-spacing-md);
+      margin-top: var(--hmp-spacing-lg);
+    }
+    .stat-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      padding: var(--hmp-card-padding);
+      box-shadow: var(--hmp-shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--hmp-shadow-md); }
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .stat-card-label {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .stat-card-icon {
+      width: 28px; height: 28px;
+      border-radius: var(--hmp-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-card-value {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-display);
+      font-weight: var(--hmp-font-weight-bold);
+      font-feature-settings: var(--hmp-font-features);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-card-detail {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+    }
+    .stat-card-detail .pct { font-weight: var(--hmp-font-weight-semibold); }
+
+    /* --- Table --- */
+    .table-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-lg);
+      margin-top: var(--hmp-spacing-lg);
+      overflow: hidden;
+    }
+    .table-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--hmp-spacing-md) var(--hmp-card-padding);
+      border-bottom: 1px solid var(--hmp-color-border);
+    }
+    .table-header-title {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+    }
+    .table-header-count {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+      margin-left: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      text-align: left;
+      padding: 10px var(--hmp-card-padding);
+      font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+      background: var(--hmp-bg-body);
+      border-bottom: 1px solid var(--hmp-color-border);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--hmp-color-border);
+      transition: background 0.12s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--hmp-bg-card-hover); }
+    tbody td {
+      padding: 12px var(--hmp-card-padding);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      vertical-align: middle;
+    }
+
+    /* Low battery row highlight */
+    tbody tr.row-low-battery {
+      background: oklch(0.62 0.23 22 / 6%);
+    }
+    tbody tr.row-low-battery:hover {
+      background: oklch(0.62 0.23 22 / 10%);
+    }
+    tbody tr.row-low-battery td:first-child {
+      position: relative;
+    }
+    tbody tr.row-low-battery td:first-child::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--hmp-health-red);
+    }
+
+    /* --- Online Status Dot --- */
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--hmp-font-size-body);
+      white-space: nowrap;
+    }
+    .status-dot .dot {
+      width: 8px; height: 8px;
+      border-radius: var(--hmp-radius-full);
+      flex-shrink: 0;
+    }
+    .status-dot .dot.online {
+      background: var(--hmp-health-green);
+      box-shadow: 0 0 0 3px oklch(0.7 0.16 155 / 20%);
+    }
+    .status-dot .dot.offline {
+      background: var(--hmp-color-text-tertiary);
+    }
+    .status-dot .dot.low-battery-online {
+      background: var(--hmp-health-red);
+      box-shadow: 0 0 0 3px oklch(0.62 0.23 22 / 20%);
+      animation: pulse-red 1.5s ease-in-out infinite;
+    }
+
+    /* --- Battery Progress Bar --- */
+    .battery-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 120px;
+    }
+    .battery-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-bg-sunken);
+      overflow: hidden;
+      position: relative;
+    }
+    .battery-fill {
+      height: 100%;
+      border-radius: var(--hmp-radius-full);
+      transition: width 0.3s ease;
+    }
+    .battery-fill.green { background: var(--hmp-health-green); }
+    .battery-fill.yellow { background: var(--hmp-health-yellow); }
+    .battery-fill.red {
+      background: var(--hmp-health-red);
+      animation: pulse-red-fill 1.5s ease-in-out infinite;
+    }
+    .battery-text {
+      font-family: var(--hmp-font-family-mono);
+      font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      font-feature-settings: var(--hmp-font-features);
+      min-width: 32px;
+      text-align: right;
+    }
+    .battery-text.green { color: var(--hmp-health-green); }
+    .battery-text.yellow { color: var(--hmp-health-yellow); }
+    .battery-text.red { color: var(--hmp-health-red); }
+
+    /* --- Low battery blink animation --- */
+    @keyframes pulse-red {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes pulse-red-fill {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* --- IMEI mono text --- */
+    .imei-text {
+      font-family: var(--hmp-font-family-mono);
+      font-size: var(--hmp-font-size-caption);
+      font-feature-settings: var(--hmp-font-features);
+      color: var(--hmp-color-text-secondary);
+    }
+
+    /* --- Heartbeat time --- */
+    .heartbeat-time {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      font-feature-settings: var(--hmp-font-features);
+      white-space: nowrap;
+    }
+    .heartbeat-time .time-ago {
+      color: var(--hmp-color-text-tertiary);
+      font-size: var(--hmp-font-size-small);
+      margin-top: 1px;
+    }
+
+    /* --- Action Buttons --- */
+    .action-btns {
+      display: flex;
+      gap: var(--hmp-spacing-xs);
+    }
+    .action-btn {
+      width: 30px; height: 30px;
+      border-radius: var(--hmp-radius-sm);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--hmp-color-text-secondary);
+      transition: all 0.15s;
+    }
+    .action-btn:hover {
+      border-color: var(--hmp-color-primary);
+      color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light);
+    }
+    .action-btn.danger:hover {
+      border-color: var(--hmp-health-red);
+      color: var(--hmp-health-red);
+      background: var(--hmp-health-red-bg);
+    }
+
+    /* --- Pagination --- */
+    .pagination-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--hmp-spacing-md) var(--hmp-card-padding);
+      border-top: 1px solid var(--hmp-color-border);
+    }
+    .pagination-info {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .page-btn {
+      min-width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-md);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--hmp-font-size-caption);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-feature-settings: var(--hmp-font-features);
+    }
+    .page-btn:hover { border-color: var(--hmp-color-border-hover); background: var(--hmp-bg-card-hover); }
+    .page-btn.active {
+      background: var(--hmp-color-primary);
+      color: var(--hmp-color-text-on-primary);
+      border-color: var(--hmp-color-primary);
+    }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .page-size-select {
+      height: 32px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: 0 var(--hmp-spacing-sm);
+      font-size: var(--hmp-font-size-caption);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-card);
+      color: var(--hmp-color-text-secondary);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* --- Tabular Numbers Utility --- */
+    .tnum { font-feature-settings: var(--hmp-font-features); }
+  </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医生信息维护 — 主动健康管理平台</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i data-lucide="heart-pulse" style="width:18px;height:18px;"></i>
+    </div>
+    <span class="sidebar-logo-text">主动健康管理</span>
+  </div>
+  <nav class="sidebar-nav">
+    <!-- 业务概览 -->
+    <div class="nav-group">
+      <div class="nav-group-label">业务概览</div>
+      <a class="nav-item" href="#">
+        <i data-lucide="monitor" class="nav-icon"></i>
+        <span>业务大屏</span>
+      </a>
+    </div>
+    <!-- 居民管理 -->
+    <div class="nav-group">
+      <div class="nav-group-label">居民管理</div>
+      <a class="nav-item" href="#">
+        <i data-lucide="user-check" class="nav-icon"></i>
+        <span>在管居民</span>
+      </a>
+    </div>
+    <!-- 医生管理 -->
+    <div class="nav-group">
+      <div class="nav-group-label">医生管理</div>
+      <a class="nav-item active" href="#">
+        <i data-lucide="stethoscope" class="nav-icon"></i>
+        <span>医生入驻审批</span>
+      </a>
+      <a class="nav-item" href="#">
+        <i data-lucide="users" class="nav-icon"></i>
+        <span>我的病人</span>
+      </a>
+    </div>
+    <!-- 智能服务 -->
+    <div class="nav-group">
+      <div class="nav-group-label">智能服务</div>
+      <a class="nav-item" href="#">
+        <i data-lucide="clipboard-list" class="nav-icon"></i>
+        <span>调理方案</span>
+      </a>
+      <a class="nav-item" href="#">
+        <i data-lucide="siren" class="nav-icon"></i>
+        <span>预警工作台</span>
+      </a>
+      <a class="nav-item" href="#">
+        <i data-lucide="message-circle" class="nav-icon"></i>
+        <span>即时通讯</span>
+      </a>
+    </div>
+    <!-- 系统设置 -->
+    <div class="nav-group">
+      <div class="nav-group-label">系统设置</div>
+      <a class="nav-item" href="#">
+        <i data-lucide="cpu" class="nav-icon"></i>
+        <span>设备管理</span>
+      </a>
+      <a class="nav-item" href="#">
+        <i data-lucide="settings" class="nav-icon"></i>
+        <span>系统配置</span>
+      </a>
+    </div>
+  </nav>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">张</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">张伟</div>
+      <div class="sidebar-user-role">主治医师</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="breadcrumb">
+      <a href="#">首页</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <a href="#">医生管理</a>
+      <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+      <span class="current">医生信息维护</span>
+    </div>
+    <div class="header-search">
+      <i data-lucide="search" class="header-search-icon" style="width:15px;height:15px;"></i>
+      <input type="text" placeholder="全局搜索居民、医生、方案...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="通知">
+        <i data-lucide="bell" style="width:17px;height:17px;"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="header-avatar">
+        <div class="avatar-circle" style="background:#1a8a8a;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600;flex-shrink:0;">张</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Page Title -->
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-title">医生信息维护</h1>
+        <p class="page-title-sub">编辑您的个人资料、专业信息与隐私设置</p>
+      </div>
+    </div>
+
+    <!-- ==================== Avatar Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="user-circle" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">头像信息</h3>
+            <p class="form-card-desc">支持 JPG、PNG 格式，建议尺寸 200x200 像素</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <div class="avatar-section">
+          <div class="avatar-large" id="avatarPreview">
+            <div id="avatarImg" style="width:96px;height:96px;border-radius:50%;background:var(--hmp-color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;font-weight:600;flex-shrink:0;">张</div>
+          </div>
+          <div class="avatar-actions">
+            <button class="btn btn-primary" id="changeAvatarBtn">
+              <i data-lucide="camera" style="width:15px;height:15px;"></i>
+              更换头像
+            </button>
+            <p class="avatar-hint">点击上传新头像，文件不超过 2MB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Basic Info Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="id-card" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">基本信息</h3>
+            <p class="form-card-desc">填写您的个人基本信息</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <div class="form-grid">
+          <!-- 姓名 -->
+          <div class="form-field">
+            <label class="form-label">
+              姓名 <span class="form-required">*</span>
+            </label>
+            <input type="text" class="form-input" placeholder="请输入姓名" value="张伟">
+          </div>
+          <!-- 手机号 -->
+          <div class="form-field">
+            <label class="form-label">
+              手机号 <span class="form-required">*</span>
+            </label>
+            <input type="tel" class="form-input" placeholder="请输入手机号" value="138****6789">
+          </div>
+          <!-- 邮箱 -->
+          <div class="form-field">
+            <label class="form-label">
+              邮箱
+            </label>
+            <input type="email" class="form-input" placeholder="请输入邮箱地址" value="zhangwei@hospital.com">
+          </div>
+          <!-- 科室 -->
+          <div class="form-field">
+            <label class="form-label">
+              科室 <span class="form-required">*</span>
+            </label>
+            <select class="form-select">
+              <option value="" disabled>请选择科室</option>
+              <option value="cardiology">心血管内科</option>
+              <option value="endocrinology">内分泌科</option>
+              <option value="neurology">神经内科</option>
+              <option value="respiratory">呼吸内科</option>
+              <option value="general">全科</option>
+              <option value="geriatrics" selected>老年病科</option>
+            </select>
+          </div>
+          <!-- 职称 -->
+          <div class="form-field">
+            <label class="form-label">
+              职称 <span class="form-required">*</span>
+            </label>
+            <select class="form-select">
+              <option value="" disabled>请选择职称</option>
+              <option value="resident">住院医师</option>
+              <option value="attending" selected>主治医师</option>
+              <option value="associate">副主任医师</option>
+              <option value="chief">主任医师</option>
+            </select>
+          </div>
+          <!-- 从医年限 -->
+          <div class="form-field">
+            <label class="form-label">
+              从医年限
+            </label>
+            <input type="number" class="form-input" placeholder="请输入从医年限" value="12" min="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Professional Tags Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="tags" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">专业标签</h3>
+            <p class="form-card-desc">添加您擅长领域的专业标签，便于患者了解您的专长</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <div class="tags-container" id="tagsContainer">
+          <span class="tag-item">
+            心血管
+            <button class="tag-remove" data-tag="心血管" title="移除">
+              <i data-lucide="x" style="width:12px;height:12px;"></i>
+            </button>
+          </span>
+          <span class="tag-item">
+            高血压管理
+            <button class="tag-remove" data-tag="高血压管理" title="移除">
+              <i data-lucide="x" style="width:12px;height:12px;"></i>
+            </button>
+          </span>
+          <span class="tag-item">
+            老年慢病
+            <button class="tag-remove" data-tag="老年慢病" title="移除">
+              <i data-lucide="x" style="width:12px;height:12px;"></i>
+            </button>
+          </span>
+          <span class="tag-item">
+            糖尿病管理
+            <button class="tag-remove" data-tag="糖尿病管理" title="移除">
+              <i data-lucide="x" style="width:12px;height:12px;"></i>
+            </button>
+          </span>
+          <div class="tag-input-wrap">
+            <input type="text" class="tag-input" id="tagInput" placeholder="输入标签后按回车添加">
+          </div>
+        </div>
+        <p class="form-help-text">最多可添加 10 个标签，按 Enter 键添加新标签</p>
+      </div>
+    </div>
+
+    <!-- ==================== Bio Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="file-text" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">个人简介</h3>
+            <p class="form-card-desc">向患者展示您的专业背景与从医经历</p>
+          </div>
+        </div>
+        <span class="char-count"><span id="bioCharCount">86</span>/500</span>
+      </div>
+      <div class="form-card-body">
+        <textarea class="form-textarea" id="bioTextarea" rows="5" maxlength="500" placeholder="请输入个人简介...">从事老年病科临床工作12年，擅长心血管疾病及老年慢性病管理，具有丰富的高血压、糖尿病综合管理经验。曾参与多项省级科研项目，发表学术论文8篇。</textarea>
+      </div>
+    </div>
+
+    <!-- ==================== Credentials Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="award" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">执业资质</h3>
+            <p class="form-card-desc">上传您的执业证书和职称证书</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <div class="upload-grid">
+          <!-- 执业医师资格证 -->
+          <div class="upload-area" id="uploadLicense">
+            <div class="upload-placeholder">
+              <div class="upload-icon">
+                <i data-lucide="upload" style="width:28px;height:28px;"></i>
+              </div>
+              <p class="upload-title">执业医师资格证</p>
+              <p class="upload-hint">点击或拖拽文件上传</p>
+              <p class="upload-hint">支持 PDF、JPG、PNG，不超过 10MB</p>
+            </div>
+            <div class="upload-preview hidden" id="licensePreview">
+              <div class="upload-file-icon">
+                <i data-lucide="file-check" style="width:32px;height:32px;"></i>
+              </div>
+              <div class="upload-file-info">
+                <span class="upload-file-name">执业医师资格证.pdf</span>
+                <span class="upload-file-size">1.2 MB</span>
+              </div>
+              <button class="upload-file-remove" title="删除">
+                <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+              </button>
+            </div>
+          </div>
+          <!-- 职称证书 -->
+          <div class="upload-area" id="uploadTitle">
+            <div class="upload-placeholder">
+              <div class="upload-icon">
+                <i data-lucide="upload" style="width:28px;height:28px;"></i>
+              </div>
+              <p class="upload-title">职称证书</p>
+              <p class="upload-hint">点击或拖拽文件上传</p>
+              <p class="upload-hint">支持 PDF、JPG、PNG，不超过 10MB</p>
+            </div>
+            <div class="upload-preview hidden" id="titlePreview">
+              <div class="upload-file-icon">
+                <i data-lucide="file-check" style="width:32px;height:32px;"></i>
+              </div>
+              <div class="upload-file-info">
+                <span class="upload-file-name">主治医师职称证.jpg</span>
+                <span class="upload-file-size">856 KB</span>
+              </div>
+              <button class="upload-file-remove" title="删除">
+                <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Privacy Settings Card ==================== -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title-group">
+          <i data-lucide="shield" class="form-card-icon" style="width:18px;height:18px;"></i>
+          <div>
+            <h3 class="form-card-title">隐私设置</h3>
+            <p class="form-card-desc">控制您的信息可见性与通知偏好</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <div class="privacy-list">
+          <!-- 允许患者查看手机号 -->
+          <div class="privacy-item">
+            <div class="privacy-info">
+              <div class="privacy-label">允许患者查看手机号</div>
+              <div class="privacy-desc">开启后，您的患者可以在个人主页看到您的手机号码</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="togglePhone" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <!-- 允许IM消息推送 -->
+          <div class="privacy-item">
+            <div class="privacy-info">
+              <div class="privacy-label">允许 IM 消息推送</div>
+              <div class="privacy-desc">开启后，患者发送的消息将通过平台即时推送通知</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleIM" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <!-- 允许平台推荐 -->
+          <div class="privacy-item">
+            <div class="privacy-info">
+              <div class="privacy-label">允许平台推荐</div>
+              <div class="privacy-desc">开启后，平台可将您推荐给有相关需求的患者</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleRecommend">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Action Buttons ==================== -->
+    <div class="form-actions">
+      <button class="btn btn-primary btn-lg" id="saveBtn">
+        <i data-lucide="check" style="width:16px;height:16px;"></i>
+        保存修改
+      </button>
+      <button class="btn btn-ghost btn-lg" id="cancelBtn">
+        取消
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  // ---- Tag management ----
+  const tagsContainer = document.getElementById('tagsContainer');
+  const tagInput = document.getElementById('tagInput');
+  const maxTags = 10;
+
+  tagInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const val = tagInput.value.trim();
+      if (!val) return;
+      const tags = tagsContainer.querySelectorAll('.tag-item');
+      if (tags.length >= maxTags) return;
+      // check duplicate
+      let dup = false;
+      tags.forEach(t => { if (t.textContent.replace('×', '').trim() === val) dup = true; });
+      if (dup) { tagInput.value = ''; return; }
+      const span = document.createElement('span');
+      span.className = 'tag-item';
+      span.innerHTML = `${val}<button class="tag-remove" data-tag="${val}" title="移除"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+      tagsContainer.insertBefore(span, tagInput.parentElement);
+      tagInput.value = '';
+      lucide.createIcons();
+    }
+  });
+
+  tagsContainer.addEventListener('click', function(e) {
+    const btn = e.target.closest('.tag-remove');
+    if (btn) {
+      btn.closest('.tag-item').remove();
+    }
+  });
+
+  // ---- Bio char count ----
+  const bioTextarea = document.getElementById('bioTextarea');
+  const bioCharCount = document.getElementById('bioCharCount');
+  bioTextarea.addEventListener('input', function() {
+    bioCharCount.textContent = bioTextarea.value.length;
+  });
+
+  // ---- Upload area toggle (demo: show preview on click) ----
+  function setupUpload(areaId, previewId) {
+    const area = document.getElementById(areaId);
+    const placeholder = area.querySelector('.upload-placeholder');
+    const preview = document.getElementById(previewId);
+    area.addEventListener('click', function() {
+      if (!preview.classList.contains('hidden')) return;
+      placeholder.classList.add('hidden');
+      preview.classList.remove('hidden');
+      lucide.createIcons();
+    });
+    const removeBtn = preview.querySelector('.upload-file-remove');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        placeholder.classList.remove('hidden');
+        preview.classList.add('hidden');
+        lucide.createIcons();
+      });
+    }
+  }
+  setupUpload('uploadLicense', 'licensePreview');
+  setupUpload('uploadTitle', 'titlePreview');
+
+  // ---- Save / Cancel (demo alerts) ----
+  document.getElementById('saveBtn').addEventListener('click', function() {
+    showToast('信息已保存成功');
+  });
+  document.getElementById('cancelBtn').addEventListener('click', function() {
+    showToast('已取消修改', 'info');
+  });
+
+  // ---- Toast ----
+  function showToast(msg, type) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg' + (type === 'info' ? ' toast-info' : '');
+    toast.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${type === 'info' ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' : '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'}</svg><span>${msg}</span>`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('show'));
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+</script>
+
+    <style>
+    /* ========================================
+       Health Management Platform — OKLCH Design System
+       Prefix: --hmp-
+       ======================================== */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--hmp-font-family);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-primary);
+      background: var(--hmp-bg-body);
+      line-height: var(--hmp-line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: var(--hmp-sidebar-width);
+      background: var(--hmp-bg-sidebar);
+      border-right: 1px solid var(--hmp-color-border);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      height: var(--hmp-header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-lg);
+      border-bottom: 1px solid var(--hmp-color-border);
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-text {
+      font-family: var(--hmp-font-family-display);
+      font-weight: 600;
+      font-size: var(--hmp-font-size-h4);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--hmp-spacing-sm) var(--hmp-spacing-sm);
+    }
+    .sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: var(--hmp-color-border); border-radius: 4px; }
+    .nav-group { margin-bottom: var(--hmp-spacing-xs); }
+    .nav-group-label {
+      font-size: var(--hmp-font-size-small);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px var(--hmp-spacing-md) 4px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px var(--hmp-spacing-md);
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      color: var(--hmp-color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .nav-item:hover {
+      background: var(--hmp-bg-card-hover);
+      color: var(--hmp-color-text-primary);
+    }
+    .nav-item.active {
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      font-weight: var(--hmp-font-weight-medium);
+    }
+    .nav-item .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-user {
+      padding: var(--hmp-spacing-md) var(--hmp-spacing-lg);
+      border-top: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-user-avatar {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: var(--hmp-font-size-caption);
+      flex-shrink: 0;
+    }
+    .sidebar-user-info { overflow: hidden; }
+    .sidebar-user-name {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-user-role {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+
+    /* --- Main Layout --- */
+    .main-wrapper {
+      margin-left: var(--hmp-sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Header --- */
+    .header {
+      height: var(--hmp-header-height);
+      background: var(--hmp-bg-header);
+      border-bottom: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--hmp-spacing-xl);
+      gap: var(--hmp-spacing-lg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      flex-shrink: 0;
+    }
+    .breadcrumb a { color: var(--hmp-color-text-tertiary); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--hmp-color-text-secondary); }
+    .breadcrumb .current { color: var(--hmp-color-text-primary); font-weight: var(--hmp-font-weight-medium); }
+    .header-search {
+      flex: 1;
+      max-width: 360px;
+      margin-left: auto;
+      position: relative;
+    }
+    .header-search input {
+      width: 100%;
+      height: 34px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-full);
+      padding: 0 14px 0 34px;
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      transition: border-color 0.15s, background 0.15s;
+      outline: none;
+    }
+    .header-search input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .header-search input:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+    }
+    .header-search-icon {
+      position: absolute;
+      left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--hmp-color-text-tertiary);
+      pointer-events: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+      flex-shrink: 0;
+    }
+    .header-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--hmp-color-text-secondary);
+      transition: all 0.15s;
+      position: relative;
+    }
+    .header-btn:hover {
+      border-color: var(--hmp-color-border-hover);
+      background: var(--hmp-bg-card-hover);
+    }
+    .header-btn .badge-dot {
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 7px; height: 7px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-health-red);
+      border: 1.5px solid var(--hmp-bg-card);
+    }
+    .header-avatar {
+      width: 34px; height: 34px;
+      border-radius: var(--hmp-radius-full);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid var(--hmp-color-border);
+    }
+    .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* --- Content --- */
+    .content {
+      flex: 1;
+      padding: var(--hmp-spacing-xl);
+      max-width: var(--hmp-content-max-width);
+      width: 100%;
+    }
+
+    /* --- Page Title Row --- */
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--hmp-spacing-lg);
+    }
+    .page-title {
+      font-family: var(--hmp-font-family-display);
+      font-size: var(--hmp-font-size-h2);
+      font-weight: var(--hmp-font-weight-bold);
+      color: var(--hmp-color-text-primary);
+    }
+    .page-title-sub {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-secondary);
+      margin-top: 2px;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: var(--hmp-radius-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      font-weight: var(--hmp-font-weight-medium);
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--hmp-color-primary);
+      color: var(--hmp-color-text-on-primary);
+    }
+    .btn-primary:hover { background: var(--hmp-color-primary-hover); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--hmp-color-border);
+      color: var(--hmp-color-text-secondary);
+    }
+    .btn-ghost:hover { background: var(--hmp-bg-card-hover); border-color: var(--hmp-color-border-hover); }
+    .btn-lg {
+      height: 40px;
+      padding: 0 24px;
+      font-size: var(--hmp-font-size-body);
+    }
+
+    /* --- Form Card --- */
+    .form-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      box-shadow: var(--hmp-shadow-lg);
+      margin-bottom: var(--hmp-spacing-lg);
+      overflow: hidden;
+    }
+    .form-card-header {
+      padding: var(--hmp-spacing-lg) var(--hmp-spacing-xl);
+      border-bottom: 1px solid var(--hmp-color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-card-title-group {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--hmp-spacing-md);
+    }
+    .form-card-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .form-card-title {
+      font-size: var(--hmp-font-size-h3);
+      font-weight: var(--hmp-font-weight-semibold);
+      color: var(--hmp-color-text-primary);
+      line-height: var(--hmp-line-height-tight);
+    }
+    .form-card-desc {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      margin-top: 2px;
+    }
+    .form-card-body {
+      padding: var(--hmp-spacing-xl);
+    }
+    .char-count {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      font-feature-settings: var(--hmp-font-features);
+      flex-shrink: 0;
+    }
+
+    /* --- Avatar Section --- */
+    .avatar-section {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-xl);
+    }
+    .avatar-large {
+      width: 96px; height: 96px;
+      border-radius: var(--hmp-radius-full);
+      overflow: hidden;
+      border: 3px solid var(--hmp-color-primary-light-default);
+      flex-shrink: 0;
+      background: var(--hmp-bg-sunken);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-large img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .avatar-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--hmp-spacing-sm);
+    }
+    .avatar-hint {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+
+    /* --- Form Grid & Fields --- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--hmp-spacing-lg) var(--hmp-spacing-xl);
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+    }
+    .form-required {
+      color: var(--hmp-health-red);
+      margin-left: 2px;
+    }
+    .form-input {
+      height: 40px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: 0 var(--hmp-spacing-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .form-input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .form-input:hover { border-color: var(--hmp-color-border-hover); }
+    .form-input:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+      box-shadow: 0 0 0 3px var(--hmp-color-primary-light-default);
+    }
+    .form-select {
+      height: 40px;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: 0 var(--hmp-spacing-md);
+      padding-right: 32px;
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+    .form-select:hover { border-color: var(--hmp-color-border-hover); }
+    .form-select:focus {
+      border-color: var(--hmp-color-primary);
+      background-color: var(--hmp-bg-card);
+      box-shadow: 0 0 0 3px var(--hmp-color-primary-light-default);
+    }
+    .form-textarea {
+      width: 100%;
+      border: 1px solid var(--hmp-color-border);
+      border-radius: var(--hmp-radius-md);
+      padding: var(--hmp-spacing-md);
+      font-size: var(--hmp-font-size-body);
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-sunken);
+      color: var(--hmp-color-text-primary);
+      outline: none;
+      resize: vertical;
+      min-height: 120px;
+      line-height: var(--hmp-line-height-relaxed);
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .form-textarea::placeholder { color: var(--hmp-color-text-tertiary); }
+    .form-textarea:hover { border-color: var(--hmp-color-border-hover); }
+    .form-textarea:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-bg-card);
+      box-shadow: 0 0 0 3px var(--hmp-color-primary-light-default);
+    }
+    .form-help-text {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      margin-top: var(--hmp-spacing-sm);
+    }
+
+    /* --- Tags --- */
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+    }
+    .tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      border-radius: var(--hmp-radius-full);
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      font-size: var(--hmp-font-size-caption);
+      font-weight: var(--hmp-font-weight-medium);
+      border: 1px solid oklch(0.55 0.13 195 / 20%);
+      transition: all 0.15s;
+    }
+    .tag-item:hover {
+      background: var(--hmp-color-primary-light-hover);
+    }
+    .tag-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: inherit;
+      background: none;
+      border: none;
+      padding: 0;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+    .tag-remove:hover { opacity: 1; }
+    .tag-input-wrap {
+      display: inline-flex;
+    }
+    .tag-input {
+      height: 32px;
+      border: 1px dashed var(--hmp-color-border-hover);
+      border-radius: var(--hmp-radius-full);
+      padding: 0 var(--hmp-spacing-md);
+      font-size: var(--hmp-font-size-caption);
+      font-family: var(--hmp-font-family);
+      background: transparent;
+      color: var(--hmp-color-text-primary);
+      outline: none;
+      width: 160px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .tag-input::placeholder { color: var(--hmp-color-text-tertiary); }
+    .tag-input:focus {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light-default);
+    }
+
+    /* --- Upload Area --- */
+    .upload-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--hmp-spacing-lg);
+    }
+    .upload-area {
+      border: 2px dashed var(--hmp-color-border);
+      border-radius: var(--hmp-radius-lg);
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .upload-area:hover {
+      border-color: var(--hmp-color-primary);
+      background: var(--hmp-color-primary-light-default);
+    }
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--hmp-spacing-sm);
+      padding: var(--hmp-spacing-lg);
+      text-align: center;
+    }
+    .upload-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--hmp-radius-lg);
+      background: var(--hmp-color-primary-light-default);
+      color: var(--hmp-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .upload-title {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+    }
+    .upload-hint {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+    .upload-preview {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-md);
+      padding: var(--hmp-spacing-lg);
+      width: 100%;
+    }
+    .upload-file-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--hmp-radius-lg);
+      background: var(--hmp-color-success-light-default);
+      color: var(--hmp-color-success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .upload-file-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+    }
+    .upload-file-name {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .upload-file-size {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+    }
+    .upload-file-remove {
+      width: 32px; height: 32px;
+      border-radius: var(--hmp-radius-sm);
+      border: 1px solid var(--hmp-color-border);
+      background: var(--hmp-bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--hmp-color-text-tertiary);
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .upload-file-remove:hover {
+      border-color: var(--hmp-health-red);
+      color: var(--hmp-health-red);
+      background: var(--hmp-health-red-bg);
+    }
+    .hidden { display: none !important; }
+
+    /* --- Privacy Settings --- */
+    .privacy-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .privacy-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--hmp-spacing-lg) 0;
+      gap: var(--hmp-spacing-xl);
+    }
+    .privacy-item + .privacy-item {
+      border-top: 1px solid var(--hmp-color-border);
+    }
+    .privacy-info { flex: 1; min-width: 0; }
+    .privacy-label {
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      color: var(--hmp-color-text-primary);
+    }
+    .privacy-desc {
+      font-size: var(--hmp-font-size-caption);
+      color: var(--hmp-color-text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* --- Toggle Switch --- */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--hmp-bg-sunken-alt);
+      border-radius: var(--hmp-radius-full);
+      transition: background 0.25s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      height: 18px; width: 18px;
+      left: 3px; bottom: 3px;
+      background: white;
+      border-radius: var(--hmp-radius-full);
+      transition: transform 0.25s;
+      box-shadow: 0 1px 3px oklch(0 0 0 / 15%);
+    }
+    .toggle-switch input:checked + .toggle-slider {
+      background: var(--hmp-color-primary);
+    }
+    .toggle-switch input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+    .toggle-switch input:focus + .toggle-slider {
+      box-shadow: 0 0 0 3px var(--hmp-color-primary-light-default);
+    }
+
+    /* --- Form Actions --- */
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--hmp-spacing-md);
+      padding-top: var(--hmp-spacing-sm);
+      padding-bottom: var(--hmp-spacing-3xl);
+    }
+
+    /* --- Toast --- */
+    .toast-msg {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-12px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--hmp-radius-md);
+      background: var(--hmp-color-success);
+      color: white;
+      font-size: var(--hmp-font-size-body);
+      font-weight: var(--hmp-font-weight-medium);
+      box-shadow: var(--hmp-shadow-lg);
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast-info {
+      background: var(--hmp-color-info);
+    }
+
+    /* --- Tabular Numbers Utility --- */
+    .tnum { font-feature-settings: var(--hmp-font-features); }
+  </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

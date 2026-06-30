@@ -582,276 +582,28 @@
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
@@ -894,323 +646,70 @@
     })();
     </script>
 
-    <script>
-    // Navigation click handling
-    (function() {
-      var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","service-package":"service-package.html","device-management":"device-management.html","system-settings":"system-settings.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html"};
-      document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var key = this.getAttribute('data-nav-key');
-          var target = navMap[key];
-          if (target) {
-            window.location.href = target;
-          }
-        });
-      });
-    })();
-    </script>
-</body>
-</html>
-<style>.crm-modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.45);align-items:center;justify-content:center}.crm-modal-overlay.is-visible{display:flex}.crm-modal{background:var(--hmp-bg-card);border-radius:var(--hmp-radius-lg);padding:24px;width:520px;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.15)}.crm-modal-title{font-size:var(--hmp-font-size-h3);font-weight:var(--hmp-font-weight-semibold);color:var(--hmp-color-text-primary);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}.crm-modal-close{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:var(--hmp-radius-md);cursor:pointer;color:var(--hmp-color-text-tertiary);border:none;background:transparent}.crm-modal-close:hover{background:var(--hmp-color-tertiary-light-default)}.crm-form-group{margin-bottom:16px}.crm-label{display:block;font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-secondary);margin-bottom:6px}.crm-label .required{color:var(--hmp-color-danger);margin-left:2px}.crm-input{width:100%;height:36px;padding:0 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);box-sizing:border-box}.crm-input:focus{outline:none;border-color:var(--hmp-color-primary);box-shadow:0 0 0 2px var(--hmp-color-primary-light-default)}.crm-textarea{width:100%;min-height:80px;padding:10px 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);resize:vertical;box-sizing:border-box}.crm-textarea:focus{outline:none;border-color:var(--hmp-color-primary);box-shadow:0 0 0 2px var(--hmp-color-primary-light-default)}.crm-select{width:100%;height:36px;padding:0 12px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);background:var(--hmp-bg-card);color:var(--hmp-color-text-primary);font-size:var(--hmp-font-size-body);font-family:var(--hmp-font-family);box-sizing:border-box}.crm-select:focus{outline:none;border-color:var(--hmp-color-primary)}.crm-modal-footer{display:flex;justify-content:flex-end;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--hmp-color-border)}.crm-btn{height:36px;padding:0 20px;border-radius:var(--hmp-radius-md);font-size:var(--hmp-font-size-body);cursor:pointer;font-family:var(--hmp-font-family);border:1px solid var(--hmp-color-border)}.crm-btn-primary{background:var(--hmp-color-primary);color:white;border-color:var(--hmp-color-primary)}.crm-btn-primary:hover{opacity:0.9}.crm-btn-default{background:var(--hmp-bg-card);color:var(--hmp-color-text-primary)}.crm-btn-default:hover{background:var(--hmp-bg-sunken)}.crm-btn-danger{background:var(--hmp-color-danger);color:white;border-color:var(--hmp-color-danger)}.crm-btn-danger:hover{opacity:0.9}.crm-warning-box{background:var(--hmp-color-danger-light-default);border:1px solid rgba(246,81,89,0.2);border-radius:var(--hmp-radius-md);padding:10px 14px;font-size:var(--hmp-font-size-caption);color:var(--hmp-color-danger);margin-bottom:16px;display:flex;align-items:center;gap:8px}</style>
+    
 
-
-<div class="crm-modal-overlay" data-crm-modal="create-package">
-  <div class="crm-modal">
-    <div class="crm-modal-title"><span>新建服务包</span><button class="crm-modal-close" data-crm-close="create-package">&#10005;</button></div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务包名称 <span class="required">*</span></label>
-      <input class="crm-input" placeholder="请输入服务包名称">
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务类型</label>
-      <select class="crm-select">
-        <option value="">请选择服务类型</option>
-        <option>健康管理</option>
-        <option>康复治疗</option>
-        <option>慢病管理</option>
-        <option>体检服务</option>
-      </select>
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务价格（元）</label>
-      <input class="crm-input" placeholder="请输入价格">
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务周期</label>
-      <select class="crm-select">
-        <option>1个月</option>
-        <option>3个月</option>
-        <option>6个月</option>
-        <option>12个月</option>
-        <option>单次</option>
-      </select>
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务描述</label>
-      <textarea class="crm-textarea" placeholder="请输入服务包描述"></textarea>
-    </div>
-    <div class="crm-modal-footer">
-      <button class="crm-btn crm-btn-default" data-crm-close="create-package">取消</button>
-      <button class="crm-btn crm-btn-primary" id="btn-create-package">创建</button>
-    </div>
-  </div>
-</div>
-<div class="crm-modal-overlay" data-crm-modal="confirm-offline">
-  <div class="crm-modal">
-    <div class="crm-modal-title"><span>下架确认</span><button class="crm-modal-close" data-crm-close="confirm-offline">&#10005;</button></div>
-    <div class="crm-warning-box">下架后该服务包将不再对居民可见，已购买的用户不受影响</div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务包名称</label>
-      <input class="crm-input" value="脑血管健康管理包" readonly>
-    </div>
-    <div class="crm-modal-footer">
-      <button class="crm-btn crm-btn-default" data-crm-close="confirm-offline">取消</button>
-      <button class="crm-btn crm-btn-danger" id="btn-confirm-delete-package" data-crm-close="confirm-offline">确认下架</button>
-    </div>
-  </div>
-</div>
-
-<div class="crm-modal-overlay" data-crm-modal="edit-package">
-  <div class="crm-modal">
-    <div class="crm-modal-title"><span>编辑服务包</span><button class="crm-modal-close" data-crm-close="edit-package">&#10005;</button></div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务包名称 <span class="required">*</span></label>
-      <input class="crm-input" value="脑血管健康管理包">
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务类型</label>
-      <select class="crm-select">
-        <option>健康管理</option>
-        <option>康复治疗</option>
-        <option>慢病管理</option>
-        <option>体检服务</option>
-      </select>
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务价格（元）</label>
-      <input class="crm-input" value="299">
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务周期</label>
-      <select class="crm-select">
-        <option>1个月</option>
-        <option>3个月</option>
-        <option>6个月</option>
-        <option>12个月</option>
-      </select>
-    </div>
-    <div class="crm-form-group">
-      <label class="crm-label">服务描述</label>
-      <textarea class="crm-textarea" placeholder="请输入服务包描述">针对脑血管疾病患者的综合健康管理服务</textarea>
-    </div>
-    <div class="crm-modal-footer">
-      <button class="crm-btn crm-btn-default" data-crm-close="edit-package">取消</button>
-      <button class="crm-btn crm-btn-primary" id="btn-save-package">保存</button>
-    </div>
-  </div>
-</div>
-<script>(function(){function openModal(id){var m=document.querySelector('[data-crm-modal="'+id+'"]');if(m)m.classList.add('is-visible')}function closeModal(id){var m=document.querySelector('[data-crm-modal="'+id+'"]');if(m)m.classList.remove('is-visible')}document.addEventListener('click',function(e){var t=e.target.closest('[data-crm-open]');if(t){openModal(t.getAttribute('data-crm-open'));return}var c=e.target.closest('[data-crm-close]');if(c){closeModal(c.getAttribute('data-crm-close'));return}var o=e.target.closest('[data-crm-modal]');if(o&&o.classList.contains('is-visible')&&o===e.target){o.classList.remove('is-visible')}})})();</script>
 <script>
-// Tab switching for service packages
-(function(){
-  var tabBar = document.querySelector('main div[style*="border-bottom:1px solid var(--hmp-color-border)"]');
-  if (!tabBar) return;
-  var tabs = tabBar.children;
-  var tabNames = ['全部','上架中','已下架'];
-  window.__pkgFilter = '全部';
-  for (var i=0; i<tabs.length; i++) {
-    (function(idx){
-      tabs[idx].addEventListener('click', function() {
-        window.__pkgFilter = tabNames[idx];
-        for (var j=0; j<tabs.length; j++) {
-          if (j===idx) {
-            tabs[j].style.color = 'var(--hmp-color-primary)';
-            tabs[j].style.fontWeight = 'var(--hmp-font-weight-medium)';
-            if (!tabs[j].querySelector('.tab-indicator')) {
-              var indicator = document.createElement('span');
-              indicator.className = 'tab-indicator';
-              indicator.style.cssText = 'position:absolute;bottom:-1px;left:16px;right:16px;height:2px;background:var(--hmp-color-primary);border-radius:1px;';
-              tabs[j].style.position = 'relative';
-              tabs[j].appendChild(indicator);
-            }
-          } else {
-            tabs[j].style.color = 'var(--hmp-color-text-secondary)';
-            tabs[j].style.fontWeight = 'var(--hmp-font-weight-regular)';
-            var ind = tabs[j].querySelector('.tab-indicator');
-            if (ind) ind.remove();
-          }
-        }
-        if (window.__pkgRenderTable) window.__pkgRenderTable();
-      });
-    })(i);
-  }
-})();
-</script>
-<script>
-(function(){
-  var STORAGE_KEY = 'hmp_service_packages';
-  var defaultData = [
-    {name:'睡眠调理基础包',type:'健康管理',price:'¥299/月',priceNum:299,cycle:'1个月',plan:'睡眠调理基础方案',status:'上架中',statusType:'green',sold:156},
-    {name:'脑血管健康管理包',type:'慢病管理',price:'¥499/月',priceNum:499,cycle:'3个月',plan:'脑血管健康管理方案',status:'上架中',statusType:'green',sold:89},
-    {name:'情绪压力评估包',type:'康复治疗',price:'¥199/月',priceNum:199,cycle:'1个月',plan:'情绪压力评估方案',status:'上架中',statusType:'green',sold:234},
-    {name:'心脑血管康复包',type:'康复治疗',price:'¥699/月',priceNum:699,cycle:'6个月',plan:'心脑血管康复方案',status:'上架中',statusType:'green',sold:67},
-    {name:'综合体检服务包',type:'体检服务',price:'¥128/次',priceNum:128,cycle:'单次',plan:'--',status:'已下架',statusType:'yellow',sold:45},
-    {name:'睡眠改善进阶包',type:'健康管理',price:'¥399/月',priceNum:399,cycle:'3个月',plan:'睡眠改善进阶方案',status:'上架中',statusType:'green',sold:112}
-  ];
-  var data = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || JSON.parse(JSON.stringify(defaultData));
-  var currentEditIndex = -1;
-  var currentDeleteIndex = -1;
-  var tbody = document.querySelector('main table tbody');
-  if (!tbody) return;
-
-  function renderTable() {
-    if (!tbody) return;
-    var filter = window.__pkgFilter || '全部';
-    var filteredData = data.filter(function(row) {
-      if (filter === '全部') return true;
-      if (filter === '上架中') return row.statusType === 'green';
-      if (filter === '已下架') return row.statusType === 'yellow';
-      return true;
-    });
-    var statusBg = {green:'var(--hmp-health-green-bg)',yellow:'var(--hmp-health-yellow-bg)'};
-    var statusColor = {green:'var(--hmp-health-green)',yellow:'var(--hmp-color-warning)'};
-    var statusBorder = {green:'var(--hmp-health-green-border)',yellow:'var(--hmp-health-yellow-border)'};
-    var html = '';
-    filteredData.forEach(function(row, i) {
-      var origIdx = data.indexOf(row);
-      var isOnline = row.status === '上架中';
-      var onlineBtn = isOnline
-        ? '<button data-crm-open="confirm-offline" data-action="toggle-status" data-row="'+origIdx+'" style="padding:4px 8px;border:none;background:none;color:var(--hmp-color-danger);font-size:var(--hmp-font-size-caption);cursor:pointer;white-space:nowrap;border-radius:var(--hmp-radius-sm);transition:background 0.15s;font-family:var(--hmp-font-family);" onmouseover="this.style.background=\'var(--hmp-color-danger-light-default)\'" onmouseout="this.style.background=\'none\'">下架</button>'
-        : '<button data-action="toggle-status" data-row="'+origIdx+'" style="padding:4px 8px;border:none;background:none;color:var(--hmp-color-success);font-size:var(--hmp-font-size-caption);cursor:pointer;white-space:nowrap;border-radius:var(--hmp-radius-sm);transition:background 0.15s;font-family:var(--hmp-font-family);" onmouseover="this.style.background=\'var(--hmp-color-success-light-default)\'" onmouseout="this.style.background=\'none\'">上架</button>';
-      html += '<tr style="height:var(--hmp-table-row-height);border-bottom:1px solid var(--hmp-color-border);transition:background 0.15s;" onmouseover="this.style.background=\'var(--hmp-bg-card-hover)\'" onmouseout="this.style.background=\'\'">'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-primary);white-space:nowrap;font-weight:var(--hmp-font-weight-medium);">' + row.name + '</td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);white-space:nowrap;"><span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--hmp-radius-sm);background:var(--hmp-color-info-light-default);color:var(--hmp-color-info);font-size:var(--hmp-font-size-caption);white-space:nowrap;">' + row.type + '</span></td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-primary);white-space:nowrap;font-weight:var(--hmp-font-weight-semibold);">' + row.price + '</td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;">' + row.cycle + '</td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:'+(row.plan==='--'?'var(--hmp-color-text-secondary)':'var(--hmp-color-primary)')+';white-space:nowrap;'+(row.plan!=='--'?'cursor:pointer;':'')+'">' + row.plan + '</td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);white-space:nowrap;"><span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--hmp-radius-sm);background:'+statusBg[row.statusType]+';color:'+statusColor[row.statusType]+';border:1px solid '+statusBorder[row.statusType]+';font-size:var(--hmp-font-size-small);font-weight:var(--hmp-font-weight-medium);white-space:nowrap;">'+row.status+'</span></td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);color:var(--hmp-color-text-secondary);white-space:nowrap;font-family:var(--hmp-font-family-mono);">' + row.sold + '</td>'
-        + '<td style="padding:var(--hmp-spacing-md) var(--hmp-spacing-xl);white-space:nowrap;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;">'
-        + '<button data-crm-open="edit-package" data-action="edit" data-row="'+origIdx+'" style="padding:4px 8px;border:none;background:none;color:var(--hmp-color-primary);font-size:var(--hmp-font-size-caption);cursor:pointer;white-space:nowrap;border-radius:var(--hmp-radius-sm);transition:background 0.15s;font-family:var(--hmp-font-family);" onmouseover="this.style.background=\'var(--hmp-color-primary-light-hover)\'" onmouseout="this.style.background=\'none\'">编辑</button>'
-        + '<a href="#" style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-primary);text-decoration:none;white-space:nowrap;cursor:pointer;">查看详情</a>'
-        + onlineBtn
-        + '</div></td></tr>';
-    });
-    tbody.innerHTML = html;
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }
-
-  document.addEventListener('click', function(e) {
-    var editBtn = e.target.closest('[data-action="edit"]');
-    if (editBtn) {
-      var idx = parseInt(editBtn.getAttribute('data-row'));
-      currentEditIndex = idx;
-      var row = data[idx];
-      if (!row) return;
-      var modal = document.querySelector('[data-crm-modal="edit-package"]');
-      if (!modal) return;
-      modal.querySelector('.crm-input').value = row.name;
-      var selType = modal.querySelectorAll('.crm-select')[0];
-      for (var o=0;o<selType.options.length;o++) { if(selType.options[o].text===row.type) selType.selectedIndex=o; }
-      var inputs = modal.querySelectorAll('.crm-input');
-      inputs[1].value = row.priceNum;
-      var selCycle = modal.querySelectorAll('.crm-select')[1];
-      for (var o=0;o<selCycle.options.length;o++) { if(selCycle.options[o].text===row.cycle) selCycle.selectedIndex=o; }
-      modal.querySelector('.crm-textarea').value = row.name + '的服务描述';
-    }
-    var toggleBtn = e.target.closest('[data-action="toggle-status"]');
-    if (toggleBtn) {
-      var idx = parseInt(toggleBtn.getAttribute('data-row'));
-      if (idx >= 0 && data[idx]) {
-        if (data[idx].status === '上架中') {
-          currentDeleteIndex = idx;
-        } else {
-          data[idx].status = '上架中';
-          data[idx].statusType = 'green';
-          renderTable();
-        }
-      }
-    }
-  });
-
-  var saveBtn = document.getElementById('btn-save-package');
-  if (saveBtn) saveBtn.addEventListener('click', function() {
-    if (currentEditIndex >= 0 && data[currentEditIndex]) {
-      var modal = document.querySelector('[data-crm-modal="edit-package"]');
-      var inputs = modal.querySelectorAll('.crm-input');
-      data[currentEditIndex].name = inputs[0].value;
-      data[currentEditIndex].type = modal.querySelectorAll('.crm-select')[0].value;
-      var priceNum = parseInt(inputs[1].value) || 0;
-      var cycle = modal.querySelectorAll('.crm-select')[1].value;
-      data[currentEditIndex].priceNum = priceNum;
-      data[currentEditIndex].price = '\u00a5' + priceNum + '/' + (cycle === '单次' ? '次' : '月');
-      data[currentEditIndex].cycle = cycle;
-      var closeBtn = modal.querySelector('[data-crm-close="edit-package"]');
-      if (closeBtn) closeBtn.click();
-      renderTable();
-    }
-  });
-
-  var createBtn = document.getElementById('btn-create-package');
-  if (createBtn) createBtn.addEventListener('click', function() {
-    var modal = document.querySelector('[data-crm-modal="create-package"]');
-    var name = modal.querySelector('.crm-input').value.trim();
-    if (!name) return;
-    var inputs = modal.querySelectorAll('.crm-input');
-    var priceNum = parseInt(inputs[1].value) || 0;
-    var cycle = modal.querySelectorAll('.crm-select')[1].value;
-    var priceStr = '\u00a5' + priceNum + '/' + (cycle === '单次' ? '次' : '月');
-    data.unshift({name:name, type:modal.querySelectorAll('.crm-select')[0].value, price:priceStr, priceNum:priceNum, cycle:cycle, plan:'--', status:'上架中', statusType:'green', sold:0});
-    inputs[0].value = '';
-    inputs[1].value = '';
-    modal.querySelector('.crm-textarea').value = '';
-    var closeBtn = modal.querySelector('[data-crm-close="create-package"]');
-    if (closeBtn) closeBtn.click();
-    renderTable();
-  });
-
-  var deleteBtn = document.getElementById('btn-confirm-delete-package');
-  if (deleteBtn) deleteBtn.addEventListener('click', function() {
-    if (currentDeleteIndex >= 0 && data[currentDeleteIndex]) {
-      data[currentDeleteIndex].status = '已下架';
-      data[currentDeleteIndex].statusType = 'yellow';
-      var modal = document.querySelector('[data-crm-modal="confirm-offline"]');
-      var closeBtn = modal.querySelector('[data-crm-close="confirm-offline"]');
-      if (closeBtn) closeBtn.click();
-      renderTable();
-    }
-  });
-
-  window.__pkgRenderTable = renderTable;
-  renderTable();
-})();
-</script>
-  <script>
+// === UNIFIED NAVIGATION ===
+(function() {
   // Submenu toggle
-  (function() {
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
+  document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var menuName = this.getAttribute('data-submenu-trigger');
+      var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+      if (!submenu) return;
+      var isOpen = this.classList.contains('is-open');
+      document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+        openTrigger.classList.remove('is-open');
+        var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+        if (openMenu) openMenu.style.display = 'none';
+      });
+      if (!isOpen) {
+        this.classList.add('is-open');
+        submenu.style.display = 'block';
+      }
+    });
+  });
+
+  // Role switcher dropdown
+  var roleDropdown = document.querySelector('.role-dropdown');
+  if (roleDropdown) {
+    var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      roleDropdown.classList.toggle('is-open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!roleDropdown.contains(e.target)) {
+        roleDropdown.classList.remove('is-open');
+      }
+    });
+    document.querySelectorAll('[data-role-select]').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var role = this.getAttribute('data-role-select');
+        document.body.setAttribute('data-active-role', role);
+        roleDropdown.classList.remove('is-open');
+        var textEl = roleDropdown.querySelector('.role-dropdown-text');
+        if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+        document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+        this.classList.add('is-active');
       });
     });
-  })();
-  </script></body>
-</html>
-</body>
-</html>
-</body>
-</html>
+  }
+
+  // Nav click handling
+  var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","cms-content":"cms-content.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html","enrolled-doctors":"enrolled-doctors.html","resident-profile":"resident-profile.html"};
+  document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      if (this.hasAttribute('data-submenu-trigger')) return;
+      var key = this.getAttribute('data-nav-key');
+      if (key === 'dashboard') {
+        window.open(navMap[key], '_blank');
+      } else if (navMap[key]) {
+        window.location.href = navMap[key];
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

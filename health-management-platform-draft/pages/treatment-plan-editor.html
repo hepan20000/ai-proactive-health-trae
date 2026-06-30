@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主动健康管理平台 - 编辑调理方案</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   Based on design-system/design-tokens.json & DESIGN.md
+   Dual-mode: Light (SaaS Day) + Dark (Screen Night)
+   Prefix: hmp (maintained for HTML variable compatibility)
+   ======================================== */
+
+:root {
+  /* --- Brand Prefix: hmp --- */
+  
+  /* --- Typography --- */
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  
+  /* --- Tabular Numbers (prevent data jitter) --- */
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  
+  /* --- Spacing --- */
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  
+  /* --- Border Radius (Design System Levels) --- */
+  --hmp-radius-base: 0.625rem; /* 10px */
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px); /* 6px - badges, checkboxes */
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px); /* 8px - buttons, inputs */
+  --hmp-radius-lg: var(--hmp-radius-base); /* 10px - cards */
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px); /* 14px - screen panels */
+  --hmp-radius-full: 9999px;
+  
+  /* --- Shadows (Light theme) --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  
+  /* --- Shadows (Dark theme / Big Screen) --- */
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  
+  /* --- Layout --- */
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  
+  /* --- Chart Colors (OKLCH) --- */
+  --hmp-chart-1: oklch(0.65 0.18 195); /* Ice blue */
+  --hmp-chart-2: oklch(0.7 0.16 155); /* Mint green */
+  --hmp-chart-3: oklch(0.78 0.16 75); /* Amber */
+  --hmp-chart-4: oklch(0.62 0.23 22); /* Crimson */
+  --hmp-chart-5: oklch(0.6 0.2 290); /* Violet */
+}
+
+/* ========================================
+   Light Mode (SaaS Day Mode) - OKLCH
+   ======================================== */
+:root {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.99 0.005 200);       /* Near-white with blue-grey tint */
+  --hmp-bg-card: oklch(1 0 0);                /* Pure white cards */
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);       /* Light grey-blue for inputs */
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  
+  /* --- Primary (Medical Cyan-Blue) --- */
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  
+  /* --- Secondary / Accent --- */
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Tertiary (Grey) --- */
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.2 0.03 220);           /* Deep blue-black */
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  
+  /* --- Functional Colors --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  
+  /* --- Health-Specific Status Colors --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+
+/* ========================================
+   Dark Mode (Big Screen / Night Mode) - OKLCH
+   ======================================== */
+:root.dark {
+  /* --- Backgrounds --- */
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  
+  /* --- Primary (Ice Blue for dark) --- */
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  
+  /* --- Secondary --- */
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  
+  /* --- Tertiary --- */
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  
+  /* --- Text Colors --- */
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  
+  /* --- Border Colors --- */
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  
+  /* --- Functional Colors (same OKLCH hues, adjusted lightness) --- */
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  
+  /* --- Health-Specific Status Colors (Dark) --- */
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  
+  /* --- Dark Mode Shadows --- */
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+
+/* ========================================
+   Screen/Big Screen Specific Variables (Dark Mode Enhancement)
+   Applied via .screen-mode class
+   ======================================== */
+.screen-mode {
+  --hmp-bg-body: oklch(0.18 0.04 230);
+  --hmp-bg-card: oklch(0.22 0.05 230);
+  --hmp-bg-sidebar: oklch(0.16 0.035 230);
+  --hmp-bg-header: oklch(0.16 0.035 230);
+  --hmp-color-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-color-border-hover: oklch(0.4 0.08 200 / 40%);
+  
+  /* Screen glow accent */
+  --hmp-screen-accent: oklch(0.78 0.18 195);
+  --hmp-screen-glow: 0 0 24px -6px oklch(0.78 0.18 195 / 60%);
+  
+  /* Glass panel effect for big screen */
+  --hmp-glass-panel-bg: linear-gradient(
+    160deg,
+    color-mix(in oklab, oklch(0.22 0.05 230) 90%, transparent),
+    color-mix(in oklab, oklch(0.18 0.04 230) 90%, transparent)
+  );
+  --hmp-glass-panel-border: oklch(0.4 0.08 200 / 30%);
+  --hmp-glass-panel-shadow: 
+    inset 0 1px 0 oklch(1 0 0 / 4%),
+    0 12px 36px -10px oklch(0 0 0 / 60%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-chart-1: var(--hmp-chart-1);
+    --color-chart-2: var(--hmp-chart-2);
+    --color-chart-3: var(--hmp-chart-3);
+    --color-chart-4: var(--hmp-chart-4);
+    --color-chart-5: var(--hmp-chart-5);
+  }
+  @layer base {
+    body { background: var(--hmp-background); color: var(--hmp-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+  <div style="display:flex; height:100vh; width:100vw;">
+
+    <!-- ====== LEFT SIDEBAR (232px) ====== -->
+    <aside style="width:var(--hmp-sidebar-width); min-width:var(--hmp-sidebar-width); height:100vh; background:var(--hmp-bg-sidebar); border-right:1px solid var(--hmp-color-border); display:flex; flex-direction:column; overflow-y:auto;">
+
+      <!-- Logo -->
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 16px 12px 16px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+          <path d="M3 12h4l3-9 4 18 3-9h4" stroke="var(--hmp-color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span style="font-size:15px; font-weight:600; color:var(--hmp-color-text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">主动健康管理</span>
+      </div>
+
+      <!-- Navigation -->
+      <nav style="flex:1; padding:0 0 8px 0;">
+
+        <!-- Group: 业务概览 -->
+        <div style="padding:0 16px; margin-bottom:4px;">
+          <span style="font-size:11px; font-weight:500; color:var(--hmp-color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">业务概览</span>
+        </div>
+        <div data-nav-key="dashboard" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">业务大屏</span>
+        </div>
+
+        <!-- Group: 居民管理 -->
+        <div style="padding:0 16px; margin-bottom:4px; margin-top:12px;">
+          <span style="font-size:11px; font-weight:500; color:var(--hmp-color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">居民管理</span>
+        </div>
+        <div data-nav-key="resident-list" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">在管居民</span>
+        </div>
+
+        <!-- Group: 医生管理 -->
+        <div style="padding:0 16px; margin-bottom:4px; margin-top:12px;">
+          <span style="font-size:11px; font-weight:500; color:var(--hmp-color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">医生管理</span>
+        </div>
+        <div data-nav-key="doctor-approval" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6"/><path d="M19 8v6"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">医生入驻审批</span>
+        </div>
+        <div data-nav-key="my-patients" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">我的病人</span>
+        </div>
+
+        <!-- Group: 智能服务 -->
+        <div style="padding:0 16px; margin-bottom:4px; margin-top:12px;">
+          <span style="font-size:11px; font-weight:500; color:var(--hmp-color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">智能服务</span>
+        </div>
+
+        <!-- HIGHLIGHTED: 调理方案 -->
+        <div data-nav-key="treatment-plan" data-active="true" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-primary); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span style="font-size:14px; white-space:nowrap; font-weight:500; color:var(--hmp-color-primary);">调理方案</span>
+        </div>
+
+        <div data-nav-key="service-package" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">服务包管理</span>
+        </div>
+
+        <div data-nav-key="product-management" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">商品管理</span>
+        </div>
+
+        <div data-nav-key="alert-workbench" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">预警工作台</span>
+        </div>
+
+        <div data-nav-key="im-chat" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">即时通讯</span>
+        </div>
+
+        <!-- Group: 系统设置 -->
+        <div style="padding:0 16px; margin-bottom:4px; margin-top:12px;">
+          <span style="font-size:11px; font-weight:500; color:var(--hmp-color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">系统设置</span>
+        </div>
+        <div data-nav-key="device-management" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><rect x="1" y="6" width="22" height="12" rx="4"/><path d="M10 9h4"/><path d="M12 6v3"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">设备管理</span>
+        </div>
+        <div data-nav-key="system-settings" style="display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; border-radius:8px; margin:1px 8px; cursor:pointer; color:var(--hmp-color-text-primary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary); flex-shrink:0;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span style="font-size:14px; white-space:nowrap;">系统配置</span>
+        </div>
+
+      </nav>
+
+      <!-- Bottom: User Info -->
+      <div style="border-top:1px solid var(--hmp-color-border); padding:12px 16px; display:flex; align-items:center; gap:10px;">
+        <div style="width:32px; height:32px; border-radius:9999px; background:var(--hmp-color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <span style="color:var(--hmp-color-text-on-primary); font-size:12px; font-weight:600;">管</span>
+        </div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:14px; color:var(--hmp-color-text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">管理员</div>
+          <div style="font-size:11px; color:var(--hmp-color-text-tertiary); white-space:nowrap;">机构管理员</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ====== MAIN AREA ====== -->
+    <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+
+      <!-- ====== Top Header (56px) ====== -->
+      <header style="height:var(--hmp-header-height); min-height:var(--hmp-header-height); background:var(--hmp-bg-header); border-bottom:1px solid var(--hmp-color-border); display:flex; align-items:center; justify-content:space-between; padding:0 24px;">
+
+        <!-- Left: Breadcrumb -->
+        <div style="flex:1; min-width:0; display:flex; align-items:center; gap:6px;">
+          <span style="font-size:12px; color:var(--hmp-color-text-tertiary); cursor:pointer;">首页</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-tertiary); flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          <span style="font-size:12px; color:var(--hmp-color-text-tertiary); cursor:pointer;">智能服务</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-tertiary); flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          <span style="font-size:12px; color:var(--hmp-color-text-tertiary); cursor:pointer;">调理方案</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-tertiary); flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          <span style="font-size:12px; color:var(--hmp-color-text-secondary); font-weight:500;">编辑方案</span>
+        </div>
+
+        <!-- Right: Controls -->
+        <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
+          <!-- Notification -->
+          <div style="position:relative; cursor:pointer; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-text-secondary);">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <div style="position:absolute; top:4px; right:4px; width:6px; height:6px; border-radius:9999px; background:var(--hmp-color-danger);"></div>
+          </div>
+
+          <!-- Avatar -->
+          <div style="width:28px; height:28px; border-radius:9999px; background:var(--hmp-color-primary); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+            <span style="color:var(--hmp-color-text-on-primary); font-size:11px; font-weight:600;">管</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ====== Content Area ====== -->
+      <main style="flex:1; background:var(--hmp-bg-body); overflow-y:auto;">
+
+        <!-- ====== Top Toolbar ====== -->
+        <div style="background:var(--hmp-bg-card); border-bottom:1px solid var(--hmp-color-border); padding:16px 24px;">
+
+          <!-- Row 1: Name + Report Type + Buttons -->
+          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+            <!-- Plan Name Input -->
+            <div style="flex:1; min-width:280px;">
+              <label style="display:block; font-size:12px; font-weight:500; color:var(--hmp-color-text-secondary); margin-bottom:6px;">方案名称</label>
+              <input type="text" value="中老年失眠综合调理方案" class="editor-input" style="width:100%; height:36px; padding:0 12px; border:1px solid var(--hmp-color-border); border-radius:8px; font-size:14px; font-weight:500; background:var(--hmp-bg-card); color:var(--hmp-color-text-primary); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family); transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--hmp-color-border-active)'" onblur="this.style.borderColor='var(--hmp-color-border)'" />
+            </div>
+
+            <!-- Report Type Select -->
+            <div style="min-width:160px;">
+              <label style="display:block; font-size:12px; font-weight:500; color:var(--hmp-color-text-secondary); margin-bottom:6px;">报告类型</label>
+              <select class="editor-select" style="width:100%; height:36px; padding:0 32px 0 12px; border:1px solid var(--hmp-color-border); border-radius:8px; font-size:13px; background:var(--hmp-bg-card); color:var(--hmp-color-text-primary); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family); cursor:pointer; appearance:none; background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22oklch(0.2 0.03 220/35%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat:no-repeat; background-position:right 10px center; transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--hmp-color-border-active)'" onblur="this.style.borderColor='var(--hmp-color-border)'">
+                <option value="sleep" selected>睡眠健康</option>
+                <option value="brain">脑血管风险</option>
+                <option value="mood">情绪压力</option>
+              </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display:flex; align-items:flex-end; gap:8px;">
+              <button class="btn-secondary" onclick="alert('取消')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                取消
+              </button>
+              <button class="btn-outline" onclick="alert('预览方案')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                预览
+              </button>
+              <button class="btn-primary" onclick="alert('保存方案')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                保存方案
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== Editor Body: Left (Nodes) + Right (Properties) ====== -->
+        <div style="display:flex; gap:0; height:calc(100vh - var(--hmp-header-height) - 100px); overflow:hidden;">
+
+          <!-- ====== LEFT: Node Editor (Main Area) ====== -->
+          <div style="flex:1; min-width:0; padding:24px; overflow-y:auto;">
+
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+              <div>
+                <h2 style="font-size:18px; font-weight:600; color:var(--hmp-color-text-primary); margin-bottom:2px;">方案流程节点</h2>
+                <p style="font-size:13px; color:var(--hmp-color-text-secondary);">拖拽调整节点顺序，点击节点卡片展开编辑内容</p>
+              </div>
+              <button class="btn-outline-sm" onclick="addNode()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                添加节点
+              </button>
+            </div>
+
+            <!-- Node List -->
+            <div id="nodeList" style="display:flex; flex-direction:column; gap:12px;">
+
+              <!-- Connector line stub (vertical) -->
+              <!-- Node 1: 初始评估 -->
+              <div class="node-card" data-step="1">
+                <div class="node-card-header" onclick="toggleNode(1)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">1</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-primary); flex-shrink:0;"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        <span class="node-title">初始评估</span>
+                        <span class="node-status-badge completed">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          已配置
+                        </span>
+                      </div>
+                      <p class="node-desc">描述评估目标及关联检测项，收集患者基础健康数据</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(1,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(1,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <!-- Expanded Content -->
+                <div class="node-card-body" id="nodeBody1">
+                  <div class="node-form-section">
+                    <label class="form-label">评估描述</label>
+                    <textarea class="form-textarea" rows="3" placeholder="请输入初始评估的目标与说明...">通过睡眠监测设备采集患者夜间睡眠数据，包括入睡时间、睡眠时长、深睡比例、觉醒次数等关键指标，形成基线评估报告。</textarea>
+                  </div>
+                  <div class="node-form-section">
+                    <label class="form-label">关联检测项</label>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                      <span class="detect-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        多导睡眠监测
+                        <svg class="tag-remove" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </span>
+                      <span class="detect-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        睡眠质量问卷(PSQI)
+                        <svg class="tag-remove" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </span>
+                      <span class="detect-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        血氧饱和度监测
+                        <svg class="tag-remove" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </span>
+                      <button class="add-tag-btn" onclick="alert('添加检测项')">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        添加检测项
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Node 2: 风险评估 -->
+              <div class="node-card" data-step="2">
+                <div class="node-card-header" onclick="toggleNode(2)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">2</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-warning); flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        <span class="node-title">风险评估</span>
+                        <span class="node-status-badge completed">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          已配置
+                        </span>
+                      </div>
+                      <p class="node-desc">选择评估模型对检测结果进行分级风险判定</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(2,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(2,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(2)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="node-card-body" id="nodeBody2" style="display:none;">
+                  <div class="node-form-section">
+                    <label class="form-label">评估模型</label>
+                    <select class="form-select">
+                      <option selected>睡眠障碍风险分级模型 v2.1</option>
+                      <option>失眠严重程度指数 (ISI)</option>
+                      <option>Epworth嗜睡量表 (ESS)</option>
+                      <option>自定义评估模型</option>
+                    </select>
+                  </div>
+                  <div class="node-form-section">
+                    <label class="form-label">风险等级划分</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <div class="risk-level-row">
+                        <span class="risk-dot risk-low"></span>
+                        <span class="risk-label">低风险</span>
+                        <span class="risk-range">0 - 30分</span>
+                        <span class="risk-action">日常健康指导</span>
+                      </div>
+                      <div class="risk-level-row">
+                        <span class="risk-dot risk-medium"></span>
+                        <span class="risk-label">中风险</span>
+                        <span class="risk-range">31 - 60分</span>
+                        <span class="risk-action">行为干预方案</span>
+                      </div>
+                      <div class="risk-level-row">
+                        <span class="risk-dot risk-high"></span>
+                        <span class="risk-label">高风险</span>
+                        <span class="risk-range">61 - 100分</span>
+                        <span class="risk-action">医疗介入 + 强化干预</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Node 3: 制定方案 -->
+              <div class="node-card" data-step="3">
+                <div class="node-card-header" onclick="toggleNode(3)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">3</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-primary); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        <span class="node-title">制定方案</span>
+                        <span class="node-status-badge pending">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                          待完善
+                        </span>
+                      </div>
+                      <p class="node-desc">根据风险等级制定个性化干预措施列表</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(3,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(3,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(3)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="node-card-body" id="nodeBody3" style="display:none;">
+                  <div class="node-form-section">
+                    <label class="form-label">干预措施列表</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <div class="intervention-item">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0;">
+                          <div class="intervention-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                          </div>
+                          <div style="flex:1; min-width:0;">
+                            <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">CBT-I 认知行为疗法</div>
+                            <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">每周2次，持续8周</div>
+                          </div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                      <div class="intervention-item">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0;">
+                          <div class="intervention-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                          </div>
+                          <div style="flex:1; min-width:0;">
+                            <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">睡眠节律调整计划</div>
+                            <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">固定作息时间，限制午休时长</div>
+                          </div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                      <div class="intervention-item">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0;">
+                          <div class="intervention-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                          </div>
+                          <div style="flex:1; min-width:0;">
+                            <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">正念冥想训练</div>
+                            <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">每日睡前15分钟引导冥想</div>
+                          </div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                    </div>
+                    <button class="add-intervention-btn" onclick="alert('添加干预措施')">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      添加干预措施
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Node 4: 执行干预 -->
+              <div class="node-card" data-step="4">
+                <div class="node-card-header" onclick="toggleNode(4)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">4</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-success); flex-shrink:0;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span class="node-title">执行干预</span>
+                        <span class="node-status-badge completed">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          已配置
+                        </span>
+                      </div>
+                      <p class="node-desc">关联推荐商品与服务，支持患者自主采购或机构配送</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(4,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(4,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(4)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="node-card-body" id="nodeBody4" style="display:none;">
+                  <div class="node-form-section">
+                    <label class="form-label">关联商品/服务</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <div class="product-link-item">
+                        <div style="width:36px; height:36px; border-radius:8px; background:var(--hmp-color-primary-light-default); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <div style="flex:1; min-width:0;">
+                          <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">助眠香薰套装</div>
+                          <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">商品 | SKU: HMP-SLP-001</div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                      <div class="product-link-item">
+                        <div style="width:36px; height:36px; border-radius:8px; background:var(--hmp-color-secondary-light-default); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <div style="flex:1; min-width:0;">
+                          <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">睡眠健康在线咨询</div>
+                          <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">服务 | 30分钟/次</div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                      <div class="product-link-item">
+                        <div style="width:36px; height:36px; border-radius:8px; background:var(--hmp-color-success-light-default); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--hmp-color-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div style="flex:1; min-width:0;">
+                          <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">智能睡眠监测手环</div>
+                          <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">设备 | 租赁/购买</div>
+                        </div>
+                        <button class="intervention-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                      </div>
+                    </div>
+                    <button class="add-intervention-btn" onclick="alert('关联商品/服务')">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      关联商品/服务
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Node 5: 效果监测 -->
+              <div class="node-card" data-step="5">
+                <div class="node-card-header" onclick="toggleNode(5)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">5</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-info); flex-shrink:0;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        <span class="node-title">效果监测</span>
+                        <span class="node-status-badge pending">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                          待完善
+                        </span>
+                      </div>
+                      <p class="node-desc">设置关键监测指标与采集频率，追踪干预效果</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(5,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(5,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(5)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="node-card-body" id="nodeBody5" style="display:none;">
+                  <div class="node-form-section">
+                    <label class="form-label">监测指标设置</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <div class="monitor-indicator">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                          <div class="monitor-dot" style="background:var(--hmp-color-primary);"></div>
+                          <span style="font-size:13px; color:var(--hmp-color-text-primary); font-weight:500;">睡眠效率 (%)</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                          <span class="monitor-freq">每日</span>
+                          <span class="monitor-target">目标: &ge;85%</span>
+                        </div>
+                      </div>
+                      <div class="monitor-indicator">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                          <div class="monitor-dot" style="background:var(--hmp-color-success);"></div>
+                          <span style="font-size:13px; color:var(--hmp-color-text-primary); font-weight:500;">入睡潜伏期 (分钟)</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                          <span class="monitor-freq">每日</span>
+                          <span class="monitor-target">目标: &le;20min</span>
+                        </div>
+                      </div>
+                      <div class="monitor-indicator">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                          <div class="monitor-dot" style="background:var(--hmp-color-warning);"></div>
+                          <span style="font-size:13px; color:var(--hmp-color-text-primary); font-weight:500;">PSQI 评分</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                          <span class="monitor-freq">每周</span>
+                          <span class="monitor-target">目标: &le;5分</span>
+                        </div>
+                      </div>
+                      <div class="monitor-indicator">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                          <div class="monitor-dot" style="background:oklch(0.6 0.2 290);"></div>
+                          <span style="font-size:13px; color:var(--hmp-color-text-primary); font-weight:500;">日间嗜睡评分 (ESS)</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                          <span class="monitor-freq">每两周</span>
+                          <span class="monitor-target">目标: &le;8分</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="add-intervention-btn" onclick="alert('添加监测指标')" style="margin-top:8px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      添加监测指标
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Node 6: 调整优化 -->
+              <div class="node-card" data-step="6">
+                <div class="node-card-header" onclick="toggleNode(6)">
+                  <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <div class="step-number">6</div>
+                    <div style="flex:1; min-width:0;">
+                      <div class="node-title-row">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:oklch(0.6 0.2 290); flex-shrink:0;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        <span class="node-title">调整优化</span>
+                        <span class="node-status-badge pending">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                          待完善
+                        </span>
+                      </div>
+                      <p class="node-desc">设置复评周期，根据效果反馈自动触发方案调整</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <button class="node-action-btn" title="上移" onclick="event.stopPropagation(); moveNode(6,-1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="下移" onclick="event.stopPropagation(); moveNode(6,1)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <button class="node-action-btn" title="删除" onclick="event.stopPropagation(); deleteNode(6)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <div class="node-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="node-card-body" id="nodeBody6" style="display:none;">
+                  <div class="node-form-section">
+                    <label class="form-label">复评周期</label>
+                    <select class="form-select">
+                      <option>每2周复评一次</option>
+                      <option selected>每4周复评一次</option>
+                      <option>每8周复评一次</option>
+                      <option>自定义周期</option>
+                    </select>
+                  </div>
+                  <div class="node-form-section">
+                    <label class="form-label">调整触发条件</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; color:var(--hmp-color-text-primary);">
+                        <input type="checkbox" checked style="accent-color:var(--hmp-color-primary); width:16px; height:16px;">
+                        连续2周监测指标未达标时自动预警
+                      </label>
+                      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; color:var(--hmp-color-text-primary);">
+                        <input type="checkbox" checked style="accent-color:var(--hmp-color-primary); width:16px; height:16px;">
+                        PSQI评分反弹超过基线20%时触发复评
+                      </label>
+                      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; color:var(--hmp-color-text-primary);">
+                        <input type="checkbox" style="accent-color:var(--hmp-color-primary); width:16px; height:16px;">
+                        患者主观反馈满意度低于3分时介入
+                      </label>
+                    </div>
+                  </div>
+                  <div class="node-form-section">
+                    <label class="form-label">调整策略</label>
+                    <select class="form-select">
+                      <option selected>系统推荐调整 + 人工确认</option>
+                      <option>系统自动调整</option>
+                      <option>仅人工调整</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- End Node List -->
+          </div>
+
+          <!-- ====== RIGHT: Properties Panel ====== -->
+          <div style="width:300px; min-width:300px; border-left:1px solid var(--hmp-color-border); background:var(--hmp-bg-card); overflow-y:auto; padding:24px 20px;">
+
+            <h3 style="font-size:15px; font-weight:600; color:var(--hmp-color-text-primary); margin-bottom:20px; display:flex; align-items:center; gap:8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hmp-color-primary);"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              方案属性
+            </h3>
+
+            <!-- 适用人群 -->
+            <div class="prop-section">
+              <label class="prop-label">适用人群</label>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <span class="prop-tag">45-65岁中老年</span>
+                <span class="prop-tag">失眠人群</span>
+                <span class="prop-tag">更年期女性</span>
+                <button class="add-prop-tag" onclick="alert('编辑适用人群')">+ 自定义</button>
+              </div>
+            </div>
+
+            <!-- 预计周期 -->
+            <div class="prop-section">
+              <label class="prop-label">预计周期</label>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="flex:1; position:relative;">
+                  <input type="number" value="12" class="prop-input" style="width:100%; height:36px; padding:0 12px; border:1px solid var(--hmp-color-border); border-radius:8px; font-size:14px; background:var(--hmp-bg-card); color:var(--hmp-color-text-primary); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family-mono); font-feature-settings:'tnum' 1; text-align:center;" />
+                </div>
+                <select class="prop-select" style="flex:1; height:36px; padding:0 28px 0 12px; border:1px solid var(--hmp-color-border); border-radius:8px; font-size:13px; background:var(--hmp-bg-card); color:var(--hmp-color-text-primary); outline:none; box-sizing:border-box; font-family:var(--hmp-font-family); cursor:pointer; appearance:none; background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22oklch(0.2 0.03 220/35%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat:no-repeat; background-position:right 8px center;">
+                  <option selected>周</option>
+                  <option>天</option>
+                  <option>月</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 关联商品数 -->
+            <div class="prop-section">
+              <label class="prop-label">关联商品数</label>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:var(--hmp-color-primary-light-default); display:flex; align-items:center; justify-content:center;">
+                  <span style="font-size:18px; font-weight:700; color:var(--hmp-color-primary); font-family:var(--hmp-font-family-display);">5</span>
+                </div>
+                <div>
+                  <div style="font-size:13px; color:var(--hmp-color-text-primary); font-weight:500;">5 件商品</div>
+                  <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">3 商品 + 1 服务 + 1 设备</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 分隔线 -->
+            <div style="height:1px; background:var(--hmp-color-border); margin:20px 0;"></div>
+
+            <!-- 方案状态 -->
+            <div class="prop-section">
+              <label class="prop-label">当前状态</label>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="badge-draft" style="display:inline-flex; align-items:center; gap:4px; padding:2px 10px; border-radius:9999px; font-size:12px; font-weight:500; background:var(--hmp-color-warning-light-default); color:var(--hmp-color-warning);">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  草稿
+                </span>
+              </div>
+            </div>
+
+            <!-- 创建信息 -->
+            <div class="prop-section">
+              <label class="prop-label">创建信息</label>
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                  <span style="color:var(--hmp-color-text-secondary);">创建人</span>
+                  <span style="color:var(--hmp-color-text-primary); font-weight:500;">张医生</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                  <span style="color:var(--hmp-color-text-secondary);">创建时间</span>
+                  <span style="color:var(--hmp-color-text-primary);">2026-06-25</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                  <span style="color:var(--hmp-color-text-secondary);">最后修改</span>
+                  <span style="color:var(--hmp-color-text-primary);">2026-06-30 14:22</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 分隔线 -->
+            <div style="height:1px; background:var(--hmp-color-border); margin:20px 0;"></div>
+
+            <!-- 版本记录 -->
+            <div class="prop-section">
+              <label class="prop-label">版本记录</label>
+              <div style="display:flex; flex-direction:column; gap:0; position:relative;">
+                <!-- Timeline line -->
+                <div style="position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--hmp-color-border);"></div>
+
+                <div style="display:flex; gap:12px; padding:8px 0; position:relative;">
+                  <div style="width:16px; height:16px; border-radius:9999px; background:var(--hmp-color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; margin-top:2px;">
+                    <div style="width:6px; height:6px; border-radius:9999px; background:white;"></div>
+                  </div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; font-weight:500; color:var(--hmp-color-text-primary);">v1.2 (当前编辑)</div>
+                    <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">2026-06-30 14:22 by 张医生</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:12px; padding:8px 0; position:relative;">
+                  <div style="width:16px; height:16px; border-radius:9999px; background:var(--hmp-bg-sunken); border:2px solid var(--hmp-color-border); flex-shrink:0; z-index:1; margin-top:2px;"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; color:var(--hmp-color-text-primary);">v1.1</div>
+                    <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">2026-06-28 09:15 by 李医生</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:12px; padding:8px 0; position:relative;">
+                  <div style="width:16px; height:16px; border-radius:9999px; background:var(--hmp-bg-sunken); border:2px solid var(--hmp-color-border); flex-shrink:0; z-index:1; margin-top:2px;"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; color:var(--hmp-color-text-primary);">v1.0</div>
+                    <div style="font-size:12px; color:var(--hmp-color-text-tertiary);">2026-06-25 16:00 by 张医生</div>
+                    <div style="font-size:12px; color:var(--hmp-color-text-secondary); margin-top:2px;">初始版本创建</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Completion Progress -->
+            <div class="prop-section" style="margin-top:20px;">
+              <label class="prop-label">节点完成度</label>
+              <div style="background:var(--hmp-bg-sunken); border-radius:9999px; height:8px; overflow:hidden; margin-bottom:8px;">
+                <div style="width:50%; height:100%; background:var(--hmp-color-primary); border-radius:9999px; transition:width 0.3s;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:12px;">
+                <span style="color:var(--hmp-color-text-secondary);">3 / 6 个节点已配置</span>
+                <span style="color:var(--hmp-color-primary); font-weight:600;">50%</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- End Editor Body -->
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- ====== JavaScript ====== -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // === Toggle Node Expand/Collapse ===
+    function toggleNode(step) {
+      var body = document.getElementById('nodeBody' + step);
+      var card = document.querySelector('.node-card[data-step="' + step + '"]');
+      var chevron = card.querySelector('.node-chevron');
+      if (!body || !card) return;
+
+      if (body.style.display === 'none' || body.style.display === '') {
+        body.style.display = 'block';
+        card.classList.add('is-expanded');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      } else {
+        body.style.display = 'none';
+        card.classList.remove('is-expanded');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // === Move Node Up/Down ===
+    function moveNode(step, direction) {
+      var nodeList = document.getElementById('nodeList');
+      var cards = nodeList.querySelectorAll('.node-card');
+      var cardsArr = Array.from(cards);
+      var currentIndex = cardsArr.findIndex(function(c) { return c.getAttribute('data-step') === String(step); });
+      var targetIndex = currentIndex + direction;
+
+      if (targetIndex < 0 || targetIndex >= cardsArr.length) return;
+
+      if (direction === -1) {
+        nodeList.insertBefore(cardsArr[currentIndex], cardsArr[targetIndex]);
+      } else {
+        nodeList.insertBefore(cardsArr[targetIndex], cardsArr[currentIndex]);
+      }
+    }
+
+    // === Delete Node ===
+    function deleteNode(step) {
+      var card = document.querySelector('.node-card[data-step="' + step + '"]');
+      if (card && confirm('确定要删除此节点吗？')) {
+        card.style.transition = 'opacity 0.2s, transform 0.2s';
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-20px)';
+        setTimeout(function() { card.remove(); }, 200);
+      }
+    }
+
+    // === Add Node ===
+    function addNode() {
+      alert('添加新节点到方案流程中');
+    }
+
+    // === Sidebar Nav Hover ===
+    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+      item.addEventListener('mouseenter', function() {
+        if (!this.hasAttribute('data-active')) {
+          this.style.background = 'oklch(0.2 0.03 220 / 4%)';
+        }
+      });
+      item.addEventListener('mouseleave', function() {
+        if (!this.hasAttribute('data-active')) {
+          this.style.background = '';
+        }
+      });
+    });
+  </script>
+
+  <style>
+    /* === CSS Custom Properties === */
+    :root {
+      --hmp-bg-body: oklch(0.99 0.005 200);
+      --hmp-bg-card: oklch(1 0 0);
+      --hmp-bg-sidebar: oklch(1 0 0);
+      --hmp-bg-header: oklch(1 0 0);
+      --hmp-bg-sunken: oklch(0.96 0.01 200);
+
+      --hmp-primary: oklch(0.55 0.13 195);
+      --hmp-primary-hover: oklch(0.58 0.14 195);
+      --hmp-primary-active: oklch(0.50 0.13 195);
+      --hmp-primary-light: oklch(0.55 0.13 195 / 8%);
+      --hmp-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+
+      --hmp-text: oklch(0.2 0.03 220);
+      --hmp-text-secondary: oklch(0.2 0.03 220 / 60%);
+      --hmp-text-tertiary: oklch(0.2 0.03 220 / 35%);
+      --hmp-text-on-primary: oklch(0.99 0.005 200);
+
+      --hmp-border: oklch(0.2 0.03 220 / 10%);
+      --hmp-border-hover: oklch(0.2 0.03 220 / 18%);
+      --hmp-border-active: oklch(0.55 0.13 195 / 50%);
+
+      --hmp-success: oklch(0.7 0.16 155);
+      --hmp-success-light: oklch(0.7 0.16 155 / 8%);
+      --hmp-warning: oklch(0.78 0.16 75);
+      --hmp-warning-light: oklch(0.78 0.16 75 / 8%);
+      --hmp-danger: oklch(0.62 0.23 22);
+      --hmp-danger-light: oklch(0.62 0.23 22 / 8%);
+      --hmp-info: oklch(0.62 0.14 230);
+      --hmp-info-light: oklch(0.62 0.14 230 / 8%);
+
+      --hmp-secondary: oklch(0.62 0.14 230);
+      --hmp-secondary-light: oklch(0.62 0.14 230 / 8%);
+
+      --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+      --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+      --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+
+      --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+      --hmp-font-family-mono: 'JetBrains Mono', monospace;
+
+      --hmp-sidebar-width: 232px;
+      --hmp-header-height: 56px;
+    }
+
+    /* === Base === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: var(--hmp-font-family);
+      background: var(--hmp-bg-body);
+      color: var(--hmp-text);
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* === Sidebar Nav Active === */
+    [data-nav-key][data-active="true"] {
+      background: var(--hmp-primary-light) !important;
+    }
+    [data-nav-key][data-active="true"] svg {
+      color: var(--hmp-primary) !important;
+    }
+    [data-nav-key] {
+      transition: background 0.15s;
+    }
+
+    /* === Buttons === */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px; border: none;
+      background: var(--hmp-primary); color: var(--hmp-text-on-primary);
+      font-size: 13px; font-weight: 500; font-family: var(--hmp-font-family);
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--hmp-primary-hover); }
+    .btn-primary:active { background: var(--hmp-primary-active); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px;
+      border: 1px solid var(--hmp-border); background: var(--hmp-bg-card);
+      color: var(--hmp-text); font-size: 13px; font-weight: 500;
+      font-family: var(--hmp-font-family); cursor: pointer;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-outline:hover { border-color: var(--hmp-primary); color: var(--hmp-primary); background: var(--hmp-primary-light); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px;
+      border: 1px solid var(--hmp-border); background: var(--hmp-bg-card);
+      color: var(--hmp-text-secondary); font-size: 13px; font-weight: 500;
+      font-family: var(--hmp-font-family); cursor: pointer;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-secondary:hover { border-color: var(--hmp-border-hover); color: var(--hmp-text); }
+
+    .btn-outline-sm {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid var(--hmp-border); background: var(--hmp-bg-card);
+      color: var(--hmp-text); font-size: 12px; font-weight: 500;
+      font-family: var(--hmp-font-family); cursor: pointer;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-outline-sm:hover { border-color: var(--hmp-primary); color: var(--hmp-primary); background: var(--hmp-primary-light); }
+
+    /* === Node Card === */
+    .node-card {
+      background: var(--hmp-bg-card);
+      border: 1px solid var(--hmp-border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .node-card:hover {
+      border-color: var(--hmp-border-hover);
+      box-shadow: var(--hmp-shadow-sm);
+    }
+    .node-card.is-expanded {
+      border-color: var(--hmp-border-active);
+      box-shadow: var(--hmp-shadow-md);
+    }
+    .node-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; cursor: pointer; gap: 12px;
+      transition: background 0.15s;
+    }
+    .node-card-header:hover {
+      background: oklch(0.2 0.03 220 / 2%);
+    }
+    .node-card.is-expanded .node-card-header {
+      background: var(--hmp-primary-light);
+    }
+
+    .step-number {
+      width:28px; height:28px; border-radius:8px;
+      background: var(--hmp-primary-light);
+      color: var(--hmp-primary);
+      font-size: 13px; font-weight: 600;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      font-family: var(--hmp-font-family-mono);
+    }
+
+    .node-title-row {
+      display:flex; align-items:center; gap:8px; margin-bottom:4px;
+    }
+    .node-title {
+      font-size:14px; font-weight:600; color:var(--hmp-text);
+    }
+    .node-desc {
+      font-size:12px; color:var(--hmp-text-tertiary); line-height:1.5;
+    }
+
+    .node-status-badge {
+      display:inline-flex; align-items:center; gap:3px;
+      padding:1px 8px; border-radius:9999px;
+      font-size:11px; font-weight:500; white-space:nowrap;
+    }
+    .node-status-badge.completed {
+      background: var(--hmp-success-light);
+      color: var(--hmp-success);
+    }
+    .node-status-badge.pending {
+      background: var(--hmp-warning-light);
+      color: var(--hmp-warning);
+    }
+
+    .node-action-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:28px; height:28px; border-radius:6px;
+      border:1px solid transparent; background:transparent;
+      color:var(--hmp-text-tertiary); cursor:pointer;
+      transition:all 0.15s;
+    }
+    .node-action-btn:hover {
+      border-color:var(--hmp-border);
+      background:var(--hmp-bg-card);
+      color:var(--hmp-text-secondary);
+    }
+
+    .node-chevron {
+      transition: transform 0.25s;
+      color: var(--hmp-text-tertiary);
+      display:flex; align-items:center;
+    }
+
+    /* === Node Card Body === */
+    .node-card-body {
+      padding: 0 20px 20px 20px;
+      border-top: 1px solid var(--hmp-border);
+      animation: slideDown 0.2s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .node-form-section {
+      margin-top: 16px;
+    }
+    .node-form-section:first-child {
+      margin-top: 16px;
+    }
+
+    .form-label {
+      display:block; font-size:12px; font-weight:500;
+      color:var(--hmp-text-secondary); margin-bottom:8px;
+    }
+
+    .form-textarea {
+      width:100%; padding:10px 12px; border:1px solid var(--hmp-border);
+      border-radius:8px; font-size:13px; line-height:1.6;
+      background:var(--hmp-bg-card); color:var(--hmp-text);
+      outline:none; box-sizing:border-box; font-family:var(--hmp-font-family);
+      resize:vertical; transition:border-color 0.15s;
+    }
+    .form-textarea:focus { border-color:var(--hmp-border-active); }
+
+    .form-select {
+      width:100%; padding:0 12px; height:36px;
+      border:1px solid var(--hmp-border); border-radius:8px;
+      font-size:13px; background:var(--hmp-bg-card); color:var(--hmp-text);
+      outline:none; box-sizing:border-box; font-family:var(--hmp-font-family);
+      cursor:pointer; appearance:none;
+      background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22oklch(0.2 0.03 220/35%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>');
+      background-repeat:no-repeat; background-position:right 10px center;
+      transition:border-color 0.15s;
+    }
+    .form-select:focus { border-color:var(--hmp-border-active); }
+
+    /* === Detection Tags === */
+    .detect-tag {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:4px 10px; border-radius:6px;
+      background:var(--hmp-primary-light); color:var(--hmp-primary);
+      font-size:12px; font-weight:500; white-space:nowrap;
+      border:1px solid oklch(0.55 0.13 195 / 15%);
+    }
+    .detect-tag .tag-remove {
+      cursor:pointer; opacity:0.5; transition:opacity 0.15s;
+    }
+    .detect-tag .tag-remove:hover { opacity:1; }
+
+    .add-tag-btn {
+      display:inline-flex; align-items:center; gap:4px;
+      padding:4px 10px; border-radius:6px;
+      border:1px dashed var(--hmp-border); background:transparent;
+      color:var(--hmp-text-tertiary); font-size:12px;
+      cursor:pointer; transition:all 0.15s; font-family:var(--hmp-font-family);
+    }
+    .add-tag-btn:hover { border-color:var(--hmp-primary); color:var(--hmp-primary); }
+
+    /* === Risk Level Rows === */
+    .risk-level-row {
+      display:flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:8px;
+      background:var(--hmp-bg-sunken); font-size:13px;
+    }
+    .risk-dot {
+      width:10px; height:10px; border-radius:9999px; flex-shrink:0;
+    }
+    .risk-low { background:var(--hmp-success); }
+    .risk-medium { background:var(--hmp-warning); }
+    .risk-high { background:var(--hmp-danger); }
+    .risk-label { font-weight:500; color:var(--hmp-text); flex-shrink:0; width:56px; }
+    .risk-range { color:var(--hmp-text-secondary); flex-shrink:0; }
+    .risk-action { color:var(--hmp-text-tertiary); margin-left:auto; font-size:12px; }
+
+    /* === Intervention Items === */
+    .intervention-item {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:8px;
+      border:1px solid var(--hmp-border); background:var(--hmp-bg-card);
+      transition:border-color 0.15s;
+    }
+    .intervention-item:hover { border-color:var(--hmp-border-hover); }
+    .intervention-icon {
+      width:32px; height:32px; border-radius:8px;
+      background:var(--hmp-primary-light);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; color:var(--hmp-primary);
+    }
+    .intervention-remove {
+      width:24px; height:24px; border-radius:6px;
+      border:none; background:transparent; color:var(--hmp-text-tertiary);
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:all 0.15s; flex-shrink:0;
+    }
+    .intervention-remove:hover { background:var(--hmp-danger-light); color:var(--hmp-danger); }
+
+    .add-intervention-btn {
+      display:flex; align-items:center; gap:5px;
+      padding:8px 14px; border-radius:8px;
+      border:1px dashed var(--hmp-border); background:transparent;
+      color:var(--hmp-text-tertiary); font-size:12px; font-weight:500;
+      cursor:pointer; transition:all 0.15s; font-family:var(--hmp-font-family);
+      width:100%; justify-content:center;
+    }
+    .add-intervention-btn:hover { border-color:var(--hmp-primary); color:var(--hmp-primary); background:var(--hmp-primary-light); }
+
+    /* === Product Link Items === */
+    .product-link-item {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:8px;
+      border:1px solid var(--hmp-border); background:var(--hmp-bg-card);
+      transition:border-color 0.15s;
+    }
+    .product-link-item:hover { border-color:var(--hmp-border-hover); }
+
+    /* === Monitor Indicator === */
+    .monitor-indicator {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:8px 12px; border-radius:8px;
+      border:1px solid var(--hmp-border); background:var(--hmp-bg-card);
+    }
+    .monitor-dot {
+      width:8px; height:8px; border-radius:9999px; flex-shrink:0;
+    }
+    .monitor-freq {
+      display:inline-flex; padding:2px 8px; border-radius:6px;
+      background:var(--hmp-info-light); color:var(--hmp-info);
+      font-size:11px; font-weight:500;
+    }
+    .monitor-target {
+      font-size:12px; color:var(--hmp-text-secondary); font-family:var(--hmp-font-family-mono);
+    }
+
+    /* === Right Panel Properties === */
+    .prop-section {
+      margin-bottom: 20px;
+    }
+    .prop-label {
+      display:block; font-size:12px; font-weight:500;
+      color:var(--hmp-text-secondary); margin-bottom:8px;
+    }
+    .prop-tag {
+      display:inline-flex; align-items:center;
+      padding:4px 10px; border-radius:6px;
+      background:var(--hmp-primary-light); color:var(--hmp-primary);
+      font-size:12px; font-weight:500; white-space:nowrap;
+    }
+    .add-prop-tag {
+      display:inline-flex; align-items:center;
+      padding:4px 10px; border-radius:6px;
+      border:1px dashed var(--hmp-border); background:transparent;
+      color:var(--hmp-text-tertiary); font-size:12px;
+      cursor:pointer; transition:all 0.15s; font-family:var(--hmp-font-family);
+    }
+    .add-prop-tag:hover { border-color:var(--hmp-primary); color:var(--hmp-primary); }
+
+    /* === Scrollbar === */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: oklch(0.2 0.03 220 / 12%); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: oklch(0.2 0.03 220 / 20%); }
+  </style>
+<script>
+document.querySelectorAll('.nav-item').forEach(a => {
+  const text = a.querySelector('span');
+  if (!text) return;
+  const map = {
+    '业务大屏': 'dashboard.html',
+    '医生入驻审批': 'doctor-approval.html',
+    '在管居民': 'resident-list.html',
+    '调理方案': 'treatment-plan.html',
+    '预警工作台': 'alert-workbench.html',
+    '即时通讯': 'im-chat.html',
+    '设备管理': 'device-management.html',
+    '系统配置': 'system-basic.html',
+    '服务包管理': 'service-package.html',
+    '商品管理': 'product-management.html',
+    'CMS运营': 'cms-banner.html',
+    '我的病人': 'my-patients.html',
+    '医生信息维护': 'doctor-profile.html'
+  };
+  const target = map[text.textContent.trim()];
+  if (target) a.href = target;
+});
+</script>
+<script>
+(function(){
+  try {
+    if (window.self !== window.top) {
+      var sidebar = document.querySelector('aside');
+      if (sidebar) sidebar.style.display = 'none';
+      var main = sidebar ? sidebar.nextElementSibling : null;
+      if (main) {
+        main.style.marginLeft = '0';
+        main.style.width = '100%';
+      }
+      var header = document.querySelector('header');
+      if (header && !header.closest('aside')) {
+        header.style.left = '0';
+        header.style.width = '100%';
+      }
+      document.body.style.overflow = 'auto';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

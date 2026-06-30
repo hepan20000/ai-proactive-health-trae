@@ -804,276 +804,28 @@
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
 
   </div>
 
-  <script>
-  // Navigation click handling
-  (function() {
-    // Submenu toggle
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        // Close all submenus first
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
-      });
-    });
-
-    // Nav click -> page navigation (skip submenu parent triggers)
-    var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html"};
-    document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        // Skip if this is a submenu parent trigger (submenu toggle handles it)
-        if (this.hasAttribute('data-submenu-trigger')) return;
-        var key = this.getAttribute('data-nav-key');
-        if (navMap[key]) window.location.href = navMap[key];
-      });
-    });
-
-    // Role switcher dropdown
-    var roleDropdown = document.querySelector('.role-dropdown');
-    if (roleDropdown) {
-      var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        roleDropdown.classList.toggle('is-open');
-      });
-      document.addEventListener('click', function(e) {
-        if (!roleDropdown.contains(e.target)) {
-          roleDropdown.classList.remove('is-open');
-        }
-      });
-      document.querySelectorAll('[data-role-select]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var role = this.getAttribute('data-role-select');
-          document.body.setAttribute('data-active-role', role);
-          roleDropdown.classList.remove('is-open');
-          // Update trigger text
-          var textEl = roleDropdown.querySelector('.role-dropdown-text');
-          if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
-          // Update active state
-          document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
-          this.classList.add('is-active');
-        });
-      });
-    }
-  })();
-  </script>
+  
 
 
 </div>
@@ -1116,49 +868,70 @@
     })();
     </script>
 
-    <script>
-    // Navigation click handling
-    (function() {
-      var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","service-package":"service-package.html","device-management":"device-management.html","system-settings":"system-settings.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html"};
-      document.querySelectorAll('[data-nav-key]').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var key = this.getAttribute('data-nav-key');
-          var target = navMap[key];
-          if (target) {
-            window.location.href = target;
-          }
-        });
-      });
-    })();
-    </script>
-</body>
-</html>
-  <script>
+    
+
+<script>
+// === UNIFIED NAVIGATION ===
+(function() {
   // Submenu toggle
-  (function() {
-    document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var menuName = this.getAttribute('data-submenu-trigger');
-        var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
-        if (!submenu) return;
-        var isOpen = this.classList.contains('is-open');
-        document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
-          openTrigger.classList.remove('is-open');
-          var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
-          if (openMenu) openMenu.style.display = 'none';
-        });
-        if (!isOpen) {
-          this.classList.add('is-open');
-          submenu.style.display = 'block';
-        }
+  document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var menuName = this.getAttribute('data-submenu-trigger');
+      var submenu = document.querySelector('[data-submenu="' + menuName + '"]');
+      if (!submenu) return;
+      var isOpen = this.classList.contains('is-open');
+      document.querySelectorAll('.nav-submenu-trigger.is-open').forEach(function(openTrigger) {
+        openTrigger.classList.remove('is-open');
+        var openMenu = document.querySelector('[data-submenu="' + openTrigger.getAttribute('data-submenu-trigger') + '"]');
+        if (openMenu) openMenu.style.display = 'none';
+      });
+      if (!isOpen) {
+        this.classList.add('is-open');
+        submenu.style.display = 'block';
+      }
+    });
+  });
+
+  // Role switcher dropdown
+  var roleDropdown = document.querySelector('.role-dropdown');
+  if (roleDropdown) {
+    var trigger = roleDropdown.querySelector('.role-dropdown-trigger');
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      roleDropdown.classList.toggle('is-open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!roleDropdown.contains(e.target)) {
+        roleDropdown.classList.remove('is-open');
+      }
+    });
+    document.querySelectorAll('[data-role-select]').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var role = this.getAttribute('data-role-select');
+        document.body.setAttribute('data-active-role', role);
+        roleDropdown.classList.remove('is-open');
+        var textEl = roleDropdown.querySelector('.role-dropdown-text');
+        if (textEl) textEl.textContent = this.querySelector('span:last-child').textContent;
+        document.querySelectorAll('[data-role-select]').forEach(function(r) { r.classList.remove('is-active'); });
+        this.classList.add('is-active');
       });
     });
-  })();
-  </script></body>
-</html>
-</body>
-</html>
-</body>
-</html>
+  }
+
+  // Nav click handling
+  var navMap = {"dashboard":"dashboard.html","doctor-approval":"doctor-approval.html","resident-list":"resident-list.html","resident-binding":"resident-binding.html","treatment-plan":"treatment-plan.html","treatment-plan-editor":"treatment-plan-editor.html","service-package":"service-package.html","product-management":"product-management.html","cms-banner":"cms-banner.html","cms-recommend-doctors":"cms-recommend-doctors.html","cms-content":"cms-content.html","device-management":"device-management.html","system-basic":"system-basic.html","system-alert-rules":"system-alert-rules.html","system-notifications":"system-notifications.html","sub-account":"sub-account.html","operation-log":"operation-log.html","my-patients":"my-patients.html","alert-workbench":"alert-workbench.html","im-chat":"im-chat.html","doctor-profile":"doctor-profile.html","plan-template":"plan-template.html","plan-tracking":"plan-tracking.html","template-phrases":"template-phrases.html","doctor-homepage":"doctor-homepage.html","enrolled-doctors":"enrolled-doctors.html","resident-profile":"resident-profile.html"};
+  document.querySelectorAll('[data-nav-key]').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      if (this.hasAttribute('data-submenu-trigger')) return;
+      var key = this.getAttribute('data-nav-key');
+      if (key === 'dashboard') {
+        window.open(navMap[key], '_blank');
+      } else if (navMap[key]) {
+        window.location.href = navMap[key];
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
