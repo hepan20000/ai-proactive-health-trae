@@ -22872,8 +22872,10 @@ lucide.createIcons();
         });
       });
     });
+} catch(e) {}
 </script>
 <script>
+try {
 // === Submenu Toggle ===
     document.querySelectorAll('[data-submenu-trigger]').forEach(function(trigger) {
       trigger.addEventListener('click', function() {
@@ -22897,10 +22899,12 @@ lucide.createIcons();
 lucide.createIcons();
 
   // --- Reject Modal ---
+  try {
   const rejectModal = document.getElementById('rejectModal');
   const rejectReason = document.getElementById('rejectReason');
   const rejectConfirmBtn = document.getElementById('rejectConfirmBtn');
 
+  if (rejectModal && rejectReason && rejectConfirmBtn) {
   document.getElementById('btnReject').addEventListener('click', () => {
     rejectModal.classList.add('show');
     rejectReason.value = '';
@@ -22922,12 +22926,14 @@ lucide.createIcons();
       showToast('已驳回该医生的入驻申请');
     }
   });
+  }
 
   // --- Supplement Modal ---
   const supplementModal = document.getElementById('supplementModal');
   const supplementReason = document.getElementById('supplementReason');
   const supplementConfirmBtn = document.getElementById('supplementConfirmBtn');
 
+  if (supplementModal && supplementReason && supplementConfirmBtn) {
   document.getElementById('btnSupplement').addEventListener('click', () => {
     supplementModal.classList.add('show');
     supplementReason.value = '';
@@ -22949,9 +22955,11 @@ lucide.createIcons();
       showToast('已发送补充材料通知');
     }
   });
+  }
 
   // --- Approve ---
-  document.getElementById('btnApprove').addEventListener('click', () => {
+  var btnApprove = document.getElementById('btnApprove');
+  if (btnApprove) btnApprove.addEventListener('click', () => {
     showToast('已通过该医生的入驻申请');
   });
 
@@ -22962,12 +22970,10 @@ lucide.createIcons();
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2500);
   }
+  } catch(e) {}
 </script>
 <script>
-// Initialize Lucide icons
-  lucide.createIcons();
-
-  // Tab switching logic
+try {
   document.querySelectorAll('.tab-item').forEach(tab => {
     tab.addEventListener('click', () => {
       // Update active tab
@@ -22995,8 +23001,10 @@ lucide.createIcons();
         : '暂无数据';
     });
   });
+} catch(e) {}
 </script>
 <script>
+try {
 lucide.createIcons();
 
   // ---- Tag management ----
@@ -23084,12 +23092,13 @@ lucide.createIcons();
   }
 </script>
 <script>
+try {
 // Initialize Lucide icons
     lucide.createIcons();
 
     // Auto scroll to bottom
-    const chatMessages = document.getElementById('chatMessages');
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    const chatMessages2 = document.getElementById('chatMessages');
+    if (chatMessages2) chatMessages2.scrollTop = chatMessages2.scrollHeight;
 
     // Auto-resize textarea
     const chatInput = document.getElementById('chatInput');
