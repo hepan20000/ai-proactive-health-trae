@@ -398,7 +398,7 @@
         <h1 class="page-title">Banner管理</h1>
         <p class="page-title-sub">管理平台各端位的Banner轮播图，控制展示顺序与上下线状态</p>
       </div>
-      <button class="btn btn-primary" id="addBannerBtn">
+      <button class="btn btn-primary" id="addBannerBtn" onclick="openAddBanner()">
         <i data-lucide="plus" style="width:15px;height:15px;"></i>
         新增Banner
       </button>
@@ -1315,6 +1315,66 @@ document.querySelectorAll('.nav-item').forEach(a => {
     }
   } catch(e) {}
 })();
+</script>
+<style scoped>.hmp-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:oklch(0 0 0 / 50%);backdrop-filter:blur(4px);z-index:1000;display:none;animation:hmf .15s ease}
+.hmp-modal-overlay.active{display:flex;align-items:center;justify-content:center}
+@keyframes hmf{from{opacity:0}to{opacity:1}}
+.hmp-modal-container{position:relative;background:var(--hmp-bg-card,#fff);border:1px solid var(--hmp-color-border);border-radius:12px;padding:24px;width:560px;max-width:90vw;max-height:85vh;overflow-y:auto;z-index:1001;box-shadow:var(--hmp-shadow-xl,0 10px 40px -4px rgba(0,0,0,.2));animation:hms .2s ease}
+@keyframes hms{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.hmp-modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--hmp-color-border)}
+.hmp-modal-title{font-size:var(--hmp-font-size-h3,18px);font-weight:var(--hmp-font-weight-semibold,600);color:var(--hmp-color-text-primary,#1a1a1a)}
+.hmp-modal-close{width:32px;height:32px;border-radius:var(--hmp-radius-md,8px);border:1px solid var(--hmp-color-border);background:var(--hmp-bg-card,#fff);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--hmp-color-text-secondary);transition:all .15s}
+.hmp-modal-close:hover{background:var(--hmp-bg-card-hover);border-color:var(--hmp-color-border-hover);color:var(--hmp-color-text-primary)}
+.hmp-modal-body{margin-bottom:20px}
+.hmp-modal-footer{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding-top:16px;border-top:1px solid var(--hmp-color-border)}
+.hmp-modal-field{margin-bottom:16px}
+.hmp-modal-label{display:block;font-size:var(--hmp-font-size-body,14px);font-weight:var(--hmp-font-weight-medium,500);color:var(--hmp-color-text-primary,#1a1a1a);margin-bottom:6px}
+.hmp-modal-label .req{color:oklch(0.62 0.23 22);margin-left:2px}
+.hmp-modal-input,.hmp-modal-select,.hmp-modal-textarea{width:100%;height:38px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md,8px);padding:0 12px;font-size:var(--hmp-font-size-body,14px);font-family:var(--hmp-font-family,'Inter',sans-serif);background:var(--hmp-bg-sunken,oklch(0.96 0.01 200));color:var(--hmp-color-text-primary,#1a1a1a);outline:none;transition:border-color .15s,box-shadow .15s}
+.hmp-modal-input:focus,.hmp-modal-select:focus,.hmp-modal-textarea:focus{border-color:var(--hmp-color-primary,oklch(0.55 0.13 195));box-shadow:0 0 0 3px oklch(0.55 0.13 195 / 10%)}
+.hmp-modal-input::placeholder,.hmp-modal-textarea::placeholder{color:var(--hmp-color-text-tertiary)}
+.hmp-modal-select{appearance:none;padding-right:32px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.hmp-modal-textarea{height:auto;min-height:80px;padding:10px 12px;resize:vertical}
+.hmp-modal-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hmp-modal-cb-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.hmp-modal-cb-item{display:flex;align-items:center;gap:6px;font-size:var(--hmp-font-size-body,14px);color:var(--hmp-color-text-secondary);cursor:pointer}
+.hmp-modal-cb-item input[type="checkbox"]{width:16px;height:16px;accent-color:var(--hmp-color-primary,oklch(0.55 0.13 195))}
+.hmp-btn{height:36px;padding:0 18px;border-radius:var(--hmp-radius-md,8px);font-size:var(--hmp-font-size-body,14px);font-weight:var(--hmp-font-weight-medium,500);font-family:var(--hmp-font-family,'Inter',sans-serif);cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
+.hmp-btn-primary{background:var(--hmp-color-primary,oklch(0.55 0.13 195));color:var(--hmp-color-text-on-primary,#fff)}
+.hmp-btn-primary:hover{background:var(--hmp-color-primary-hover,oklch(0.58 0.14 195))}
+.hmp-btn-ghost{background:transparent;border:1px solid var(--hmp-color-border);color:var(--hmp-color-text-secondary)}
+.hmp-btn-ghost:hover{background:var(--hmp-bg-card-hover);border-color:var(--hmp-color-border-hover)}
+.hmp-btn-danger{background:oklch(0.62 0.23 22);color:#fff}
+.hmp-btn-danger:hover{background:oklch(0.58 0.22 22)}
+.hmp-confirm-text{font-size:var(--hmp-font-size-body,14px);color:var(--hmp-color-text-primary,#1a1a1a);line-height:1.6;text-align:center;padding:12px 0}
+.hmp-confirm-text .warn{color:oklch(0.62 0.23 22);font-weight:500}
+.hmp-detail-row{display:flex;padding:10px 0;border-bottom:1px solid var(--hmp-color-border)}
+.hmp-detail-row:last-child{border-bottom:none}
+.hmp-detail-label{width:100px;flex-shrink:0;font-size:var(--hmp-font-size-body,14px);color:var(--hmp-color-text-tertiary)}
+.hmp-detail-value{flex:1;font-size:var(--hmp-font-size-body,14px);color:var(--hmp-color-text-primary);font-weight:var(--hmp-font-weight-medium,500)}
+.subnav{padding-left:44px}
+.subnav-item{padding:8px 16px !important;font-size:13px}
+.nav-arrow{transition:transform .2s}
+.has-subnav.open .nav-arrow{transform:rotate(180deg)}
+</style>
+<div id="m-banner-add" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增Banner</span><button class="hmp-modal-close" onclick="closeAddBanner()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-field"><label class="hmp-modal-label">Banner名称<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入Banner名称"></div><div class="hmp-modal-field"><label class="hmp-modal-label">图片URL</label><input type="text" class="hmp-modal-input" placeholder="https://..."></div><div class="hmp-modal-field"><label class="hmp-modal-label">跳转链接</label><input type="text" class="hmp-modal-input" placeholder="https://..."></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">排序</label><input type="number" class="hmp-modal-input" value="1" min="1"></div><div class="hmp-modal-field"><label class="hmp-modal-label">状态</label><select class="hmp-modal-select"><option>启用</option><option>停用</option></select></div></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeAddBanner()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveNewBanner()">保存</button></div></div></div>
+<div id="m-banner-edit" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑Banner</span><button class="hmp-modal-close" onclick="closeEditBanner()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-field"><label class="hmp-modal-label">Banner名称</label><input type="text" class="hmp-modal-input" value="夏季健康活动"></div><div class="hmp-modal-field"><label class="hmp-modal-label">图片URL</label><input type="text" class="hmp-modal-input" value="https://example.com/banner1.jpg"></div><div class="hmp-modal-field"><label class="hmp-modal-label">跳转链接</label><input type="text" class="hmp-modal-input" value="https://example.com/activity"></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">排序</label><input type="number" class="hmp-modal-input" value="1"></div><div class="hmp-modal-field"><label class="hmp-modal-label">状态</label><select class="hmp-modal-select"><option selected>启用</option><option>停用</option></select></div></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditBanner()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveBannerEdit()">保存</button></div></div></div>
+<div id="m-banner-del" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">删除确认</span><button class="hmp-modal-close" onclick="closeDelBanner()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定删除该Banner吗？<br><span class="warn">删除后不可恢复。</span></p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDelBanner()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="doDelBanner()">确认删除</button></div></div></div>
+
+<script>function hmpShow(id){var e=document.getElementById(id);if(e)e.classList.add('active')}
+function hmpHide(id){var e=document.getElementById(id);if(e)e.classList.remove('active')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.hmp-modal-overlay.active').forEach(function(m){m.classList.remove('active')})});
+function hmpToast(msg,type){var t=document.createElement('div');t.style.cssText='position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-12px);display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;font-family:var(--hmp-font-family,sans-serif);color:#fff;z-index:10000;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.15);';t.style.background=(type==='danger')?'oklch(0.62 0.23 22)':(type==='warning')?'oklch(0.78 0.16 75)':'oklch(0.7 0.16 155)';t.innerHTML='<span>'+(type==='danger'?'X':'OK')+'</span><span>'+msg+'</span>';document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)'});setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove()},300)},2500)}
+function toggleSubnav(el){el.classList.toggle('open');var s=el.nextElementSibling;if(s&&s.classList.contains('subnav')){s.style.display=s.style.display==='none'?'block':'none'}}
+function openAddBanner(){hmpShow('m-banner-add')}
+function closeAddBanner(){hmpHide('m-banner-add')}
+function saveNewBanner(){hmpHide('m-banner-add');hmpToast('Banner创建成功')}
+function openEditBanner(){hmpShow('m-banner-edit')}
+function closeEditBanner(){hmpHide('m-banner-edit')}
+function saveBannerEdit(){hmpHide('m-banner-edit');hmpToast('Banner已更新')}
+function openDelBanner(){hmpShow('m-banner-del')}
+function closeDelBanner(){hmpHide('m-banner-del')}
+function doDelBanner(){hmpHide('m-banner-del');hmpToast('Banner已删除','danger')}
 </script>
 </body>
 </html>
