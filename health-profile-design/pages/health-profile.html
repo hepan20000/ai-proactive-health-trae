@@ -491,7 +491,7 @@
 }
 
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
 </head>
 <body class="min-h-screen antialiased" style="background: var(--bg-page); color: var(--text-primary); font-family: 'DM Sans', ui-sans-serif, sans-serif, system-ui;">
@@ -893,8 +893,8 @@
 
       </div>
     </main>
-    <style type="text/tailwindcss">
-  @theme inline {
+    <style>
+  :root {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -926,11 +926,9 @@
     --color-sidebar-accent: var(--sidebar-accent);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   }
-  @layer base {
     body { background: var(--background-50); color: var(--text-800); }
-    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
-    th { @apply whitespace-nowrap; }
-  }
+    td, th { overflow-wrap: break-word; word-break: break-word; word-break: break-all; word-break: auto-phrase; }
+    th { white-space: nowrap; }
     </style>
     <style>
       .no-scrollbar::-webkit-scrollbar { display: none; }

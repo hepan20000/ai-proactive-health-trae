@@ -254,21 +254,19 @@
 }
 
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
-    <style type="text/tailwindcss">
-  @theme inline {
+    <style>
+  :root {
     --color-chart-1: var(--hmp-chart-1);
     --color-chart-2: var(--hmp-chart-2);
     --color-chart-3: var(--hmp-chart-3);
     --color-chart-4: var(--hmp-chart-4);
     --color-chart-5: var(--hmp-chart-5);
   }
-  @layer base {
     body { background: var(--hmp-background); color: var(--hmp-foreground); }
-    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
-    th { @apply whitespace-nowrap; }
-  }
+    td, th { overflow-wrap: break-word; word-break: break-word; word-break: break-all; word-break: auto-phrase; }
+    th { white-space: nowrap; }
     </style>
     <style>
       .no-scrollbar::-webkit-scrollbar { display: none; }
