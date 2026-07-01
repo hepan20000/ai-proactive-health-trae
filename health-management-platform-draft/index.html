@@ -15288,9 +15288,8 @@ tbody td {
               <div class="action-btns">
                 <button class="action-btn approve-btn" title="通过审批">
                   <i data-lucide="check" class="action-btn-icon"></i>
-                  审批
                 </button>
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
               </div>
@@ -15318,9 +15317,8 @@ tbody td {
               <div class="action-btns">
                 <button class="action-btn approve-btn" title="通过审批">
                   <i data-lucide="check" class="action-btn-icon"></i>
-                  审批
                 </button>
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
               </div>
@@ -15348,9 +15346,8 @@ tbody td {
               <div class="action-btns">
                 <button class="action-btn approve-btn" title="通过审批">
                   <i data-lucide="check" class="action-btn-icon"></i>
-                  审批
                 </button>
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
               </div>
@@ -15376,7 +15373,7 @@ tbody td {
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
                 <button class="action-btn disable-btn" title="禁用">
@@ -15405,7 +15402,7 @@ tbody td {
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
                 <button class="action-btn disable-btn" title="禁用">
@@ -15434,7 +15431,7 @@ tbody td {
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
                 <button class="action-btn disable-btn" title="禁用">
@@ -15463,7 +15460,7 @@ tbody td {
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
                 <button class="action-btn approve-btn" title="重新审批">
@@ -15492,7 +15489,7 @@ tbody td {
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情">
+                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
                   <i data-lucide="eye" class="action-btn-icon"></i>
                 </button>
                 <button class="action-btn approve-btn" title="重新审批">
@@ -19277,10 +19274,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
           <i data-lucide="download" style="width:15px;height:15px;"></i>
           导出
         </button>
-        <button class="btn btn-primary" onclick="openAddResident()">
-          <i data-lucide="plus" style="width:15px;height:15px;"></i>
-          新增居民
-        </button>
       </div>
     </div>
 
@@ -19426,7 +19419,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19459,7 +19451,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19493,7 +19484,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19526,7 +19516,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19559,7 +19548,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19592,7 +19580,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19625,7 +19612,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19658,7 +19644,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19691,7 +19676,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -19725,7 +19709,6 @@ document.querySelectorAll('.nav-item').forEach(a => {
               <td>
                 <div class="action-btns">
                   <button class="action-btn" title="查看" onclick="openHealthProfile(this)"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
-                  <button class="action-btn" title="编辑"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
                   <button class="action-btn" title="随访"><i data-lucide="phone" style="width:14px;height:14px;"></i></button>
                 </div>
               </td>
@@ -22122,307 +22105,141 @@ document.querySelectorAll('.nav-item').forEach(a => {
         <!-- End Editor Body -->
 </div>
 <div id="page-treatment-plan" class="page-content">
-<!-- Page Title + Action Row -->
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
-          <div>
-            <h1 style="font-size:22px; font-weight:700; color:var(--hmp-text); margin-bottom:4px; font-family:var(--hmp-font-family);">调理方案管理</h1>
-            <p style="font-size:13px; color:var(--hmp-text-secondary);">管理所有调理方案模板，支持按检测报告类型分类筛选</p>
+<!-- Page Title Row -->
+    <div class="page-title-row">
+      <div>
+        <div class="page-title-group">
+          <h1 class="page-title">调理方案管理</h1>
+        </div>
+        <p class="page-title-sub">管理所有调理方案模板，支持新增、编辑和启停操作</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary" onclick="openAddPlan()">
+          <i data-lucide="plus" style="width:15px;height:15px;"></i>
+          新增方案
+        </button>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="table-card">
+      <div class="table-header-row">
+        <div>
+          <span class="table-header-title">方案列表</span>
+          <span class="table-header-count tnum">共 5 条记录</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="position:relative;">
+            <i data-lucide="search" style="width:14px;height:14px;position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--hmp-color-text-tertiary);pointer-events:none;"></i>
+            <input type="text" placeholder="搜索方案名称..." style="height:30px;border:1px solid var(--hmp-color-border);border-radius:var(--hmp-radius-md);padding:0 10px 0 30px;font-size:var(--hmp-font-size-caption);font-family:var(--hmp-font-family);background:var(--hmp-bg-sunken);color:var(--hmp-color-text-primary);outline:none;width:180px;transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--hmp-color-primary)';this.style.background='var(--hmp-bg-card)'" onblur="this.style.borderColor='var(--hmp-color-border)';this.style.background='var(--hmp-bg-sunken)'">
           </div>
-          <button class="btn-primary" onclick="openAddPlan()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            新增方案
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>方案名称</th>
+            <th>适用人群</th>
+            <th>疗程天数</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr>
+            <td><span class="doctor-info-name">高血压综合管理方案</span></td>
+            <td>高血压、冠心病</td>
+            <td class="tnum">30天</td>
+            <td><span class="status-badge status-approved"><span class="dot"></span>启用</span></td>
+            <td class="tnum"><span class="time-text">2026-06-01</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="action-btn" title="查看" onclick="openViewPlan()"><i data-lucide="eye" class="action-btn-icon"></i></button>
+                <button class="action-btn" title="编辑" onclick="openEditPlan()"><i data-lucide="pencil" class="action-btn-icon"></i></button>
+                <button class="action-btn disable-btn" title="停用" onclick="togglePlanStatus(this)"><i data-lucide="pause" class="action-btn-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+          <!-- Row 2 -->
+          <tr>
+            <td><span class="doctor-info-name">糖尿病饮食运动干预方案</span></td>
+            <td>糖尿病、肥胖</td>
+            <td class="tnum">60天</td>
+            <td><span class="status-badge status-approved"><span class="dot"></span>启用</span></td>
+            <td class="tnum"><span class="time-text">2026-05-20</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="action-btn" title="查看" onclick="openViewPlan()"><i data-lucide="eye" class="action-btn-icon"></i></button>
+                <button class="action-btn" title="编辑" onclick="openEditPlan()"><i data-lucide="pencil" class="action-btn-icon"></i></button>
+                <button class="action-btn disable-btn" title="停用" onclick="togglePlanStatus(this)"><i data-lucide="pause" class="action-btn-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+          <!-- Row 3 -->
+          <tr>
+            <td><span class="doctor-info-name">中老年失眠综合调理方案</span></td>
+            <td>失眠、情绪压力</td>
+            <td class="tnum">21天</td>
+            <td><span class="status-badge status-approved"><span class="dot"></span>启用</span></td>
+            <td class="tnum"><span class="time-text">2026-06-10</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="action-btn" title="查看" onclick="openViewPlan()"><i data-lucide="eye" class="action-btn-icon"></i></button>
+                <button class="action-btn" title="编辑" onclick="openEditPlan()"><i data-lucide="pencil" class="action-btn-icon"></i></button>
+                <button class="action-btn disable-btn" title="停用" onclick="togglePlanStatus(this)"><i data-lucide="pause" class="action-btn-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+          <!-- Row 4 -->
+          <tr>
+            <td><span class="doctor-info-name">脑卒中早期预防与康复方案</span></td>
+            <td>脑血管风险</td>
+            <td class="tnum">90天</td>
+            <td><span class="status-badge status-rejected"><span class="dot"></span>停用</span></td>
+            <td class="tnum"><span class="time-text">2026-04-15</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="action-btn" title="查看" onclick="openViewPlan()"><i data-lucide="eye" class="action-btn-icon"></i></button>
+                <button class="action-btn" title="编辑" onclick="openEditPlan()"><i data-lucide="pencil" class="action-btn-icon"></i></button>
+                <button class="action-btn approve-btn" title="启用" onclick="togglePlanStatus(this)"><i data-lucide="play" class="action-btn-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+          <!-- Row 5 -->
+          <tr>
+            <td><span class="doctor-info-name">焦虑情绪舒缓与正念调理</span></td>
+            <td>情绪压力、失眠</td>
+            <td class="tnum">28天</td>
+            <td><span class="status-badge status-approved"><span class="dot"></span>启用</span></td>
+            <td class="tnum"><span class="time-text">2026-06-25</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="action-btn" title="查看" onclick="openViewPlan()"><i data-lucide="eye" class="action-btn-icon"></i></button>
+                <button class="action-btn" title="编辑" onclick="openEditPlan()"><i data-lucide="pencil" class="action-btn-icon"></i></button>
+                <button class="action-btn disable-btn" title="停用" onclick="togglePlanStatus(this)"><i data-lucide="pause" class="action-btn-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination-wrapper">
+        <span class="pagination-info tnum">显示 1 - 5 条，共 5 条</span>
+        <div class="pagination">
+          <button class="page-btn" disabled>
+            <i data-lucide="chevron-left" style="width:14px;height:14px;"></i>
+          </button>
+          <button class="page-btn active tnum">1</button>
+          <button class="page-btn" disabled>
+            <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
           </button>
         </div>
-
-        <!-- Tab Bar -->
-        <div style="display:flex; align-items:center; gap:4px; padding:4px; background:var(--hmp-bg-sunken); border-radius:10px; margin-bottom:24px; width:fit-content;">
-          <div class="tab-item active" data-tab="all" onclick="switchTab(this)">全部</div>
-          <div class="tab-item" data-tab="sleep" onclick="switchTab(this)">睡眠健康</div>
-          <div class="tab-item" data-tab="brain" onclick="switchTab(this)">脑血管风险</div>
-          <div class="tab-item" data-tab="mood" onclick="switchTab(this)">情绪压力</div>
-        </div>
-
-        <!-- Plan Cards Grid (3 columns) -->
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;" id="planGrid">
-
-          <!-- Card 1: 已发布 - 睡眠健康 -->
-          <div class="plan-card" data-type="sleep">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">中老年失眠综合调理方案</h3>
-                <span class="report-tag tag-sleep">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                  睡眠健康
-                </span>
-              </div>
-              <span class="badge-published" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                已发布
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">12</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">5</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-28 14:30</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: 草稿 - 脑血管风险 -->
-          <div class="plan-card" data-type="brain">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">高血压伴脑血管风险干预方案</h3>
-                <span class="report-tag tag-brain">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                  脑血管风险
-                </span>
-              </div>
-              <span class="badge-draft" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                草稿
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">18</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">8</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-29 09:15</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: 已发布 - 情绪压力 -->
-          <div class="plan-card" data-type="mood">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">焦虑情绪舒缓与正念调理</h3>
-                <span class="report-tag tag-mood">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                  情绪压力
-                </span>
-              </div>
-              <span class="badge-published" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                已发布
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">8</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">3</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-27 16:42</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: 已发布 - 脑血管风险 -->
-          <div class="plan-card" data-type="brain">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">脑卒中早期预防与康复方案</h3>
-                <span class="report-tag tag-brain">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                  脑血管风险
-                </span>
-              </div>
-              <span class="badge-published" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                已发布
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">24</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">12</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-25 11:20</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 5: 草稿 - 睡眠健康 -->
-          <div class="plan-card" data-type="sleep">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">睡眠呼吸暂停综合征管理方案</h3>
-                <span class="report-tag tag-sleep">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                  睡眠健康
-                </span>
-              </div>
-              <span class="badge-draft" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                草稿
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">6</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">2</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-30 08:05</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6: 已发布 - 情绪压力 -->
-          <div class="plan-card" data-type="mood">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">产后抑郁心理调适方案</h3>
-                <span class="report-tag tag-mood">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:3px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                  情绪压力
-                </span>
-              </div>
-              <span class="badge-published" style="margin-left:8px; flex-shrink:0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                已发布
-              </span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="stat-value">15</span>
-                <span>个节点</span>
-              </div>
-              <div class="stat-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span class="stat-value">4</span>
-                <span>件商品</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <span style="font-size:12px; color:var(--hmp-text-tertiary);">最后编辑: 2026-06-26 10:38</span>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="预览">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="复制">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-                <button class="action-btn danger" title="删除">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Plan Cards Grid -->
+      </div>
+    </div>
 </div>
   </div>
 </div>
@@ -23835,8 +23652,6 @@ document.querySelector('.hp-modal-overlay').addEventListener('click', closeHealt
 .nav-arrow{transition:transform .2s}
 .has-subnav.open .nav-arrow{transform:rotate(180deg)}
 </style>
-<div id="m-res-add" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增居民</span><button class="hmp-modal-close" onclick="closeResModal()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入姓名"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" placeholder="请输入手机号"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">性别</label><select class="hmp-modal-select"><option>男</option><option>女</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">年龄</label><input type="number" class="hmp-modal-input" placeholder="请输入年龄" min="0" max="150"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">身份证号</label><input type="text" class="hmp-modal-input" placeholder="请输入身份证号"></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">健康评级</label><select class="hmp-modal-select"><option>正常</option><option>亚健康</option><option>高危</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">责任医生</label><input type="text" class="hmp-modal-input" placeholder="请输入责任医生"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">绑定设备</label><div class="hmp-modal-cb-group"><label class="hmp-modal-cb-item"><input type="checkbox">血压计</label><label class="hmp-modal-cb-item"><input type="checkbox">血糖仪</label><label class="hmp-modal-cb-item"><input type="checkbox">血氧仪</label><label class="hmp-modal-cb-item"><input type="checkbox">体温计</label><label class="hmp-modal-cb-item"><input type="checkbox">心电监护</label></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">备注</label><textarea class="hmp-modal-textarea" placeholder="请输入备注信息" rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeResModal()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveRes('add')">保存</button></div></div></div>
-<div id="m-res-edit" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑居民</span><button class="hmp-modal-close" onclick="closeEditRes()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" id="resEditName" class="hmp-modal-input"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" id="resEditPhone" class="hmp-modal-input"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">性别</label><select id="resEditGender" class="hmp-modal-select"><option>男</option><option>女</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">年龄</label><input type="number" id="resEditAge" class="hmp-modal-input"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">身份证号</label><input type="text" id="resEditIdCard" class="hmp-modal-input"></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">健康评级</label><select id="resEditRating" class="hmp-modal-select"><option>正常</option><option>亚健康</option><option>高危</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">责任医生</label><input type="text" id="resEditDoctor" class="hmp-modal-input"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">绑定设备</label><div class="hmp-modal-cb-group"><label class="hmp-modal-cb-item"><input type="checkbox" checked>血压计</label><label class="hmp-modal-cb-item"><input type="checkbox">血糖仪</label><label class="hmp-modal-cb-item"><input type="checkbox">血氧仪</label><label class="hmp-modal-cb-item"><input type="checkbox">体温计</label><label class="hmp-modal-cb-item"><input type="checkbox">心电监护</label></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">备注</label><textarea id="resEditNote" class="hmp-modal-textarea" rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditRes()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveRes('edit')">保存</button></div></div></div>
 <div id="m-res-del" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">删除确认</span><button class="hmp-modal-close" onclick="closeDelRes()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定删除该居民档案吗？<br><span class="warn">删除后不可恢复。</span></p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDelRes()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="delRes()">确认删除</button></div></div></div>
 <div id="m-followup" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增随访</span><button class="hmp-modal-close" onclick="closeFU()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">随访类型</label><select class="hmp-modal-select"><option>电话</option><option>上门</option><option>视频</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">下次随访日期</label><input type="date" class="hmp-modal-input"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">随访内容</label><textarea class="hmp-modal-textarea" placeholder="请输入随访内容..." rows="4"></textarea></div><div class="hmp-modal-field"><label class="hmp-modal-label">随访结果</label><select class="hmp-modal-select"><option>正常</option><option>异常</option><option>需关注</option></select></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeFU()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveFU()">保存</button></div></div></div>
 <div id="m-doc-detail" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">医生详情</span><button class="hmp-modal-close" onclick="closeDocDetail()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">医生姓名</span><span class="hmp-detail-value">张伟良</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">科室</span><span class="hmp-detail-value">心血管内科</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">职称</span><span class="hmp-detail-value">主任医师</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">执业证号</span><span class="hmp-detail-value">YS2018012345</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">所属医院</span><span class="hmp-detail-value">市第一人民医院</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">联系电话</span><span class="hmp-detail-value">138****6789</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">申请来源</span><span class="hmp-detail-value">自注册</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">提交时间</span><span class="hmp-detail-value">2026-06-28 14:32</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">个人简介</span><span class="hmp-detail-value">从事心血管内科临床工作20年。</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDocDetail()">关闭</button></div></div></div>
@@ -23871,15 +23686,13 @@ function hmpHide(id){var e=document.getElementById(id);if(e)e.classList.remove('
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.hmp-modal-overlay.active').forEach(function(m){m.classList.remove('active')})});
 function hmpToast(msg,type){var t=document.createElement('div');t.style.cssText='position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-12px);display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;font-family:var(--hmp-font-family,sans-serif);color:#fff;z-index:10000;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.15);';t.style.background=(type==='danger')?'oklch(0.62 0.23 22)':(type==='warning')?'oklch(0.78 0.16 75)':'oklch(0.7 0.16 155)';t.innerHTML='<span>'+(type==='danger'?'X':'OK')+'</span><span>'+msg+'</span>';document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)'});setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove()},300)},2500)}
 function toggleSubnav(el){el.classList.toggle('open');var s=el.nextElementSibling;if(s&&s.classList.contains('subnav')){s.style.display=s.style.display==='none'?'block':'none'}}
-function openAddResident(){hmpShow('m-res-add')}
-function closeResModal(){hmpHide('m-res-add')}
-function openEditResident(){hmpShow('m-res-edit')}
-function closeEditRes(){hmpHide('m-res-edit')}
+
+
 function openDelRes(){hmpShow('m-res-del')}
 function closeDelRes(){hmpHide('m-res-del')}
 function openFollowUp(){hmpShow('m-followup')}
 function closeFU(){hmpHide('m-followup')}
-function saveRes(t){hmpHide(t==='add'?'m-res-add':'m-res-edit');hmpToast(t==='add'?'居民新增成功':'居民信息已更新')}
+function saveRes(t){hmpHide('m-res-add');hmpToast('居民新增成功')}
 function delRes(){hmpHide('m-res-del');hmpToast('居民档案已删除','danger')}
 function saveFU(){hmpHide('m-followup');hmpToast('随访记录已保存')}
 </script>
@@ -23959,6 +23772,7 @@ function closeViewPlan(){hmpHide('m-plan-view')}
 function openEditPlan(){hmpShow('m-plan-edit')}
 function closeEditPlan(){hmpHide('m-plan-edit')}
 function savePlanEdit(){hmpHide('m-plan-edit');hmpToast('方案已更新')}
+function togglePlanStatus(btn){var tr=btn.closest('tr');var badge=tr.querySelector('.status-badge');if(badge.classList.contains('status-approved')){badge.classList.remove('status-approved');badge.classList.add('status-rejected');badge.innerHTML='<span class="dot"></span>停用';btn.classList.remove('disable-btn');btn.classList.add('approve-btn');btn.title='启用';btn.querySelector('i').setAttribute('data-lucide','play');hmpToast('方案已停用')}else{badge.classList.remove('status-rejected');badge.classList.add('status-approved');badge.innerHTML='<span class="dot"></span>启用';btn.classList.remove('approve-btn');btn.classList.add('disable-btn');btn.title='停用';btn.querySelector('i').setAttribute('data-lucide','pause');hmpToast('方案已启用')};lucide.createIcons()}
 function openTogglePlan(){hmpShow('m-plan-toggle')}
 function closeTogglePlan(){hmpHide('m-plan-toggle')}
 function doToggle(){hmpHide('m-plan-toggle');hmpToast('方案状态已变更')}
