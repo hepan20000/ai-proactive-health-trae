@@ -450,308 +450,125 @@
           <div class="tab-item" data-tab="vip" onclick="switchTab(this)">VIP包</div>
         </div>
 
-        <!-- Service Package Cards Grid (3 columns) -->
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;" id="pkgGrid">
-
-          <!-- Card 1: 基础健康管理包 (基础包 / 免费 / 上架) -->
-          <div class="pkg-card" data-type="basic">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">基础健康管理包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-basic">基础包</span>
-                  <span class="badge-online">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    上架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- Price -->
-            <div style="margin-bottom:16px;">
-              <span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">免费</span>
-            </div>
-            <!-- Stats -->
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">5 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">所有签约居民</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">1,286 人</span>
-              </div>
-            </div>
-            <!-- Actions -->
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="下架" onclick="alert('下架')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
+        <!-- Service Package Table -->
+        <div class="table-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h2 style="font-size:16px;font-weight:600;color:var(--hmp-color-text-primary);">服务包列表</h2>
+            <span style="font-size:13px;color:var(--hmp-color-text-tertiary);">共 6 个服务包</span>
           </div>
-
-          <!-- Card 2: 睡眠监测增强包 (增强包 / ¥99/月 / 上架) -->
-          <div class="pkg-card" data-type="enhanced">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">睡眠监测增强包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-enhanced">增强包</span>
-                  <span class="badge-online">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    上架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <span style="font-size:15px; color:var(--hmp-text-secondary);">¥</span><span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">99</span><span style="font-size:13px; color:var(--hmp-text-secondary); margin-left:2px;">/月</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">8 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">睡眠障碍人群</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">432 人</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="下架" onclick="alert('下架')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+              <thead>
+                <tr style="border-bottom:2px solid var(--hmp-color-border);">
+                  <th style="text-align:left;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">服务包名称</th>
+                  <th style="text-align:left;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">类型</th>
+                  <th style="text-align:left;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">价格</th>
+                  <th style="text-align:center;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">包含服务</th>
+                  <th style="text-align:center;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">已订阅</th>
+                  <th style="text-align:center;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">状态</th>
+                  <th style="text-align:center;padding:10px 12px;color:var(--hmp-color-text-secondary);font-weight:500;font-size:12px;white-space:nowrap;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="basic">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">基础健康管理包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-basic">基础包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">免费</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">5 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">1,286 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2: 睡眠监测增强包 -->
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="enhanced">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">睡眠监测增强包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-enhanced">增强包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">¥99/月</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">8 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">523 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3: 心血管风险管理包 -->
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="enhanced">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">心血管风险管理包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-enhanced">增强包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">¥199/月</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">10 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">312 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 4: 至尊VIP健康管理包 -->
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="vip">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">至尊VIP健康管理包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-vip">VIP包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">¥599/月</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">16 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">89 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 5: 企业团检健康包 -->
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="vip">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">企业团检健康包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-vip">VIP包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">¥299/人</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">12 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">1,560 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 6: 慢病综合管理包 -->
+                <tr style="border-bottom:1px solid var(--hmp-color-border);" data-type="enhanced">
+                  <td style="padding:12px;font-weight:500;color:var(--hmp-color-text-primary);">慢病综合管理包</td>
+                  <td style="padding:12px;"><span class="type-tag tag-enhanced">增强包</span></td>
+                  <td style="padding:12px;font-weight:600;color:var(--hmp-color-primary);">¥149/月</td>
+                  <td style="padding:12px;text-align:center;color:var(--hmp-color-text-secondary);">11 项</td>
+                  <td style="padding:12px;text-align:center;font-weight:500;color:var(--hmp-color-text-primary);">745 人</td>
+                  <td style="padding:12px;text-align:center;"><span class="status-badge status-active"><span class="dot"></span>上架</span></td>
+                  <td style="padding:12px;text-align:center;">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <button class="action-btn" title="查看" onclick="openViewSvc()"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="编辑" onclick="openEditSvc()"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+                      <button class="action-btn" title="下架" onclick="toggleSvcStatus(this)"><i data-lucide="package-open" style="width:14px;height:14px;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <!-- Card 3: 慢病管理增强包 (增强包 / ¥129/月 / 上架) -->
-          <div class="pkg-card" data-type="enhanced">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">慢病管理增强包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-enhanced">增强包</span>
-                  <span class="badge-online">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    上架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <span style="font-size:15px; color:var(--hmp-text-secondary);">¥</span><span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">129</span><span style="font-size:13px; color:var(--hmp-text-secondary); margin-left:2px;">/月</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">10 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">高血压/糖尿病患者</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">578 人</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="下架" onclick="alert('下架')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: 心脑血管VIP包 (VIP包 / ¥299/月 / 上架) -->
-          <div class="pkg-card" data-type="vip">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">心脑血管VIP包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-vip">VIP包</span>
-                  <span class="badge-online">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    上架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <span style="font-size:15px; color:var(--hmp-text-secondary);">¥</span><span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">299</span><span style="font-size:13px; color:var(--hmp-text-secondary); margin-left:2px;">/月</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">15 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">心脑血管高危人群</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">186 人</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="下架" onclick="alert('下架')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 5: 全方位健康VIP包 (VIP包 / ¥499/月 / 下架) -->
-          <div class="pkg-card" data-type="vip">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">全方位健康VIP包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-vip">VIP包</span>
-                  <span class="badge-offline">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-                    下架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <span style="font-size:15px; color:var(--hmp-text-secondary);">¥</span><span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">499</span><span style="font-size:13px; color:var(--hmp-text-secondary); margin-left:2px;">/月</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">20 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">追求高品质健康管理</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">67 人</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="上架" onclick="alert('上架')" style="color:var(--hmp-success); border-color:var(--hmp-success);">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6: 情绪调节增强包 (增强包 / ¥79/月 / 上架) -->
-          <div class="pkg-card" data-type="enhanced">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;">
-              <div style="flex:1; min-width:0;">
-                <h3 style="font-size:15px; font-weight:600; color:var(--hmp-text); margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">情绪调节增强包</h3>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span class="type-tag tag-enhanced">增强包</span>
-                  <span class="badge-online">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    上架
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <span style="font-size:15px; color:var(--hmp-text-secondary);">¥</span><span style="font-size:24px; font-weight:700; color:var(--hmp-primary); font-family:var(--hmp-font-family-display);">79</span><span style="font-size:13px; color:var(--hmp-text-secondary); margin-left:2px;">/月</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-              <div class="stat-row">
-                <span class="stat-label">包含服务</span>
-                <span class="stat-value">6 项</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">适用人群</span>
-                <span class="stat-value">焦虑/压力过大人群</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">已订阅</span>
-                <span class="stat-value" style="color:var(--hmp-primary);">321 人</span>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--hmp-border); padding-top:14px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <button class="action-btn" title="编辑" onclick="alert('编辑')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-                <button class="action-btn" title="查看" onclick="alert('查看')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                <button class="action-btn" title="下架" onclick="alert('下架')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
-                </button>
-                <button class="action-btn" title="复制" onclick="alert('复制')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <!-- End Service Package Cards Grid -->
 
       </main>
     </div>
@@ -770,16 +587,15 @@
       });
       el.classList.add('active');
 
-      var tabType = el.getAttribute('data-tab');
-      var cards = document.querySelectorAll('.pkg-card');
-      cards.forEach(function(card) {
-        if (tabType === 'all') {
-          card.style.display = 'flex';
-        } else {
-          var cardType = card.getAttribute('data-type');
-          card.style.display = (cardType === tabType) ? 'flex' : 'none';
-        }
+      var type = el.dataset.tab;
+      document.querySelectorAll('tbody tr').forEach(function(row) {
+        if (type === 'all') { row.style.display = ''; }
+        else { row.style.display = row.dataset.type === type ? '' : 'none'; }
       });
+      // Update count
+      var visible = type === 'all'
+        ? document.querySelectorAll('tbody tr').length
+        : document.querySelectorAll('tbody tr[data-type="'+type+'"]').length;
     }
   </script>
 
@@ -878,20 +694,12 @@
       background: var(--hmp-primary-light);
     }
 
-    /* === Service Package Card === */
-    .pkg-card {
+    /* === Table Card === */
+    .table-card {
       background: var(--hmp-bg-card);
       border: 1px solid var(--hmp-border);
       border-radius: 10px;
       padding: 20px;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .pkg-card:hover {
-      box-shadow: var(--hmp-shadow-lg);
-      border-color: var(--hmp-border-hover);
-      transform: translateY(-1px);
     }
 
     /* === Type Tags === */
@@ -917,47 +725,12 @@
     }
 
     /* === Status Badge === */
-    .badge-online {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 10px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 500;
-      background: var(--hmp-success-light);
-      color: var(--hmp-success);
-    }
-    .badge-offline {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 10px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 500;
-      background: oklch(0.2 0.03 220 / 6%);
-      color: var(--hmp-text-tertiary);
-    }
-
-    /* === Stat Row === */
-    .stat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-    }
-    .stat-label {
-      color: var(--hmp-text-secondary);
-      flex-shrink: 0;
-    }
-    .stat-value {
-      color: var(--hmp-text);
-      font-weight: 500;
-      font-family: var(--hmp-font-family-mono);
-      font-feature-settings: "tnum" 1;
-      text-align: right;
-    }
+    .status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:12px;font-weight:500;}
+    .status-badge .dot{width:6px;height:6px;border-radius:50%;}
+    .status-active{background:var(--hmp-success-light,#oklch(0.7 0.16 155 / 8%));color:var(--hmp-success);}
+    .status-active .dot{background:var(--hmp-success);}
+    .status-inactive{background:var(--hmp-text-disabled,#oklch(0.2 0.03 220 / 20%));color:var(--hmp-text-tertiary);}
+    .status-inactive .dot{background:var(--hmp-text-disabled,#oklch(0.2 0.03 220 / 20%));}
 
     /* === Action Button === */
     .action-btn {
@@ -1101,7 +874,7 @@ document.querySelectorAll('.nav-item').forEach(a => {
 .has-subnav.open .nav-arrow{transform:rotate(180deg)}
 </style>
 <div id="m-svc-add" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:600px"><div class="hmp-modal-header"><span class="hmp-modal-title">新增服务包</span><button class="hmp-modal-close" onclick="closeAddSvc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">服务包名称<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入名称"></div><div class="hmp-modal-field"><label class="hmp-modal-label">价格(元)</label><input type="number" class="hmp-modal-input" placeholder="0.00" min="0" step="0.01"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">服务列表</label><textarea class="hmp-modal-textarea" placeholder="每行一项服务" rows="4"></textarea></div><div class="hmp-modal-field"><label class="hmp-modal-label">适用评级</label><div class="hmp-modal-cb-group"><label class="hmp-modal-cb-item"><input type="checkbox" checked>正常</label><label class="hmp-modal-cb-item"><input type="checkbox" checked>亚健康</label><label class="hmp-modal-cb-item"><input type="checkbox" checked>高危</label></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">描述</label><textarea class="hmp-modal-textarea" placeholder="请输入服务包描述..." rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeAddSvc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveNewSvc()">保存</button></div></div></div>
-<div id="m-svc-view" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">服务包详情</span><button class="hmp-modal-close" onclick="closeViewSvc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">名称</span><span class="hmp-detail-value">基础健康管理包</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">价格</span><span class="hmp-detail-value">299元/月</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">包含服务</span><span class="hmp-detail-value">血压监测、健康咨询、用药提醒</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">适用评级</span><span class="hmp-detail-value">正常、亚健康</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">销售数量</span><span class="hmp-detail-value">156</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">状态</span><span class="hmp-detail-value" style="color:oklch(0.7 0.16 155)">上架</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeViewSvc()">关闭</button></div></div></div>
+<div id="m-svc-view" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:560px"><div class="hmp-modal-header"><span class="hmp-modal-title">服务包详情</span><button class="hmp-modal-close" onclick="closeViewSvc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">服务包名称</span><span class="hmp-detail-value">基础健康管理包</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">类型</span><span class="hmp-detail-value">基础包</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">价格</span><span class="hmp-detail-value">免费</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">包含服务</span><span class="hmp-detail-value">5项</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">适用人群</span><span class="hmp-detail-value">所有签约居民</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">已订阅</span><span class="hmp-detail-value">1,286人</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">状态</span><span class="hmp-detail-value">上架</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">服务内容</span><span class="hmp-detail-value">健康档案管理、体征数据监测、定期健康评估、健康教育推送、在线咨询</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeViewSvc()">关闭</button></div></div></div>
 <div id="m-svc-edit" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:600px"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑服务包</span><button class="hmp-modal-close" onclick="closeEditSvc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">名称</label><input type="text" class="hmp-modal-input" value="基础健康管理包"></div><div class="hmp-modal-field"><label class="hmp-modal-label">价格(元)</label><input type="number" class="hmp-modal-input" value="299" step="0.01"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">服务列表</label><textarea class="hmp-modal-textarea" rows="4">血压监测&#10;健康咨询&#10;用药提醒</textarea></div><div class="hmp-modal-field"><label class="hmp-modal-label">适用评级</label><div class="hmp-modal-cb-group"><label class="hmp-modal-cb-item"><input type="checkbox" checked>正常</label><label class="hmp-modal-cb-item"><input type="checkbox" checked>亚健康</label><label class="hmp-modal-cb-item"><input type="checkbox">高危</label></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">描述</label><textarea class="hmp-modal-textarea" rows="3">适合健康及亚健康人群。</textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditSvc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveSvcEdit()">保存</button></div></div></div>
 <div id="m-svc-del" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">删除确认</span><button class="hmp-modal-close" onclick="closeDelSvc()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定删除该服务包吗？<br><span class="warn">删除后不可恢复。</span></p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDelSvc()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="doDelSvc()">确认删除</button></div></div></div>
 
@@ -1121,6 +894,7 @@ function saveSvcEdit(){hmpHide('m-svc-edit');hmpToast('服务包已更新')}
 function openDelSvc(){hmpShow('m-svc-del')}
 function closeDelSvc(){hmpHide('m-svc-del')}
 function doDelSvc(){hmpHide('m-svc-del');hmpToast('服务包已删除','danger')}
+function toggleSvcStatus(btn){hmpToast('服务包状态已切换')}
 </script>
 </body>
 </html>
