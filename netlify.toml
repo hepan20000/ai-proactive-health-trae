@@ -1,0 +1,9 @@
+# Netlify 部署配置
+[build]
+  publish = "health-management-platform-draft"
+
+# 所有路径都指向 app.html（SPA 模式）
+[[redirects]]
+  from = "/*"
+  to = "/app.html"
+  status = 200
