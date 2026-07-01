@@ -22970,413 +22970,348 @@ lucide.createIcons();
 
 
 
-<!-- Health Profile Modal (moved to body-level for correct position:fixed behavior) -->
-<div id="healthProfileModal" class="hp-modal">
-  <div class="hp-modal-overlay"></div>
-  <div class="hp-modal-container">
-    <div class="hp-modal-header">
-      <div class="hp-modal-title">
-        <i data-lucide="heart-pulse" style="width:20px;height:20px;color:var(--hmp-color-primary, oklch(0.78 0.18 195));"></i>
-        <h2 id="hpModalName">居民健康画像</h2>
-        <span id="hpModalInfo" class="hp-modal-info">-- · -- · --岁</span>
-      </div>
-      <div class="hp-modal-score">
-        <span class="hp-score-label">24h健康评估</span>
-        <span id="hpModalScore" class="hp-score-badge badge-yellow"><span class="dot"></span>亚健康</span>
-      </div>
-      <button class="hp-modal-close" onclick="closeHealthProfile()">
-        <i data-lucide="x" style="width:20px;height:20px;"></i>
-      </button>
+<!-- Health Profile Dashboard Modal -->
+<div id="healthProfileModal" class="hp-dashboard-modal">
+  <header class="hp-dash-header">
+    <div class="hp-header-left">
+      <a onclick="closeHealthProfile()" class="hp-back-link"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span>返回</span></a>
+      <span class="hp-header-sep">|</span>
+      <span class="hp-header-time">数据更新时间：</span>
+      <span id="hpDashClock" class="hp-header-clock">--</span>
     </div>
-    <div class="hp-modal-body">
-      <!-- Left: Vitals -->
-      <div class="hp-col hp-col-vitals">
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">实时体征</span>
-            <span class="hp-live-dot"></span>
-          </div>
-          <div class="hp-vitals-list" id="hpVitalsList"></div>
-        </div>
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">血脂四项</span>
-          </div>
-          <div class="hp-lipids-grid" id="hpLipidsList"></div>
-        </div>
-      </div>
-      <!-- Center: Body -->
-      <div class="hp-col hp-col-body">
-        <div class="hp-card hp-card-body">
-          <div class="hp-card-header">
-            <span class="hp-card-title">生理数字人模型</span>
-          </div>
-          <div class="hp-body-container">
-            <svg viewBox="0 0 200 380" width="200" height="380" xmlns="http://www.w3.org/2000/svg" class="hp-body-svg">
-              <defs>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <filter id="organGlow">
-                  <feGaussianBlur stdDeviation="2" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0"/>
-                  <stop offset="50%" stop-color="#00d4ff" stop-opacity="0.3"/>
-                  <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Platform rings -->
-              <ellipse cx="100" cy="365" rx="50" ry="8" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
-              <ellipse cx="100" cy="365" rx="35" ry="5" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
-              <!-- Vertical center line -->
-              <line x1="100" y1="30" x2="100" y2="360" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <!-- Head -->
-              <circle cx="100" cy="32" r="18" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
-              <line x1="82" y1="32" x2="118" y2="32" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
-              <line x1="100" y1="14" x2="100" y2="50" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
-              <ellipse cx="100" cy="32" rx="18" ry="8" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <!-- Neck -->
-              <line x1="93" y1="50" x2="93" y2="62" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
-              <line x1="107" y1="50" x2="107" y2="62" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
-              <!-- Shoulders -->
-              <path d="M 60 70 Q 75 62 93 65" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
-              <path d="M 107 65 Q 125 62 140 70" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
-              <!-- Torso -->
-              <path d="M 60 70 L 65 160 L 75 170 L 85 175 L 100 178 L 115 175 L 125 170 L 135 160 L 140 70" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.6" filter="url(#glow)"/>
-              <!-- Torso mesh lines -->
-              <path d="M 68 90 L 132 90" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <path d="M 72 110 L 128 110" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <path d="M 75 130 L 125 130" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <path d="M 80 150 L 120 150" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <path d="M 100 65 L 100 175" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.1"/>
-              <path d="M 80 70 L 85 175" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.1"/>
-              <path d="M 120 70 L 115 175" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.1"/>
-              <!-- Rib cage -->
-              <path d="M 75 85 Q 88 80 100 85 Q 112 80 125 85" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
-              <path d="M 73 95 Q 87 90 100 95 Q 113 90 127 95" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.18"/>
-              <path d="M 72 105 Q 87 100 100 105 Q 113 100 128 105" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
-              <!-- Arms - Left -->
-              <path d="M 60 70 L 48 120 L 42 170 L 38 210 L 40 240 L 35 260" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
-              <!-- Arms - Right -->
-              <path d="M 140 70 L 152 120 L 158 170 L 162 210 L 160 240 L 165 260" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
-              <!-- Arm mesh -->
-              <line x1="55" y1="95" x2="50" y2="95" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="50" y1="145" x2="45" y2="145" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="145" y1="95" x2="150" y2="95" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="150" y1="145" x2="155" y2="145" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <!-- Hip -->
-              <path d="M 75 170 L 80 195 L 95 205" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5"/>
-              <path d="M 125 170 L 120 195 L 105 205" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5"/>
-              <!-- Legs - Left -->
-              <path d="M 95 205 L 88 260 L 85 310 L 88 350 L 92 360" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
-              <!-- Legs - Right -->
-              <path d="M 105 205 L 112 260 L 115 310 L 112 350 L 108 360" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
-              <!-- Leg mesh -->
-              <line x1="93" y1="230" x2="89" y2="230" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="90" y1="280" x2="86" y2="280" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="107" y1="230" x2="111" y2="230" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <line x1="110" y1="280" x2="114" y2="280" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
-              <!-- Heart -->
-              <path d="M 95 95 Q 90 88 85 92 Q 80 96 85 102 L 95 112 L 105 102 Q 110 96 105 92 Q 100 88 95 95 Z" fill="#ff6b8a" opacity="0.7" filter="url(#organGlow)"/>
-              <!-- Liver -->
-              <ellipse cx="115" cy="118" rx="15" ry="10" fill="#c97856" opacity="0.5" filter="url(#organGlow)" transform="rotate(-10 115 118)"/>
-              <!-- Kidneys -->
-              <ellipse cx="83" cy="135" rx="6" ry="9" fill="#e8a0b4" opacity="0.5" filter="url(#organGlow)"/>
-              <ellipse cx="117" cy="135" rx="6" ry="9" fill="#e8a0b4" opacity="0.5" filter="url(#organGlow)"/>
-              <!-- Intestines -->
-              <path d="M 90 155 Q 95 150 100 155 Q 105 160 100 165 Q 95 168 92 163 Q 88 158 90 155" fill="none" stroke="#d4a0b0" stroke-width="2" opacity="0.4" filter="url(#organGlow)"/>
-              <path d="M 100 155 Q 108 152 112 158 Q 115 164 110 168" fill="none" stroke="#d4a0b0" stroke-width="2" opacity="0.3"/>
-              <!-- Joint dots -->
-              <circle cx="100" cy="50" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="60" cy="70" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="140" cy="70" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="95" cy="205" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="105" cy="205" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="92" cy="360" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="108" cy="360" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
-              <circle cx="48" cy="170" r="1.5" fill="#00d4ff" opacity="0.6" filter="url(#glow)"/>
-              <circle cx="152" cy="170" r="1.5" fill="#00d4ff" opacity="0.6" filter="url(#glow)"/>
-              <!-- Scanning effect line -->
-              <rect x="55" y="100" width="90" height="3" fill="url(#scanGrad)" opacity="0.6">
-                <animateTransform attributeName="transform" type="translate" values="0 0; 0 150; 0 0" dur="4s" repeatCount="indefinite"/>
-              </rect>
-            </svg>
-            <div class="hp-body-overlay" id="hpBodyOverlay"></div>
-          </div>
-          <div class="hp-body-summary">
-            <span class="hp-score-label">综合24小时体征数据与历史健康记录分析</span>
-            <span id="hpSummaryText" class="hp-summary-text">该居民当前整体健康状态呈亚健康水平。睡眠时长不足、血脂指标异常需重点关注，建议改善作息习惯并定期复查相关指标。</span>
-          </div>
-        </div>
-      </div>
-      <!-- Right: Analytics -->
-      <div class="hp-col hp-col-analytics">
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">睡眠分析</span>
-          </div>
-          <div class="hp-sleep-bars">
-            <div class="hp-bar deep" style="width:62%;"></div>
-            <div class="hp-bar light" style="width:38%;"></div>
-            <div class="hp-bar awake" style="width:0%;"></div>
-          </div>
-          <div class="hp-sleep-stats">
-            <div><span class="hp-stat-label">总睡眠</span><span class="hp-stat-value" id="hpSleepTotal">2h42m</span></div>
-            <div><span class="hp-stat-label">深睡</span><span class="hp-stat-value" id="hpSleepDeep">1h40m</span></div>
-            <div><span class="hp-stat-label">浅睡</span><span class="hp-stat-value" id="hpSleepLight">1h02m</span></div>
-          </div>
-          <div class="hp-sleep-warning"><i data-lucide="alert-triangle" style="width:12px;height:12px;"></i> 睡眠时长不足</div>
-        </div>
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">运动分析</span>
-          </div>
-          <div class="hp-exercise-bars" id="hpExerciseBars"></div>
-          <div class="hp-sleep-stats">
-            <div><span class="hp-stat-label">总步数</span><span class="hp-stat-value tnum" id="hpStepsTotal">5,247</span></div>
-            <div><span class="hp-stat-label">活跃时间</span><span class="hp-stat-value" id="hpActiveTime">45min</span></div>
-          </div>
-        </div>
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">器官分析</span>
-          </div>
-          <div class="hp-organs-grid">
-            <div class="hp-organ"><span class="hp-organ-icon">&#10084;&#65039;</span><span class="hp-organ-name">心</span><span class="hp-organ-status status-normal">正常</span></div>
-            <div class="hp-organ"><span class="hp-organ-icon">&#129729;</span><span class="hp-organ-name">肺</span><span class="hp-organ-status status-normal">正常</span></div>
-            <div class="hp-organ"><span class="hp-organ-icon">&#129504;</span><span class="hp-organ-name">脑</span><span class="hp-organ-status status-normal">正常</span></div>
-            <div class="hp-organ"><span class="hp-organ-icon">&#129384;</span><span class="hp-organ-name">肝</span><span class="hp-organ-status status-normal">正常</span></div>
-            <div class="hp-organ"><span class="hp-organ-icon">&#129384;</span><span class="hp-organ-name">肾</span><span class="hp-organ-status status-normal">正常</span></div>
-            <div class="hp-organ active"><span class="hp-organ-icon">&#129464;</span><span class="hp-organ-name">小肠</span><span class="hp-organ-status status-warning">亚健康</span></div>
-          </div>
-          <div class="hp-organ-symptoms">
-            <span class="hp-symptom-tag">腹胀</span>
-            <span class="hp-symptom-tag">便秘</span>
-            <span class="hp-symptom-tag">痔疮易感</span>
-            <span class="hp-symptom-tag">肩背痛</span>
-            <span class="hp-symptom-tag">内热</span>
-            <span class="hp-symptom-tag">口干口苦</span>
-          </div>
-        </div>
-        <div class="hp-card">
-          <div class="hp-card-header">
-            <span class="hp-card-title">未来一个月疾病风险概率</span>
-          </div>
-          <div class="hp-risk-list" id="hpRiskList">
-            <div class="hp-risk-item"><span>心动过速</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:5.2%;"></div></div><span class="tnum">5.2%</span></div>
-            <div class="hp-risk-item"><span>心梗</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:0.6%;"></div></div><span class="tnum">0.6%</span></div>
-            <div class="hp-risk-item"><span>心力衰竭</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:0%;"></div></div><span class="tnum">0%</span></div>
-            <div class="hp-risk-item"><span>冠心病</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:0%;"></div></div><span class="tnum">0%</span></div>
-            <div class="hp-risk-item"><span>心动过缓</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:0.1%;"></div></div><span class="tnum">0.1%</span></div>
-          </div>
-        </div>
-      </div>
+    <h1 class="hp-dash-title">居 民 健 康 画 像</h1>
+    <div class="hp-header-right">
+      <button onclick="closeHealthProfile()" class="hp-header-btn"><i data-lucide="power" style="width:18px;height:18px;"></i></button>
     </div>
+  </header>
+  <div class="hp-dash-grid">
+    <section class="hp-grid-left">
+      <div class="hp-panel hp-profile-card">
+        <div class="hp-profile-row"><span class="hp-avatar"><i data-lucide="user" style="width:16px;height:16px;"></i></span><span class="hp-profile-name" id="hpDashName">用****6</span></div>
+        <span class="hp-profile-phone" id="hpDashPhone">139****9056</span>
+        <div class="hp-profile-stats" id="hpDashStats">
+          <div class="hp-stat-box"><span class="hp-stat-label">性别</span><span class="hp-stat-val">男</span></div>
+          <div class="hp-stat-box"><span class="hp-stat-label">身高</span><span class="hp-stat-val">170cm</span></div>
+          <div class="hp-stat-box"><span class="hp-stat-label">体重</span><span class="hp-stat-val">69kg</span></div>
+          <div class="hp-stat-box"><span class="hp-stat-label">BMI</span><span class="hp-stat-val">23.88</span></div>
+        </div>
+      </div>
+      <div class="hp-vitals-grid" id="hpDashVitals"></div>
+    </section>
+    <section class="hp-grid-center">
+      <div class="hp-panel hp-body-panel">
+        <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>生理数字人模型</h3><p class="hp-panel-sub">综合健康标签 · 实时映射</p></div></div>
+        <div class="hp-body-area">
+          <div class="hp-body-silhouette"><svg viewBox="0 0 200 460" class="hp-body-svg"><defs><linearGradient id="bodyGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.9"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.2"/></linearGradient><filter id="bodyGlow"><feGaussianBlur stdDeviation="3"/></filter></defs><g fill="none" stroke="url(#bodyGrad)" stroke-width="1.2" filter="url(#bodyGlow)"><circle cx="100" cy="40" r="24"/><path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/><path d="M62 130 L28 200 L36 260 L46 250 L46 200"/><path d="M138 130 L172 200 L164 260 L154 250 L154 200"/></g><g fill="url(#bodyGrad)" opacity="0.15"><path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/><circle cx="100" cy="40" r="24"/></g></svg></div>
+          <div class="hp-orbit hp-orbit-inner"></div>
+          <div class="hp-orbit hp-orbit-outer"></div>
+          <div id="hpDashBodyTags"></div>
+          <div class="hp-base-ring"></div>
+        </div>
+        <div class="hp-health-rating">
+          <span class="hp-rating-label">24 小时健康评估：</span>
+          <span class="hp-rating-value" id="hpDashRating">亚健康</span>
+          <span class="hp-rating-stars" id="hpDashStars"></span>
+        </div>
+      </div>
+    </section>
+    <section class="hp-grid-right">
+      <div class="hp-panel">
+        <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>睡眠分析</h3><p class="hp-panel-sub">入睡 03:22 · 起床 06:04</p></div><div class="hp-sleep-legend"><span><span class="hp-legend-dot" style="background:#6366f1;"></span>深睡</span><span><span class="hp-legend-dot" style="background:#38bdf8;"></span>浅睡</span><span><span class="hp-legend-dot" style="background:#f59e0b;"></span>清醒</span></div></div>
+        <div class="hp-sleep-stats"><span>总睡眠 <b>2h42m</b></span><span>深睡 <b>1h40m</b></span><span>浅睡 <b>1h02m</b></span></div>
+        <div class="hp-sleep-chart" id="hpDashSleepChart"></div>
+      </div>
+      <div class="hp-panel">
+        <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>运动分析</h3><p class="hp-panel-sub">今日 · 每小时步数</p></div><span class="hp-step-total">总步数 <b>5,247</b></span></div>
+        <div class="hp-exercise-chart" id="hpDashExerciseChart"></div>
+      </div>
+    </section>
+    <section class="hp-grid-bottom-left hp-panel">
+      <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>用户生理数据</h3><p class="hp-panel-sub">心率 · 24h 趋势</p></div></div>
+      <div class="hp-hr-tabs"><span class="hp-hr-tab active">心率</span><span class="hp-hr-tab">血氧</span><span class="hp-hr-tab">呼吸率</span><span class="hp-hr-tab">体温</span><span class="hp-hr-tab">血压</span><span class="hp-hr-tab">血糖</span></div>
+      <div class="hp-hr-chart" id="hpDashHrChart"></div>
+    </section>
+    <section class="hp-grid-bottom-center hp-panel">
+      <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>未来一个月疾病风险概率</h3><p class="hp-panel-sub">AI 模型预测</p></div></div>
+      <div class="hp-risk-list" id="hpDashRiskList"></div>
+    </section>
+    <section class="hp-grid-bottom-right hp-panel">
+      <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>器官分析 · 子午流注</h3><p class="hp-panel-sub">未时 13:00 – 15:00 · 小肠经</p></div></div>
+      <div class="hp-organ-section">
+        <div class="hp-organ-circle">
+          <div class="hp-organ-outer-ring"></div>
+          <div class="hp-organ-inner-ring"></div>
+          <div class="hp-organ-center"><div class="hp-organ-center-label">小肠</div><div class="hp-organ-center-status">亚健康</div></div>
+          <div id="hpDashOrganDots"></div>
+        </div>
+        <div class="hp-organ-desc">
+          <p><span class="hp-desc-accent">虚证：</span><span class="hp-desc-muted">腹胀、易便秘、易患痔疮、肩与前臂后背疼痛、指痛、内火旺、口干舌燥。</span></p>
+          <p><span class="hp-desc-accent">常见症状：</span><span class="hp-desc-muted">小腹绕脐前痛、心烦气闷、头顶痛、容易腹泻、手脚寒凉、吸收不良、虚肥、肩周炎。</span></p>
+          <p><span class="hp-desc-accent">中医解释：</span><span class="hp-desc-muted">未时小肠经当令，主分清泌浊。建议此时段饭后小憩，忌饮浓茶咖啡，宜温饮以助消化。</span></p>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 
 <style>
 /* ========================================
-   Health Profile Modal — Dark Mode Styles
+   Health Profile Dashboard Modal — Dark Mode Styles
    ======================================== */
-.hp-modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:1000; }
-.hp-modal.open { display:flex; align-items:center; justify-content:center; }
-.hp-modal-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background:oklch(0 0 0 / 70%); backdrop-filter:blur(8px); }
-.hp-modal-container {
-  position:relative; z-index:1; width:96vw; max-width:1440px; height:90vh;
-  background:oklch(0.16 0.03 230);
-  border:1px solid oklch(1 0 0 / 10%);
-  border-radius:16px; overflow:hidden;
-  box-shadow: 0 20px 60px -15px oklch(0 0 0 / 80%);
-  display:flex; flex-direction:column;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color:oklch(0.97 0.01 200);
-}
-.hp-modal-header {
-  display:flex; align-items:center; padding:16px 24px;
-  background:oklch(0.22 0.04 230);
-  border-bottom:1px solid oklch(1 0 0 / 10%);
-  gap:16px;
-}
-.hp-modal-title { display:flex; align-items:center; gap:10px; }
-.hp-modal-title h2 { font-size:18px; font-weight:600; margin:0; color:oklch(0.97 0.01 200); }
-.hp-modal-info { font-size:12px; color:oklch(0.97 0.01 200 / 50%); }
-.hp-modal-score { display:flex; align-items:center; gap:8px; margin-left:auto; }
-.hp-score-label { font-size:12px; color:oklch(0.97 0.01 200 / 50%); }
-.hp-modal-close { background:none; border:1px solid oklch(1 0 0 / 10%); color:oklch(0.97 0.01 200 / 70%); border-radius:8px; padding:6px; cursor:pointer; display:flex; align-items:center; }
-.hp-modal-close:hover { background:oklch(1 0 0 / 8%); }
-.hp-modal-body { flex:1; display:grid; grid-template-columns:280px 1fr 360px; gap:16px; padding:16px; overflow-y:auto; }
-
-.hp-card { background:oklch(0.22 0.04 230); border:1px solid oklch(1 0 0 / 10%); border-radius:10px; padding:16px; }
-.hp-card + .hp-card { margin-top:12px; }
-.hp-card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-.hp-card-title { font-size:13px; font-weight:600; color:oklch(0.97 0.01 200 / 85%); text-transform:uppercase; letter-spacing:0.5px; }
-
-.hp-live-dot { width:8px; height:8px; border-radius:50%; background:oklch(0.7 0.16 155); animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-.hp-vitals-list { display:flex; flex-direction:column; gap:8px; }
-.hp-vital-row { display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-radius:6px; background:oklch(0.18 0.025 230); }
-.hp-vital-name { font-size:13px; color:oklch(0.97 0.01 200 / 70%); display:flex; align-items:center; gap:6px; }
-.hp-vital-value { font-size:18px; font-weight:700; font-variant-numeric:tabular-nums; }
-.hp-vital-unit { font-size:11px; color:oklch(0.97 0.01 200 / 40%); margin-left:2px; }
-.hp-vital-status { font-size:10px; padding:2px 8px; border-radius:9999px; font-weight:500; }
-.hp-vital-status.normal { background:oklch(0.7 0.16 155 / 15%); color:oklch(0.7 0.16 155); }
-.hp-vital-status.warning { background:oklch(0.78 0.16 75 / 15%); color:oklch(0.78 0.16 75); }
-.hp-vital-status.danger { background:oklch(0.62 0.23 22 / 15%); color:oklch(0.62 0.23 22); }
-.hp-vital-time { font-size:10px; color:oklch(0.97 0.01 200 / 30%); }
-
-.hp-lipids-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.hp-lipid-item { padding:8px; border-radius:6px; background:oklch(0.18 0.025 230); text-align:center; }
-.hp-lipid-name { font-size:11px; color:oklch(0.97 0.01 200 / 50%); }
-.hp-lipid-value { font-size:16px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:2px; }
-.hp-lipid-unit { font-size:10px; color:oklch(0.97 0.01 200 / 35%); }
-
-.hp-card-body { display:flex; flex-direction:column; height:100%; }
-.hp-body-container { flex:1; position:relative; display:flex; align-items:center; justify-content:center; min-height:300px; background: radial-gradient(ellipse at center, oklch(0.78 0.18 195 / 8%) 0%, transparent 70%); }
-.hp-body-svg { height:280px; opacity:0.9; }
-.hp-body-overlay { position:absolute; top:0; left:0; right:0; bottom:0; }
-.hp-body-tag { position:absolute; font-size:10px; padding:3px 10px; border-radius:9999px; font-weight:500; white-space:nowrap; }
-.hp-body-tag.tag-normal { background:oklch(0.7 0.16 155 / 15%); color:oklch(0.7 0.16 155); border:1px solid oklch(0.7 0.16 155 / 25%); }
-.hp-body-tag.tag-warning { background:oklch(0.78 0.16 75 / 15%); color:oklch(0.78 0.16 75); border:1px solid oklch(0.78 0.16 75 / 25%); }
-.hp-body-summary { padding-top:12px; border-top:1px solid oklch(1 0 0 / 8%); }
-.hp-summary-text { font-size:12px; color:oklch(0.97 0.01 200 / 55%); line-height:1.6; display:block; margin-top:4px; }
-
-.hp-score-badge { font-size:12px; padding:3px 12px; border-radius:9999px; font-weight:500; display:inline-flex; align-items:center; gap:4px; }
-.hp-score-badge .dot { width:6px; height:6px; border-radius:50%; }
-.badge-yellow { background:oklch(0.78 0.16 75 / 15%); color:oklch(0.78 0.16 75); }
-.badge-yellow .dot { background:oklch(0.78 0.16 75); }
-.badge-green { background:oklch(0.7 0.16 155 / 15%); color:oklch(0.7 0.16 155); }
-.badge-green .dot { background:oklch(0.7 0.16 155); }
-.badge-red { background:oklch(0.62 0.23 22 / 15%); color:oklch(0.62 0.23 22); }
-.badge-red .dot { background:oklch(0.62 0.23 22); }
-
-.hp-sleep-bars { display:flex; height:24px; border-radius:6px; overflow:hidden; background:oklch(0.18 0.025 230); }
-.hp-bar.deep { background:oklch(0.55 0.2 260); }
-.hp-bar.light { background:oklch(0.75 0.15 250); }
-.hp-bar.awake { background:oklch(0.62 0.23 22 / 40%); }
-.hp-sleep-stats { display:flex; gap:16px; margin-top:10px; }
-.hp-stat-label { font-size:11px; color:oklch(0.97 0.01 200 / 45%); display:block; }
-.hp-stat-value { font-size:16px; font-weight:700; font-variant-numeric:tabular-nums; color:oklch(0.97 0.01 200); }
-.hp-sleep-warning { display:flex; align-items:center; gap:6px; margin-top:8px; font-size:11px; color:oklch(0.78 0.16 75); }
-
-.hp-exercise-bars { display:flex; align-items:flex-end; gap:4px; height:60px; }
-.hp-exercise-bar { flex:1; border-radius:3px 3px 0 0; background:oklch(0.78 0.18 195 / 30%); min-height:4px; }
+.hp-dashboard-modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:1000; background:oklch(0.16 0.03 230); color:oklch(0.97 0.01 200); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; overflow-y:auto; }
+.hp-dashboard-modal.open { display:block; }
+.hp-dashboard-modal::before { content:''; position:fixed; top:0; left:0; right:0; bottom:0; background-image:linear-gradient(oklch(1 0 0 / 4%) 1px, transparent 1px),linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px); background-size:32px 32px; pointer-events:none; z-index:0; }
+.hp-dashboard-modal > * { position:relative; z-index:1; }
+.hp-dash-header { position:sticky; top:0; z-index:10; border-bottom:1px solid oklch(1 0 0 / 10%); padding:12px 32px; background:oklch(0.16 0.03 230); display:flex; align-items:center; }
+.hp-dash-header::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, oklch(0.78 0.18 195) 50%, transparent); opacity:0.6; }
+.hp-header-left, .hp-header-right { display:flex; align-items:center; gap:8px; font-size:13px; color:oklch(0.97 0.01 200 / 50%); min-width:200px; }
+.hp-header-right { justify-content:flex-end; }
+.hp-back-link { display:flex; align-items:center; gap:4px; cursor:pointer; color:oklch(0.97 0.01 200 / 50%); text-decoration:none; }
+.hp-back-link:hover { color:oklch(0.78 0.18 195); }
+.hp-header-sep { opacity:0.4; }
+.hp-header-clock { font-family:ui-monospace,SFMono-Regular,monospace; font-variant-numeric:tabular-nums; color:oklch(0.97 0.01 200); }
+.hp-dash-title { position:absolute; left:50%; transform:translateX(-50%); font-size:20px; font-weight:600; letter-spacing:0.3em; white-space:nowrap; }
+.hp-header-btn { background:none; border:none; color:oklch(0.97 0.01 200 / 50%); cursor:pointer; padding:4px; }
+.hp-header-btn:hover { color:oklch(0.78 0.18 195); }
+.hp-dash-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; padding:24px 24px; }
+.hp-grid-left { grid-column:1/4; display:flex; flex-direction:column; gap:16px; }
+.hp-grid-center { grid-column:4/10; }
+.hp-grid-right { grid-column:10/13; display:flex; flex-direction:column; gap:16px; }
+.hp-grid-bottom-left { grid-column:1/5; }
+.hp-grid-bottom-center { grid-column:5/9; }
+.hp-grid-bottom-right { grid-column:9/13; }
+.hp-panel { background:oklch(0.22 0.04 230); border:1px solid oklch(1 0 0 / 10%); border-radius:10px; padding:16px; }
+.hp-panel-title { display:flex; align-items:flex-end; justify-content:space-between; border-bottom:1px solid oklch(1 0 0 / 10%); padding-bottom:8px; margin-bottom:12px; }
+.hp-panel-title h3 { font-size:13px; font-weight:600; letter-spacing:0.05em; display:flex; align-items:center; gap:8px; margin:0; }
+.hp-title-bar { display:inline-block; width:3px; height:12px; background:oklch(0.78 0.18 195); border-radius:2px; }
+.hp-panel-sub { font-size:11px; color:oklch(0.97 0.01 200 / 50%); margin:2px 0 0 11px; }
+.hp-profile-row { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; }
+.hp-avatar { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:oklch(0.78 0.18 195 / 15%); color:oklch(0.78 0.18 195); }
+.hp-profile-phone { font-size:12px; color:oklch(0.97 0.01 200 / 50%); margin-top:12px; display:block; }
+.hp-profile-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px; text-align:center; }
+.hp-stat-box { border:1px solid oklch(1 0 0 / 10%); border-radius:6px; padding:8px 4px; }
+.hp-stat-label { display:block; font-size:11px; color:oklch(0.97 0.01 200 / 50%); }
+.hp-stat-val { display:block; font-size:14px; font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; margin-top:2px; }
+.hp-vitals-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.hp-vital-card { background:oklch(0.22 0.04 230); border:1px solid oklch(1 0 0 / 10%); border-radius:10px; padding:12px; }
+.hp-vital-header { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:oklch(0.97 0.01 200 / 50%); margin-bottom:4px; }
+.hp-vital-icon { display:flex; align-items:center; gap:4px; }
+.hp-vital-ts { font-family:ui-monospace,monospace; font-size:10px; }
+.hp-vital-value { font-size:18px; font-weight:600; font-variant-numeric:tabular-nums; }
+.hp-vital-unit { font-size:11px; color:oklch(0.97 0.01 200 / 50%); margin-left:2px; }
+.hp-tone-danger { color:oklch(0.62 0.23 22); }
+.hp-tone-info { color:oklch(0.78 0.18 195); }
+.hp-tone-warn { color:oklch(0.78 0.16 75); }
+.hp-tone-accent { color:oklch(0.78 0.18 195); }
+.hp-tone-good { color:oklch(0.7 0.16 155); }
+.hp-lipid-row { display:flex; align-items:center; justify-content:space-between; padding:2px 0; font-size:11px; }
+.hp-lipid-name { color:oklch(0.97 0.01 200 / 50%); }
+.hp-lipid-tag-val { display:flex; align-items:center; gap:6px; }
+.hp-lipid-val { font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+.hp-body-panel { position:relative; overflow:hidden; }
+.hp-body-area { position:relative; height:520px; margin-top:16px; }
+.hp-body-silhouette { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.hp-body-svg { height:100%; max-height:520px; opacity:0.7; }
+.hp-orbit { position:absolute; left:50%; top:50%; border-radius:50%; pointer-events:none; }
+.hp-orbit-inner { width:420px; height:420px; transform:translate(-50%,-50%); border:1px solid oklch(0.78 0.18 195 / 20%); }
+.hp-orbit-outer { width:500px; height:500px; transform:translate(-50%,-50%); border:1px dashed oklch(0.78 0.18 195 / 10%); }
+.hp-base-ring { position:absolute; bottom:0; left:64px; right:64px; height:64px; }
+.hp-base-ring::before { content:''; position:absolute; bottom:0; left:0; right:0; height:100%; max-width:28rem; margin:0 auto; border-radius:50%; border:1px solid oklch(0.78 0.18 195 / 40%); background:linear-gradient(to bottom, oklch(0.78 0.18 195 / 10%), transparent); }
+.hp-body-tag { position:absolute; z-index:10; display:flex; align-items:center; gap:6px; border-radius:9999px; padding:4px 12px; font-size:12px; border:1px solid; backdrop-filter:blur(4px); }
+.hp-body-tag .hp-tag-dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+.hp-body-tag.tone-good { border-color:oklch(0.7 0.16 155 / 50%); color:oklch(0.7 0.16 155); background:oklch(0.7 0.16 155 / 10%); }
+.hp-body-tag.tone-warn { border-color:oklch(0.78 0.16 75 / 50%); color:oklch(0.78 0.16 75); background:oklch(0.78 0.16 75 / 10%); }
+.hp-body-tag.tone-normal { border-color:oklch(0.78 0.18 195 / 50%); color:oklch(0.78 0.18 195); background:oklch(0.78 0.18 195 / 10%); }
+.hp-health-rating { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:8px; padding-top:16px; border-top:1px solid oklch(1 0 0 / 10%); }
+.hp-rating-label { font-size:13px; color:oklch(0.97 0.01 200 / 50%); }
+.hp-rating-value { font-size:18px; font-weight:600; }
+.hp-rating-stars { display:flex; gap:2px; }
+.hp-star { width:16px; height:16px; }
+.hp-star svg { width:16px; height:16px; }
+.hp-rating-value.rating-danger { color:oklch(0.62 0.23 22); }
+.hp-rating-value.rating-warn { color:oklch(0.78 0.16 75); }
+.hp-rating-value.rating-good { color:oklch(0.7 0.16 155); }
+.hp-rating-stars.rating-danger { color:oklch(0.62 0.23 22); }
+.hp-rating-stars.rating-warn { color:oklch(0.78 0.16 75); }
+.hp-rating-stars.rating-good { color:oklch(0.7 0.16 155); }
+.hp-sleep-legend { display:flex; gap:8px; font-size:10px; color:oklch(0.97 0.01 200 / 50%); }
+.hp-sleep-legend span { display:flex; align-items:center; gap:4px; }
+.hp-legend-dot { width:6px; height:6px; border-radius:50%; display:inline-block; }
+.hp-sleep-stats { display:flex; gap:16px; font-size:11px; color:oklch(0.97 0.01 200 / 50%); margin-bottom:8px; }
+.hp-sleep-stats b { color:oklch(0.97 0.01 200); }
+.hp-sleep-chart { height:160px; display:flex; gap:2px; }
+.hp-step-total { font-size:12px; color:oklch(0.97 0.01 200 / 50%); }
+.hp-step-total b { font-size:16px; color:oklch(0.78 0.18 195); font-variant-numeric:tabular-nums; }
+.hp-exercise-chart { height:160px; display:flex; align-items:flex-end; gap:2px; padding-top:8px; }
+.hp-exercise-bar { flex:1; background:oklch(0.78 0.18 195 / 30%); border-radius:2px 2px 0 0; min-height:2px; transition:height 0.3s; }
 .hp-exercise-bar.active { background:oklch(0.78 0.18 195); }
-
-.hp-organs-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:10px; }
-.hp-organ { padding:8px; border-radius:6px; background:oklch(0.18 0.025 230); text-align:center; font-size:12px; }
-.hp-organ.active { border:1px solid oklch(0.78 0.16 75 / 40%); background:oklch(0.78 0.16 75 / 8%); }
-.hp-organ-icon { font-size:16px; }
-.hp-organ-name { display:block; font-size:11px; color:oklch(0.97 0.01 200 / 60%); margin:2px 0; }
-.hp-organ-status { font-size:10px; font-weight:500; }
-.status-normal { color:oklch(0.7 0.16 155); }
-.status-warning { color:oklch(0.78 0.16 75); }
-.hp-organ-symptoms { display:flex; flex-wrap:wrap; gap:4px; }
-.hp-symptom-tag { font-size:10px; padding:2px 8px; border-radius:9999px; background:oklch(0.18 0.025 230); color:oklch(0.97 0.01 200 / 50%); border:1px solid oklch(1 0 0 / 6%); }
-
-.hp-risk-list { display:flex; flex-direction:column; gap:8px; }
-.hp-risk-item { display:flex; align-items:center; gap:8px; font-size:12px; color:oklch(0.97 0.01 200 / 70%); }
-.hp-risk-bar { flex:1; height:6px; border-radius:3px; background:oklch(0.18 0.025 230); overflow:hidden; }
-.hp-risk-fill { height:100%; border-radius:3px; background:oklch(0.7 0.16 155); }
-.hp-risk-item span:last-child { font-variant-numeric:tabular-nums; min-width:32px; text-align:right; color:oklch(0.97 0.01 200 / 50%); }
+.hp-hr-tabs { display:flex; gap:16px; border-bottom:1px solid oklch(1 0 0 / 10%); padding-bottom:8px; margin-bottom:12px; font-size:12px; }
+.hp-hr-tab { color:oklch(0.97 0.01 200 / 50%); cursor:pointer; }
+.hp-hr-tab.active { color:oklch(0.78 0.18 195); border-bottom:2px solid oklch(0.78 0.18 195); padding-bottom:6px; }
+.hp-hr-chart { height:200px; position:relative; }
+.hp-risk-list { display:flex; flex-direction:column; gap:10px; }
+.hp-risk-item { display:flex; align-items:center; gap:12px; font-size:12px; }
+.hp-risk-name { width:60px; flex-shrink:0; color:oklch(0.97 0.01 200 / 50%); }
+.hp-risk-bar { flex:1; height:8px; border-radius:4px; background:oklch(1 0 0 / 5%); overflow:hidden; }
+.hp-risk-fill { height:100%; border-radius:4px; }
+.hp-risk-val { width:40px; text-align:right; font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+.hp-organ-section { display:flex; gap:16px; }
+.hp-organ-circle { position:relative; width:208px; height:208px; flex-shrink:0; }
+.hp-organ-outer-ring { position:absolute; inset:0; border-radius:50%; border:1px solid oklch(1 0 0 / 10%); }
+.hp-organ-inner-ring { position:absolute; inset:16px; border-radius:50%; border:1px dashed oklch(0.78 0.18 195 / 25%); }
+.hp-organ-center { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:96px; height:96px; border-radius:50%; border:1px solid oklch(0.78 0.18 195 / 50%); background:oklch(0.22 0.04 230); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.hp-organ-center-label { font-size:12px; color:oklch(0.97 0.01 200 / 50%); }
+.hp-organ-center-status { font-size:14px; font-weight:600; color:oklch(0.78 0.16 75); }
+.hp-organ-dot { position:absolute; width:28px; height:28px; border-radius:50%; border:1px solid oklch(0.78 0.18 195 / 40%); background:oklch(0.16 0.03 230); display:flex; align-items:center; justify-content:center; font-size:10px; color:oklch(0.78 0.18 195); transform:translate(-50%,-50%); }
+.hp-organ-desc { flex:1; min-width:0; font-size:12px; line-height:1.7; }
+.hp-desc-accent { color:oklch(0.78 0.18 195); }
+.hp-desc-muted { color:oklch(0.97 0.01 200 / 50%); }
 </style>
 <script>
+var bodyTagsData = [
+  {label:'睡眠不足',tone:'warn',side:'L',top:8},
+  {label:'异常血脂',tone:'warn',side:'R',top:8},
+  {label:'高血脂',tone:'normal',side:'L',top:24},
+  {label:'高血压',tone:'normal',side:'R',top:24},
+  {label:'高血脂',tone:'normal',side:'L',top:40},
+  {label:'高血压',tone:'normal',side:'R',top:40},
+  {label:'正常体重',tone:'good',side:'L',top:56},
+  {label:'正常心率',tone:'good',side:'R',top:56},
+  {label:'正常血压',tone:'good',side:'L',top:72},
+  {label:'正常尿酸',tone:'good',side:'R',top:72},
+];
+var vitalsData = [
+  {icon:'heart',label:'心率',value:'80',unit:'次/分',ts:'13:52',tone:'danger'},
+  {icon:'droplets',label:'血氧',value:'99',unit:'%',ts:'13:52',tone:'info'},
+  {icon:'wind',label:'呼吸率',value:'19',unit:'次/分',ts:'13:52',tone:'accent'},
+  {icon:'thermometer',label:'体温',value:'—',unit:'°C',ts:'13:59',tone:'warn'},
+  {icon:'activity',label:'血压',value:'128/53',unit:'mmHg',ts:'13:52',tone:'danger'},
+  {icon:'droplets',label:'血糖',value:'5',unit:'mmol/L',ts:'21:00',tone:'info'},
+  {icon:'flask-conical',label:'尿酸',value:'423',unit:'μmol/L',ts:'07:00',tone:'warn'},
+];
+var lipidsData = [
+  {k:'总胆固醇',tag:'正常',v:'4.33',tone:'good'},
+  {k:'甘油三酯',tag:'偏高',v:'2.46',tone:'warn'},
+  {k:'高密度蛋白',tag:'偏低',v:'0.92',tone:'warn'},
+  {k:'低密度蛋白',tag:'正常',v:'2.28',tone:'good'},
+];
+var riskData = [
+  {name:'房颤',v:0},{name:'心力衰竭',v:0},{name:'冠心病',v:0},
+  {name:'心动过速',v:5.2},{name:'心动过缓',v:0.1},{name:'心梗',v:0.6},
+  {name:'脑卒中',v:1.8},{name:'糖尿病',v:3.4},
+];
+var organsList = ['肝','心','脾','肺','肾','胃','胆','膀胱','大肠','小肠','心包','三焦'];
+var stepData = [40,40,0,0,0,40,800,1200,1700,900,300,500,40,40,40,40,40,40,200,400,350,100,40,40,40];
+var hrTrend = [];
+for(var i=0;i<48;i++){hrTrend.push(72+Math.round(Math.sin(i/3)*14)+Math.round(Math.random()*8));}
+
 function openHealthProfile(btn) {
   var row = btn.closest('tr');
-  var nameEl = row.querySelector('.resident-name div[style*="font-weight"]') || row.querySelector('.resident-name div div:first-child');
-  var name = nameEl ? nameEl.textContent : '未知';
-  var idEl = row.querySelector('.resident-id');
-  var id = idEl ? idEl.textContent : '';
-  var age = row.querySelectorAll('td')[1] ? row.querySelectorAll('td')[1].textContent : '--';
-  var gender = row.querySelectorAll('td')[2] ? row.querySelectorAll('td')[2].textContent : '--';
-  
-  document.getElementById('hpModalName').textContent = name + ' 健康画像';
-  document.getElementById('hpModalInfo').textContent = id + ' · ' + gender + ' · ' + age + '岁';
-  
-  var scoreEl = document.getElementById('hpModalScore');
-  if (row.classList.contains('row-red')) {
-    scoreEl.className = 'hp-score-badge badge-red';
-    scoreEl.innerHTML = '<span class="dot"></span>高危';
-    document.getElementById('hpSummaryText').textContent = '该居民当前整体健康状态呈高危水平，多项体征指标异常，需立即进行医疗干预并密切监测。';
-  } else if (row.classList.contains('row-yellow')) {
-    scoreEl.className = 'hp-score-badge badge-yellow';
-    scoreEl.innerHTML = '<span class="dot"></span>亚健康';
-    document.getElementById('hpSummaryText').textContent = '该居民当前整体健康状态呈亚健康水平。睡眠时长不足、血脂指标异常需重点关注，建议改善作息习惯并定期复查相关指标。';
-  } else {
-    scoreEl.className = 'hp-score-badge badge-green';
-    scoreEl.innerHTML = '<span class="dot"></span>正常';
-    document.getElementById('hpSummaryText').textContent = '该居民当前整体健康状态良好，各项体征指标均在正常范围内，建议保持健康的生活方式并定期复查。';
-  }
-  
+  var name = row ? row.querySelector('.resident-name div div:first-child') : null;
+  document.getElementById('hpDashName').textContent = name ? name.textContent : '用****6';
+  document.getElementById('hpDashPhone').textContent = '139****9056';
   var vitalsHtml = '';
-  var vitals = [
-    {name:'心率', icon:'heart', value: Math.floor(Math.random()*30+60), unit:'次/分', status:'normal'},
-    {name:'血氧', icon:'droplets', value: (97+Math.floor(Math.random()*3)), unit:'%', status:'normal'},
-    {name:'呼吸率', icon:'wind', value: Math.floor(Math.random()*6+14), unit:'次/分', status:'normal'},
-    {name:'体温', icon:'thermometer', value:'--', unit:'°C', status:'normal'},
-    {name:'血压', icon:'activity', value: row.classList.contains('row-red')?'168/102':'128/83', unit:'mmHg', status: row.classList.contains('row-red')?'danger':'normal'},
-    {name:'血糖', icon:'flame', value: row.classList.contains('row-red')?'13.8':'5.0', unit:'mmol/L', status: row.classList.contains('row-red')?'danger':'normal'},
-    {name:'尿酸', icon:'zap', value:'423', unit:'μmol/L', status:'warning'},
-  ];
-  vitals.forEach(function(v) {
-    vitalsHtml += '<div class="hp-vital-row"><span class="hp-vital-name"><i data-lucide="'+v.icon+'" style="width:14px;height:14px;"></i>'+v.name+'</span><span class="hp-vital-value">'+v.value+'</span><span class="hp-vital-unit">'+v.unit+'</span><span class="hp-vital-status '+v.status+'">'+(v.status==='normal'?'正常':v.status==='warning'?'偏高':'异常')+'</span></div>';
+  vitalsData.forEach(function(v) {
+    vitalsHtml += '<div class="hp-vital-card"><div class="hp-vital-header"><span class="hp-vital-icon hp-tone-'+v.tone+'"><i data-lucide="'+v.icon+'" style="width:14px;height:14px;"></i> '+v.label+'</span><span class="hp-vital-ts">'+v.ts+'</span></div><div class="hp-vital-value hp-tone-'+v.tone+'">'+v.value+'<span class="hp-vital-unit">'+v.unit+'</span></div></div>';
   });
-  document.getElementById('hpVitalsList').innerHTML = vitalsHtml;
-  
-  var bodyTags = [
-    {text:'正常体重',cls:'tag-normal',top:'15%',left:'10%'},
-    {text:'正常心率',cls:'tag-normal',top:'25%',left:'82%'},
-    {text:'正常血氧',cls:'tag-normal',top:'45%',left:'10%'},
-    {text:'正常血糖',cls:'tag-normal',top:'60%',left:'82%'},
-    {text:'睡眠不足',cls:'tag-warning',top:'70%',left:'5%'},
-    {text:'异常血脂',cls:'tag-warning',top:'35%',left:'85%'},
-  ];
-  var bodyHtml = '';
-  bodyTags.forEach(function(t) {
-    bodyHtml += '<span class="hp-body-tag '+t.cls+'" style="top:'+t.top+';left:'+t.left+';">'+t.text+'</span>';
+  vitalsHtml += '<div class="hp-vital-card"><div style="margin-bottom:4px;font-size:11px;color:oklch(0.97 0.01 200 / 50%);">血脂四项</div>';
+  lipidsData.forEach(function(l) {
+    var c = l.tone==='good' ? 'oklch(0.7 0.16 155)' : 'oklch(0.78 0.16 75)';
+    vitalsHtml += '<div class="hp-lipid-row"><span class="hp-lipid-name">'+l.k+'</span><span class="hp-lipid-tag-val"><span style="color:'+c+'">'+l.tag+'</span><span class="hp-lipid-val">'+l.v+'</span></span></div>';
   });
-  document.getElementById('hpBodyOverlay').innerHTML = bodyHtml;
-  
-  var lipidsHtml = '';
-  var lipids = [
-    {name:'总胆固醇',value:'5.2',unit:'mmol/L'},
-    {name:'甘油三酯',value:'1.8',unit:'mmol/L'},
-    {name:'HDL',value:'1.3',unit:'mmol/L'},
-    {name:'LDL',value:'3.4',unit:'mmol/L'},
-  ];
-  lipids.forEach(function(l) {
-    lipidsHtml += '<div class="hp-lipid-item"><span class="hp-lipid-name">'+l.name+'</span><span class="hp-lipid-value">'+l.value+'</span><span class="hp-lipid-unit">'+l.unit+'</span></div>';
+  vitalsHtml += '</div>';
+  document.getElementById('hpDashVitals').innerHTML = vitalsHtml;
+  var tagsHtml = '';
+  bodyTagsData.forEach(function(t) {
+    tagsHtml += '<div class="hp-body-tag tone-'+t.tone+'" style="top:'+t.top+'%;'+(t.side==='L'?'left':'right')+':6%;"><span class="hp-tag-dot"></span>'+t.label+'</div>';
   });
-  document.getElementById('hpLipidsList').innerHTML = lipidsHtml;
-  
-  var barsHtml = '';
-  var steps = [200,800,1500,3200,1800,400,100,50];
-  var maxSteps = 3200;
-  steps.forEach(function(s) {
-    var h = Math.max(4, (s/maxSteps)*56);
-    barsHtml += '<div class="hp-exercise-bar'+(s>500?' active':'')+'" style="height:'+h+'px;"></div>';
+  document.getElementById('hpDashBodyTags').innerHTML = tagsHtml;
+  var svg = document.querySelector('.hp-body-svg');
+  if(svg) {
+    for(var d=0;d<14;d++){
+      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx','100'); dot.setAttribute('cy', 80+d*22); dot.setAttribute('r','1.4');
+      dot.setAttribute('fill','oklch(0.78 0.18 195)'); dot.setAttribute('opacity','0.6');
+      svg.querySelector('g:last-child').appendChild(dot);
+    }
+  }
+  document.getElementById('hpDashRating').textContent = '亚健康';
+  document.getElementById('hpDashRating').className = 'hp-rating-value rating-warn';
+  var starsHtml = '';
+  for(var s=0;s<5;s++){
+    starsHtml += '<span class="hp-star"><svg viewBox="0 0 24 24" fill="'+(s===0?'currentColor':'none')+'" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"/></svg></span>';
+  }
+  document.getElementById('hpDashStars').innerHTML = starsHtml;
+  document.getElementById('hpDashStars').className = 'hp-rating-stars rating-warn';
+  var sleepHtml = '';
+  var sleepSegs = [{deep:60,light:40,wake:4},{deep:75,light:30,wake:4},{deep:65,light:35,wake:4},{deep:50,light:35,wake:15},{deep:80,light:15,wake:4},{deep:55,light:40,wake:4},{deep:70,light:25,wake:4},{deep:60,light:35,wake:4}];
+  sleepSegs.forEach(function(seg){
+    var total = seg.deep+seg.light+seg.wake;
+    sleepHtml += '<div style="display:flex;height:100%;flex:1;gap:1px;">';
+    sleepHtml += '<div style="height:100%;flex:'+seg.deep/total+';background:#6366f1;border-radius:2px;"></div>';
+    sleepHtml += '<div style="height:100%;flex:'+seg.light/total+';background:#38bdf8;border-radius:2px;"></div>';
+    sleepHtml += '<div style="height:100%;flex:'+seg.wake/total+';background:#f59e0b;border-radius:2px;"></div>';
+    sleepHtml += '</div>';
   });
-  document.getElementById('hpExerciseBars').innerHTML = barsHtml;
-  
+  document.getElementById('hpDashSleepChart').innerHTML = sleepHtml;
+  var exHtml = '';
+  var maxStep = 2000;
+  stepData.forEach(function(v){
+    var h = Math.max(2, (v/maxStep)*152);
+    exHtml += '<div class="hp-exercise-bar'+(v>200?' active':'')+'" style="height:'+h+'px;"></div>';
+  });
+  document.getElementById('hpDashExerciseChart').innerHTML = exHtml;
+  var hrHtml = '<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%;height:100%;">';
+  hrHtml += '<defs><linearGradient id="hrGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.5"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0"/></linearGradient></defs>';
+  for(var g=0;g<5;g++){hrHtml+='<line x1="0" y1="'+(g*25)+'" x2="100" y2="'+(g*25)+'" stroke="oklch(1 0 0 / 10%)" stroke-width="0.3" stroke-dasharray="1 1"/>';}
+  var pts = []; var areaPts = ['0,100'];
+  hrTrend.forEach(function(v,i){
+    var x = (i/(hrTrend.length-1))*100; var y = 100 - ((v-40)/100)*100;
+    y = Math.max(0,Math.min(100,y)); pts.push(x+','+y); areaPts.push(x+','+y);
+  });
+  areaPts.push('100,100');
+  hrHtml += '<polygon points="'+areaPts.join(' ')+'" fill="url(#hrGrad)"/>';
+  hrHtml += '<polyline points="'+pts.join(' ')+'" fill="none" stroke="#6366f1" stroke-width="0.8" vector-effect="non-scaling-stroke"/>';
+  hrHtml += '</svg>';
+  document.getElementById('hpDashHrChart').innerHTML = hrHtml;
+  var riskHtml = '';
+  riskData.forEach(function(r){
+    var tone = r.v>=5?'oklch(0.62 0.23 22)':r.v>=1?'oklch(0.78 0.16 75)':'oklch(0.7 0.16 155)';
+    var w = Math.max(r.v*6, r.v>0?4:0);
+    riskHtml += '<div class="hp-risk-item"><span class="hp-risk-name">'+r.name+'</span><div class="hp-risk-bar"><div class="hp-risk-fill" style="width:'+w+'%;background:'+tone+';"></div></div><span class="hp-risk-val" style="color:'+tone+';">'+r.v+'%</span></div>';
+  });
+  document.getElementById('hpDashRiskList').innerHTML = riskHtml;
+  var organHtml = '';
+  organsList.forEach(function(o,i){
+    var a = (i/organsList.length)*Math.PI*2 - Math.PI/2;
+    var r = 92;
+    var x = 50 + (Math.cos(a)*r)/2;
+    var y = 50 + (Math.sin(a)*r)/2;
+    organHtml += '<div class="hp-organ-dot" style="left:'+x+'%;top:'+y+'%;">'+o+'</div>';
+  });
+  document.getElementById('hpDashOrganDots').innerHTML = organHtml;
+  updateHpClock();
+  window._hpClockInterval = setInterval(updateHpClock, 1000);
   document.getElementById('healthProfileModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  setTimeout(function(){ try{if(typeof lucide!=='undefined')lucide.createIcons();}catch(e){} },100);
+  setTimeout(function(){try{if(typeof lucide!=='undefined')lucide.createIcons();}catch(e){}},100);
 }
 
 function closeHealthProfile() {
   document.getElementById('healthProfileModal').classList.remove('open');
   document.body.style.overflow = '';
+  if(window._hpClockInterval) clearInterval(window._hpClockInterval);
 }
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeHealthProfile();
-});
+function updateHpClock() {
+  var now = new Date();
+  var stamp = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+  var el = document.getElementById('hpDashClock');
+  if(el) el.textContent = stamp;
+}
 
-document.querySelector('.hp-modal-overlay').addEventListener('click', closeHealthProfile);
-</script>
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeHealthProfile(); });
+</script></script>
 
 <!-- === HMP CRUD Modals === -->
 <style scoped>.hmp-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:oklch(0 0 0 / 50%);backdrop-filter:blur(4px);z-index:1000;display:none;animation:hmf .15s ease}
