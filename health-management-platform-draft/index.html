@@ -23409,7 +23409,98 @@ lucide.createIcons();
             <span class="hp-card-title">生理数字人模型</span>
           </div>
           <div class="hp-body-container">
-            <img src="https://cdn.jsdelivr.net/gh/nicehash/TraeAssets@main/body-outline-blue.svg" alt="身体模型" class="hp-body-img" onerror="this.style.display='none'">
+            <svg viewBox="0 0 200 380" width="200" height="380" xmlns="http://www.w3.org/2000/svg" class="hp-body-svg">
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="organGlow">
+                  <feGaussianBlur stdDeviation="2" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#00d4ff" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Platform rings -->
+              <ellipse cx="100" cy="365" rx="50" ry="8" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+              <ellipse cx="100" cy="365" rx="35" ry="5" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
+              <!-- Vertical center line -->
+              <line x1="100" y1="30" x2="100" y2="360" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <!-- Head -->
+              <circle cx="100" cy="32" r="18" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+              <line x1="82" y1="32" x2="118" y2="32" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+              <line x1="100" y1="14" x2="100" y2="50" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+              <ellipse cx="100" cy="32" rx="18" ry="8" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <!-- Neck -->
+              <line x1="93" y1="50" x2="93" y2="62" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
+              <line x1="107" y1="50" x2="107" y2="62" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
+              <!-- Shoulders -->
+              <path d="M 60 70 Q 75 62 93 65" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+              <path d="M 107 65 Q 125 62 140 70" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+              <!-- Torso -->
+              <path d="M 60 70 L 65 160 L 75 170 L 85 175 L 100 178 L 115 175 L 125 170 L 135 160 L 140 70" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.6" filter="url(#glow)"/>
+              <!-- Torso mesh lines -->
+              <path d="M 68 90 L 132 90" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <path d="M 72 110 L 128 110" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <path d="M 75 130 L 125 130" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <path d="M 80 150 L 120 150" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <path d="M 100 65 L 100 175" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.1"/>
+              <path d="M 80 70 L 85 175" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.1"/>
+              <path d="M 120 70 L 115 175" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.1"/>
+              <!-- Rib cage -->
+              <path d="M 75 85 Q 88 80 100 85 Q 112 80 125 85" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+              <path d="M 73 95 Q 87 90 100 95 Q 113 90 127 95" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.18"/>
+              <path d="M 72 105 Q 87 100 100 105 Q 113 100 128 105" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+              <!-- Arms - Left -->
+              <path d="M 60 70 L 48 120 L 42 170 L 38 210 L 40 240 L 35 260" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+              <!-- Arms - Right -->
+              <path d="M 140 70 L 152 120 L 158 170 L 162 210 L 160 240 L 165 260" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+              <!-- Arm mesh -->
+              <line x1="55" y1="95" x2="50" y2="95" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="50" y1="145" x2="45" y2="145" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="145" y1="95" x2="150" y2="95" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="150" y1="145" x2="155" y2="145" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <!-- Hip -->
+              <path d="M 75 170 L 80 195 L 95 205" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5"/>
+              <path d="M 125 170 L 120 195 L 105 205" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5"/>
+              <!-- Legs - Left -->
+              <path d="M 95 205 L 88 260 L 85 310 L 88 350 L 92 360" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+              <!-- Legs - Right -->
+              <path d="M 105 205 L 112 260 L 115 310 L 112 350 L 108 360" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+              <!-- Leg mesh -->
+              <line x1="93" y1="230" x2="89" y2="230" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="90" y1="280" x2="86" y2="280" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="107" y1="230" x2="111" y2="230" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <line x1="110" y1="280" x2="114" y2="280" stroke="#00d4ff" stroke-width="0.3" opacity="0.15"/>
+              <!-- Heart -->
+              <path d="M 95 95 Q 90 88 85 92 Q 80 96 85 102 L 95 112 L 105 102 Q 110 96 105 92 Q 100 88 95 95 Z" fill="#ff6b8a" opacity="0.7" filter="url(#organGlow)"/>
+              <!-- Liver -->
+              <ellipse cx="115" cy="118" rx="15" ry="10" fill="#c97856" opacity="0.5" filter="url(#organGlow)" transform="rotate(-10 115 118)"/>
+              <!-- Kidneys -->
+              <ellipse cx="83" cy="135" rx="6" ry="9" fill="#e8a0b4" opacity="0.5" filter="url(#organGlow)"/>
+              <ellipse cx="117" cy="135" rx="6" ry="9" fill="#e8a0b4" opacity="0.5" filter="url(#organGlow)"/>
+              <!-- Intestines -->
+              <path d="M 90 155 Q 95 150 100 155 Q 105 160 100 165 Q 95 168 92 163 Q 88 158 90 155" fill="none" stroke="#d4a0b0" stroke-width="2" opacity="0.4" filter="url(#organGlow)"/>
+              <path d="M 100 155 Q 108 152 112 158 Q 115 164 110 168" fill="none" stroke="#d4a0b0" stroke-width="2" opacity="0.3"/>
+              <!-- Joint dots -->
+              <circle cx="100" cy="50" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="60" cy="70" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="140" cy="70" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="95" cy="205" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="105" cy="205" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="92" cy="360" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="108" cy="360" r="2" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+              <circle cx="48" cy="170" r="1.5" fill="#00d4ff" opacity="0.6" filter="url(#glow)"/>
+              <circle cx="152" cy="170" r="1.5" fill="#00d4ff" opacity="0.6" filter="url(#glow)"/>
+              <!-- Scanning effect line -->
+              <rect x="55" y="100" width="90" height="3" fill="url(#scanGrad)" opacity="0.6">
+                <animateTransform attributeName="transform" type="translate" values="0 0; 0 150; 0 0" dur="4s" repeatCount="indefinite"/>
+              </rect>
+            </svg>
             <div class="hp-body-overlay" id="hpBodyOverlay"></div>
           </div>
           <div class="hp-body-summary">
@@ -23541,8 +23632,8 @@ lucide.createIcons();
 .hp-lipid-unit { font-size:10px; color:oklch(0.97 0.01 200 / 35%); }
 
 .hp-card-body { display:flex; flex-direction:column; height:100%; }
-.hp-body-container { flex:1; position:relative; display:flex; align-items:center; justify-content:center; min-height:300px; }
-.hp-body-img { height:280px; opacity:0.6; }
+.hp-body-container { flex:1; position:relative; display:flex; align-items:center; justify-content:center; min-height:300px; background: radial-gradient(ellipse at center, oklch(0.78 0.18 195 / 8%) 0%, transparent 70%); }
+.hp-body-svg { height:280px; opacity:0.9; }
 .hp-body-overlay { position:absolute; top:0; left:0; right:0; bottom:0; }
 .hp-body-tag { position:absolute; font-size:10px; padding:3px 10px; border-radius:9999px; font-weight:500; white-space:nowrap; }
 .hp-body-tag.tag-normal { background:oklch(0.7 0.16 155 / 15%); color:oklch(0.7 0.16 155); border:1px solid oklch(0.7 0.16 155 / 25%); }
