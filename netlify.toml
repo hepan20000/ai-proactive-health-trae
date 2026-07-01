@@ -1,9 +1,21 @@
 # Netlify 部署配置
 [build]
-  publish = "health-management-platform-draft"
+  publish = "."
 
-# 所有路径都指向 app.html（SPA 模式）
+# 根路径指向主平台
 [[redirects]]
-  from = "/*"
-  to = "/app.html"
+  from = "/"
+  to = "/health-management-platform-draft/index.html"
+  status = 200
+
+# 主平台内页面路由
+[[redirects]]
+  from = "/health-management-platform-draft/*"
+  to = "/health-management-platform-draft/index.html"
+  status = 200
+
+# 健康画像页面
+[[redirects]]
+  from = "/health-profile"
+  to = "/health-profile-design/pages/health-profile.html"
   status = 200
