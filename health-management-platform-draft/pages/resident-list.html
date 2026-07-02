@@ -891,79 +891,8 @@
             <!-- Outer glow layers -->
             <div class="hp-body-glow hp-body-glow-outer"></div>
             <div class="hp-body-glow hp-body-glow-inner"></div>
-            <!-- Main body -->
-            <svg viewBox="0 0 200 460" class="hp-body-svg-enhanced">
-              <defs>
-                <linearGradient id="bodyGrad" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="1"/>
-                  <stop offset="40%" stop-color="#0099ff" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#0044aa" stop-opacity="0.3"/>
-                </linearGradient>
-                <linearGradient id="bodyFill" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.12"/>
-                  <stop offset="50%" stop-color="#0066ff" stop-opacity="0.06"/>
-                  <stop offset="100%" stop-color="#001133" stop-opacity="0.02"/>
-                </linearGradient>
-                <radialGradient id="heartGlow" cx="0.48" cy="0.22" r="0.08">
-                  <stop offset="0%" stop-color="#ff6b8a" stop-opacity="0.4"/>
-                  <stop offset="100%" stop-color="#ff6b8a" stop-opacity="0"/>
-                </radialGradient>
-                <filter id="bodyBlur"><feGaussianBlur stdDeviation="4"/></filter>
-                <filter id="softGlow"><feGaussianBlur stdDeviation="8"/></filter>
-                <filter id="wideGlow"><feGaussianBlur stdDeviation="20"/></filter>
-              </defs>
-              <!-- Wide glow background -->
-              <g filter="url(#wideGlow)" opacity="0.3">
-                <circle cx="100" cy="40" r="24" fill="#00d4ff"/>
-                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="#00d4ff"/>
-              </g>
-              <!-- Soft glow layer -->
-              <g filter="url(#softGlow)" opacity="0.5">
-                <circle cx="100" cy="40" r="24" fill="#00aaff"/>
-                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="#00aaff"/>
-              </g>
-              <!-- Body fill (semi-transparent gradient) -->
-              <circle cx="100" cy="40" r="24" fill="url(#bodyFill)"/>
-              <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="url(#bodyFill)"/>
-              <!-- Body outline (crisp) -->
-              <g fill="none" stroke="url(#bodyGrad)" stroke-width="1.5">
-                <circle cx="100" cy="40" r="24"/>
-                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/>
-                <path d="M62 130 L28 200 L36 260 L46 250 L46 200"/>
-                <path d="M138 130 L172 200 L164 260 L154 250 L154 200"/>
-              </g>
-              <!-- Arms fill -->
-              <path d="M62 130 L28 200 L36 260 L46 250 L46 200 L62 130 Z" fill="url(#bodyFill)" opacity="0.5"/>
-              <path d="M138 130 L172 200 L164 260 L154 250 L154 200 L138 130 Z" fill="url(#bodyFill)" opacity="0.5"/>
-              <!-- Heart glow spot -->
-              <ellipse cx="96" cy="105" rx="15" ry="12" fill="url(#heartGlow)"/>
-              <!-- Spine dots -->
-              <g fill="#00d4ff" opacity="0.5">
-                <circle cx="100" cy="80" r="1.5"/>
-                <circle cx="100" cy="102" r="1.5"/>
-                <circle cx="100" cy="124" r="1.5"/>
-                <circle cx="100" cy="146" r="1.5"/>
-                <circle cx="100" cy="168" r="1.5"/>
-                <circle cx="100" cy="190" r="1.5"/>
-                <circle cx="100" cy="212" r="1.5"/>
-                <circle cx="100" cy="234" r="1.5"/>
-                <circle cx="100" cy="256" r="1.5"/>
-                <circle cx="100" cy="278" r="1.5"/>
-                <circle cx="100" cy="300" r="1.5"/>
-                <circle cx="100" cy="322" r="1.5"/>
-                <circle cx="100" cy="344" r="1.5"/>
-                <circle cx="100" cy="366" r="1.5"/>
-              </g>
-              <!-- Energy lines from spine -->
-              <g stroke="#00d4ff" stroke-width="0.3" opacity="0.15">
-                <line x1="100" y1="80" x2="75" y2="68"/>
-                <line x1="100" y1="80" x2="125" y2="68"/>
-                <line x1="100" y1="130" x2="62" y2="130"/>
-                <line x1="100" y1="130" x2="138" y2="130"/>
-                <line x1="100" y1="220" x2="72" y2="220"/>
-                <line x1="100" y1="220" x2="128" y2="220"/>
-              </g>
-            </svg>
+            <!-- Body image -->
+            <img src="../assets/body-human.png" alt="生理数字人" class="hp-body-img" />
             <!-- Floating particles -->
             <div class="hp-particles" id="hpDashParticles"></div>
           </div>
@@ -1806,6 +1735,7 @@
 .hp-body-area { position:relative; height:520px; margin-top:16px; }
 .hp-body-silhouette { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
 .hp-body-svg-enhanced { height:100%; max-height:520px; }
+.hp-body-img { height:100%; max-height:520px; object-fit:contain; filter:drop-shadow(0 0 20px oklch(0.78 0.18 195 / 30%)) drop-shadow(0 0 60px oklch(0.78 0.18 195 / 15%)); opacity:0.92; }
 .hp-body-glow { position:absolute; pointer-events:none; border-radius:50%; }
 .hp-body-glow-outer { width:300px; height:500px; left:50%; top:50%; transform:translate(-50%,-50%); background:radial-gradient(ellipse, oklch(0.78 0.18 195 / 15%) 0%, oklch(0.78 0.18 195 / 5%) 40%, transparent 70%); filter:blur(30px); }
 .hp-body-glow-inner { width:150px; height:400px; left:50%; top:50%; transform:translate(-50%,-50%); background:radial-gradient(ellipse, oklch(0.78 0.18 195 / 25%) 0%, oklch(0.78 0.18 195 / 8%) 40%, transparent 70%); filter:blur(15px); }
