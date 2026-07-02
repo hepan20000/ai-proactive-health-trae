@@ -5283,6 +5283,12 @@ tbody td {
       font-size: var(--hmp-font-size-caption);
       color: var(--hmp-color-text-secondary);
     }
+    .doctor-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
+    .doctor-tag { display:inline-block; padding:1px 8px; border-radius:9999px; font-size:10px; font-weight:500; border:1px solid; }
+    .doctor-tag.blue { border-color:oklch(0.78 0.18 195 / 30%); color:oklch(0.78 0.18 195); background:oklch(0.78 0.18 195 / 8%); }
+    .doctor-tag.green { border-color:oklch(0.7 0.16 155 / 30%); color:oklch(0.7 0.16 155); background:oklch(0.7 0.16 155 / 8%); }
+    .doctor-tag.orange { border-color:oklch(0.78 0.16 75 / 30%); color:oklch(0.78 0.16 75); background:oklch(0.78 0.16 75 / 8%); }
+    .doctor-tag.purple { border-color:oklch(0.65 0.2 290 / 30%); color:oklch(0.65 0.2 290); background:oklch(0.65 0.2 290 / 8%); }
 
     /* --- Status Badge --- */
     .status-badge {
@@ -15233,6 +15239,11 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">张伟良</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260601</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag blue">心脑血管</span>
+                    <span class="doctor-tag blue">高血压管理</span>
+                    <span class="doctor-tag green">运动康复</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -15262,6 +15273,11 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">李梦瑶</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260602</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag orange">糖尿病管理</span>
+                    <span class="doctor-tag purple">情绪压力</span>
+                    <span class="doctor-tag blue">睡眠障碍</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -15291,6 +15307,12 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">王建华</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260603</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag green">经方调理</span>
+                    <span class="doctor-tag green">体质调理</span>
+                    <span class="doctor-tag purple">失眠多梦</span>
+                    <span class="doctor-tag orange">高血压管理</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -15320,6 +15342,11 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">陈立峰</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260520</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag blue">心脑血管</span>
+                    <span class="doctor-tag purple">睡眠障碍</span>
+                    <span class="doctor-tag orange">失眠多梦</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -15378,6 +15405,10 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">黄国涛</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260510</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag blue">睡眠障碍</span>
+                    <span class="doctor-tag green">运动康复</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -15436,6 +15467,11 @@ tbody td {
                 <div class="doctor-info">
                   <span class="doctor-info-name">孙彦明</span>
                   <span style="font-size:var(--hmp-font-size-caption);color:var(--hmp-color-text-tertiary);font-family:var(--hmp-font-family-mono);font-feature-settings:var(--hmp-font-features);">ID: D-20260608</span>
+                  <div class="doctor-tags">
+                    <span class="doctor-tag purple">情绪压力</span>
+                    <span class="doctor-tag orange">糖尿病管理</span>
+                    <span class="doctor-tag green">经方调理</span>
+                  </div>
                 </div>
               </div>
             </td>
@@ -23374,9 +23410,54 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeHea
 </style>
 <div id="m-res-del" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">删除确认</span><button class="hmp-modal-close" onclick="closeDelRes()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定删除该居民档案吗？<br><span class="warn">删除后不可恢复。</span></p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDelRes()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="delRes()">确认删除</button></div></div></div>
 <div id="m-followup" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增随访</span><button class="hmp-modal-close" onclick="closeFU()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">随访类型</label><select class="hmp-modal-select"><option>电话</option><option>上门</option><option>视频</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">下次随访日期</label><input type="date" class="hmp-modal-input"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">随访内容</label><textarea class="hmp-modal-textarea" placeholder="请输入随访内容..." rows="4"></textarea></div><div class="hmp-modal-field"><label class="hmp-modal-label">随访结果</label><select class="hmp-modal-select"><option>正常</option><option>异常</option><option>需关注</option></select></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeFU()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveFU()">保存</button></div></div></div>
-<div id="m-doc-detail" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">医生详情</span><button class="hmp-modal-close" onclick="closeDocDetail()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">医生姓名</span><span class="hmp-detail-value">张伟良</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">科室</span><span class="hmp-detail-value">心血管内科</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">职称</span><span class="hmp-detail-value">主任医师</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">执业证号</span><span class="hmp-detail-value">YS2018012345</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">所属医院</span><span class="hmp-detail-value">市第一人民医院</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">联系电话</span><span class="hmp-detail-value">138****6789</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">申请来源</span><span class="hmp-detail-value">自注册</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">提交时间</span><span class="hmp-detail-value">2026-06-28 14:32</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">个人简介</span><span class="hmp-detail-value">从事心血管内科临床工作20年。</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDocDetail()">关闭</button></div></div></div>
+<div id="m-doc-detail" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">医生详情</span><button class="hmp-modal-close" onclick="closeDocDetail()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">医生姓名</span><span class="hmp-detail-value">张伟良</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">科室</span><span class="hmp-detail-value">心血管内科</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">职称</span><span class="hmp-detail-value">主任医师</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">执业证号</span><span class="hmp-detail-value">YS2018012345</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">所属医院</span><span class="hmp-detail-value">市第一人民医院</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">联系电话</span><span class="hmp-detail-value">138****6789</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">申请来源</span><span class="hmp-detail-value">自注册</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">提交时间</span><span class="hmp-detail-value">2026-06-28 14:32</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">个人简介</span><span class="hmp-detail-value">从事心血管内科临床工作20年。</span></div></div>
+<div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--hmp-color-border);">
+  <div style="font-size:13px; font-weight:600; color:var(--hmp-color-text-primary); margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+    <i data-lucide="award" style="width:14px;height:14px;color:var(--hmp-color-primary);"></i>
+    执业证书
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div style="border:1px solid var(--hmp-color-border); border-radius:8px; padding:8px; text-align:center; background:var(--hmp-bg-secondary);">
+      <div style="font-size:11px; color:var(--hmp-color-text-tertiary); margin-bottom:4px;">医师执业证书</div>
+      <div class="cert-preview" onclick="viewCert('practicing')" style="cursor:pointer; height:120px; border-radius:4px; background:linear-gradient(135deg, oklch(0.95 0.02 250) 0%, oklch(0.92 0.03 250) 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px;">
+        <i data-lucide="file-image" style="width:24px;height:24px;color:var(--hmp-color-text-tertiary);"></i>
+        <span style="font-size:10px; color:var(--hmp-color-text-tertiary);">点击查看</span>
+      </div>
+    </div>
+    <div style="border:1px solid var(--hmp-color-border); border-radius:8px; padding:8px; text-align:center; background:var(--hmp-bg-secondary);">
+      <div style="font-size:11px; color:var(--hmp-color-text-tertiary); margin-bottom:4px;">专业技术资格证书</div>
+      <div class="cert-preview" onclick="viewCert('technical')" style="cursor:pointer; height:120px; border-radius:4px; background:linear-gradient(135deg, oklch(0.95 0.02 250) 0%, oklch(0.92 0.03 250) 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px;">
+        <i data-lucide="file-image" style="width:24px;height:24px;color:var(--hmp-color-text-tertiary);"></i>
+        <span style="font-size:10px; color:var(--hmp-color-text-tertiary);">点击查看</span>
+      </div>
+    </div>
+  </div>
+</div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDocDetail()">关闭</button></div></div></div>
 <div id="m-approve" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">审批确认</span><button class="hmp-modal-close" onclick="closeApprove()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定通过该医生的入驻申请吗？</p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeApprove()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="doApprove()">确认通过</button></div></div></div>
 <div id="m-reject" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">驳回确认</span><button class="hmp-modal-close" onclick="closeReject()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定驳回该医生的入驻申请吗？<br><span class="warn">驳回后医生可重新提交申请。</span></p><div class="hmp-modal-field" style="margin-top:12px"><label class="hmp-modal-label">驳回原因</label><textarea class="hmp-modal-textarea" placeholder="请输入驳回原因..." rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeReject()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="doReject()">确认驳回</button></div></div></div>
+<div id="m-cert-viewer" class="hmp-modal-overlay">
+  <div class="hmp-modal-container" style="width:640px;">
+    <div class="hmp-modal-header">
+      <span class="hmp-modal-title" id="certViewerTitle">执业证书</span>
+      <button class="hmp-modal-close" onclick="closeCertViewer()">&#10005;</button>
+    </div>
+    <div class="hmp-modal-body" style="text-align:center;">
+      <div id="certViewerContent" style="width:100%; aspect-ratio:297/210; border-radius:8px; background:linear-gradient(135deg, oklch(0.97 0.01 250) 0%, oklch(0.94 0.02 250) 100%); border:1px solid var(--hmp-color-border); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; color:#334155;">
+        <i data-lucide="award" style="width:48px;height:48px;color:#94a3b8;"></i>
+        <span style="font-size:14px;font-weight:500;">中华人民共和国医师执业证书</span>
+        <span style="font-size:12px;color:#64748b;">姓名：张伟良 | 执业类别：临床 | 执业范围：心血管内科</span>
+        <span style="font-size:12px;color:#64748b;">证书编号：110108XXXXXXXX | 发证日期：2024-03-15</span>
+        <span style="font-size:11px;color:#94a3b8;">（演示数据，正式环境将显示真实证书扫描件）</span>
+      </div>
+    </div>
+    <div class="hmp-modal-footer">
+      <button class="hmp-btn hmp-btn-ghost" onclick="closeCertViewer()">关闭</button>
+      <button class="hmp-btn hmp-btn-primary" onclick="hmpToast('证书已下载')">
+        <i data-lucide="download" style="width:14px;height:14px;"></i> 下载证书
+      </button>
+    </div>
+  </div>
+</div>
 <div id="m-doc-edit" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑医生信息</span><button class="hmp-modal-close" onclick="closeEditDoc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" value="张伟"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" value="138****6789"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">科室</label><select class="hmp-modal-select"><option>心血管内科</option><option>内分泌科</option><option selected>老年病科</option><option>全科</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">职称</label><select class="hmp-modal-select"><option>住院医师</option><option selected>主治医师</option><option>副主任医师</option><option>主任医师</option></select></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">从医年限</label><input type="number" class="hmp-modal-input" value="12"></div><div class="hmp-modal-field"><label class="hmp-modal-label">个人简介</label><textarea class="hmp-modal-textarea" rows="3">从事老年病科临床工作12年。</textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditDoc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveDocProfile()">保存</button></div></div></div>
 <div id="m-doc-add" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增医生</span><button class="hmp-modal-close" onclick="closeAddDoc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入医生姓名"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" placeholder="请输入手机号"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">科室</label><select class="hmp-modal-select"><option>心血管内科</option><option>内分泌科</option><option>神经内科</option><option>全科</option><option>中医科</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">职称</label><select class="hmp-modal-select"><option>住院医师</option><option>主治医师</option><option>副主任医师</option><option>主任医师</option></select></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">执业证号</label><input type="text" class="hmp-modal-input" placeholder="请输入执业证号"></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeAddDoc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveNewDoc()">保存</button></div></div></div>
 <div id="m-pat-detail" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">病人详情</span><button class="hmp-modal-close" onclick="closePatDetail()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">姓名</span><span class="hmp-detail-value">张建国</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">年龄</span><span class="hmp-detail-value">72岁</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">性别</span><span class="hmp-detail-value">男</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">健康评级</span><span class="hmp-detail-value" style="color:oklch(0.62 0.23 22)">高危</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">联系电话</span><span class="hmp-detail-value">138****6789</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">主要疾病</span><span class="hmp-detail-value">高血压、冠心病</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">最近血压</span><span class="hmp-detail-value" style="color:oklch(0.62 0.23 22)">168/102 mmHg</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">当前方案</span><span class="hmp-detail-value">高血压综合管理方案</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closePatDetail()">关闭</button><button class="hmp-btn hmp-btn-primary" onclick="closePatDetail();openEditPat()">编辑信息</button></div></div></div>
@@ -23429,6 +23510,8 @@ function doApprove(){hmpHide('m-approve');hmpToast('审批已通过')}
 function openReject(){hmpShow('m-reject')}
 function closeReject(){hmpHide('m-reject')}
 function doReject(){hmpHide('m-reject');hmpToast('已驳回申请','warning')}
+function viewCert(type){var title=type==='practicing'?'医师执业证书':'专业技术资格证书';document.getElementById('certViewerTitle').textContent=title;hmpShow('m-cert-viewer');setTimeout(function(){try{lucide.createIcons();}catch(e){}},100)}
+function closeCertViewer(){hmpHide('m-cert-viewer')}
 </script>
 <script>function hmpShow(id){var e=document.getElementById(id);if(e)e.classList.add('active')}
 function hmpHide(id){var e=document.getElementById(id);if(e)e.classList.remove('active')}
