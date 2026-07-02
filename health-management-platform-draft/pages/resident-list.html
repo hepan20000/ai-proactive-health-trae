@@ -864,7 +864,9 @@
     </div>
     <h1 class="hp-dash-title">居 民 健 康 画 像</h1>
     <div class="hp-header-right">
-      <button onclick="closeHealthProfile()" class="hp-header-btn"><i data-lucide="power" style="width:18px;height:18px;"></i></button>
+      <button onclick="closeHealthProfile()" class="hp-close-btn" title="关闭">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </header>
   <div class="hp-dash-grid">
@@ -885,7 +887,86 @@
       <div class="hp-panel hp-body-panel">
         <div class="hp-panel-title"><div><h3><span class="hp-title-bar"></span>生理数字人模型</h3><p class="hp-panel-sub">综合健康标签 · 实时映射</p></div></div>
         <div class="hp-body-area">
-          <div class="hp-body-silhouette"><svg viewBox="0 0 200 460" class="hp-body-svg"><defs><linearGradient id="bodyGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.9"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.2"/></linearGradient><filter id="bodyGlow"><feGaussianBlur stdDeviation="3"/></filter></defs><g fill="none" stroke="url(#bodyGrad)" stroke-width="1.2" filter="url(#bodyGlow)"><circle cx="100" cy="40" r="24"/><path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/><path d="M62 130 L28 200 L36 260 L46 250 L46 200"/><path d="M138 130 L172 200 L164 260 L154 250 L154 200"/></g><g fill="url(#bodyGrad)" opacity="0.15"><path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/><circle cx="100" cy="40" r="24"/></g></svg></div>
+          <div class="hp-body-silhouette">
+            <!-- Outer glow layers -->
+            <div class="hp-body-glow hp-body-glow-outer"></div>
+            <div class="hp-body-glow hp-body-glow-inner"></div>
+            <!-- Main body -->
+            <svg viewBox="0 0 200 460" class="hp-body-svg-enhanced">
+              <defs>
+                <linearGradient id="bodyGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="1"/>
+                  <stop offset="40%" stop-color="#0099ff" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#0044aa" stop-opacity="0.3"/>
+                </linearGradient>
+                <linearGradient id="bodyFill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.12"/>
+                  <stop offset="50%" stop-color="#0066ff" stop-opacity="0.06"/>
+                  <stop offset="100%" stop-color="#001133" stop-opacity="0.02"/>
+                </linearGradient>
+                <radialGradient id="heartGlow" cx="0.48" cy="0.22" r="0.08">
+                  <stop offset="0%" stop-color="#ff6b8a" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#ff6b8a" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="bodyBlur"><feGaussianBlur stdDeviation="4"/></filter>
+                <filter id="softGlow"><feGaussianBlur stdDeviation="8"/></filter>
+                <filter id="wideGlow"><feGaussianBlur stdDeviation="20"/></filter>
+              </defs>
+              <!-- Wide glow background -->
+              <g filter="url(#wideGlow)" opacity="0.3">
+                <circle cx="100" cy="40" r="24" fill="#00d4ff"/>
+                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="#00d4ff"/>
+              </g>
+              <!-- Soft glow layer -->
+              <g filter="url(#softGlow)" opacity="0.5">
+                <circle cx="100" cy="40" r="24" fill="#00aaff"/>
+                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="#00aaff"/>
+              </g>
+              <!-- Body fill (semi-transparent gradient) -->
+              <circle cx="100" cy="40" r="24" fill="url(#bodyFill)"/>
+              <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z" fill="url(#bodyFill)"/>
+              <!-- Body outline (crisp) -->
+              <g fill="none" stroke="url(#bodyGrad)" stroke-width="1.5">
+                <circle cx="100" cy="40" r="24"/>
+                <path d="M76 68 L124 68 L138 130 L128 220 L120 320 L128 420 L108 428 L100 340 L92 428 L72 420 L80 320 L72 220 L62 130 Z"/>
+                <path d="M62 130 L28 200 L36 260 L46 250 L46 200"/>
+                <path d="M138 130 L172 200 L164 260 L154 250 L154 200"/>
+              </g>
+              <!-- Arms fill -->
+              <path d="M62 130 L28 200 L36 260 L46 250 L46 200 L62 130 Z" fill="url(#bodyFill)" opacity="0.5"/>
+              <path d="M138 130 L172 200 L164 260 L154 250 L154 200 L138 130 Z" fill="url(#bodyFill)" opacity="0.5"/>
+              <!-- Heart glow spot -->
+              <ellipse cx="96" cy="105" rx="15" ry="12" fill="url(#heartGlow)"/>
+              <!-- Spine dots -->
+              <g fill="#00d4ff" opacity="0.5">
+                <circle cx="100" cy="80" r="1.5"/>
+                <circle cx="100" cy="102" r="1.5"/>
+                <circle cx="100" cy="124" r="1.5"/>
+                <circle cx="100" cy="146" r="1.5"/>
+                <circle cx="100" cy="168" r="1.5"/>
+                <circle cx="100" cy="190" r="1.5"/>
+                <circle cx="100" cy="212" r="1.5"/>
+                <circle cx="100" cy="234" r="1.5"/>
+                <circle cx="100" cy="256" r="1.5"/>
+                <circle cx="100" cy="278" r="1.5"/>
+                <circle cx="100" cy="300" r="1.5"/>
+                <circle cx="100" cy="322" r="1.5"/>
+                <circle cx="100" cy="344" r="1.5"/>
+                <circle cx="100" cy="366" r="1.5"/>
+              </g>
+              <!-- Energy lines from spine -->
+              <g stroke="#00d4ff" stroke-width="0.3" opacity="0.15">
+                <line x1="100" y1="80" x2="75" y2="68"/>
+                <line x1="100" y1="80" x2="125" y2="68"/>
+                <line x1="100" y1="130" x2="62" y2="130"/>
+                <line x1="100" y1="130" x2="138" y2="130"/>
+                <line x1="100" y1="220" x2="72" y2="220"/>
+                <line x1="100" y1="220" x2="128" y2="220"/>
+              </g>
+            </svg>
+            <!-- Floating particles -->
+            <div class="hp-particles" id="hpDashParticles"></div>
+          </div>
           <div class="hp-orbit hp-orbit-inner"></div>
           <div class="hp-orbit hp-orbit-outer"></div>
           <div id="hpDashBodyTags"></div>
@@ -1678,8 +1759,8 @@
 .hp-header-sep { opacity:0.4; }
 .hp-header-clock { font-family:ui-monospace,SFMono-Regular,monospace; font-variant-numeric:tabular-nums; color:oklch(0.97 0.01 200); }
 .hp-dash-title { position:absolute; left:50%; transform:translateX(-50%); font-size:20px; font-weight:600; letter-spacing:0.3em; white-space:nowrap; }
-.hp-header-btn { background:none; border:none; color:oklch(0.97 0.01 200 / 50%); cursor:pointer; padding:4px; }
-.hp-header-btn:hover { color:oklch(0.78 0.18 195); }
+.hp-close-btn { display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid oklch(1 0 0 / 15%); background:oklch(1 0 0 / 5%); color:oklch(0.97 0.01 200 / 70%); cursor:pointer; transition:all 0.2s; }
+.hp-close-btn:hover { background:oklch(0.62 0.23 22 / 20%); border-color:oklch(0.62 0.23 22 / 40%); color:oklch(0.62 0.23 22); }
 
 .hp-dash-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; padding:24px 24px; }
 .hp-grid-left { grid-column:1/4; display:flex; flex-direction:column; gap:16px; }
@@ -1724,7 +1805,13 @@
 .hp-body-panel { position:relative; overflow:hidden; }
 .hp-body-area { position:relative; height:520px; margin-top:16px; }
 .hp-body-silhouette { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-.hp-body-svg { height:100%; max-height:520px; opacity:0.7; }
+.hp-body-svg-enhanced { height:100%; max-height:520px; }
+.hp-body-glow { position:absolute; pointer-events:none; border-radius:50%; }
+.hp-body-glow-outer { width:300px; height:500px; left:50%; top:50%; transform:translate(-50%,-50%); background:radial-gradient(ellipse, oklch(0.78 0.18 195 / 15%) 0%, oklch(0.78 0.18 195 / 5%) 40%, transparent 70%); filter:blur(30px); }
+.hp-body-glow-inner { width:150px; height:400px; left:50%; top:50%; transform:translate(-50%,-50%); background:radial-gradient(ellipse, oklch(0.78 0.18 195 / 25%) 0%, oklch(0.78 0.18 195 / 8%) 40%, transparent 70%); filter:blur(15px); }
+.hp-particles { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.hp-particle { position:absolute; width:2px; height:2px; border-radius:50%; background:oklch(0.78 0.18 195); opacity:0; animation:particleFloat 6s infinite; }
+@keyframes particleFloat { 0%{opacity:0;transform:translateY(0);} 20%{opacity:0.6;} 80%{opacity:0.3;} 100%{opacity:0;transform:translateY(-120px);} }
 .hp-orbit { position:absolute; left:50%; top:50%; border-radius:50%; pointer-events:none; }
 .hp-orbit-inner { width:420px; height:420px; transform:translate(-50%,-50%); border:1px solid oklch(0.78 0.18 195 / 20%); }
 .hp-orbit-outer { width:500px; height:500px; transform:translate(-50%,-50%); border:1px dashed oklch(0.78 0.18 195 / 10%); }
@@ -1899,18 +1986,16 @@ function openHealthProfile(btn) {
   });
   document.getElementById('hpDashBodyTags').innerHTML = tagsHtml;
 
-  var svg = document.querySelector('.hp-body-svg');
-  if(svg) {
-    for(var d=0;d<14;d++){
-      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      dot.setAttribute('cx','100');
-      dot.setAttribute('cy', 80+d*22);
-      dot.setAttribute('r','1.4');
-      dot.setAttribute('fill','oklch(0.78 0.18 195)');
-      dot.setAttribute('opacity','0.6');
-      svg.querySelector('g:last-child').appendChild(dot);
-    }
+  // Particles
+  var particlesHtml = '';
+  for(var p=0;p<20;p++){
+    var px = 30+Math.random()*40;
+    var py = 60+Math.random()*30;
+    var delay = Math.random()*6;
+    var dur = 4+Math.random()*4;
+    particlesHtml += '<div class="hp-particle" style="left:'+px+'%;top:'+py+'%;animation-delay:'+delay+'s;animation-duration:'+dur+'s;"></div>';
   }
+  document.getElementById('hpDashParticles').innerHTML = particlesHtml;
 
   document.getElementById('hpDashRating').textContent = '亚健康';
   document.getElementById('hpDashRating').className = 'hp-rating-value rating-warn';
