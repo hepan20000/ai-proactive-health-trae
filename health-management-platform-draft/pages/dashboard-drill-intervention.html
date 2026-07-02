@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>干预统计详情 — 主动健康管理</title>
+    <style id="theme-vars">
+:root { --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; --hmp-font-family-display: 'Outfit', var(--hmp-font-family); --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace; --hmp-font-features: "tnum" 1, "ss01" 1; --hmp-radius-base: 0.625rem; --hmp-radius-full: 9999px; }
+:root { --hmp-bg-body: oklch(0.99 0.005 200); --hmp-bg-card: oklch(1 0 0); --hmp-color-text-primary: oklch(0.2 0.03 220); --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%); --hmp-color-border: oklch(0.2 0.03 220 / 10%); --hmp-color-success: oklch(0.7 0.16 155); --hmp-color-warning: oklch(0.78 0.16 75); --hmp-color-danger: oklch(0.62 0.23 22); }
+:root.dark { --hmp-bg-body: oklch(0.16 0.03 230); --hmp-bg-card: oklch(0.22 0.04 230); --hmp-color-text-primary: oklch(0.97 0.01 200); --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%); --hmp-color-border: oklch(1 0 0 / 10%); --hmp-color-success: oklch(0.7 0.16 155); --hmp-color-warning: oklch(0.78 0.16 75); --hmp-color-danger: oklch(0.62 0.23 22); }
+    </style>
+    <style>
+  :root { --hmp-bg: #0a0f1a; --hmp-bg-card: rgba(15, 23, 42, 0.7); --hmp-border: rgba(255, 255, 255, 0.08); --hmp-accent: #00d4aa; --hmp-danger: #ff4757; --hmp-warning: #ffa502; --hmp-purple: #a855f7; --hmp-text: #e2e8f0; --hmp-text-muted: #94a3b8; --hmp-text-dim: #64748b; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100vw; min-height: 100vh; font-family: 'Inter', 'Outfit', sans-serif; background-color: var(--hmp-bg); color: var(--hmp-text); overflow-x: hidden; }
+  body { background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 212, 170, 0.03) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.02) 0%, transparent 50%), linear-gradient(180deg, #0a0f1a 0%, #0d1326 100%); }
+  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+  .dashboard { position: relative; z-index: 1; width: 100vw; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; padding: 0 16px 24px; }
+  .header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 12px 0 8px; position: relative; }
+  .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hmp-accent), transparent); opacity: 0.4; }
+  .header-btn { display: flex; align-items: center; gap: 6px; color: var(--hmp-text-muted); font-size: 13px; cursor: pointer; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--hmp-border); background: transparent; transition: all 0.2s; text-decoration: none; }
+  .header-btn:hover { color: var(--hmp-accent); border-color: rgba(0, 212, 170, 0.3); background: rgba(0, 212, 170, 0.05); }
+  .header-title { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.1em; text-align: center; white-space: nowrap; position: absolute; left: 50%; transform: translateX(-50%); }
+  .header-right { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--hmp-text-muted); }
+  .kpi-row { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 0; }
+  .kpi-card { background: var(--hmp-bg-card); border: 1px solid var(--hmp-border); border-radius: 8px; padding: 14px 16px; position: relative; overflow: hidden; transition: background 0.2s; }
+  .kpi-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+  .kpi-card.accent::after { background: var(--hmp-accent); }
+  .kpi-card.danger::after { background: var(--hmp-danger); }
+  .kpi-card.warn::after { background: var(--hmp-warning); }
+  .kpi-label { font-size: 12px; color: var(--hmp-text-dim); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .kpi-value.accent { color: var(--hmp-accent); }
+  .kpi-value.danger { color: var(--hmp-danger); }
+  .kpi-value.warn { color: var(--hmp-warning); }
+  .kpi-sub { font-size: 12px; color: var(--hmp-text-muted); margin-top: 4px; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 4px; }
+  .panel { background: var(--hmp-bg-card); border: 1px solid var(--hmp-border); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; transition: background 0.2s; overflow: hidden; }
+  .panel:hover { background: rgba(15, 23, 42, 0.9); }
+  .panel-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; position: relative; padding-bottom: 8px; }
+  .panel-title::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--hmp-accent), transparent); opacity: 0.3; }
+  .panel-title .tag { font-size: 11px; font-weight: 400; color: var(--hmp-text-dim); margin-left: auto; }
+  .chart-container { flex: 1; min-height: 0; position: relative; }
+  .chart-container svg { width: 100%; height: 100%; }
+  .donut-wrapper { display: flex; align-items: center; justify-content: center; gap: 24px; flex: 1; }
+  .donut-svg { width: 180px; height: 180px; flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .legend-label { color: var(--hmp-text-muted); }
+  .legend-value { color: #fff; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+  .section-full { grid-column: 1 / -1; }
+  .drill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .drill-table th { text-align: left; padding: 10px 12px; color: #64748b; font-weight: 500; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.08); text-transform: uppercase; letter-spacing: 0.05em; }
+  .drill-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e2e8f0; }
+  .drill-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; }
+  .badge-danger { background: rgba(255,71,87,0.15); color: #ff4757; }
+  .badge-warn { background: rgba(255,170,0,0.15); color: #ffaa00; }
+  .badge-ok { background: rgba(0,212,170,0.15); color: #00d4aa; }
+  .badge-muted { background: rgba(255,255,255,0.05); color: #64748b; }
+  .drill-btn { padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(0,212,170,0.3); background: rgba(0,212,170,0.1); color: #00d4aa; font-size: 11px; cursor: pointer; }
+  .drill-btn:hover { background: rgba(0,212,170,0.2); }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="header">
+    <a href="dashboard.html" class="header-btn" style="text-decoration:none;">
+      <span>&#8592;</span><span>返回</span>
+    </a>
+    <div class="header-title">干预统计详情</div>
+    <div class="header-right"><span id="headerTime"></span></div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card accent">
+      <div class="kpi-label">今日</div>
+      <div class="kpi-value accent">318</div>
+      <div class="kpi-sub">干预人次</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">本周累计</div>
+      <div class="kpi-value accent">2,156</div>
+      <div class="kpi-sub">日均 308</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">本月累计</div>
+      <div class="kpi-value accent">8,934</div>
+      <div class="kpi-sub">环比 +22%</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">目标完成率</div>
+      <div class="kpi-value accent">112%</div>
+      <div class="kpi-sub">超额完成</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- Left: 7-day intervention bar chart -->
+    <div class="panel">
+      <div class="panel-title">
+        7日干预趋势
+        <span class="tag">每日干预人次</span>
+      </div>
+      <div class="chart-container" style="min-height:240px;">
+        <svg viewBox="0 0 520 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00d4aa" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#00d4aa" stop-opacity="0.3"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid -->
+          <line x1="40" y1="180" x2="500" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <line x1="40" y1="140" x2="500" y2="140" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="100" x2="500" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="60" x2="500" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="20" x2="500" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <!-- Y labels -->
+          <text x="34" y="183" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">0</text>
+          <text x="34" y="143" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">100</text>
+          <text x="34" y="103" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">200</text>
+          <text x="34" y="63" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">300</text>
+          <text x="34" y="23" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">400</text>
+          <!-- X labels -->
+          <text x="75" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/26</text>
+          <text x="145" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/27</text>
+          <text x="215" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/28</text>
+          <text x="285" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/29</text>
+          <text x="355" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/30</text>
+          <text x="425" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">7/01</text>
+          <text x="495" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">7/02</text>
+          <!-- Data: 280, 310, 345, 295, 320, 308, 318 -->
+          <!-- y = 180 - (val/400)*160 -->
+          <!-- 280:68, 310:56, 345:42, 295:62, 320:52, 308:56.8, 318:52.8 -->
+          <rect x="57" y="68" width="36" height="112" fill="url(#barGrad)" rx="4"/>
+          <rect x="127" y="56" width="36" height="124" fill="url(#barGrad)" rx="4"/>
+          <rect x="197" y="42" width="36" height="138" fill="url(#barGrad)" rx="4"/>
+          <rect x="267" y="62" width="36" height="118" fill="url(#barGrad)" rx="4"/>
+          <rect x="337" y="52" width="36" height="128" fill="url(#barGrad)" rx="4"/>
+          <rect x="407" y="56.8" width="36" height="123.2" fill="url(#barGrad)" rx="4"/>
+          <rect x="477" y="52.8" width="36" height="127.2" fill="url(#barGrad)" rx="4"/>
+          <!-- Value labels on top -->
+          <text x="75" y="62" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">280</text>
+          <text x="145" y="50" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">310</text>
+          <text x="215" y="36" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">345</text>
+          <text x="285" y="56" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">295</text>
+          <text x="355" y="46" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">320</text>
+          <text x="425" y="50.8" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">308</text>
+          <text x="495" y="46.8" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">318</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right: Intervention type donut -->
+    <div class="panel">
+      <div class="panel-title">
+        干预类型分布
+        <span class="tag">今日占比</span>
+      </div>
+      <div class="donut-wrapper">
+        <svg class="donut-svg" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="24"/>
+          <!-- Phone 38%: 167.14 -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#00d4aa" stroke-width="24"
+            stroke-dasharray="167.14 272.71" stroke-dashoffset="0" transform="rotate(-90 100 100)" stroke-linecap="butt"/>
+          <!-- Med reminder 22%: 96.77 -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#3b82f6" stroke-width="24"
+            stroke-dasharray="96.77 343.08" stroke-dashoffset="-167.14" transform="rotate(-90 100 100)" stroke-linecap="butt"/>
+          <!-- Diet 18%: 79.17 -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#ffa502" stroke-width="24"
+            stroke-dasharray="79.17 360.68" stroke-dashoffset="-263.91" transform="rotate(-90 100 100)" stroke-linecap="butt"/>
+          <!-- Exercise 12%: 52.78 -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#a855f7" stroke-width="24"
+            stroke-dasharray="52.78 387.07" stroke-dashoffset="-343.08" transform="rotate(-90 100 100)" stroke-linecap="butt"/>
+          <!-- Mental 10%: 43.99 -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#ff4757" stroke-width="24"
+            stroke-dasharray="43.99 395.86" stroke-dashoffset="-395.86" transform="rotate(-90 100 100)" stroke-linecap="butt"/>
+          <text x="100" y="92" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="22" font-weight="700">318</text>
+          <text x="100" y="112" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="11">今日干预</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#00d4aa;"></div><span class="legend-label">电话随访</span><span class="legend-value">38%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div><span class="legend-label">用药提醒</span><span class="legend-value">22%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ffa502;"></div><span class="legend-label">饮食指导</span><span class="legend-value">18%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#a855f7;"></div><span class="legend-label">运动处方</span><span class="legend-value">12%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ff4757;"></div><span class="legend-label">心理疏导</span><span class="legend-value">10%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom: Today's intervention records -->
+  <div class="panel section-full" style="margin-top:12px;">
+    <div class="panel-title">
+      今日干预记录
+      <span class="tag">共318条</span>
+    </div>
+    <table class="drill-table">
+      <thead>
+        <tr>
+          <th>时间</th>
+          <th>居民姓名</th>
+          <th>干预类型</th>
+          <th>医生</th>
+          <th>结果</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:JetBrains Mono;">08:15</td>
+          <td style="font-weight:500;">王建国</td>
+          <td>电话随访</td>
+          <td>陈雪松</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">血压控制良好，继续监测</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">08:32</td>
+          <td style="font-weight:500;">张秀兰</td>
+          <td>用药提醒</td>
+          <td>李梦瑶</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">胰岛素注射提醒</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">09:10</td>
+          <td style="font-weight:500;">吴桂英</td>
+          <td>饮食指导</td>
+          <td>王建华</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">低盐低脂饮食方案</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">09:45</td>
+          <td style="font-weight:500;">赵芳芳</td>
+          <td>心理疏导</td>
+          <td>赵晓芳</td>
+          <td><span class="badge badge-warn">待跟进</span></td>
+          <td style="color:var(--hmp-text-dim);">焦虑情绪，建议周回访</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">10:20</td>
+          <td style="font-weight:500;">陈志强</td>
+          <td>运动处方</td>
+          <td>黄国涛</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">太极拳 + 散步 30min/日</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">10:55</td>
+          <td style="font-weight:500;">刘德明</td>
+          <td>电话随访</td>
+          <td>陈立峰</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">心率恢复，调整用药</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">11:30</td>
+          <td style="font-weight:500;">孙丽娟</td>
+          <td>用药提醒</td>
+          <td>陈雪松</td>
+          <td><span class="badge badge-warn">待跟进</span></td>
+          <td style="color:var(--hmp-text-dim);">降压药调整后观察</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">13:15</td>
+          <td style="font-weight:500;">周国平</td>
+          <td>饮食指导</td>
+          <td>李梦瑶</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">糖尿病饮食控制</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">14:00</td>
+          <td style="font-weight:500;">钱玉兰</td>
+          <td>电话随访</td>
+          <td>王建华</td>
+          <td><span class="badge badge-ok">已完成</span></td>
+          <td style="color:var(--hmp-text-dim);">术后恢复良好</td>
+        </tr>
+        <tr>
+          <td style="font-family:JetBrains Mono;">14:40</td>
+          <td style="font-weight:500;">马建华</td>
+          <td>运动处方</td>
+          <td>黄国涛</td>
+          <td><span class="badge badge-warn">待跟进</span></td>
+          <td style="color:var(--hmp-text-dim);">关节恢复中，需调整方案</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  function updateTime(){const n=new Date(),w=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];const y=n.getFullYear(),m=String(n.getMonth()+1).padStart(2,'0'),d=String(n.getDate()).padStart(2,'0'),wd=w[n.getDay()],h=String(n.getHours()).padStart(2,'0'),mi=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('headerTime').textContent=`${y}年${m}月${d}日${wd} ${h}:${mi}:${s}`;}
+  updateTime();setInterval(updateTime,1000);
+</script>
+</body>
+</html>

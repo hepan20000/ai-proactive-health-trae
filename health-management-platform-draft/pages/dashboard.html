@@ -305,7 +305,8 @@
 
   <!-- KPI Cards -->
   <div class="kpi-row">
-    <div class="kpi-card accent">
+    <div class="kpi-card accent" onclick="window.open('dashboard-drill-residents.html','_self')" title="点击查看详情">
+      <span class="drill-arrow">&#8594;</span>
       <div class="kpi-label">
         <i data-lucide="users" style="width:14px;height:14px;color:var(--hmp-accent);"></i>
         在管居民总数
@@ -313,7 +314,8 @@
       <div class="kpi-value accent">12,486</div>
       <div class="kpi-sub">+128 今日</div>
     </div>
-    <div class="kpi-card accent">
+    <div class="kpi-card accent" onclick="window.open('dashboard-drill-devices.html','_self')" title="点击查看详情">
+      <span class="drill-arrow">&#8594;</span>
       <div class="kpi-label">
         <i data-lucide="activity" style="width:14px;height:14px;color:var(--hmp-accent);"></i>
         活跃设备数
@@ -321,7 +323,8 @@
       <div class="kpi-value accent">9,217</div>
       <div class="kpi-sub">在线率 87.4%</div>
     </div>
-    <div class="kpi-card danger">
+    <div class="kpi-card danger" onclick="window.open('dashboard-drill-alerts.html','_self')" title="点击查看详情">
+      <span class="drill-arrow">&#8594;</span>
       <div class="kpi-label">
         <i data-lucide="alert-triangle" style="width:14px;height:14px;color:var(--hmp-danger);"></i>
         待处理预警
@@ -329,7 +332,8 @@
       <div class="kpi-value danger">42</div>
       <div class="kpi-sub">高危 <span class="danger-text">7</span></div>
     </div>
-    <div class="kpi-card accent">
+    <div class="kpi-card accent" onclick="window.open('dashboard-drill-intervention.html','_self')" title="点击查看详情">
+      <span class="drill-arrow">&#8594;</span>
       <div class="kpi-label">
         <i data-lucide="heart-pulse" style="width:14px;height:14px;color:var(--hmp-accent);"></i>
         今日干预人次
@@ -345,7 +349,7 @@
     <div class="col">
       <!-- Risk Type Distribution (Donut) -->
       <div class="panel" style="flex:1.1;">
-        <div class="panel-title">
+        <div class="panel-title clickable" style="cursor:pointer;" onclick="window.open('dashboard-drill-risk.html','_self')">
           <i data-lucide="pie-chart" style="width:14px;height:14px;color:var(--hmp-accent);"></i>
           风险类型分布
           <span class="tag">近24h触发占比</span>
@@ -1002,8 +1006,51 @@
     transition: background 0.2s;
   }
 
+  .kpi-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+
   .kpi-card:hover {
     background: rgba(15, 23, 42, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .kpi-card .drill-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: rgba(255,255,255,0.15);
+    transition: color 0.2s;
+  }
+
+  .kpi-card:hover .drill-arrow {
+    color: var(--hmp-accent);
+  }
+
+  .panel-title.clickable {
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .panel-title.clickable:hover {
+    opacity: 0.8;
+  }
+
+  .panel-title.clickable::before {
+    content: '\2192';
+    margin-right: 2px;
+    font-size: 11px;
+    color: var(--hmp-accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .panel-title.clickable:hover::before {
+    opacity: 1;
   }
 
   .kpi-card::after {

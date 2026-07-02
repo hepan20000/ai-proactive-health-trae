@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风险分析详情 — 主动健康管理</title>
+    <style id="theme-vars">
+:root { --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; --hmp-font-family-display: 'Outfit', var(--hmp-font-family); --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace; --hmp-font-features: "tnum" 1, "ss01" 1; --hmp-radius-base: 0.625rem; --hmp-radius-full: 9999px; }
+:root { --hmp-bg-body: oklch(0.99 0.005 200); --hmp-bg-card: oklch(1 0 0); --hmp-color-text-primary: oklch(0.2 0.03 220); --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%); --hmp-color-border: oklch(0.2 0.03 220 / 10%); --hmp-color-success: oklch(0.7 0.16 155); --hmp-color-warning: oklch(0.78 0.16 75); --hmp-color-danger: oklch(0.62 0.23 22); }
+:root.dark { --hmp-bg-body: oklch(0.16 0.03 230); --hmp-bg-card: oklch(0.22 0.04 230); --hmp-color-text-primary: oklch(0.97 0.01 200); --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%); --hmp-color-border: oklch(1 0 0 / 10%); --hmp-color-success: oklch(0.7 0.16 155); --hmp-color-warning: oklch(0.78 0.16 75); --hmp-color-danger: oklch(0.62 0.23 22); }
+    </style>
+    <style>
+  :root { --hmp-bg: #0a0f1a; --hmp-bg-card: rgba(15, 23, 42, 0.7); --hmp-border: rgba(255, 255, 255, 0.08); --hmp-accent: #00d4aa; --hmp-danger: #ff4757; --hmp-warning: #ffa502; --hmp-purple: #a855f7; --hmp-text: #e2e8f0; --hmp-text-muted: #94a3b8; --hmp-text-dim: #64748b; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100vw; min-height: 100vh; font-family: 'Inter', 'Outfit', sans-serif; background-color: var(--hmp-bg); color: var(--hmp-text); overflow-x: hidden; }
+  body { background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 212, 170, 0.03) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.02) 0%, transparent 50%), linear-gradient(180deg, #0a0f1a 0%, #0d1326 100%); }
+  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+  .dashboard { position: relative; z-index: 1; width: 100vw; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; padding: 0 16px 24px; }
+  .header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 12px 0 8px; position: relative; }
+  .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hmp-accent), transparent); opacity: 0.4; }
+  .header-btn { display: flex; align-items: center; gap: 6px; color: var(--hmp-text-muted); font-size: 13px; cursor: pointer; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--hmp-border); background: transparent; transition: all 0.2s; text-decoration: none; }
+  .header-btn:hover { color: var(--hmp-accent); border-color: rgba(0, 212, 170, 0.3); background: rgba(0, 212, 170, 0.05); }
+  .header-title { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.1em; text-align: center; white-space: nowrap; position: absolute; left: 50%; transform: translateX(-50%); }
+  .header-right { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--hmp-text-muted); }
+  /* Risk level overview cards */
+  .risk-overview { flex-shrink: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 12px 0; }
+  .risk-card { background: var(--hmp-bg-card); border: 1px solid var(--hmp-border); border-radius: 10px; padding: 18px 20px; text-align: center; position: relative; overflow: hidden; transition: background 0.2s; }
+  .risk-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .risk-card.high::before { background: #ff4757; }
+  .risk-card.mid::before { background: #ffa502; }
+  .risk-card.low::before { background: #00d4aa; }
+  .risk-card:hover { background: rgba(15, 23, 42, 0.9); }
+  .risk-card .risk-num { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; line-height: 1.1; }
+  .risk-card.high .risk-num { color: #ff4757; }
+  .risk-card.mid .risk-num { color: #ffa502; }
+  .risk-card.low .risk-num { color: #00d4aa; }
+  .risk-card .risk-label { font-size: 13px; color: var(--hmp-text-muted); margin-top: 4px; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 4px; }
+  .panel { background: var(--hmp-bg-card); border: 1px solid var(--hmp-border); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; transition: background 0.2s; overflow: hidden; }
+  .panel:hover { background: rgba(15, 23, 42, 0.9); }
+  .panel-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; position: relative; padding-bottom: 8px; }
+  .panel-title::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--hmp-accent), transparent); opacity: 0.3; }
+  .panel-title .tag { font-size: 11px; font-weight: 400; color: var(--hmp-text-dim); margin-left: auto; }
+  .chart-container { flex: 1; min-height: 0; position: relative; }
+  .chart-container svg { width: 100%; height: 100%; }
+  .section-full { grid-column: 1 / -1; }
+  .drill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .drill-table th { text-align: left; padding: 10px 12px; color: #64748b; font-weight: 500; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.08); text-transform: uppercase; letter-spacing: 0.05em; }
+  .drill-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e2e8f0; }
+  .drill-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; }
+  .badge-danger { background: rgba(255,71,87,0.15); color: #ff4757; }
+  .badge-warn { background: rgba(255,170,0,0.15); color: #ffaa00; }
+  .badge-ok { background: rgba(0,212,170,0.15); color: #00d4aa; }
+  .badge-muted { background: rgba(255,255,255,0.05); color: #64748b; }
+  .drill-btn { padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(0,212,170,0.3); background: rgba(0,212,170,0.1); color: #00d4aa; font-size: 11px; cursor: pointer; }
+  .drill-btn:hover { background: rgba(0,212,170,0.2); }
+  .action-group { display: flex; gap: 6px; }
+  /* Risk type list with progress bars */
+  .risk-type-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .risk-type-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .risk-type-info { flex: 1; }
+  .risk-type-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .risk-type-name { font-size: 13px; color: #fff; font-weight: 500; }
+  .risk-type-count { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #fff; font-weight: 600; }
+  .risk-type-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.04); overflow: hidden; }
+  .risk-type-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="header">
+    <a href="dashboard.html" class="header-btn" style="text-decoration:none;">
+      <span>&#8592;</span><span>返回</span>
+    </a>
+    <div class="header-title">风险分析详情</div>
+    <div class="header-right"><span id="headerTime"></span></div>
+  </div>
+
+  <!-- Risk level overview cards -->
+  <div class="risk-overview">
+    <div class="risk-card high">
+      <div class="risk-num">7</div>
+      <div class="risk-label">高危</div>
+    </div>
+    <div class="risk-card mid">
+      <div class="risk-num">15</div>
+      <div class="risk-label">中危</div>
+    </div>
+    <div class="risk-card low">
+      <div class="risk-num">20</div>
+      <div class="risk-label">低危</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- Left: Risk trend line chart -->
+    <div class="panel">
+      <div class="panel-title">
+        风险趋势 (近7日)
+        <span class="tag">风险事件数</span>
+      </div>
+      <div class="chart-container" style="min-height:220px;">
+        <svg viewBox="0 0 520 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaRisk" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ff4757" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#ff4757" stop-opacity="0.01"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid -->
+          <line x1="40" y1="180" x2="500" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <line x1="40" y1="144" x2="500" y2="144" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="108" x2="500" y2="108" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="72" x2="500" y2="72" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="36" x2="500" y2="36" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <!-- Y labels -->
+          <text x="34" y="183" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">0</text>
+          <text x="34" y="147" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">10</text>
+          <text x="34" y="111" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">20</text>
+          <text x="34" y="75" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">30</text>
+          <text x="34" y="39" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">40</text>
+          <!-- X labels -->
+          <text x="75" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/26</text>
+          <text x="145" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/27</text>
+          <text x="215" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/28</text>
+          <text x="285" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/29</text>
+          <text x="355" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">6/30</text>
+          <text x="425" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">7/01</text>
+          <text x="495" y="196" text-anchor="middle" fill="#475569" font-size="10" font-family="JetBrains Mono">7/02</text>
+          <!-- Data: 28, 32, 38, 35, 40, 42, 42 -->
+          <!-- y = 180 - (val/50)*144 -->
+          <!-- 28:99.36, 32:87.84, 38:70.56, 35:79.2, 40:64.8, 42:59.04, 42:59.04 -->
+          <polygon points="75,99.4 145,87.8 215,70.6 285,79.2 355,64.8 425,59.0 495,59.0 495,180 75,180" fill="url(#areaRisk)"/>
+          <polyline points="75,99.4 145,87.8 215,70.6 285,79.2 355,64.8 425,59.0 495,59.0"
+            fill="none" stroke="#ff4757" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="75" cy="99.4" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="145" cy="87.8" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="215" cy="70.6" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="285" cy="79.2" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="355" cy="64.8" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="425" cy="59.0" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="1.5"/>
+          <circle cx="495" cy="59.0" r="4" fill="#ff4757" opacity="0.4"/>
+          <circle cx="495" cy="59.0" r="3" fill="#0a0f1a" stroke="#ff4757" stroke-width="2"/>
+          <text x="495" y="50" text-anchor="middle" fill="#ff4757" font-size="10" font-family="JetBrains Mono" font-weight="600">42</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right: Risk type details with progress bars -->
+    <div class="panel">
+      <div class="panel-title">
+        各风险类型详情
+        <span class="tag">按事件数排序</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <div class="risk-type-item">
+          <div class="risk-type-icon" style="background:rgba(255,71,87,0.15); color:#ff4757;">&#9829;</div>
+          <div class="risk-type-info">
+            <div class="risk-type-header">
+              <span class="risk-type-name">心脑血管</span>
+              <span class="risk-type-count">16</span>
+            </div>
+            <div class="risk-type-bar"><div class="risk-type-fill" style="width:80%; background:linear-gradient(90deg, #ff4757, rgba(255,71,87,0.4));"></div></div>
+          </div>
+        </div>
+        <div class="risk-type-item">
+          <div class="risk-type-icon" style="background:rgba(168,85,247,0.15); color:#a855f7;">&#9790;</div>
+          <div class="risk-type-info">
+            <div class="risk-type-header">
+              <span class="risk-type-name">睡眠障碍</span>
+              <span class="risk-type-count">12</span>
+            </div>
+            <div class="risk-type-bar"><div class="risk-type-fill" style="width:60%; background:linear-gradient(90deg, #a855f7, rgba(168,85,247,0.4));"></div></div>
+          </div>
+        </div>
+        <div class="risk-type-item">
+          <div class="risk-type-icon" style="background:rgba(255,165,2,0.15); color:#ffa502;">&#9878;</div>
+          <div class="risk-type-info">
+            <div class="risk-type-header">
+              <span class="risk-type-name">代谢异常</span>
+              <span class="risk-type-count">8</span>
+            </div>
+            <div class="risk-type-bar"><div class="risk-type-fill" style="width:40%; background:linear-gradient(90deg, #ffa502, rgba(255,165,2,0.4));"></div></div>
+          </div>
+        </div>
+        <div class="risk-type-item">
+          <div class="risk-type-icon" style="background:rgba(59,130,246,0.15); color:#3b82f6;">&#9742;</div>
+          <div class="risk-type-info">
+            <div class="risk-type-header">
+              <span class="risk-type-name">呼吸异常</span>
+              <span class="risk-type-count">4</span>
+            </div>
+            <div class="risk-type-bar"><div class="risk-type-fill" style="width:20%; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.4));"></div></div>
+          </div>
+        </div>
+        <div class="risk-type-item">
+          <div class="risk-type-icon" style="background:rgba(100,116,139,0.15); color:#94a3b8;">&#8943;</div>
+          <div class="risk-type-info">
+            <div class="risk-type-header">
+              <span class="risk-type-name">其他</span>
+              <span class="risk-type-count">2</span>
+            </div>
+            <div class="risk-type-bar"><div class="risk-type-fill" style="width:10%; background:linear-gradient(90deg, #64748b, rgba(100,116,139,0.4));"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom: High-risk residents table -->
+  <div class="panel section-full" style="margin-top:12px;">
+    <div class="panel-title">
+      高危居民列表
+      <span class="tag">共7人</span>
+    </div>
+    <table class="drill-table">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>风险类型</th>
+          <th>等级</th>
+          <th>最近评估</th>
+          <th>责任医生</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:500;">王建国</td>
+          <td>心脑血管</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-02</td>
+          <td>陈雪松</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">吴桂英</td>
+          <td>心脑血管</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-02</td>
+          <td>陈立峰</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">孙丽娟</td>
+          <td>心脑血管</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-01</td>
+          <td>陈雪松</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">赵芳芳</td>
+          <td>睡眠障碍</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-02</td>
+          <td>王建华</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">钱玉兰</td>
+          <td>心脑血管</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-01</td>
+          <td>李梦瑶</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">马建华</td>
+          <td>代谢异常</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-06-30</td>
+          <td>黄国涛</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">郑秀英</td>
+          <td>呼吸异常</td>
+          <td><span class="badge badge-danger">高危</span></td>
+          <td style="font-family:JetBrains Mono;">2026-07-02</td>
+          <td>赵晓芳</td>
+          <td><div class="action-group"><button class="drill-btn">查看</button><button class="drill-btn">干预</button></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  function updateTime(){const n=new Date(),w=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];const y=n.getFullYear(),m=String(n.getMonth()+1).padStart(2,'0'),d=String(n.getDate()).padStart(2,'0'),wd=w[n.getDay()],h=String(n.getHours()).padStart(2,'0'),mi=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('headerTime').textContent=`${y}年${m}月${d}日${wd} ${h}:${mi}:${s}`;}
+  updateTime();setInterval(updateTime,1000);
+</script>
+</body>
+</html>

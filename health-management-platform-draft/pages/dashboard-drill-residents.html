@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在管居民分析 — 主动健康管理</title>
+    <style id="theme-vars">
+/* ========================================
+   Health Management Platform — OKLCH Design System Brand CSS
+   ======================================== */
+:root {
+  --hmp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --hmp-font-family-display: 'Outfit', var(--hmp-font-family);
+  --hmp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  --hmp-font-size-display: 36px;
+  --hmp-font-size-h1: 28px;
+  --hmp-font-size-h2: 22px;
+  --hmp-font-size-h3: 18px;
+  --hmp-font-size-h4: 15px;
+  --hmp-font-size-body: 14px;
+  --hmp-font-size-caption: 12px;
+  --hmp-font-size-small: 11px;
+  --hmp-font-weight-regular: 400;
+  --hmp-font-weight-medium: 500;
+  --hmp-font-weight-semibold: 600;
+  --hmp-font-weight-bold: 700;
+  --hmp-line-height-tight: 1.25;
+  --hmp-line-height-normal: 1.5;
+  --hmp-line-height-relaxed: 1.75;
+  --hmp-font-features: "tnum" 1, "ss01" 1;
+  --hmp-spacing-xs: 4px;
+  --hmp-spacing-sm: 8px;
+  --hmp-spacing-md: 12px;
+  --hmp-spacing-lg: 16px;
+  --hmp-spacing-xl: 24px;
+  --hmp-spacing-2xl: 32px;
+  --hmp-spacing-3xl: 48px;
+  --hmp-radius-base: 0.625rem;
+  --hmp-radius-sm: calc(var(--hmp-radius-base) - 4px);
+  --hmp-radius-md: calc(var(--hmp-radius-base) - 2px);
+  --hmp-radius-lg: var(--hmp-radius-base);
+  --hmp-radius-xl: calc(var(--hmp-radius-base) + 4px);
+  --hmp-radius-full: 9999px;
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 4%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 5%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 8%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 12%);
+  --hmp-shadow-screen: 0 20px 40px -15px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 4%);
+  --hmp-sidebar-width: 232px;
+  --hmp-header-height: 56px;
+  --hmp-content-max-width: 1200px;
+  --hmp-card-padding: 16px;
+  --hmp-card-gap: 16px;
+  --hmp-table-row-height: 48px;
+  --hmp-chart-1: oklch(0.65 0.18 195);
+  --hmp-chart-2: oklch(0.7 0.16 155);
+  --hmp-chart-3: oklch(0.78 0.16 75);
+  --hmp-chart-4: oklch(0.62 0.23 22);
+  --hmp-chart-5: oklch(0.6 0.2 290);
+}
+:root {
+  --hmp-bg-body: oklch(0.99 0.005 200);
+  --hmp-bg-card: oklch(1 0 0);
+  --hmp-bg-card-hover: oklch(0.995 0.003 200);
+  --hmp-bg-elevated: oklch(1 0 0);
+  --hmp-bg-sunken: oklch(0.96 0.01 200);
+  --hmp-bg-sunken-alt: oklch(0.94 0.015 200);
+  --hmp-bg-sidebar: oklch(1 0 0);
+  --hmp-bg-header: oklch(1 0 0);
+  --hmp-color-primary: oklch(0.55 0.13 195);
+  --hmp-color-primary-hover: oklch(0.58 0.14 195);
+  --hmp-color-primary-active: oklch(0.50 0.13 195);
+  --hmp-color-primary-disabled: oklch(0.55 0.13 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.55 0.13 195 / 8%);
+  --hmp-color-primary-light-hover: oklch(0.55 0.13 195 / 14%);
+  --hmp-color-primary-on-surface: oklch(0.55 0.13 195 / 12%);
+  --hmp-color-secondary: oklch(0.62 0.14 230);
+  --hmp-color-secondary-hover: oklch(0.58 0.14 230);
+  --hmp-color-secondary-light-default: oklch(0.62 0.14 230 / 8%);
+  --hmp-color-tertiary: oklch(0.5 0.02 230);
+  --hmp-color-tertiary-hover: oklch(0.42 0.03 230);
+  --hmp-color-tertiary-light-default: oklch(0.5 0.02 230 / 6%);
+  --hmp-color-text-primary: oklch(0.2 0.03 220);
+  --hmp-color-text-secondary: oklch(0.2 0.03 220 / 60%);
+  --hmp-color-text-tertiary: oklch(0.2 0.03 220 / 35%);
+  --hmp-color-text-disabled: oklch(0.2 0.03 220 / 20%);
+  --hmp-color-text-on-primary: oklch(0.99 0.005 200);
+  --hmp-color-text-help: oklch(0.2 0.03 220 / 40%);
+  --hmp-color-border: oklch(0.2 0.03 220 / 10%);
+  --hmp-color-border-hover: oklch(0.2 0.03 220 / 18%);
+  --hmp-color-border-active: oklch(0.55 0.13 195 / 50%);
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 8%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 8%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 8%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 8%);
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 8%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 25%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 8%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 25%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 8%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 25%);
+}
+:root.dark {
+  --hmp-bg-body: oklch(0.16 0.03 230);
+  --hmp-bg-card: oklch(0.22 0.04 230);
+  --hmp-bg-card-hover: oklch(0.25 0.045 230);
+  --hmp-bg-elevated: oklch(0.25 0.045 230);
+  --hmp-bg-sunken: oklch(0.14 0.025 230);
+  --hmp-bg-sunken-alt: oklch(0.12 0.02 230);
+  --hmp-bg-sidebar: oklch(0.18 0.04 230);
+  --hmp-bg-header: oklch(0.18 0.04 230);
+  --hmp-color-primary: oklch(0.78 0.18 195);
+  --hmp-color-primary-hover: oklch(0.75 0.18 195);
+  --hmp-color-primary-active: oklch(0.82 0.18 195);
+  --hmp-color-primary-disabled: oklch(0.78 0.18 195 / 35%);
+  --hmp-color-primary-light-default: oklch(0.78 0.18 195 / 12%);
+  --hmp-color-primary-light-hover: oklch(0.78 0.18 195 / 18%);
+  --hmp-color-primary-on-surface: oklch(0.78 0.18 195 / 15%);
+  --hmp-color-secondary: oklch(0.72 0.04 220);
+  --hmp-color-secondary-hover: oklch(0.76 0.04 220);
+  --hmp-color-secondary-light-default: oklch(0.72 0.04 220 / 12%);
+  --hmp-color-tertiary: oklch(0.72 0.04 220);
+  --hmp-color-tertiary-hover: oklch(0.78 0.04 220);
+  --hmp-color-tertiary-light-default: oklch(0.72 0.04 220 / 10%);
+  --hmp-color-text-primary: oklch(0.97 0.01 200);
+  --hmp-color-text-secondary: oklch(0.97 0.01 200 / 70%);
+  --hmp-color-text-tertiary: oklch(0.97 0.01 200 / 45%);
+  --hmp-color-text-disabled: oklch(0.97 0.01 200 / 25%);
+  --hmp-color-text-on-primary: oklch(0.18 0.04 230);
+  --hmp-color-text-help: oklch(0.97 0.01 200 / 40%);
+  --hmp-color-border: oklch(1 0 0 / 10%);
+  --hmp-color-border-hover: oklch(1 0 0 / 15%);
+  --hmp-color-border-active: oklch(0.78 0.18 195 / 50%);
+  --hmp-color-success: oklch(0.7 0.16 155);
+  --hmp-color-success-light-default: oklch(0.7 0.16 155 / 12%);
+  --hmp-color-warning: oklch(0.78 0.16 75);
+  --hmp-color-warning-light-default: oklch(0.78 0.16 75 / 12%);
+  --hmp-color-danger: oklch(0.62 0.23 22);
+  --hmp-color-danger-light-default: oklch(0.62 0.23 22 / 12%);
+  --hmp-color-info: oklch(0.62 0.14 230);
+  --hmp-color-info-light-default: oklch(0.62 0.14 230 / 12%);
+  --hmp-health-green: oklch(0.7 0.16 155);
+  --hmp-health-green-bg: oklch(0.7 0.16 155 / 12%);
+  --hmp-health-green-border: oklch(0.7 0.16 155 / 30%);
+  --hmp-health-yellow: oklch(0.78 0.16 75);
+  --hmp-health-yellow-bg: oklch(0.78 0.16 75 / 12%);
+  --hmp-health-yellow-border: oklch(0.78 0.16 75 / 30%);
+  --hmp-health-red: oklch(0.62 0.23 22);
+  --hmp-health-red-bg: oklch(0.62 0.23 22 / 12%);
+  --hmp-health-red-border: oklch(0.62 0.23 22 / 30%);
+  --hmp-shadow-sm: 0 1px 2px oklch(0 0 0 / 20%);
+  --hmp-shadow-md: 0 2px 8px oklch(0 0 0 / 25%);
+  --hmp-shadow-lg: 0 4px 20px -2px oklch(0 0 0 / 40%);
+  --hmp-shadow-xl: 0 10px 40px -4px oklch(0 0 0 / 50%);
+}
+    </style>
+    <style>
+  :root {
+    --hmp-bg: #0a0f1a;
+    --hmp-bg-card: rgba(15, 23, 42, 0.7);
+    --hmp-border: rgba(255, 255, 255, 0.08);
+    --hmp-accent: #00d4aa;
+    --hmp-danger: #ff4757;
+    --hmp-warning: #ffa502;
+    --hmp-purple: #a855f7;
+    --hmp-text: #e2e8f0;
+    --hmp-text-muted: #94a3b8;
+    --hmp-text-dim: #64748b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100vw;
+    min-height: 100vh;
+    font-family: 'Inter', 'Outfit', sans-serif;
+    background-color: var(--hmp-bg);
+    color: var(--hmp-text);
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 212, 170, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.02) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0f1a 0%, #0d1326 100%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dashboard {
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 24px;
+  }
+
+  /* Header */
+  .header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0 8px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hmp-accent), transparent);
+    opacity: 0.4;
+  }
+
+  .header-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--hmp-text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--hmp-border);
+    background: transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .header-btn:hover {
+    color: var(--hmp-accent);
+    border-color: rgba(0, 212, 170, 0.3);
+    background: rgba(0, 212, 170, 0.05);
+  }
+
+  .header-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-align: center;
+    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--hmp-text-muted);
+  }
+
+  /* KPI Cards */
+  .kpi-row {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .kpi-card {
+    background: var(--hmp-bg-card);
+    border: 1px solid var(--hmp-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .kpi-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .kpi-card.accent::after { background: var(--hmp-accent); }
+  .kpi-card.danger::after { background: var(--hmp-danger); }
+  .kpi-card.warn::after { background: var(--hmp-warning); }
+  .kpi-card.purple::after { background: var(--hmp-purple); }
+
+  .kpi-label {
+    font-size: 12px;
+    color: var(--hmp-text-dim);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .kpi-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .kpi-value.accent { color: var(--hmp-accent); }
+  .kpi-value.danger { color: var(--hmp-danger); }
+  .kpi-value.warn { color: var(--hmp-warning); }
+
+  .kpi-sub {
+    font-size: 12px;
+    color: var(--hmp-text-muted);
+    margin-top: 4px;
+  }
+
+  /* Main grid */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  .main-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Panel */
+  .panel {
+    background: var(--hmp-bg-card);
+    border: 1px solid var(--hmp-border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+
+  .panel:hover {
+    background: rgba(15, 23, 42, 0.9);
+  }
+
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding-bottom: 8px;
+  }
+
+  .panel-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--hmp-accent), transparent);
+    opacity: 0.3;
+  }
+
+  .panel-title .tag {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--hmp-text-dim);
+    margin-left: auto;
+  }
+
+  /* Chart container */
+  .chart-container {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+  }
+
+  .chart-container svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Donut chart */
+  .donut-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex: 1;
+  }
+
+  .donut-svg {
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+  }
+
+  .donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .legend-label { color: var(--hmp-text-muted); }
+  .legend-value { color: #fff; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+  /* Tables */
+  .drill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .drill-table th { text-align: left; padding: 10px 12px; color: #64748b; font-weight: 500; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.08); text-transform: uppercase; letter-spacing: 0.05em; }
+  .drill-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e2e8f0; }
+  .drill-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* Action buttons */
+  .drill-btn { padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(0,212,170,0.3); background: rgba(0,212,170,0.1); color: #00d4aa; font-size: 11px; cursor: pointer; }
+  .drill-btn:hover { background: rgba(0,212,170,0.2); }
+  .drill-btn.danger { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.1); color: #ff4757; }
+  .drill-btn.danger:hover { background: rgba(255,71,87,0.2); }
+
+  /* Status badges */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; }
+  .badge-danger { background: rgba(255,71,87,0.15); color: #ff4757; }
+  .badge-warn { background: rgba(255,170,0,0.15); color: #ffaa00; }
+  .badge-ok { background: rgba(0,212,170,0.15); color: #00d4aa; }
+  .badge-muted { background: rgba(255,255,255,0.05); color: #64748b; }
+
+  /* Progress bars for distribution */
+  .dist-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .dist-bar-label {
+    min-width: 80px;
+    color: var(--hmp-text-muted);
+    font-size: 12px;
+  }
+
+  .dist-bar-track {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    overflow: hidden;
+  }
+
+  .dist-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .dist-bar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--hmp-text);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* Gender/Age pills */
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .pill .pill-label { color: var(--hmp-text-dim); }
+  .pill .pill-value { color: #fff; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+  /* H-bar chart */
+  .hbar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .hbar-label {
+    min-width: 56px;
+    color: var(--hmp-text-muted);
+    text-align: right;
+    font-size: 12px;
+  }
+
+  .hbar-track {
+    flex: 1;
+    height: 20px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hbar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    transition: width 0.6s ease;
+  }
+
+  /* Section full width */
+  .section-full {
+    grid-column: 1 / -1;
+  }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+  <!-- Header -->
+  <div class="header">
+    <a href="dashboard.html" class="header-btn" style="text-decoration:none;">
+      <span>&#8592;</span>
+      <span>返回</span>
+    </a>
+    <div class="header-title">在管居民分析</div>
+    <div class="header-right">
+      <span class="header-time" id="headerTime"></span>
+    </div>
+  </div>
+
+  <!-- Summary KPI row -->
+  <div class="kpi-row">
+    <div class="kpi-card accent">
+      <div class="kpi-label">总数</div>
+      <div class="kpi-value accent">12,486</div>
+      <div class="kpi-sub">在管居民</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">今日新增</div>
+      <div class="kpi-value accent">128</div>
+      <div class="kpi-sub">较昨日 +12</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">本月新增</div>
+      <div class="kpi-value warn">1,862</div>
+      <div class="kpi-sub">环比 +18.6%</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">周活跃率</div>
+      <div class="kpi-value accent">94.2%</div>
+      <div class="kpi-sub">持续上升</div>
+    </div>
+  </div>
+
+  <!-- Main 2-column grid -->
+  <div class="main-grid">
+    <!-- Left: 30-day trend area chart -->
+    <div class="panel">
+      <div class="panel-title">
+        30日新增趋势
+        <span class="tag">日新增在管居民</span>
+      </div>
+      <div class="chart-container" style="min-height:240px;">
+        <svg viewBox="0 0 520 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00d4aa" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#00d4aa" stop-opacity="0.02"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="40" y1="180" x2="510" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <line x1="40" y1="150" x2="510" y2="150" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="120" x2="510" y2="120" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="90" x2="510" y2="90" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="60" x2="510" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <line x1="40" y1="30" x2="510" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <!-- Y labels -->
+          <text x="34" y="183" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">0</text>
+          <text x="34" y="153" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">30</text>
+          <text x="34" y="123" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">60</text>
+          <text x="34" y="93" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">90</text>
+          <text x="34" y="63" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">120</text>
+          <text x="34" y="33" text-anchor="end" fill="#475569" font-size="10" font-family="JetBrains Mono">150</text>
+          <!-- X labels (show every 5 days) -->
+          <text x="56" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/03</text>
+          <text x="138" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/08</text>
+          <text x="220" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/13</text>
+          <text x="302" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/18</text>
+          <text x="384" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/23</text>
+          <text x="466" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">6/28</text>
+          <text x="504" y="196" text-anchor="middle" fill="#475569" font-size="9" font-family="JetBrains Mono">7/02</text>
+          <!-- Data: 42,38,55,48,62,45,58,72,65,78,53,88,62,95,70,82,58,105,75,92,68,108,80,115,72,98,65,120,85,128 -->
+          <!-- y = 180 - (val/150)*150 = 180 - val -->
+          <!-- Area -->
+          <polygon points="56,138 82,142 108,125 134,132 160,118 186,135 212,122 238,108 264,115 290,102 316,127 342,92 368,118 394,85 420,98 446,122 472,75 498,95 504,52 504,180 56,180"
+            fill="url(#areaGreen)"/>
+          <polyline points="56,138 82,142 108,125 134,132 160,118 186,135 212,122 238,108 264,115 290,102 316,127 342,92 368,118 394,85 420,98 446,122 472,75 498,95 504,52"
+            fill="none" stroke="#00d4aa" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Highlight last point -->
+          <circle cx="504" cy="52" r="4" fill="#00d4aa" stroke="#00d4aa" stroke-width="2" opacity="0.6"/>
+          <circle cx="504" cy="52" r="3" fill="#0a0f1a" stroke="#00d4aa" stroke-width="2"/>
+          <text x="504" y="42" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="JetBrains Mono" font-weight="600">128</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right: Area distribution horizontal bars -->
+    <div class="panel">
+      <div class="panel-title">
+        区域分布 TOP 8
+        <span class="tag">按在管居民数</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <div class="hbar-item">
+          <span class="hbar-label">东城区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:100%; background:linear-gradient(90deg, #00d4aa, rgba(0,212,170,0.6));">2,341</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">朝阳区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:84.8%; background:linear-gradient(90deg, #00d4aa, rgba(0,212,170,0.5));">1,987</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">海淀区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:70.7%; background:linear-gradient(90deg, #00d4aa, rgba(0,212,170,0.4));">1,654</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">西城区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:52.7%; background:linear-gradient(90deg, #00d4aa, rgba(0,212,170,0.35));">1,234</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">丰台区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:42.2%; background:linear-gradient(90deg, rgba(0,212,170,0.6), rgba(0,212,170,0.3));">987</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">通州区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:36.6%; background:linear-gradient(90deg, rgba(0,212,170,0.5), rgba(0,212,170,0.25));">856</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">大兴区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:31.7%; background:linear-gradient(90deg, rgba(0,212,170,0.4), rgba(0,212,170,0.2));">743</div>
+          </div>
+        </div>
+        <div class="hbar-item">
+          <span class="hbar-label">昌平区</span>
+          <div class="hbar-track">
+            <div class="hbar-fill" style="width:26.8%; background:linear-gradient(90deg, rgba(0,212,170,0.35), rgba(0,212,170,0.15));">628</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom 3-column row -->
+  <div class="main-grid-3" style="margin-top:12px;">
+    <!-- Health rating donut -->
+    <div class="panel">
+      <div class="panel-title">
+        健康评级分布
+        <span class="tag">全量居民</span>
+      </div>
+      <div class="donut-wrapper">
+        <svg class="donut-svg" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="24"/>
+          <!-- Normal 47.2%: 47.2% of 439.85 = 207.61 -->
+          <circle cx="100" cy="100" r="70" fill="none"
+            stroke="#00d4aa" stroke-width="24"
+            stroke-dasharray="207.61 232.24"
+            stroke-dashoffset="0"
+            transform="rotate(-90 100 100)"
+            stroke-linecap="butt"/>
+          <!-- Sub-health 37.5%: 37.5% of 439.85 = 164.94 -->
+          <circle cx="100" cy="100" r="70" fill="none"
+            stroke="#ffa502" stroke-width="24"
+            stroke-dasharray="164.94 274.91"
+            stroke-dashoffset="-207.61"
+            transform="rotate(-90 100 100)"
+            stroke-linecap="butt"/>
+          <!-- High-risk 15.3%: 15.3% of 439.85 = 67.30 -->
+          <circle cx="100" cy="100" r="70" fill="none"
+            stroke="#ff4757" stroke-width="24"
+            stroke-dasharray="67.30 372.55"
+            stroke-dashoffset="-372.55"
+            transform="rotate(-90 100 100)"
+            stroke-linecap="butt"/>
+          <text x="100" y="92" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="22" font-weight="700">12,486</text>
+          <text x="100" y="112" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="11">总居民数</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#00d4aa;"></div>
+            <span class="legend-label">正常</span>
+            <span class="legend-value">5,892 (47.2%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#ffa502;"></div>
+            <span class="legend-label">亚健康</span>
+            <span class="legend-value">4,687 (37.5%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#ff4757;"></div>
+            <span class="legend-label">高危</span>
+            <span class="legend-value">1,907 (15.3%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gender distribution -->
+    <div class="panel">
+      <div class="panel-title">性别分布</div>
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px;">
+        <div class="donut-wrapper" style="gap:16px;">
+          <svg viewBox="0 0 120 120" style="width:120px;height:120px;">
+            <circle cx="60" cy="60" r="45" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="18"/>
+            <!-- Male 52%: 52% of 282.74 = 147.02 -->
+            <circle cx="60" cy="60" r="45" fill="none"
+              stroke="#3b82f6" stroke-width="18"
+              stroke-dasharray="147.02 135.72"
+              stroke-dashoffset="0"
+              transform="rotate(-90 60 60)"
+              stroke-linecap="butt"/>
+            <!-- Female 48%: 48% of 282.74 = 135.72 -->
+            <circle cx="60" cy="60" r="45" fill="none"
+              stroke="#a855f7" stroke-width="18"
+              stroke-dasharray="135.72 147.02"
+              stroke-dashoffset="-147.02"
+              transform="rotate(-90 60 60)"
+              stroke-linecap="butt"/>
+          </svg>
+          <div class="donut-legend" style="gap:12px;">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#3b82f6; border-radius:50%;"></div>
+              <span class="legend-label">男</span>
+              <span class="legend-value">52%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#a855f7; border-radius:50%;"></div>
+              <span class="legend-label">女</span>
+              <span class="legend-value">48%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Age distribution -->
+    <div class="panel">
+      <div class="panel-title">年龄段分布</div>
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <div class="dist-bar-item">
+          <span class="dist-bar-label">30以下</span>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width:8%; background:#00d4aa;"></div>
+          </div>
+          <span class="dist-bar-num">8% (999)</span>
+        </div>
+        <div class="dist-bar-item">
+          <span class="dist-bar-label">30-40岁</span>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width:18%; background:#00d4aa;"></div>
+          </div>
+          <span class="dist-bar-num">18% (2,247)</span>
+        </div>
+        <div class="dist-bar-item">
+          <span class="dist-bar-label">40-50岁</span>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width:32%; background:#00d4aa;"></div>
+          </div>
+          <span class="dist-bar-num">32% (3,996)</span>
+        </div>
+        <div class="dist-bar-item">
+          <span class="dist-bar-label">50-60岁</span>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width:28%; background:#ffa502;"></div>
+          </div>
+          <span class="dist-bar-num">28% (3,496)</span>
+        </div>
+        <div class="dist-bar-item">
+          <span class="dist-bar-label">60以上</span>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width:14%; background:#ff4757;"></div>
+          </div>
+          <span class="dist-bar-num">14% (1,748)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateTime() {
+    const now = new Date();
+    const weekdays = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const w = weekdays[now.getDay()];
+    const h = String(now.getHours()).padStart(2, '0');
+    const min = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('headerTime').textContent = `${y}年${m}月${d}日${w} ${h}:${min}:${s}`;
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+</script>
+</body>
+</html>
