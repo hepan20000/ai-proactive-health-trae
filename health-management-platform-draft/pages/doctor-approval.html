@@ -442,6 +442,8 @@
             <th>医生信息</th>
             <th>科室</th>
             <th>职称</th>
+            <th>在管居民</th>
+            <th>最近活跃</th>
             <th>申请来源</th>
             <th>提交时间</th>
             <th>状态</th>
@@ -469,17 +471,15 @@
             </td>
             <td>心血管内科</td>
             <td>主任医师</td>
+            <td style="font-family:var(--hmp-font-family-mono);font-variant-numeric:tabular-nums;">128</td>
+            <td class="time-text">2026-07-02 10:30</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-28 14:32</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批" onclick="openApprove()">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -498,17 +498,15 @@
             </td>
             <td>内分泌科</td>
             <td>副主任医师</td>
+            <td>96</td>
+            <td class="time-text">2026-07-02 09:15</td>
             <td><span class="source-tag admin-add"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> 管理员直加</span></td>
             <td><span class="time-text">2026-06-27 09:15</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批" onclick="openApprove()">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -533,17 +531,15 @@
             </td>
             <td>中医科</td>
             <td>主治医师</td>
+            <td>54</td>
+            <td class="time-text">2026-07-01 16:48</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-26 16:48</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批" onclick="openApprove()">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -567,17 +563,15 @@
             </td>
             <td>神经内科</td>
             <td>主任医师</td>
+            <td style="font-family:var(--hmp-font-family-mono);font-variant-numeric:tabular-nums;">234</td>
+            <td class="time-text">2026-07-02 11:22</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-05-20 10:22</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -601,17 +595,15 @@
             </td>
             <td>全科</td>
             <td>副主任医师</td>
+            <td>187</td>
+            <td class="time-text">2026-07-02 08:50</td>
             <td><span class="source-tag admin-add"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> 管理员直加</span></td>
             <td><span class="time-text">2026-05-18 08:50</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -634,17 +626,15 @@
             </td>
             <td>呼吸内科</td>
             <td>主治医师</td>
+            <td>76</td>
+            <td class="time-text">2026-06-30 15:30</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-05-10 15:30</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -667,17 +657,15 @@
             </td>
             <td>康复医学科</td>
             <td>住院医师</td>
+            <td>—</td>
+            <td class="time-text" style="color:var(--hmp-color-text-disabled);">从未登录</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-15 11:20</span></td>
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn approve-btn" title="重新审批">
-                  <i data-lucide="rotate-ccw" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">重新审批</button>
               </div>
             </td>
           </tr>
@@ -701,17 +689,15 @@
             </td>
             <td>心血管内科</td>
             <td>副主任医师</td>
+            <td>—</td>
+            <td class="time-text" style="color:var(--hmp-color-text-disabled);">从未登录</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-08 19:45</span></td>
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn approve-btn" title="重新审批">
-                  <i data-lucide="rotate-ccw" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">重新审批</button>
               </div>
             </td>
           </tr>
@@ -1359,51 +1345,14 @@
     }
 
     /* --- Action Buttons --- */
-    .action-btns {
-      display: flex;
-      gap: var(--hmp-spacing-xs);
-    }
-    .action-btn {
-      height: 30px;
-      padding: 0 10px;
-      border-radius: var(--hmp-radius-sm);
-      border: 1px solid var(--hmp-color-border);
-      background: var(--hmp-bg-card);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      color: var(--hmp-color-text-secondary);
-      transition: all 0.15s;
-      font-size: var(--hmp-font-size-small);
-      font-family: var(--hmp-font-family);
-      font-weight: var(--hmp-font-weight-medium);
-      white-space: nowrap;
-    }
-    .action-btn:hover {
-      border-color: var(--hmp-color-primary);
-      color: var(--hmp-color-primary);
-      background: var(--hmp-color-primary-light);
-    }
-    .action-btn.approve-btn:hover {
-      border-color: var(--hmp-color-success);
-      color: var(--hmp-color-success);
-      background: var(--hmp-color-success-bg);
-    }
-    .action-btn.reject-btn:hover {
-      border-color: var(--hmp-color-danger);
-      color: var(--hmp-color-danger);
-      background: var(--hmp-color-danger-bg);
-    }
-    .action-btn.disable-btn:hover {
-      border-color: var(--hmp-color-warning);
-      color: var(--hmp-color-warning);
-      background: var(--hmp-color-warning-bg);
-    }
-    .action-btn-icon {
-      width: 14px; height: 14px; flex-shrink: 0;
-    }
+    .action-btns { display:flex; gap:6px; justify-content:center; }
+    .action-btn { padding:4px 12px; border-radius:6px; font-size:12px; font-weight:500; cursor:pointer; border:none; transition:all 0.15s; white-space:nowrap; font-family:var(--hmp-font-family); }
+    .action-btn-primary { background:var(--hmp-color-primary); color:#fff; }
+    .action-btn-primary:hover { opacity:0.85; }
+    .action-btn-secondary { background:var(--hmp-bg-sunken); color:var(--hmp-color-text-secondary); border:1px solid var(--hmp-color-border); }
+    .action-btn-secondary:hover { background:var(--hmp-color-border); color:var(--hmp-color-text-primary); }
+    .action-btn-danger { background:oklch(0.62 0.23 22 / 10%); color:oklch(0.62 0.23 22); border:1px solid oklch(0.62 0.23 22 / 20%); }
+    .action-btn-danger:hover { background:oklch(0.62 0.23 22 / 20%); }
 
     /* --- Pagination --- */
     .pagination-wrapper {
@@ -1576,6 +1525,44 @@ document.querySelectorAll('.nav-item').forEach(a => {
     </div>
   </div>
 </div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDocDetail()">关闭</button></div></div></div>
+<div id="m-approve-confirm" class="hmp-modal-overlay">
+  <div class="hmp-modal-container" style="width:400px;">
+    <div class="hmp-modal-header">
+      <span class="hmp-modal-title">确认通过审批</span>
+      <button class="hmp-modal-close" onclick="hmpHide('m-approve-confirm')">&#10005;</button>
+    </div>
+    <div class="hmp-modal-body" style="text-align:center; padding:24px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:oklch(0.7 0.16 155 / 15%);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <i data-lucide="check-circle" style="width:24px;height:24px;color:oklch(0.7 0.16 155);"></i>
+      </div>
+      <p style="font-size:14px;color:var(--hmp-color-text-primary);margin-bottom:8px;">确定通过该医生的入驻申请吗？</p>
+      <p style="font-size:12px;color:var(--hmp-color-text-tertiary);">通过后，该医生将可以登录系统并管理在管居民。</p>
+    </div>
+    <div class="hmp-modal-footer">
+      <button class="hmp-btn hmp-btn-ghost" onclick="hmpHide('m-approve-confirm')">取消</button>
+      <button class="hmp-btn hmp-btn-primary" onclick="confirmApprove()">确认通过</button>
+    </div>
+  </div>
+</div>
+<div id="m-disable-confirm" class="hmp-modal-overlay">
+  <div class="hmp-modal-container" style="width:400px;">
+    <div class="hmp-modal-header">
+      <span class="hmp-modal-title">确认禁用医生</span>
+      <button class="hmp-modal-close" onclick="hmpHide('m-disable-confirm')">&#10005;</button>
+    </div>
+    <div class="hmp-modal-body" style="text-align:center; padding:24px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:oklch(0.62 0.23 22 / 15%);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <i data-lucide="alert-triangle" style="width:24px;height:24px;color:oklch(0.62 0.23 22);"></i>
+      </div>
+      <p style="font-size:14px;color:var(--hmp-color-text-primary);margin-bottom:8px;">确定禁用该医生账号吗？</p>
+      <p style="font-size:12px;color:var(--hmp-color-text-tertiary);">禁用后，该医生将无法登录系统，其管理的居民将需要重新分配。</p>
+    </div>
+    <div class="hmp-modal-footer">
+      <button class="hmp-btn hmp-btn-ghost" onclick="hmpHide('m-disable-confirm')">取消</button>
+      <button class="hmp-btn hmp-btn-danger" style="background:oklch(0.62 0.23 22);color:#fff;" onclick="confirmDisable()">确认禁用</button>
+    </div>
+  </div>
+</div>
 <div id="m-approve" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">审批确认</span><button class="hmp-modal-close" onclick="closeApprove()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定通过该医生的入驻申请吗？</p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeApprove()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="doApprove()">确认通过</button></div></div></div>
 <div id="m-reject" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">驳回确认</span><button class="hmp-modal-close" onclick="closeReject()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定驳回该医生的入驻申请吗？<br><span class="warn">驳回后医生可重新提交申请。</span></p><div class="hmp-modal-field" style="margin-top:12px"><label class="hmp-modal-label">驳回原因</label><textarea class="hmp-modal-textarea" placeholder="请输入驳回原因..." rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeReject()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="doReject()">确认驳回</button></div></div></div>
 <div id="m-cert-viewer" class="hmp-modal-overlay">
@@ -1609,7 +1596,10 @@ function hmpToast(msg,type){var t=document.createElement('div');t.style.cssText=
 function toggleSubnav(el){el.classList.toggle('open');var s=el.nextElementSibling;if(s&&s.classList.contains('subnav')){s.style.display=s.style.display==='none'?'block':'none'}}
 function openDocDetail(){hmpShow('m-doc-detail')}
 function closeDocDetail(){hmpHide('m-doc-detail')}
-function openApprove(){hmpShow('m-approve')}
+function openApprove() { hmpShow('m-approve-confirm'); setTimeout(function(){try{lucide.createIcons();}catch(e){}},100); }
+function confirmApprove() { hmpHide('m-approve-confirm'); hmpToast('已通过该医生的入驻申请'); }
+function openDisable() { hmpShow('m-disable-confirm'); setTimeout(function(){try{lucide.createIcons();}catch(e){}},100); }
+function confirmDisable() { hmpHide('m-disable-confirm'); hmpToast('该医生账号已禁用'); }
 function closeApprove(){hmpHide('m-approve')}
 function doApprove(){hmpHide('m-approve');hmpToast('审批已通过')}
 function openReject(){hmpShow('m-reject')}
@@ -1617,6 +1607,19 @@ function closeReject(){hmpHide('m-reject')}
 function doReject(){hmpHide('m-reject');hmpToast('已驳回申请','warning')}
 function viewCert(type){var title=type==='practicing'?'医师执业证书':'专业技术资格证书';document.getElementById('certViewerTitle').textContent=title;hmpShow('m-cert-viewer');setTimeout(function(){try{lucide.createIcons();}catch(e){}},100)}
 function closeCertViewer(){hmpHide('m-cert-viewer')}
+function handleCertUpload(input, previewId, fileNameId) {
+  var preview = document.getElementById(previewId);
+  var fileName = document.getElementById(fileNameId);
+  if (input.files && input.files[0]) {
+    fileName.textContent = input.files[0].name;
+    fileName.style.display = 'block';
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      preview.innerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100px;object-fit:cover;border-radius:4px;">';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
 </body>
 </html>

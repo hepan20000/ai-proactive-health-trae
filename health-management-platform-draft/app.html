@@ -5359,50 +5359,18 @@ tbody td {
 
     /* --- Action Buttons --- */
     .action-btns {
-      display: flex;
-      gap: var(--hmp-spacing-xs);
-    }
-    .action-btn {
-      height: 30px;
-      padding: 0 10px;
-      border-radius: var(--hmp-radius-sm);
-      border: 1px solid var(--hmp-color-border);
-      background: var(--hmp-bg-card);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      color: var(--hmp-color-text-secondary);
-      transition: all 0.15s;
-      font-size: var(--hmp-font-size-small);
-      font-family: var(--hmp-font-family);
-      font-weight: var(--hmp-font-weight-medium);
-      white-space: nowrap;
-    }
-    .action-btn:hover {
-      border-color: var(--hmp-color-primary);
-      color: var(--hmp-color-primary);
-      background: var(--hmp-color-primary-light);
-    }
-    .action-btn.approve-btn:hover {
-      border-color: var(--hmp-color-success);
-      color: var(--hmp-color-success);
-      background: var(--hmp-color-success-bg);
-    }
-    .action-btn.reject-btn:hover {
-      border-color: var(--hmp-color-danger);
-      color: var(--hmp-color-danger);
-      background: var(--hmp-color-danger-bg);
-    }
-    .action-btn.disable-btn:hover {
-      border-color: var(--hmp-color-warning);
-      color: var(--hmp-color-warning);
-      background: var(--hmp-color-warning-bg);
-    }
-    .action-btn-icon {
-      width: 14px; height: 14px; flex-shrink: 0;
-    }
+    .action-btns { display:flex; gap:6px; justify-content:center; }
+    .action-btn { padding:4px 12px; border-radius:6px; font-size:12px; font-weight:500; cursor:pointer; border:none; transition:all 0.15s; white-space:nowrap; font-family:var(--hmp-font-family); }
+    .action-btn-primary { background:var(--hmp-color-primary); color:#fff; }
+    .action-btn-primary:hover { opacity:0.85; }
+    .action-btn-secondary { background:var(--hmp-bg-sunken); color:var(--hmp-color-text-secondary); border:1px solid var(--hmp-color-border); }
+    .action-btn-secondary:hover { background:var(--hmp-color-border); color:var(--hmp-color-text-primary); }
+    .action-btn-danger { background:oklch(0.62 0.23 22 / 10%); color:oklch(0.62 0.23 22); border:1px solid oklch(0.62 0.23 22 / 20%); }
+    .action-btn-danger:hover { background:oklch(0.62 0.23 22 / 20%); }
+    .tag-option:has(input:checked) { border-color:var(--hmp-color-primary); background:oklch(0.78 0.18 195 / 10%); color:var(--hmp-color-primary); }
+    .tag-option:hover { border-color:var(--hmp-color-primary); }
+    .upload-area { border:1px dashed var(--hmp-color-border); border-radius:8px; padding:20px; text-align:center; cursor:pointer; transition:all 0.15s; background:var(--hmp-bg-sunken); }
+    .upload-area:hover { border-color:var(--hmp-color-primary); background:oklch(0.78 0.18 195 / 5%); }
 
     /* --- Pagination --- */
     .pagination-wrapper {
@@ -15222,6 +15190,8 @@ tbody td {
             <th>医生信息</th>
             <th>科室</th>
             <th>职称</th>
+            <th>在管居民</th>
+            <th>最近活跃</th>
             <th>申请来源</th>
             <th>提交时间</th>
             <th>状态</th>
@@ -15249,17 +15219,15 @@ tbody td {
             </td>
             <td>心血管内科</td>
             <td>主任医师</td>
+            <td style="font-family:var(--hmp-font-family-mono);font-variant-numeric:tabular-nums;">128</td>
+            <td class="time-text">2026-07-02 10:30</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-28 14:32</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -15283,17 +15251,15 @@ tbody td {
             </td>
             <td>内分泌科</td>
             <td>副主任医师</td>
+            <td>96</td>
+            <td class="time-text">2026-07-02 09:15</td>
             <td><span class="source-tag admin-add"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> 管理员直加</span></td>
             <td><span class="time-text">2026-06-27 09:15</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -15318,17 +15284,15 @@ tbody td {
             </td>
             <td>中医科</td>
             <td>主治医师</td>
+            <td>54</td>
+            <td class="time-text">2026-07-01 16:48</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-26 16:48</span></td>
             <td><span class="status-badge status-pending"><span class="dot"></span>待审批</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn approve-btn" title="通过审批">
-                  <i data-lucide="check" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">通过</button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
               </div>
             </td>
           </tr>
@@ -15352,17 +15316,15 @@ tbody td {
             </td>
             <td>神经内科</td>
             <td>主任医师</td>
+            <td style="font-family:var(--hmp-font-family-mono);font-variant-numeric:tabular-nums;">234</td>
+            <td class="time-text">2026-07-02 11:22</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-05-20 10:22</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -15381,17 +15343,15 @@ tbody td {
             </td>
             <td>全科</td>
             <td>副主任医师</td>
+            <td>187</td>
+            <td class="time-text">2026-07-02 08:50</td>
             <td><span class="source-tag admin-add"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> 管理员直加</span></td>
             <td><span class="time-text">2026-05-18 08:50</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -15414,17 +15374,15 @@ tbody td {
             </td>
             <td>呼吸内科</td>
             <td>主治医师</td>
+            <td>76</td>
+            <td class="time-text">2026-06-30 15:30</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-05-10 15:30</span></td>
             <td><span class="status-badge status-approved"><span class="dot"></span>已通过</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn disable-btn" title="禁用">
-                  <i data-lucide="ban" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-danger" onclick="openDisable()">禁用</button>
               </div>
             </td>
           </tr>
@@ -15443,17 +15401,15 @@ tbody td {
             </td>
             <td>康复医学科</td>
             <td>住院医师</td>
+            <td>—</td>
+            <td class="time-text" style="color:var(--hmp-color-text-disabled);">从未登录</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-15 11:20</span></td>
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn approve-btn" title="重新审批">
-                  <i data-lucide="rotate-ccw" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">重新审批</button>
               </div>
             </td>
           </tr>
@@ -15477,17 +15433,15 @@ tbody td {
             </td>
             <td>心血管内科</td>
             <td>副主任医师</td>
+            <td>—</td>
+            <td class="time-text" style="color:var(--hmp-color-text-disabled);">从未登录</td>
             <td><span class="source-tag self-reg"><i data-lucide="user-plus" style="width:12px;height:12px;"></i> 自注册</span></td>
             <td><span class="time-text">2026-06-08 19:45</span></td>
             <td><span class="status-badge status-rejected"><span class="dot"></span>已驳回</span></td>
             <td>
               <div class="action-btns">
-                <button class="action-btn" title="查看详情" onclick="openDocDetail()">
-                  <i data-lucide="eye" class="action-btn-icon"></i>
-                </button>
-                <button class="action-btn approve-btn" title="重新审批">
-                  <i data-lucide="rotate-ccw" class="action-btn-icon"></i>
-                </button>
+                <button class="action-btn action-btn-secondary" onclick="openDocDetail()">查看</button>
+                <button class="action-btn action-btn-primary" onclick="openApprove()">重新审批</button>
               </div>
             </td>
           </tr>
@@ -23435,6 +23389,44 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeHea
 </div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeDocDetail()">关闭</button></div></div></div>
 <div id="m-approve" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">审批确认</span><button class="hmp-modal-close" onclick="closeApprove()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定通过该医生的入驻申请吗？</p></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeApprove()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="doApprove()">确认通过</button></div></div></div>
 <div id="m-reject" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:400px"><div class="hmp-modal-header"><span class="hmp-modal-title">驳回确认</span><button class="hmp-modal-close" onclick="closeReject()">&#10005;</button></div><div class="hmp-modal-body"><p class="hmp-confirm-text">确定驳回该医生的入驻申请吗？<br><span class="warn">驳回后医生可重新提交申请。</span></p><div class="hmp-modal-field" style="margin-top:12px"><label class="hmp-modal-label">驳回原因</label><textarea class="hmp-modal-textarea" placeholder="请输入驳回原因..." rows="3"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeReject()">取消</button><button class="hmp-btn hmp-btn-danger" onclick="doReject()">确认驳回</button></div></div></div>
+<div id="m-approve-confirm" class="hmp-modal-overlay">
+  <div class="hmp-modal-container" style="width:400px;">
+    <div class="hmp-modal-header">
+      <span class="hmp-modal-title">确认通过审批</span>
+      <button class="hmp-modal-close" onclick="hmpHide('m-approve-confirm')">&#10005;</button>
+    </div>
+    <div class="hmp-modal-body" style="text-align:center; padding:24px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:oklch(0.7 0.16 155 / 15%);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <i data-lucide="check-circle" style="width:24px;height:24px;color:oklch(0.7 0.16 155);"></i>
+      </div>
+      <p style="font-size:14px;color:var(--hmp-color-text-primary);margin-bottom:8px;">确定通过该医生的入驻申请吗？</p>
+      <p style="font-size:12px;color:var(--hmp-color-text-tertiary);">通过后，该医生将可以登录系统并管理在管居民。</p>
+    </div>
+    <div class="hmp-modal-footer">
+      <button class="hmp-btn hmp-btn-ghost" onclick="hmpHide('m-approve-confirm')">取消</button>
+      <button class="hmp-btn hmp-btn-primary" onclick="confirmApprove()">确认通过</button>
+    </div>
+  </div>
+</div>
+<div id="m-disable-confirm" class="hmp-modal-overlay">
+  <div class="hmp-modal-container" style="width:400px;">
+    <div class="hmp-modal-header">
+      <span class="hmp-modal-title">确认禁用医生</span>
+      <button class="hmp-modal-close" onclick="hmpHide('m-disable-confirm')">&#10005;</button>
+    </div>
+    <div class="hmp-modal-body" style="text-align:center; padding:24px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:oklch(0.62 0.23 22 / 15%);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <i data-lucide="alert-triangle" style="width:24px;height:24px;color:oklch(0.62 0.23 22);"></i>
+      </div>
+      <p style="font-size:14px;color:var(--hmp-color-text-primary);margin-bottom:8px;">确定禁用该医生账号吗？</p>
+      <p style="font-size:12px;color:var(--hmp-color-text-tertiary);">禁用后，该医生将无法登录系统，其管理的居民将需要重新分配。</p>
+    </div>
+    <div class="hmp-modal-footer">
+      <button class="hmp-btn hmp-btn-ghost" onclick="hmpHide('m-disable-confirm')">取消</button>
+      <button class="hmp-btn hmp-btn-danger" style="background:oklch(0.62 0.23 22);color:#fff;" onclick="confirmDisable()">确认禁用</button>
+    </div>
+  </div>
+</div>
 <div id="m-cert-viewer" class="hmp-modal-overlay">
   <div class="hmp-modal-container" style="width:640px;">
     <div class="hmp-modal-header">
@@ -23459,7 +23451,71 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeHea
   </div>
 </div>
 <div id="m-doc-edit" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑医生信息</span><button class="hmp-modal-close" onclick="closeEditDoc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" value="张伟"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" value="138****6789"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">科室</label><select class="hmp-modal-select"><option>心血管内科</option><option>内分泌科</option><option selected>老年病科</option><option>全科</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">职称</label><select class="hmp-modal-select"><option>住院医师</option><option selected>主治医师</option><option>副主任医师</option><option>主任医师</option></select></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">从医年限</label><input type="number" class="hmp-modal-input" value="12"></div><div class="hmp-modal-field"><label class="hmp-modal-label">个人简介</label><textarea class="hmp-modal-textarea" rows="3">从事老年病科临床工作12年。</textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditDoc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveDocProfile()">保存</button></div></div></div>
-<div id="m-doc-add" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增医生</span><button class="hmp-modal-close" onclick="closeAddDoc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入医生姓名"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" placeholder="请输入手机号"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">科室</label><select class="hmp-modal-select"><option>心血管内科</option><option>内分泌科</option><option>神经内科</option><option>全科</option><option>中医科</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">职称</label><select class="hmp-modal-select"><option>住院医师</option><option>主治医师</option><option>副主任医师</option><option>主任医师</option></select></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">执业证号</label><input type="text" class="hmp-modal-input" placeholder="请输入执业证号"></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeAddDoc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveNewDoc()">保存</button></div></div></div>
+<div id="m-doc-add" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">新增医生</span><button class="hmp-modal-close" onclick="closeAddDoc()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名<span class="req">*</span></label><input type="text" class="hmp-modal-input" placeholder="请输入医生姓名"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号<span class="req">*</span></label><input type="tel" class="hmp-modal-input" placeholder="请输入手机号"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">科室</label><select class="hmp-modal-select"><option>心血管内科</option><option>内分泌科</option><option>神经内科</option><option>全科</option><option>中医科</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">职称</label><select class="hmp-modal-select"><option>住院医师</option><option>主治医师</option><option>副主任医师</option><option>主任医师</option></select></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">执业证号</label><input type="text" class="hmp-modal-input" placeholder="请输入执业证号"></div>
+<div style="margin-bottom:16px;">
+  <label style="display:block;font-size:12px;font-weight:500;color:var(--hmp-color-text-secondary);margin-bottom:6px;">专长标签 <span style="color:var(--hmp-color-text-disabled);">（可多选）</span></label>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;" id="specialtyTags">
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="心脑血管" style="display:none;">
+      <span>心脑血管</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="情绪压力" style="display:none;">
+      <span>情绪压力</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="睡眠障碍" style="display:none;">
+      <span>睡眠障碍</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="糖尿病管理" style="display:none;">
+      <span>糖尿病管理</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="高血压管理" style="display:none;">
+      <span>高血压管理</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="失眠多梦" style="display:none;">
+      <span>失眠多梦</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="经方调理" style="display:none;">
+      <span>经方调理</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="体质调理" style="display:none;">
+      <span>体质调理</span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;padding:4px 12px;border-radius:9999px;border:1px solid var(--hmp-color-border);font-size:12px;cursor:pointer;transition:all 0.15s;" class="tag-option">
+      <input type="checkbox" name="specialty" value="运动康复" style="display:none;">
+      <span>运动康复</span>
+    </label>
+  </div>
+</div>
+<div style="margin-bottom:16px;">
+  <label style="display:block;font-size:12px;font-weight:500;color:var(--hmp-color-text-secondary);margin-bottom:6px;">上传资质 <span style="color:var(--hmp-color-text-disabled);">（执业证 + 职称证）</span></label>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div class="upload-area" onclick="document.getElementById('certFile1').click()">
+      <input type="file" id="certFile1" accept="image/*" style="display:none;" onchange="handleCertUpload(this,'certPreview1','certFileName1')">
+      <div id="certPreview1" style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <i data-lucide="upload" style="width:20px;height:20px;color:var(--hmp-color-text-tertiary);"></i>
+        <span style="font-size:12px;color:var(--hmp-color-text-secondary);">医师执业证书</span>
+        <span style="font-size:10px;color:var(--hmp-color-text-disabled);">点击或拖拽上传</span>
+      </div>
+      <span id="certFileName1" style="font-size:10px;color:var(--hmp-color-primary);display:none;margin-top:4px;"></span>
+    </div>
+    <div class="upload-area" onclick="document.getElementById('certFile2').click()">
+      <input type="file" id="certFile2" accept="image/*" style="display:none;" onchange="handleCertUpload(this,'certPreview2','certFileName2')">
+      <div id="certPreview2" style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <i data-lucide="upload" style="width:20px;height:20px;color:var(--hmp-color-text-tertiary);"></i>
+        <span style="font-size:12px;color:var(--hmp-color-text-secondary);">专业技术资格证书</span>
+        <span style="font-size:10px;color:var(--hmp-color-text-disabled);">点击或拖拽上传</span>
+      </div>
+      <span id="certFileName2" style="font-size:10px;color:var(--hmp-color-primary);display:none;margin-top:4px;"></span>
+    </div>
+  </div>
+</div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeAddDoc()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="saveNewDoc()">保存</button></div></div></div>
 <div id="m-pat-detail" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">病人详情</span><button class="hmp-modal-close" onclick="closePatDetail()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-detail-row"><span class="hmp-detail-label">姓名</span><span class="hmp-detail-value">张建国</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">年龄</span><span class="hmp-detail-value">72岁</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">性别</span><span class="hmp-detail-value">男</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">健康评级</span><span class="hmp-detail-value" style="color:oklch(0.62 0.23 22)">高危</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">联系电话</span><span class="hmp-detail-value">138****6789</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">主要疾病</span><span class="hmp-detail-value">高血压、冠心病</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">最近血压</span><span class="hmp-detail-value" style="color:oklch(0.62 0.23 22)">168/102 mmHg</span></div><div class="hmp-detail-row"><span class="hmp-detail-label">当前方案</span><span class="hmp-detail-value">高血压综合管理方案</span></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closePatDetail()">关闭</button><button class="hmp-btn hmp-btn-primary" onclick="closePatDetail();openEditPat()">编辑信息</button></div></div></div>
 <div id="m-pat-edit" class="hmp-modal-overlay"><div class="hmp-modal-container"><div class="hmp-modal-header"><span class="hmp-modal-title">编辑病人信息</span><button class="hmp-modal-close" onclick="closeEditPat()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">姓名</label><input type="text" class="hmp-modal-input" value="张建国"></div><div class="hmp-modal-field"><label class="hmp-modal-label">手机号</label><input type="tel" class="hmp-modal-input" value="138****6789"></div></div><div class="hmp-modal-row"><div class="hmp-modal-field"><label class="hmp-modal-label">健康评级</label><select class="hmp-modal-select"><option>正常</option><option>亚健康</option><option selected>高危</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">年龄</label><input type="number" class="hmp-modal-input" value="72"></div></div><div class="hmp-modal-field"><label class="hmp-modal-label">主要疾病</label><input type="text" class="hmp-modal-input" value="高血压、冠心病"></div><div class="hmp-modal-field"><label class="hmp-modal-label">备注</label><textarea class="hmp-modal-textarea" rows="3" placeholder="补充说明..."></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeEditPat()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="savePatEdit()">保存</button></div></div></div>
 <div id="m-new-conv" class="hmp-modal-overlay"><div class="hmp-modal-container" style="width:480px"><div class="hmp-modal-header"><span class="hmp-modal-title">发起会话</span><button class="hmp-modal-close" onclick="closeNewConv()">&#10005;</button></div><div class="hmp-modal-body"><div class="hmp-modal-field"><label class="hmp-modal-label">选择联系人</label><select class="hmp-modal-select"><option>张建国 - 高血压患者</option><option>李美华 - 糖尿病患者</option><option>王德福 - 冠心病患者</option><option>刘秀英 - 亚健康</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">会话类型</label><select class="hmp-modal-select"><option>健康咨询</option><option>随访通知</option><option>方案调整</option><option>紧急提醒</option></select></div><div class="hmp-modal-field"><label class="hmp-modal-label">首条消息</label><textarea class="hmp-modal-textarea" placeholder="请输入消息内容..." rows="4"></textarea></div></div><div class="hmp-modal-footer"><button class="hmp-btn hmp-btn-ghost" onclick="closeNewConv()">取消</button><button class="hmp-btn hmp-btn-primary" onclick="startConv()">发起会话</button></div></div></div>
@@ -23504,7 +23560,10 @@ function hmpToast(msg,type){var t=document.createElement('div');t.style.cssText=
 function toggleSubnav(el){el.classList.toggle('open');var s=el.nextElementSibling;if(s&&s.classList.contains('subnav')){s.style.display=s.style.display==='none'?'block':'none'}}
 function openDocDetail(){hmpShow('m-doc-detail')}
 function closeDocDetail(){hmpHide('m-doc-detail')}
-function openApprove(){hmpShow('m-approve')}
+function openApprove() { hmpShow('m-approve-confirm'); setTimeout(function(){try{lucide.createIcons();}catch(e){}},100); }
+function confirmApprove() { hmpHide('m-approve-confirm'); hmpToast('已通过该医生的入驻申请'); }
+function openDisable() { hmpShow('m-disable-confirm'); setTimeout(function(){try{lucide.createIcons();}catch(e){}},100); }
+function confirmDisable() { hmpHide('m-disable-confirm'); hmpToast('该医生账号已禁用'); }
 function closeApprove(){hmpHide('m-approve')}
 function doApprove(){hmpHide('m-approve');hmpToast('审批已通过')}
 function openReject(){hmpShow('m-reject')}
@@ -23524,6 +23583,19 @@ function saveDocProfile(){hmpHide('m-doc-edit');hmpToast('医生信息已更新'
 function openAddDoc(){hmpShow('m-doc-add')}
 function closeAddDoc(){hmpHide('m-doc-add')}
 function saveNewDoc(){hmpHide('m-doc-add');hmpToast('新医生添加成功')}
+function handleCertUpload(input, previewId, fileNameId) {
+  var preview = document.getElementById(previewId);
+  var fileName = document.getElementById(fileNameId);
+  if (input.files && input.files[0]) {
+    fileName.textContent = input.files[0].name;
+    fileName.style.display = 'block';
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      preview.innerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100px;object-fit:cover;border-radius:4px;">';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
 <script>function hmpShow(id){var e=document.getElementById(id);if(e)e.classList.add('active')}
 function hmpHide(id){var e=document.getElementById(id);if(e)e.classList.remove('active')}
